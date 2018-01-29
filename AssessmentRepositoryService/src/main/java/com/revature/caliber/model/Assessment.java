@@ -49,14 +49,14 @@ public class Assessment implements Serializable {
 
 	@NotNull
 	@Column(name = "ASSESSMENT_CATEGORY", nullable = false)
-	private int category;
+	private int categoryId;
 
 	public Assessment() {
 		super();
 	}
 
 	public Assessment(long assessmentId, int rawScore, String title, AssessmentType type, short week, int batchId,
-			int category) {
+			int categoryId) {
 		super();
 		this.assessmentId = assessmentId;
 		this.rawScore = rawScore;
@@ -64,7 +64,7 @@ public class Assessment implements Serializable {
 		this.type = type;
 		this.week = week;
 		this.batchId = batchId;
-		this.category = category;
+		this.categoryId = categoryId;
 	}
 
 	public long getAssessmentId() {
@@ -115,12 +115,12 @@ public class Assessment implements Serializable {
 		this.batchId = batchId;
 	}
 
-	public int getCategory() {
-		return category;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory(int category) {
-		this.category = category;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class Assessment implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + batchId;
-		result = prime * result + category;
+		result = prime * result + categoryId;
 		result = prime * result + rawScore;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -147,7 +147,7 @@ public class Assessment implements Serializable {
 		Assessment other = (Assessment) obj;
 		if (batchId != other.batchId)
 			return false;
-		if (category != other.category)
+		if (categoryId != other.categoryId)
 			return false;
 		if (rawScore != other.rawScore)
 			return false;
@@ -166,6 +166,6 @@ public class Assessment implements Serializable {
 	@Override
 	public String toString() {
 		return "Assessment [assessmentId=" + assessmentId + ", rawScore=" + rawScore + ", title=" + title + ", type="
-				+ type + ", week=" + week + ", batchId=" + batchId + ", category=" + category + "]";
+				+ type + ", week=" + week + ", batchId=" + batchId + ", categoryId=" + categoryId + "]";
 	}
 }
