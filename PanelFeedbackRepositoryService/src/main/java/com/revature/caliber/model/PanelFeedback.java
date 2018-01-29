@@ -31,10 +31,8 @@ public class PanelFeedback {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PANEL_FEEDBACK_ID_SEQUENCE")
 	private long id;
 	
-	@NotNull
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	@JoinColumn(name="CATEGORY_ID", nullable=false)
-	private Category technology;
+	private int categoryId;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -50,9 +48,7 @@ public class PanelFeedback {
 	@Column(name = "PANELIST_COMMENTS")
 	private String comment;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="PANEL_ID", nullable=false)
-	@JsonBackReference(value = "feedback")
 	private int panelId;
 
 	public PanelFeedback() {
@@ -67,12 +63,12 @@ public class PanelFeedback {
 		this.id = id;
 	}
 
-	public Category getTechnology() {
-		return technology;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setTechnology(Category technology) {
-		this.technology = technology;
+	public void setTechnology(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public PanelStatus getStatus() {
@@ -99,11 +95,11 @@ public class PanelFeedback {
 		this.comment = comment;
 	}
 
-	public int getPanel() {
+	public int getPanelId() {
 		return panelId;
 	}
 
-	public void setPanel(int panelId) {
+	public void setPanelId(int panelId) {
 		this.panelId = panelId;
 	}
 
@@ -115,7 +111,7 @@ public class PanelFeedback {
 		hashCodeResult = prime * hashCodeResult + panelId;
 		hashCodeResult = prime * hashCodeResult + this.result;
 		hashCodeResult = prime * hashCodeResult + ((status == null) ? 0 : status.hashCode());
-		hashCodeResult = prime * hashCodeResult + ((technology == null) ? 0 : technology.hashCode());
+		hashCodeResult = prime * hashCodeResult + categoryId;
 		return hashCodeResult;
 	}
 
@@ -141,17 +137,17 @@ public class PanelFeedback {
 			return false;
 		if (status != other.status)
 			return false;
-		if (technology == null) {
-			if (other.technology != null)
+		if (categoryId == 0) {
+			if (other.categoryId != 0)
 				return false;
-		} else if (!technology.equals(other.technology))
+		} else if (categoryId != other.categoryId)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "PanelFeedback [id=" + id + ", technology=" + technology + ", status=" + status + ", result=" + result
+		return "PanelFeedback [id=" + id + ", categoryId=" + categoryId + ", status=" + status + ", result=" + result
 				+ ", comment=" + comment + "]";
 	}
 	

@@ -41,10 +41,6 @@ public class Category implements Serializable {
 	@Column(name = "IS_ACTIVE", nullable=false)
 	private boolean active;
 
-	@OneToMany(mappedBy = "category")
-	@JsonIgnore
-	private Set<Long> assessmentIds;
-
 	/**
 	 * Instantiates a new Category.
 	 */
@@ -107,25 +103,6 @@ public class Category implements Serializable {
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	/**
-	 * Gets assessments.
-	 *
-	 * @return the assessments
-	 */
-	public Set<Long> getAssessments() {
-		return assessmentIds;
-	}
-
-	/**
-	 * Sets assessments.
-	 *
-	 * @param assessments
-	 *            the assessments
-	 */
-	public void setAssessments(Set<Long> assessments) {
-		this.assessmentIds = assessments;
 	}
 
 	@Override
