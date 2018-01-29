@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 public class Panel implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -32,6 +35,8 @@ public class Panel implements Serializable {
 	@Column(name = "DURATION")
 	private String duration;
 
+	@NotNull
+	@Enumerated(EnumType.STRING)
 	@Column(name = "INTERVIEW_FORMAT")
 	private Integer formatId;
 
@@ -48,7 +53,9 @@ public class Panel implements Serializable {
 	@Column(name = "RECORDING_LINK")
 	private String recordingLink;
 
-	@Column(name = "PANEL_STATUS", nullable = false)
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name = "PANEL_STATUS")
 	private Integer statusId;
 
 	@Column(name = "ASSOCIATE_INTRO", nullable = true)
