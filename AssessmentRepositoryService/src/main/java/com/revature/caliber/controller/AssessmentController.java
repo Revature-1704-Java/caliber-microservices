@@ -45,7 +45,7 @@ public class AssessmentController {
 	 * @param assessmentId
 	 * @return assessmentList
 	 */
-	@GetMapping(value = "/assessment", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/trainer/assessment", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Assessment> getAssessments() {
 		List<Assessment> assessmentList = dao.findAll();
 		return assessmentList;
@@ -57,7 +57,7 @@ public class AssessmentController {
 	 * @param assessmentId
 	 * @return assessment object
 	 */
-	@GetMapping(value = "/assessment/{assessmentId", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/trainer/assessment/{assessmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Assessment getAssessment(@PathVariable Integer assessmentId) {
 		Assessment assessment = dao.findByAssessmentId(assessmentId);
 		return assessment;
@@ -71,7 +71,7 @@ public class AssessmentController {
 	 *            the assessment
 	 * @return the response entity
 	 */
-	@RequestMapping(value = "/assessment/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/trainer/assessment/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
 	public ResponseEntity<Void> createAssessment(@Valid @RequestBody Assessment assessment) {
@@ -87,7 +87,7 @@ public class AssessmentController {
 	 *            the id
 	 * @return the response entity
 	 */
-	@RequestMapping(value = "/assessment/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/trainer/assessment/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
 	public ResponseEntity<Void> deleteAssessment(@PathVariable Long id) {
@@ -105,7 +105,7 @@ public class AssessmentController {
 	 *            the assessment
 	 * @return the response entity
 	 */
-	@RequestMapping(value = "/assessment/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/trainer/assessment/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
 	public ResponseEntity<Assessment> updateAssessment(@Valid @RequestBody Assessment assessment) {
@@ -121,7 +121,7 @@ public class AssessmentController {
 	 * @param week
 	 * @return
 	 */
-	@GetMapping(value = "/assessment/{batchId}/{week}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/trainer/assessment/{batchId}/{week}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Assessment>> findAssessmentByWeek(@PathVariable Integer batchId,
 			@PathVariable Short week) {
 		log.debug("Find assessment by week number " + week + " for batch " + batchId + " ");
