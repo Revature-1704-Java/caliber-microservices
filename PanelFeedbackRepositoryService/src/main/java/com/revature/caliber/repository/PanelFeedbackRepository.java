@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.revature.caliber.model.PanelFeedback;
 
+@Repository
 public interface PanelFeedbackRepository extends JpaRepository<PanelFeedback, Long> {
 
 	@Query("SELECT DISTINCT pf FROM PanelFeedback pf")
