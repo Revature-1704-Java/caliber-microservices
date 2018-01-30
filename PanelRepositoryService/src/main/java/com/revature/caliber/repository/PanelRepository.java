@@ -8,25 +8,25 @@ import org.springframework.data.jpa.repository.Query;
 import com.revature.caliber.model.Panel;
 
 public interface PanelRepository extends JpaRepository<Panel, Integer> {
-
+	
 	/** find by trainee id 
 	 * @param traineeID the traineeId that identifies the trainee
 	 * @return a list of panels associated with the trainee
 	 */
 	List<Panel> findByTraineeId(Integer traineeId);
-	
+
 	/** find by repanels ordered descending by interview date
 	 * @return a list of panels that have a status of Repanel
 	 */
-	@Query("SELECT P FROM Panel P WHERE P.status = com.revature.caliber.beans.PanelStatus.Repanel ORDER BY P.interviewDate DESC")
+	@Query("SELECT p FROM Panel p WHERE p.statusId = com.revature.caliber.model.PanelStatus.Repanel ORDER BY p.interviewDate DESC")
 	List<Panel> findAllRepanels();
-
+	
 	/** find panels in the last 14 days NO DATA TO TEST ON
 	 * @return a list of panels that happen in the last 14 days
 	 */
 	@Query("FROM Panel p WHERE p.interviewDate >= TRUNC(SYSDATE) - 13")
 	List<Panel> findRecentPanels();
-	
+
 	/** find all panels 
 	 * Useful for listing available panels 
 	 * @return a list of all panels
@@ -51,4 +51,14 @@ public interface PanelRepository extends JpaRepository<Panel, Integer> {
 	 * @return a panel that was deleted by panel id
 	 */
 	Panel delete(int id);
+	
+// 	need to communicate to another table
+//	/** find all trainees and panels
+//	 * @param batchId
+//	 * @return a list of trainees and panels by batch id
+//	 */
+//	@Query("SELECT T FROM Trainee T LEFT JOIN FETCH T.panelInterviews P WHERE T.batch.batchId = ?1 AND T.trainingStatus <> com.revature.caliber.beans.TrainingStatus.Dropped")
+//	List<Trainee> findAllTraineesAndPanelsByBatch(int batchId);	
+	
+
 }

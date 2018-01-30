@@ -3,20 +3,28 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
+/**
+ * The type Panel.
+ */
+@Entity
+@Table(name = "CALIBER_PANEL")
+@Cacheable
 public class Panel implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	/** columns */
+
 	@Id
 	@Column(name = "PANEL_ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PANEL_ID_SEQUENCE")
@@ -38,7 +46,7 @@ public class Panel implements Serializable {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "INTERVIEW_FORMAT")
-	private Integer formatId;
+	private InterviewFormat formatId;
 
 	@Column(name = "INTERNET_CONNECTIVITY")
 	private String internet;
@@ -56,7 +64,7 @@ public class Panel implements Serializable {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "PANEL_STATUS")
-	private Integer statusId;
+	private PanelStatus statusId;
 
 	@Column(name = "ASSOCIATE_INTRO", nullable = true)
 	private String associateIntro;
@@ -83,8 +91,8 @@ public class Panel implements Serializable {
 	}
 
 	public Panel(Integer panelId, Integer traineeId, Integer panelist, Date interviewDate, String duration,
-			Integer formatId, String internet, Integer panelRound, boolean recordingConsent, String recordingLink,
-			Integer statusId, String associateIntro, String projectOneDescription, String projectTwoDescription,
+			InterviewFormat formatId, String internet, Integer panelRound, boolean recordingConsent, String recordingLink,
+			PanelStatus statusId, String associateIntro, String projectOneDescription, String projectTwoDescription,
 			String projectThreeDescription, String communicationSkills, String overall) {
 		super();
 		this.panelId = panelId;
@@ -148,11 +156,11 @@ public class Panel implements Serializable {
 		this.duration = duration;
 	}
 
-	public Integer getFormatId() {
+	public InterviewFormat getFormatId() {
 		return formatId;
 	}
 
-	public void setFormatId(Integer formatId) {
+	public void setFormatId(InterviewFormat formatId) {
 		this.formatId = formatId;
 	}
 
@@ -188,11 +196,11 @@ public class Panel implements Serializable {
 		this.recordingLink = recordingLink;
 	}
 
-	public Integer getStatusId() {
+	public PanelStatus getStatusId() {
 		return statusId;
 	}
 
-	public void setStatusId(Integer statusId) {
+	public void setStatusId(PanelStatus statusId) {
 		this.statusId = statusId;
 	}
 
