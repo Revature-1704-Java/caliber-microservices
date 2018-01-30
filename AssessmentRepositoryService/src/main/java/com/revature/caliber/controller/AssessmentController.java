@@ -74,10 +74,10 @@ public class AssessmentController {
 	@RequestMapping(value = "/trainer/assessment/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<Void> createAssessment(@Valid @RequestBody Assessment assessment) {
+	public ResponseEntity<Assessment> createAssessment(@Valid @RequestBody Assessment assessment) {
 		log.info("Creating assessment: " + assessment);
 		dao.save(assessment);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>(assessment, HttpStatus.CREATED);
 	}
 
 	/**

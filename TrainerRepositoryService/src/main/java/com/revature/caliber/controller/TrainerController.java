@@ -67,10 +67,10 @@ public class TrainerController {
 	@RequestMapping(value = "/trainer/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<Void> createTrainer(@Valid @RequestBody Trainer trainer) {
+	public ResponseEntity<Trainer> createTrainer(@Valid @RequestBody Trainer trainer) {
 		log.info("Creating trainer: " + trainer);
-		dao.save(trainer);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		Trainer createdTrainer = dao.save(trainer);
+		return new ResponseEntity<>(createdTrainer, HttpStatus.CREATED);
 	}
 
 	/**
