@@ -27,3 +27,6 @@ nbdist/
 
 ## Maven
 .mvn
+
+## Code Recommenders
+.recommenders
