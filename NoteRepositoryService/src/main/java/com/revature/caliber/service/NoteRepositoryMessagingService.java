@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 public class NoteRepositoryMessagingService {
 	
 	@RabbitListener(queues = "queue")
-	public String receive(String message) {
+	public void receive(String message) {
 		System.out.println(message);
-		return "NoteRepositoryMessagingService is ready";
 	}
 }
