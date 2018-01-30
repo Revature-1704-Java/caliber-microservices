@@ -3,17 +3,21 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+@Entity
+@Table(name = "CALIBER_NOTE")
 public class Note implements Serializable {
 	private static final long serialVersionUID = 7785756076682011103L;
 
@@ -25,11 +29,11 @@ public class Note implements Serializable {
 
 	@Length(min = 0, max = 4000)
 	@Column(name = "NOTE_CONTENT")
-	private String noteContent;
+	private String content;
 
 	@Min(value = 1)
 	@Column(name = "WEEK_NUMBER")
-	private Short weekNumber;
+	private Short week;
 
 	@Column(name = "BATCH_ID", nullable = true)
 	private Integer batchId;
@@ -44,7 +48,7 @@ public class Note implements Serializable {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "NOTE_TYPE")
-	private NoteType noteType;
+	private NoteType type;
 
 	@Column(name = "IS_QC_FEEDBACK", nullable = false)
 	private boolean qcFeedback;
@@ -55,20 +59,95 @@ public class Note implements Serializable {
 
 	public Note() {
 		super();
+		this.maxVisibility = TrainerRole.ROLE_TRAINER;
 	}
-
-	public Note(Integer noteId, String noteContent, Short weekNumber, Integer batchId, Integer traineeId,
-			TrainerRole maxVisibility, NoteType noteType, boolean qcFeedback, QCStatus qcStatus) {
-		super();
-		this.noteId = noteId;
-		this.noteContent = noteContent;
-		this.weekNumber = weekNumber;
-		this.batchId = batchId;
-		this.traineeId = traineeId;
-		this.maxVisibility = maxVisibility;
-		this.noteType = noteType;
-		this.qcFeedback = qcFeedback;
-		this.qcStatus = qcStatus;
+	
+	/**
+	 * Factory method to construct new QC weekly batch note
+	 * 
+	 * @param content
+	 * @param week
+	 * @param batchId
+	 * @param qcStatus
+	 * @return
+	 */
+	public static Note qcBatchNote(String content, Short week, Integer batchId, QCStatus qcStatus) {
+		Note note = new Note();
+		
+		note.setContent(content);
+		note.setWeek(week);
+		note.setBatchId(batchId);
+		note.setMaxVisibility(TrainerRole.ROLE_QC);
+		note.setType(NoteType.QC_BATCH);
+		note.setQcFeedback(true);
+		note.setQcStatus(qcStatus);
+		
+		return note;
+	}
+	
+	/**
+	 * Factory method for creating new QC weekly individual trainee note
+	 * 
+	 * @param content
+	 * @param week
+	 * @param traineeId
+	 * @param qcStatus
+	 * @return
+	 */
+	public static Note qcIndividualNote(String content, Short week, Integer traineeId, QCStatus qcStatus) {
+		Note note = new Note();
+		
+		note.setContent(content);
+		note.setWeek(week);
+		note.setTraineeId(traineeId);
+		note.setMaxVisibility(TrainerRole.ROLE_QC);
+		note.setType(NoteType.QC_TRAINEE);
+		note.setQcFeedback(true);
+		note.setQcStatus(qcStatus);;
+		
+		return note;
+	}
+	
+	/**
+	 * Factory method for creating a new Trainer weekly batch note
+	 * 
+	 * @param content
+	 * @param week
+	 * @param batchId
+	 * @return
+	 */
+	public static Note trainerBatchNote(String content, Short week, Integer batchId) {
+		Note note = new Note();
+		
+		note.setContent(content);
+		note.setWeek(week);
+		note.setBatchId(batchId);
+		note.setMaxVisibility(TrainerRole.ROLE_TRAINER);
+		note.setType(NoteType.BATCH);
+		note.setQcFeedback(false);
+		
+		return note;
+	}
+	
+	/**
+	 * Factory method for creating a new Trainer weekly individual trainee note
+	 * 
+	 * @param content
+	 * @param week
+	 * @param traineeId
+	 * @return
+	 */
+	public static Note trainerIndividualNote(String content, Short week, Integer traineeId) {
+		Note note = new Note();
+		
+		note.setContent(content);
+		note.setWeek(week);
+		note.setTraineeId(traineeId);
+		note.setMaxVisibility(TrainerRole.ROLE_TRAINER);
+		note.setType(NoteType.TRAINEE);
+		note.setQcFeedback(false);
+		
+		return note;
 	}
 
 	public Integer getNoteId() {
@@ -79,20 +158,20 @@ public class Note implements Serializable {
 		this.noteId = noteId;
 	}
 
-	public String getNoteContent() {
-		return noteContent;
+	public String getContent() {
+		return content;
 	}
 
-	public void setNoteContent(String noteContent) {
-		this.noteContent = noteContent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public Short getWeekNumber() {
-		return weekNumber;
+	public Short getWeek() {
+		return week;
 	}
 
-	public void setWeekNumber(Short weekNumber) {
-		this.weekNumber = weekNumber;
+	public void setWeek(Short week) {
+		this.week = week;
 	}
 
 	public Integer getBatchId() {
@@ -119,12 +198,12 @@ public class Note implements Serializable {
 		this.maxVisibility = maxVisibility;
 	}
 
-	public NoteType getNoteType() {
-		return noteType;
+	public NoteType getType() {
+		return type;
 	}
 
-	public void setNoteType(NoteType noteType) {
-		this.noteType = noteType;
+	public void setType(NoteType type) {
+		this.type = type;
 	}
 
 	public boolean isQcFeedback() {
@@ -143,4 +222,72 @@ public class Note implements Serializable {
 		this.qcStatus = qcStatus;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((batchId == null) ? 0 : batchId.hashCode());
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((maxVisibility == null) ? 0 : maxVisibility.hashCode());
+		result = prime * result + ((noteId == null) ? 0 : noteId.hashCode());
+		result = prime * result + (qcFeedback ? 1231 : 1237);
+		result = prime * result + ((qcStatus == null) ? 0 : qcStatus.hashCode());
+		result = prime * result + ((traineeId == null) ? 0 : traineeId.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((week == null) ? 0 : week.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Note other = (Note) obj;
+		if (batchId == null) {
+			if (other.batchId != null)
+				return false;
+		} else if (!batchId.equals(other.batchId))
+			return false;
+		if (content == null) {
+			if (other.content != null)
+				return false;
+		} else if (!content.equals(other.content))
+			return false;
+		if (maxVisibility != other.maxVisibility)
+			return false;
+		if (noteId == null) {
+			if (other.noteId != null)
+				return false;
+		} else if (!noteId.equals(other.noteId))
+			return false;
+		if (qcFeedback != other.qcFeedback)
+			return false;
+		if (qcStatus != other.qcStatus)
+			return false;
+		if (traineeId == null) {
+			if (other.traineeId != null)
+				return false;
+		} else if (!traineeId.equals(other.traineeId))
+			return false;
+		if (type != other.type)
+			return false;
+		if (week == null) {
+			if (other.week != null)
+				return false;
+		} else if (!week.equals(other.week))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Note [noteId=" + noteId + ", content=" + content + ", week=" + week + ", batchId=" + batchId
+				+ ", traineeId=" + traineeId + ", maxVisibility=" + maxVisibility + ", type=" + type + ", qcFeedback="
+				+ qcFeedback + ", qcStatus=" + qcStatus + "]";
+	}
+	
 }
