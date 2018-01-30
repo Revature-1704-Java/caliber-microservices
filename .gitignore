@@ -26,4 +26,7 @@ nbdist/
 .nb-gradle/
 
 ## Maven
-.mvn
+.mvn/
+
+## Code Recommenders
+.recommenders/
