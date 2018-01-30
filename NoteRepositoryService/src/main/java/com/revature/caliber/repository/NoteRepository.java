@@ -12,6 +12,9 @@ import com.revature.caliber.model.NoteType;
 public interface NoteRepository extends JpaRepository<Note, Integer> {
 	Note findByTraineeIdAndWeekAndQcFeedbackAndType(Integer traineeId, Short week, boolean qcFeedback, NoteType type);
 	
+	List<Note> findByBatchIdAndType(Integer batchId, NoteType type);
+	List<Note> findByBatchIdAndWeekAndType(Integer batchId, Short week, NoteType type);
 	List<Note> findByTraineeIdAndType(Integer traineeId, NoteType type);
 	List<Note> findByBatchIdAndWeekAndQcFeedbackAndType(Integer batchId, Short week, boolean qcFeedback, NoteType type);
+	
 }

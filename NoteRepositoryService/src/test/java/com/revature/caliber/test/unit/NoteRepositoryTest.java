@@ -73,6 +73,8 @@ public class NoteRepositoryTest {
 		
 		System.out.println("Find By TraineeId and Type\n" + notes);
 		
+		assertFalse(notes.isEmpty());
+		assertNotNull(testNote);
 		assertEquals(week, testNote.getWeek().shortValue());
 		assertEquals("Technically okay. Very nervous in interview. Conducts self professionally", testNote.getContent());
 		assertEquals(TEST_TRAINEE_ID, testNote.getTraineeId().intValue());
@@ -87,11 +89,38 @@ public class NoteRepositoryTest {
 		
 		System.out.println("Find By TraineeId and Week and qcFeedback and Type:\n" + testNote);
 		
+		assertNotNull(testNote);
 		assertEquals(week, testNote.getWeek().shortValue());
 		assertEquals("Good communication. Not as confident and less use of technical terms", testNote.getContent());
 		assertEquals(TEST_TRAINEE_ID, testNote.getTraineeId().intValue());
 		assertEquals(false, testNote.isQcFeedback());
 		assertEquals(NoteType.TRAINEE, testNote.getType());
+	}
+	
+	@Test
+	public void findByBatchIdAndTypeTest() {
+		List<Note> notes = noteRepository.findByBatchIdAndType(TEST_QC_BATCH_ID, NoteType.QC_BATCH);
+		Note testNote = notes.get(0);
+		
+		System.out.println("Find by BatchId and Type:\n" + testNote);
+		
+		assertFalse(notes.isEmpty());
+		assertEquals(TEST_QC_BATCH_ID, testNote.getBatchId().intValue());
+		assertEquals(NoteType.QC_BATCH, testNote.getType());
+	}
+	
+	@Test
+	public void findByBatchIdAndWeekAndTypeTest() {
+		short week = 2;
+		List<Note> notes = noteRepository.findByBatchIdAndWeekAndType(TEST_BATCH_ID, week, NoteType.BATCH);
+		Note testNote = notes.get(0);
+		
+		System.out.println("Find by BatchId and Week and Type:\n" + notes);
+		
+		assertFalse(notes.isEmpty());
+		assertEquals(NoteType.BATCH, testNote.getType());
+		assertEquals(week, testNote.getWeek().shortValue());
+		assertEquals(TEST_BATCH_ID, testNote.getBatchId().intValue());
 	}
 
 }
