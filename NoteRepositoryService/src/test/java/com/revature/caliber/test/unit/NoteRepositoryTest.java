@@ -50,6 +50,9 @@ public class NoteRepositoryTest {
 		assertFalse(notes.isEmpty());
 	}
 	
+	/**
+	 * Test method. Tests the findByBatchIdAndWeekAndQcFeedbackAndType method for findBatchNotes
+	 */
 	@Test
 	public void findByBatchIdAndWeekAndQcFeedbackAndTypeTest() {
 		short week = 2;
@@ -65,6 +68,9 @@ public class NoteRepositoryTest {
 		assertEquals(NoteType.BATCH, testNote.getType());
 	}
 	
+	/**
+	 * Test method. Tests the findByTraineeIdAndType method for findAllPublicIndividualNotes 
+	 */
 	@Test
 	public void findByTraineeIdAndTypeTest() {
 		short week = 1;
@@ -82,6 +88,9 @@ public class NoteRepositoryTest {
 		assertEquals(NoteType.TRAINEE, testNote.getType());
 	}
 	
+	/**
+	 * Test method. Tests the findByTraineeIdAndWeekAndQcFeedbackAndType method for findTraineeNote 
+	 */
 	@Test
 	public void findByTraineeIdAndWeekAndQcFeedbackAndTypeTest() {
 		short week = 2;
@@ -97,6 +106,9 @@ public class NoteRepositoryTest {
 		assertEquals(NoteType.TRAINEE, testNote.getType());
 	}
 	
+	/**
+	 * Test method. Tests the findByBatchIdAndType method for findAllBatchQCNotes  
+	 */
 	@Test
 	public void findByBatchIdAndTypeTest() {
 		List<Note> notes = noteRepository.findByBatchIdAndType(TEST_QC_BATCH_ID, NoteType.QC_BATCH);
@@ -109,6 +121,9 @@ public class NoteRepositoryTest {
 		assertEquals(NoteType.QC_BATCH, testNote.getType());
 	}
 	
+	/**
+	 * Test method. Tests the findByBatchIdAndWeekAndType method for findAllBatchNotes
+	 */
 	@Test
 	public void findByBatchIdAndWeekAndTypeTest() {
 		short week = 2;

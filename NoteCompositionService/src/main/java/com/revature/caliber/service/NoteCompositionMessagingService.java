@@ -4,11 +4,10 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
 @Service
-public class NoteRepositoryMessagingService {
-	
-	@RabbitListener(queues = "queue")
+public class NoteCompositionMessagingService {
+	@RabbitListener(queues = "caliber.queue")
 	public String receive(String message) {
 		System.out.println(message);
-		return "NoteRepositoryMessagingService is ready";
+		return "NoteCompositionMessagingService is ready";
 	}
 }
