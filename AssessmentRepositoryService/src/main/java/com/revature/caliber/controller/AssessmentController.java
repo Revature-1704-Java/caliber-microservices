@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.caliber.model.Assessment;
+import com.revature.caliber.model.SimpleAssessment;
 import com.revature.caliber.repository.AssessmentDAO;
 
 /**
@@ -46,8 +46,8 @@ public class AssessmentController {
 	 * @return assessmentList
 	 */
 	@GetMapping(value = "/trainer/assessment", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Assessment> getAssessments() {
-		List<Assessment> assessmentList = dao.findAll();
+	public List<SimpleAssessment> getAssessments() {
+		List<SimpleAssessment> assessmentList = dao.findAll();
 		return assessmentList;
 	}
 
@@ -58,8 +58,8 @@ public class AssessmentController {
 	 * @return assessment object
 	 */
 	@GetMapping(value = "/trainer/assessment/{assessmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Assessment getAssessment(@PathVariable Integer assessmentId) {
-		Assessment assessment = dao.findByAssessmentId(assessmentId);
+	public SimpleAssessment getAssessment(@PathVariable Integer assessmentId) {
+		SimpleAssessment assessment = dao.findByAssessmentId(assessmentId);
 		return assessment;
 	}
 
@@ -74,7 +74,7 @@ public class AssessmentController {
 	@RequestMapping(value = "/trainer/assessment/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<Assessment> createAssessment(@Valid @RequestBody Assessment assessment) {
+	public ResponseEntity<SimpleAssessment> createAssessment(@Valid @RequestBody SimpleAssessment assessment) {
 		log.info("Creating assessment: " + assessment);
 		dao.save(assessment);
 		return new ResponseEntity<>(assessment, HttpStatus.CREATED);
@@ -92,7 +92,7 @@ public class AssessmentController {
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
 	public ResponseEntity<Void> deleteAssessment(@PathVariable Long id) {
 		log.info("Deleting assessment: " + id);
-		Assessment assessment = new Assessment();
+		SimpleAssessment assessment = new SimpleAssessment();
 		assessment.setAssessmentId(id);
 		dao.delete(assessment);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -108,7 +108,7 @@ public class AssessmentController {
 	@RequestMapping(value = "/trainer/assessment/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<Assessment> updateAssessment(@Valid @RequestBody Assessment assessment) {
+	public ResponseEntity<SimpleAssessment> updateAssessment(@Valid @RequestBody SimpleAssessment assessment) {
 		log.info("Updating assessment: " + assessment);
 		dao.save(assessment);
 		return new ResponseEntity<>(assessment, HttpStatus.OK);
@@ -122,10 +122,10 @@ public class AssessmentController {
 	 * @return
 	 */
 	@GetMapping(value = "/trainer/assessment/{batchId}/{week}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Assessment>> findAssessmentByWeek(@PathVariable Integer batchId,
+	public ResponseEntity<List<SimpleAssessment>> findAssessmentByWeek(@PathVariable Integer batchId,
 			@PathVariable Short week) {
 		log.debug("Find assessment by week number " + week + " for batch " + batchId + " ");
-		List<Assessment> assessments = dao.findByBatchIdAndWeek(batchId, week);
+		List<SimpleAssessment> assessments = dao.findByBatchIdAndWeek(batchId, week);
 		if (assessments.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

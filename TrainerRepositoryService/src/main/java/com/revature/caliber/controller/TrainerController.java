@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.caliber.model.Trainer;
+import com.revature.caliber.model.SimpleTrainer;
 import com.revature.caliber.repository.TrainerDAO;
 
 @RestController
@@ -39,9 +39,9 @@ public class TrainerController {
 	 * @return trainerList
 	 */
 	@GetMapping(value = "/trainer", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Trainer> getTrainers() {
+	public List<SimpleTrainer> getTrainers() {
 		log.info("Getting all trainers");
-		List<Trainer> trainerList = dao.findAll();
+		List<SimpleTrainer> trainerList = dao.findAll();
 		return trainerList;
 	}
 
@@ -52,9 +52,9 @@ public class TrainerController {
 	 * @return trainer object
 	 */
 	@GetMapping(value = "/trainer/{trainerId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Trainer getTrainer(@PathVariable int trainerId) {
+	public SimpleTrainer getTrainer(@PathVariable int trainerId) {
 		log.info("Getting trainer with id: " + trainerId);
-		Trainer trainer = dao.findByTrainerId(trainerId);
+		SimpleTrainer trainer = dao.findByTrainerId(trainerId);
 		return trainer;
 	}
 	
@@ -67,9 +67,9 @@ public class TrainerController {
 	@RequestMapping(value = "/trainer/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<Trainer> createTrainer(@Valid @RequestBody Trainer trainer) {
+	public ResponseEntity<SimpleTrainer> createTrainer(@Valid @RequestBody SimpleTrainer trainer) {
 		log.info("Creating trainer: " + trainer);
-		Trainer createdTrainer = dao.save(trainer);
+		SimpleTrainer createdTrainer = dao.save(trainer);
 		return new ResponseEntity<>(createdTrainer, HttpStatus.CREATED);
 	}
 
@@ -83,7 +83,7 @@ public class TrainerController {
 	@RequestMapping(value = "/trainer/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<Trainer> updateTrainer(@Valid @RequestBody Trainer trainer) {
+	public ResponseEntity<SimpleTrainer> updateTrainer(@Valid @RequestBody SimpleTrainer trainer) {
 		log.info("Updating trainer: " + trainer);
 		dao.updateTrainerInfoById(trainer.getName(), trainer.getTitle(), trainer.getTier(), trainer.getTrainerId());
 		return new ResponseEntity<>(trainer, HttpStatus.OK);
@@ -101,7 +101,7 @@ public class TrainerController {
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
 	public ResponseEntity<Void> deleteTrainer(@PathVariable int id) {
 		log.info("Deleting trainer: " + id);
-		Trainer trainer = new Trainer();
+		SimpleTrainer trainer = new SimpleTrainer();
 		trainer.setTrainerId(id);
 		dao.delete(trainer);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
