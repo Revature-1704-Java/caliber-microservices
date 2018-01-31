@@ -35,15 +35,6 @@ public interface GradeRepository extends JpaRepository<Grade, Integer>{
 	
 	
 	
-	/**
-	 * Returns all grades for a batch. Useful for calculating coarsely-grained
-	 * data for reporting.
-	 * 
-	 * @param batchId
-	 * @return
-	 */
-	public List<Grade> findByBatch(@Param("batch")Integer batchId);
-	
 	
 	
 	
