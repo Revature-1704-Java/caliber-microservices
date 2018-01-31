@@ -25,11 +25,11 @@ public class SimpleAssessment implements Serializable {
 	@Column(name = "ASSESSMENT_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ASSESSMENT_ID_SEQUENCE")
 	@SequenceGenerator(name = "ASSESSMENT_ID_SEQUENCE", sequenceName = "ASSESSMENT_ID_SEQUENCE")
-	private long assessmentId;
+	private Long assessmentId;
 
 	@Min(value = 1)
 	@Column(name = "RAW_SCORE", nullable = false)
-	private int rawScore;
+	private Integer rawScore;
 
 	@Column(name = "ASSESSMENT_TITLE")
 	private String title;
@@ -41,22 +41,22 @@ public class SimpleAssessment implements Serializable {
 
 	@Min(value = 1)
 	@Column(name = "WEEK_NUMBER", nullable = false)
-	private short week;
+	private Short week;
 
 	@NotNull
 	@Column(name = "BATCH_ID")
-	private int batchId;
+	private Integer batchId;
 
 	@NotNull
 	@Column(name = "ASSESSMENT_CATEGORY", nullable = false)
-	private int categoryId;
+	private Integer categoryId;
 
 	public SimpleAssessment() {
 		super();
 	}
 
-	public SimpleAssessment(long assessmentId, int rawScore, String title, AssessmentType type, short week, int batchId,
-			int categoryId) {
+	public SimpleAssessment(Long assessmentId, Integer rawScore, String title, AssessmentType type, Short week, Integer batchId,
+			Integer categoryId) {
 		super();
 		this.assessmentId = assessmentId;
 		this.rawScore = rawScore;
@@ -67,19 +67,19 @@ public class SimpleAssessment implements Serializable {
 		this.categoryId = categoryId;
 	}
 
-	public long getAssessmentId() {
+	public Long getAssessmentId() {
 		return assessmentId;
 	}
 
-	public void setAssessmentId(long assessmentId) {
+	public void setAssessmentId(Long assessmentId) {
 		this.assessmentId = assessmentId;
 	}
 
-	public int getRawScore() {
+	public Integer getRawScore() {
 		return rawScore;
 	}
 
-	public void setRawScore(int rawScore) {
+	public void setRawScore(Integer rawScore) {
 		this.rawScore = rawScore;
 	}
 
@@ -99,34 +99,34 @@ public class SimpleAssessment implements Serializable {
 		this.type = type;
 	}
 
-	public short getWeek() {
+	public Short getWeek() {
 		return week;
 	}
 
-	public void setWeek(short week) {
+	public void setWeek(Short week) {
 		this.week = week;
 	}
 
-	public int getBatchId() {
+	public Integer getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(Integer batchId) {
 		this.batchId = batchId;
 	}
 
-	public int getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + batchId;
 		result = prime * result + categoryId;
 		result = prime * result + rawScore;
