@@ -3,8 +3,8 @@ pipeline {
     stages {
       stage("stop docker"){
         steps {
-	  sh "sudo docker-compose stop"
-	  sh "sudo docker system prune"
+	  sh "docker-compose stop"
+	  sh "docker system prune"
 	}
       }
       stage("mvn clean install"){
@@ -19,7 +19,7 @@ pipeline {
       }
       stage ("docker up"){
         steps {
-	  sh "sudo docker-compose up"
+	  sh "docker-compose up"
 	}
       }
     }
