@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "CALIBER_TRAINER")
 @Cacheable
-public class Trainer implements Serializable {
+public class SimpleTrainer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -56,11 +56,11 @@ public class Trainer implements Serializable {
 	@Column(name = "TIER")
 	private TrainerRole tier;
 
-	public Trainer() {
+	public SimpleTrainer() {
 		super();
 	}
 
-	public Trainer(String email, String name, String title, TrainerRole tier) {
+	public SimpleTrainer(String email, String name, String title, TrainerRole tier) {
 		super();
 		this.email = email;
 		this.name = name;
@@ -127,7 +127,7 @@ public class Trainer implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Trainer other = (Trainer) obj;
+		SimpleTrainer other = (SimpleTrainer) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;

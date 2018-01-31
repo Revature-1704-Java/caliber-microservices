@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "CALIBER_ASSESSMENT")
 @Cacheable
-public class Assessment implements Serializable {
+public class SimpleAssessment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -51,11 +51,11 @@ public class Assessment implements Serializable {
 	@Column(name = "ASSESSMENT_CATEGORY", nullable = false)
 	private int categoryId;
 
-	public Assessment() {
+	public SimpleAssessment() {
 		super();
 	}
 
-	public Assessment(long assessmentId, int rawScore, String title, AssessmentType type, short week, int batchId,
+	public SimpleAssessment(long assessmentId, int rawScore, String title, AssessmentType type, short week, int batchId,
 			int categoryId) {
 		super();
 		this.assessmentId = assessmentId;
@@ -144,7 +144,7 @@ public class Assessment implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Assessment other = (Assessment) obj;
+		SimpleAssessment other = (SimpleAssessment) obj;
 		if (batchId != other.batchId)
 			return false;
 		if (categoryId != other.categoryId)
