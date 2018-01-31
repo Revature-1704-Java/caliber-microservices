@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "CALIBER_PANEL_FEEDBACK")
 @Cacheable
-public class PanelFeedback {
+public class SimplePanelFeedback {
 
 	@Id
 	@Column(name = "PANEL_FEEDBACK_ID")
@@ -51,7 +51,7 @@ public class PanelFeedback {
 	@JoinColumn(name="PANEL_ID", nullable=false)
 	private int panelId;
 
-	public PanelFeedback() {
+	public SimplePanelFeedback() {
 		super();
 	}
 
@@ -123,7 +123,7 @@ public class PanelFeedback {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PanelFeedback other = (PanelFeedback) obj;
+		SimplePanelFeedback other = (SimplePanelFeedback) obj;
 		if (comment == null) {
 			if (other.comment != null)
 				return false;

@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.caliber.model.Category;
+import com.revature.caliber.model.SimpleCategory;
 import com.revature.caliber.repository.CategoryRepository;
 
 @RunWith(SpringRunner.class)
@@ -36,9 +36,9 @@ public class CategoryRepositoryTest {
 	@Test
 	public void findOne() {
 		log.info("Testing findOne method from CategoryDAO");
-		Category myCat = categoryRepository.findOne(1);
+		SimpleCategory myCat = categoryRepository.findOne(1);
 		assertNotNull(myCat);
-		assertTrue(categoryRepository.findOne(1) instanceof Category);
+		assertTrue(categoryRepository.findOne(1) instanceof SimpleCategory);
 		assertEquals(categoryRepository.findOne(1).toString(), "Java");
 	}
 	
@@ -46,7 +46,7 @@ public class CategoryRepositoryTest {
 	public void update() {
 		log.info("Testing update from CategoryDAO");
 		String skillName = "Revature Pro";
-		Category myCat = categoryRepository.findOne(1);
+		SimpleCategory myCat = categoryRepository.findOne(1);
 		myCat.setSkillCategory(skillName);
 		categoryRepository.save(myCat);
 		assertEquals(skillName, myCat.getSkillCategory());
@@ -55,7 +55,7 @@ public class CategoryRepositoryTest {
 	@Test
 	public void save() {
 		log.info("Testing save method from CategoryDAO");
-		Category newCat = new Category("Underwater Basket Weaving", false);
+		SimpleCategory newCat = new SimpleCategory("Underwater Basket Weaving", false);
 		Long before = jdbcTemplate.queryForObject(CATEGORY_COUNT, Long.class);
 		categoryRepository.saveAndFlush(newCat);
 		Long after = jdbcTemplate.queryForObject(CATEGORY_COUNT, Long.class);
