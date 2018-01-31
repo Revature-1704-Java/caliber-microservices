@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class NoteRepositoryMessagingService {
 	
-	@RabbitListener(queues = "queue")
+	@RabbitListener(queues = "caliber.note")
 	public void receive(String message) {
 		System.out.println(message);
 	}
