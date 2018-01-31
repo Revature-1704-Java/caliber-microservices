@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "CALIBER_NOTE")
-public class Note implements Serializable {
+public class SimpleNote implements Serializable {
 	private static final long serialVersionUID = 7785756076682011103L;
 
 	@Id
@@ -57,7 +57,7 @@ public class Note implements Serializable {
 	@Column(name = "QC_STATUS", nullable = true)
 	private QCStatus qcStatus;
 
-	public Note() {
+	public SimpleNote() {
 		super();
 		this.maxVisibility = TrainerRole.ROLE_TRAINER;
 	}
@@ -71,8 +71,8 @@ public class Note implements Serializable {
 	 * @param qcStatus
 	 * @return
 	 */
-	public static Note qcBatchNote(String content, Short week, Integer batchId, QCStatus qcStatus) {
-		Note note = new Note();
+	public static SimpleNote qcBatchNote(String content, Short week, Integer batchId, QCStatus qcStatus) {
+		SimpleNote note = new SimpleNote();
 		
 		note.setContent(content);
 		note.setWeek(week);
@@ -94,8 +94,8 @@ public class Note implements Serializable {
 	 * @param qcStatus
 	 * @return
 	 */
-	public static Note qcIndividualNote(String content, Short week, Integer traineeId, QCStatus qcStatus) {
-		Note note = new Note();
+	public static SimpleNote qcIndividualNote(String content, Short week, Integer traineeId, QCStatus qcStatus) {
+		SimpleNote note = new SimpleNote();
 		
 		note.setContent(content);
 		note.setWeek(week);
@@ -116,8 +116,8 @@ public class Note implements Serializable {
 	 * @param batchId
 	 * @return
 	 */
-	public static Note trainerBatchNote(String content, Short week, Integer batchId) {
-		Note note = new Note();
+	public static SimpleNote trainerBatchNote(String content, Short week, Integer batchId) {
+		SimpleNote note = new SimpleNote();
 		
 		note.setContent(content);
 		note.setWeek(week);
@@ -137,8 +137,8 @@ public class Note implements Serializable {
 	 * @param traineeId
 	 * @return
 	 */
-	public static Note trainerIndividualNote(String content, Short week, Integer traineeId) {
-		Note note = new Note();
+	public static SimpleNote trainerIndividualNote(String content, Short week, Integer traineeId) {
+		SimpleNote note = new SimpleNote();
 		
 		note.setContent(content);
 		note.setWeek(week);
@@ -246,7 +246,7 @@ public class Note implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Note other = (Note) obj;
+		SimpleNote other = (SimpleNote) obj;
 		if (batchId == null) {
 			if (other.batchId != null)
 				return false;
