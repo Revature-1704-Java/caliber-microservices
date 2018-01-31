@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NoteCompositionMessagingService {
-	@RabbitListener(queues = "caliber.queue")
+	@RabbitListener(queues = "caliber.note")
 	public String receive(String message) {
 		System.out.println(message);
 		return "NoteCompositionMessagingService is ready";
