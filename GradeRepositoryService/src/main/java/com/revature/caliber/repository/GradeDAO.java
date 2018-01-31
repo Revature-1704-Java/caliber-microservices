@@ -13,17 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 import com.revature.caliber.model.Grade;
 
 @Repository
-public interface GradeRepository extends JpaRepository<Grade, Integer>{
+@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+public interface GradeDAO extends JpaRepository<Grade, Integer>{
 	
+
 	/**
-	 * Returns grades for all trainees that took a particular assignment. Great
-	 * for finding average/median/highest/lowest grades for a test
+	 * Returns all grades for an assessment. 
 	 * 
 	 * @param assessmentId
 	 * @return
 	 */
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	public List<Grade> findbyAssessmentId(Long assessmentId);
+	public List<Grade> findByAssessmentId(Long assessmentId);
 	
 	
 	
@@ -34,7 +34,9 @@ public interface GradeRepository extends JpaRepository<Grade, Integer>{
 	 * @param traineeId
 	 * @return
 	 */
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	public List<Grade> findbyTraineeId(Integer traineeId);
+	public List<Grade> findByTraineeId(Integer traineeId);
+	
+	
+	
 	
 }
