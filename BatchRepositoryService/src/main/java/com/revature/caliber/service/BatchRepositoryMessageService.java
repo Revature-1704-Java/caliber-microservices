@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BatchRepositoryMessageService {
-	@RabbitListener(queues = "note")
+	@RabbitListener(queues = "batch")
 	public void receive(String message) {
 		System.out.println(message);
 	}
