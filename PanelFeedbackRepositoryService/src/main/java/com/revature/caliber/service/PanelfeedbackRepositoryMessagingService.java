@@ -1,5 +1,7 @@
 package com.revature.caliber.service;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ public class PanelfeedbackRepositoryMessagingService {
 	@Autowired
 	private PanelFeedbackRepository panelFeedbackRepository;
 	
-	@RabbitListener(queues = "caliber.note")
+	@RabbitListener(queues = "caliber.panelfeedback")
 	public SimplePanelFeedback receive(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
@@ -49,31 +51,35 @@ public class PanelfeedbackRepositoryMessagingService {
 			panelFeedbackRepository.delete(request.get("panelFeedbackId").getAsLong());
 			return panelFeedback; //+ Message for delete? Notify others?
 		} 
+		return null;
+	}
+	
+	/*
+	@RabbitListener(queues = "caliber.panelfeedback.list")
+	public List<SimplePanelFeedback> receive(String message) {
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(message);
+		JsonObject request = element.getAsJsonObject();
+		Gson gson = new Gson();
+		
+		if(request.get("methodName").getAsString().equals("findAll")) {
+			List<SimplePanelFeedback> panelFeedbacks = panelFeedbackRepository.findAll();
+			return panelFeedbacks; //+ Message for delete?
+		}
+		
+		else if(request.get("methodName").getAsString().equals("findAllForPanel")) {
+			List<SimplePanelFeedback> panelFeedbacks = panelFeedbackRepository.findAllForPanel(request.get("panelId").getAsInt());
+			return panelFeedbacks; //+ Message for delete?
+		}
+		
+		else if(request.get("methodName").getAsString().equals("findFailedFeedbackByPanel")) {
+			List<SimplePanelFeedback> panelFeedbacks = panelFeedbackRepository.findFailedFeedbackByPanel(request.get("panelId").getAsInt());
+			panelFeedbackRepository.delete(request.get("panelFeedbackId").getAsLong());
+			return panelFeedbacks;
+		}
 		else {
 			return null;
 		}
 	}
-	
-	//Lists
-	/*
-	 * findAll
-	 * else if(request.get("methodName").getAsString().equals("findAll")) {
-			List<SimplePanelFeedback> panelFeedbacks = panelFeedbackRepository.findAll();
-			return panelFeedbacks; //+ Message for delete?
-		} 
-	 * 
-	 * findAllForPanel(int panelId)
-	 * else if(request.get("methodName").getAsString().equals("findAllForPanel")) {
-			List<SimplePanelFeedback> panelFeedbacks = panelFeedbackRepository.findAllForPanel(request.get("panelId").getAsInt());
-			return panelFeedbacks; //+ Message for delete?
-		} 
-	 * 
-	 * findFailedFeedbackByPanel(panel panel)
-	 * else if(request.get("methodName").getAsString().equals("findFailedFeedbackByPanel")) {
-			List<SimplePanelFeedback> panelFeedback = panelFeedbackRepository.findFailedFeedbackByPanel(request.get("panelId").getAsInt());
-			panelFeedbackRepository.delete(request.get("panelFeedbackId").getAsLong());
-			return panelFeedbacks;
-		} 
-	 * 
-	 */
+	*/
 }
