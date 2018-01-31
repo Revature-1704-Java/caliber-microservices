@@ -8,13 +8,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.revature.caliber.service.MockMessagingService;
+import com.revature.caliber.service.PanelFeedbackCompositionMessagingService;
 
 @Configuration
 public class RepositoryProducerConfiguration {
 
 	@Autowired
-	private MockMessagingService mms;
+	private PanelFeedbackCompositionMessagingService mms;
 	
 	@Bean
 	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
