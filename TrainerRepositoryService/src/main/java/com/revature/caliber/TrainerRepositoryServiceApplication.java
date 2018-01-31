@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.revature.caliber.model.Trainer;
+import com.revature.caliber.model.SimpleTrainer;
 import com.revature.caliber.repository.TrainerDAO;
 
 @SpringBootApplication
@@ -24,7 +24,7 @@ public class TrainerRepositoryServiceApplication {
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
-			List<Trainer> Trainers = dao.findAll();
+			List<SimpleTrainer> Trainers = dao.findAll();
 			
 			System.out.println(Trainers);
 		};

@@ -3,11 +3,12 @@ package com.revature.caliber.service;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
-@Service
-public class NoteCompositionMessagingService {
-	@RabbitListener(queues = "caliber.note")
+//@Service
+public class AssessmentRepositoryMessagingService {
+	
+//	@RabbitListener(queues = "caliber.queue")
 	public String receive(String message) {
 		System.out.println(message);
-		return "NoteCompositionMessagingService is ready";
+		return "Received from Consumer";
 	}
 }
