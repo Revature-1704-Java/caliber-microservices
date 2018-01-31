@@ -12,7 +12,7 @@ import com.revature.caliber.model.SimpleNote;
 @RepositoryRestResource(collectionResourceRel = "note", path = "note")
 public interface NoteRepository extends JpaRepository<SimpleNote, Integer> {
 	SimpleNote findByTraineeIdAndWeekAndQcFeedbackAndType(@Param("traineeId") Integer traineeId, @Param("week") Short week, @Param("qcFeedback") boolean qcFeedback, @Param("type") NoteType type);
-	
+	List<SimpleNote> findAll();
 	List<SimpleNote> findByBatchIdAndType(@Param("batchId") Integer batchId, @Param("type") NoteType type);
 	List<SimpleNote> findByBatchIdAndWeekAndType(@Param("batchId") Integer batchId, @Param("week") Short week, @Param("type") NoteType type);
 	List<SimpleNote> findByTraineeIdAndType(@Param("traineeId") Integer traineeId, @Param("type") NoteType type);
