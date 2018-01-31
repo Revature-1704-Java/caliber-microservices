@@ -20,7 +20,7 @@ public interface GradeRepository extends JpaRepository<Grade, Integer>{
 	 * @param assessmentId
 	 * @return
 	 */
-	List<Grade> findByAssessmentId(@Param("assessmentId") Long assessmentId);
+	public List<Grade> findByAssessmentId(@Param("assessmentId") Long assessmentId);
 	
 	
 	

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GradeRepositoryMessagingService {
+	
 	@RabbitListener(queues = "caliber.grade")
 	public void receive(String message) {
 		System.out.println(message);
