@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "CALIBER_CATEGORY")
 @Cacheable
-public class Category implements Serializable {
+public class SimpleCategory implements Serializable {
 
 	private static final long serialVersionUID = 3363756954535297728L;
 
@@ -44,7 +44,7 @@ public class Category implements Serializable {
 	/**
 	 * Instantiates a new Category.
 	 */
-	public Category() {
+	public SimpleCategory() {
 		super();
 	}
 
@@ -53,7 +53,7 @@ public class Category implements Serializable {
 	 * @param skillCategory
 	 * @param active
 	 */
-	public Category(String skillCategory, boolean active) {
+	public SimpleCategory(String skillCategory, boolean active) {
 		super();
 		this.skillCategory = skillCategory;
 		this.active = active;
@@ -122,7 +122,7 @@ public class Category implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		SimpleCategory other = (SimpleCategory) obj;
 		if (active != other.active)
 			return false;
 		if (skillCategory == null) {
