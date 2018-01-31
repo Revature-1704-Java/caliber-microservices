@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.caliber.model.Assessment;
+import com.revature.caliber.model.SimpleAssessment;
 import com.revature.caliber.model.AssessmentType;
 import com.revature.caliber.repository.AssessmentDAO;
 
@@ -33,12 +33,12 @@ public class AssessmentDAOTest {
 	@Autowired
 	AssessmentDAO dao;
 
-	Assessment test;
+	SimpleAssessment test;
 
 	@Before
 	public void initialize() {
 		log.info("Initalizing a Test Assessment for use in Tests");
-		test = new Assessment();
+		test = new SimpleAssessment();
 		test.setTitle("TEST_ASSESSMENT");
 		test.setBatchId(77);
 		test.setRawScore(77);
@@ -50,37 +50,37 @@ public class AssessmentDAOTest {
 	@Test
 	public void testFindAll() {
 		log.info("Getting All Assessments");
-		List<Assessment> test = dao.findAll();
+		List<SimpleAssessment> test = dao.findAll();
 		assertFalse(test.isEmpty());
 	}
 
 	@Test
 	public void testFindByAssessmentId() {
 		log.info("Getting Assessment by assessmentId");
-		Assessment test = dao.findByAssessmentId(assessmentId);
+		SimpleAssessment test = dao.findByAssessmentId(assessmentId);
 		assertFalse(test == null);
 	}
 
 	@Test
 	public void testAddAssessment() {
 		log.info("Adding Assessment");
-		Assessment savedAssessment = dao.save(test);
+		SimpleAssessment savedAssessment = dao.save(test);
 		assertEquals(test.getAssessmentId(), savedAssessment.getAssessmentId());
 	}
 
 	@Test
 	public void testUpdateAssessment() {
 		log.info("Updating Assessment");
-		Assessment savedAssessment = dao.save(test);
+		SimpleAssessment savedAssessment = dao.save(test);
 		savedAssessment.setTitle("UPDATED_ASSESSMENT");
-		Assessment updatedAssessment = dao.save(savedAssessment);
+		SimpleAssessment updatedAssessment = dao.save(savedAssessment);
 		assertEquals(savedAssessment, updatedAssessment);
 	}
 
 	@Test
 	public void testDeleteAssessment() {
 		log.info("Deleting Assessment");
-		Assessment savedTest = dao.save(test);
+		SimpleAssessment savedTest = dao.save(test);
 		dao.delete(savedTest);
 		assertNull(dao.findByAssessmentId(savedTest.getAssessmentId()));
 	}
@@ -88,8 +88,8 @@ public class AssessmentDAOTest {
 	@Test
 	public void findByWeekNumber() {
 		log.info("Getting Assessment by Week Number");
-		List<Assessment> assessments = dao.findDistinctByWeek(week);
-		for (Assessment a : assessments) {
+		List<SimpleAssessment> assessments = dao.findDistinctByWeek(week);
+		for (SimpleAssessment a : assessments) {
 			if (a.getWeek() != week)
 				Assert.fail("week Number does not match: " + a.toString());
 		}
@@ -99,14 +99,14 @@ public class AssessmentDAOTest {
 	@Test
 	public void findByBatchId() {
 		log.info("Getting Assessment by batchId");
-		List<Assessment> assessments = dao.findDistinctByBatchId(batchId);
+		List<SimpleAssessment> assessments = dao.findDistinctByBatchId(batchId);
 		assertFalse(assessments.isEmpty());
 	}
 
 	@Test
 	public void findByBatchIdAndWeek() {
 		log.info("Getting Assessment by batchId and Week");
-		List<Assessment> assessments = dao.findByBatchIdAndWeek(batchId, week);
+		List<SimpleAssessment> assessments = dao.findByBatchIdAndWeek(batchId, week);
 		assertFalse(assessments.isEmpty());
 	}
 }

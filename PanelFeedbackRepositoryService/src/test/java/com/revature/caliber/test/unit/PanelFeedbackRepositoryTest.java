@@ -13,7 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.caliber.model.PanelFeedback;
+import com.revature.caliber.model.SimplePanelFeedback;
 import com.revature.caliber.repository.PanelFeedbackRepository;
 
 @RunWith(SpringRunner.class)
@@ -66,7 +66,7 @@ public class PanelFeedbackRepositoryTest {
 	@Test
 	public void nullGetPanelFeedbackByInt() {
 		log.info("Attempting to get a panel that doesn't exist");
-		PanelFeedback feedback = panelFeedBackRepository.findOne((long) 99999999);
+		SimplePanelFeedback feedback = panelFeedBackRepository.findOne((long) 99999999);
 		assertNull(feedback);
 	}
 	
@@ -76,7 +76,7 @@ public class PanelFeedbackRepositoryTest {
 		String comment = "11111";
 		long panelFId = 10;
 
-		PanelFeedback actual = panelFeedBackRepository.findOne(panelFId);
+		SimplePanelFeedback actual = panelFeedBackRepository.findOne(panelFId);
 
 		actual.setComment(comment);
 		panelFeedBackRepository.save(actual);

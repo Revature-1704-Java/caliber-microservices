@@ -3,43 +3,13 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-/**
- * The type Category.
- */
-@Entity
-@Table(name = "CALIBER_CATEGORY")
-@Cacheable
 public class Category implements Serializable {
+	private static final long serialVersionUID = 8740866186523960143L;
 
-	private static final long serialVersionUID = 3363756954535297728L;
-
-	@Id
-	@Column(name = "CATEGORY_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORY_ID_SEQUENCE")
-	@SequenceGenerator(name = "CATEGORY_ID_SEQUENCE", sequenceName = "CATEGORY_ID_SEQUENCE", initialValue = 1, allocationSize = 1)
-	@JsonProperty(value = "categoryId")
 	private int categoryId;
-
-	@JsonProperty(value = "skillCategory")
-	@Column(name = "SKILL_CATEGORY")
 	private String skillCategory;
-	
-	@JsonProperty(value = "active")
-	@Column(name = "IS_ACTIVE", nullable=false)
 	private boolean active;
+	private Set<Assessment> assessments;
 
 	/**
 	 * Instantiates a new Category.
@@ -50,6 +20,7 @@ public class Category implements Serializable {
 
 	/**
 	 * Create new category
+	 * 
 	 * @param skillCategory
 	 * @param active
 	 */
@@ -105,6 +76,25 @@ public class Category implements Serializable {
 		this.active = active;
 	}
 
+	/**
+	 * Gets assessments.
+	 *
+	 * @return the assessments
+	 */
+	public Set<Assessment> getAssessments() {
+		return assessments;
+	}
+
+	/**
+	 * Sets assessments.
+	 *
+	 * @param assessments
+	 *            the assessments
+	 */
+	public void setAssessments(Set<Assessment> assessments) {
+		this.assessments = assessments;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -137,4 +127,5 @@ public class Category implements Serializable {
 	public String toString() {
 		return skillCategory;
 	}
+	
 }

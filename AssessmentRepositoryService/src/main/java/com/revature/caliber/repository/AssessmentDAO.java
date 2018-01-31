@@ -8,20 +8,20 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.caliber.model.Assessment;
+import com.revature.caliber.model.SimpleAssessment;
 
 @Repository
-public interface AssessmentDAO extends JpaRepository<Assessment, Long> {
+public interface AssessmentDAO extends JpaRepository<SimpleAssessment, Long> {
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	Assessment findByAssessmentId(long id);
+	SimpleAssessment findByAssessmentId(long id);
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	List<Assessment> findDistinctByWeek(short week);
+	List<SimpleAssessment> findDistinctByWeek(short week);
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	List<Assessment> findDistinctByBatchId(int id);
+	List<SimpleAssessment> findDistinctByBatchId(int id);
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	List<Assessment> findByBatchIdAndWeek(int id, short week);
+	List<SimpleAssessment> findByBatchIdAndWeek(int id, short week);
 }
