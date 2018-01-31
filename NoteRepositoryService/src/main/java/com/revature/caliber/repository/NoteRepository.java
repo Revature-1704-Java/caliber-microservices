@@ -3,18 +3,19 @@ package com.revature.caliber.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import com.revature.caliber.model.SimpleNote;
 import com.revature.caliber.model.NoteType;
+import com.revature.caliber.model.SimpleNote;
 
-@Repository
+@RepositoryRestResource(collectionResourceRel = "note", path = "note")
 public interface NoteRepository extends JpaRepository<SimpleNote, Integer> {
-	SimpleNote findByTraineeIdAndWeekAndQcFeedbackAndType(Integer traineeId, Short week, boolean qcFeedback, NoteType type);
+	SimpleNote findByTraineeIdAndWeekAndQcFeedbackAndType(@Param("traineeId") Integer traineeId, @Param("week") Short week, @Param("qcFeedback") boolean qcFeedback, @Param("type") NoteType type);
 	
-	List<SimpleNote> findByBatchIdAndType(Integer batchId, NoteType type);
-	List<SimpleNote> findByBatchIdAndWeekAndType(Integer batchId, Short week, NoteType type);
-	List<SimpleNote> findByTraineeIdAndType(Integer traineeId, NoteType type);
-	List<SimpleNote> findByBatchIdAndWeekAndQcFeedbackAndType(Integer batchId, Short week, boolean qcFeedback, NoteType type);
+	List<SimpleNote> findByBatchIdAndType(@Param("batchId") Integer batchId, @Param("type") NoteType type);
+	List<SimpleNote> findByBatchIdAndWeekAndType(@Param("batchId") Integer batchId, @Param("week") Short week, @Param("type") NoteType type);
+	List<SimpleNote> findByTraineeIdAndType(@Param("traineeId") Integer traineeId, @Param("type") NoteType type);
+	List<SimpleNote> findByBatchIdAndWeekAndQcFeedbackAndType(@Param("batchId") Integer batchId, @Param("week") Short week, @Param("qcFeedback") boolean qcFeedback, @Param("type") NoteType type);
 	
 }
