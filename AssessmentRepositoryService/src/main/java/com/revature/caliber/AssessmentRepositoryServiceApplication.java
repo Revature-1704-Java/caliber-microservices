@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.revature.caliber.model.Assessment;
+import com.revature.caliber.model.SimpleAssessment;
 import com.revature.caliber.repository.AssessmentDAO;
 
 @SpringBootApplication
@@ -24,7 +24,7 @@ public class AssessmentRepositoryServiceApplication {
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
-			List<Assessment> assessments = dao.findAll();
+			List<SimpleAssessment> assessments = dao.findAll();
 			
 			System.out.println(assessments);
 		};
