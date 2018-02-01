@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.model.SimpleTrainer;
-import com.revature.caliber.repository.TrainerDAO;
+import com.revature.caliber.repository.TrainerRepository;
 
 @RestController
 @CrossOrigin
@@ -30,7 +30,7 @@ public class TrainerController {
 	private static final Logger log = Logger.getLogger(TrainerController.class);
 	
 	@Autowired
-	TrainerDAO dao;
+	TrainerRepository dao;
 
 	/**
 	 * Gets all Trainers from database
