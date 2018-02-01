@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.revature.caliber.model.SimpleNote;
 import com.revature.caliber.model.NoteType;
-import com.revature.caliber.model.QCStatus;
 import com.revature.caliber.repository.NoteRepository;
 
 @RunWith(SpringRunner.class)
@@ -94,7 +93,8 @@ public class NoteRepositoryTest {
 	@Test
 	public void findTraineeNoteTest() {
 		short week = 2;
-		SimpleNote testNote = noteRepository.findByTraineeIdAndWeekAndQcFeedbackAndType(TEST_TRAINEE_ID, week, false, NoteType.TRAINEE);
+		List<SimpleNote> notes = noteRepository.findByTraineeIdAndWeekAndQcFeedbackAndType(TEST_TRAINEE_ID, week, false, NoteType.TRAINEE);
+		SimpleNote testNote = notes.get(0);
 		
 		System.out.println("Find trainee note:\n" + testNote);
 		
