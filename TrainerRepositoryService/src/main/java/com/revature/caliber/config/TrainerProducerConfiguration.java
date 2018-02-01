@@ -14,18 +14,18 @@ import com.revature.caliber.service.TrainerCompositionService;
 public class TrainerProducerConfiguration {
 	@Autowired
 	private TrainerCompositionService mms;
-	
+
 	@Bean
 	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(factory);
 		rabbitTemplate.setExchange("revature.caliber.repos");
 		return new RabbitTemplate(factory);
 	}
-	
+
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
-			mms.send("9xdaX72tPYuz8xDP", "Hello world!");
+			System.out.println(mms.send("BSVihZkuxwdg9Dxy", "Hello world!"));
 		};
 	}
 }
