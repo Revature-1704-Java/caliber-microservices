@@ -1,11 +1,12 @@
 package com.revature.caliber.service;
 
 import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
+import com.revature.caliber.model.SimpleBatch;
+import com.revature.caliber.model.SimpleTrainee;
 
 @Service
 public class NoteCompositionMessagingService {
@@ -16,25 +17,21 @@ public class NoteCompositionMessagingService {
 	private static final String SINGLE_BATCH_ROUTING_KEY = "XLNbCWqQzFHr9JfZ";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 	
-	public boolean sendSingleSimpleBatchRequest(Integer batchId) {
+	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
 		JsonObject batchRequest = new JsonObject();
 		
 		batchRequest.addProperty("methodName", "findOne");
 		batchRequest.addProperty("batchId", batchId);
 		
-		String batch = (String) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY, batchRequest.toString());
-		
-		return true;
+		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY, batchRequest.toString());
 	}
 	
-	public boolean sendSingleSimpleTraineeRequest(Integer traineeId) {
+	public SimpleTrainee sendSingleSimpleTraineeRequest(Integer traineeId) {
 		JsonObject traineeRequest = new JsonObject();
 		
 		traineeRequest.addProperty("methodName", "findOne");
 		traineeRequest.addProperty("traineeId", traineeId);
 		
-		String trainee = (String) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY, traineeRequest.toString());
-		
-		return true;
+		return (SimpleTrainee) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY, traineeRequest.toString());
 	}
 }
