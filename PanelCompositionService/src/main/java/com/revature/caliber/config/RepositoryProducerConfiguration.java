@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.google.gson.JsonObject;
 import com.revature.caliber.service.PanelCompositionMessagingService;
 
 @Configuration
@@ -25,7 +26,11 @@ public class RepositoryProducerConfiguration {
     @Bean
     public CommandLineRunner runner() {
         return args -> {
-            mms.send("B8ptbVDNyVB28mVA", "repositoryProducer saying hi!");
+            // mms.send("B8ptbVDNyVB28mVA", "repositoryProducer saying hi!");
+        	JsonObject object = new JsonObject();
+        	object.addProperty("methodName", "findOne");
+        	object.addProperty("panelId", 1);
+        	mms.send("B8ptbVDNyVB28mVA", object.toString());        	
         };
     }
 }

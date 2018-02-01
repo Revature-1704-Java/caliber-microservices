@@ -11,12 +11,8 @@ public class PanelCompositionMessagingService {
     AmqpTemplate rabbitTemplate;
     
     public boolean send(String routingKey, String message) {
-        String response = (String) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
-        System.out.println(response);
+        Object response =  rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
+        System.out.println(response.toString());
         return true;
     }
-//	@RabbitListener(queues = "caliber.panel")
-//    public void receive(String message) {
-//        System.out.println(message);
-//    }
 }
