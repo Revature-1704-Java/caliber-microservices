@@ -22,37 +22,20 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Entity
-@Table(name = "CALIBER_PANEL_FEEDBACK")
-@Cacheable
 public class SimplePanelFeedback implements Serializable {
 
 	private static final long serialVersionUID = 8110514896738077383L;
 
-	@Id
-	@Column(name = "PANEL_FEEDBACK_ID")
-	@SequenceGenerator(name = "PANEL_FEEDBACK_ID_SEQUENCE", sequenceName = "PANEL_FEEDBACK_ID_SEQUENCE", initialValue = 1, allocationSize = 600)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PANEL_FEEDBACK_ID_SEQUENCE")
 	private long id;
 	
-	@JoinColumn(name="CATEGORY_ID", nullable=false)
 	private int categoryId;
-	
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "PANEL_STATUS", nullable = false)
+
 	private PanelStatus status;
 	
-	@Min(0)
-	@Max(10)
-	@NotNull
-	@Column(name = "PANEL_RESULT")
 	private int result;
 	
-	@Column(name = "PANELIST_COMMENTS")
 	private String comment;
 	
-	@JoinColumn(name="PANEL_ID", nullable=false)
 	private int panelId;
 
 	public SimplePanelFeedback() {

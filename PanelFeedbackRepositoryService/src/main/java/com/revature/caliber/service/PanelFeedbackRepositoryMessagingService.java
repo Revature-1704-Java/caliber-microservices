@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,24 @@ import com.revature.caliber.model.SimplePanelFeedback;
 import com.revature.caliber.repository.PanelFeedbackRepository;
 
 @Service
-public class PanelfeedbackRepositoryMessagingService {
+public class PanelFeedbackRepositoryMessagingService {
 
-	private static final Logger log = Logger.getLogger(PanelfeedbackRepositoryMessagingService.class);
+	private static final Logger log = Logger.getLogger(PanelFeedbackRepositoryMessagingService.class);
 	@Autowired
 	private PanelFeedbackRepository panelFeedbackRepository;
+	
+	@Autowired
+	AmqpTemplate rabbitTemplate;
+	
+	public boolean send(String routingKey, String message) {
+		SimplePanelFeedback response = (SimplePanelFeedback) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
+		if (response != null) {
+			System.out.println(response);
+			return true;
+		}
+		System.out.println("Response NOT recieved");
+		return false;
+	}
 	
 	@RabbitListener(queues = "caliber.panelfeedback")
 	public SimplePanelFeedback receiveSingle(String message) {
@@ -30,16 +44,12 @@ public class PanelfeedbackRepositoryMessagingService {
 		Gson gson = new Gson();
 		
 		System.out.println(request);
-		return null;
 		
 		//FindOne
-		//if(request.get("methodName").getAsString().equals("findOne")) {
-		//	SimplePanelFeedback panelFeedback = panelFeedbackRepository.findOne(request.get("panelFeedbackId").getAsLong());
-		//	return panelFeedback;
-		//}
-		//else if(request.get("methodName").getAsString().equals("findOne")) {
-		//	SimplePanelFeedback panelFeedback = panelFeedbackRepository.findOne(request.get("panelId").getAsLong());
-		//	return panelFeedback;
+		if(request.get("methodName").getAsString().equals("findOne")) {
+			SimplePanelFeedback panelFeedback = panelFeedbackRepository.findOne(request.get("panelFeedbackId").getAsLong());
+			System.out.println("Panel to return: "+panelFeedback);
+			return panelFeedback;
 		}
 		//update --  what the heck to we expect here? A bean? The updated fields?
 		//else if(request.get("methodName").getAsString().equals("update")) {
@@ -59,8 +69,8 @@ public class PanelfeedbackRepositoryMessagingService {
 		//	panelFeedbackRepository.delete(request.get("panelFeedbackId").getAsLong());
 		//	return panelFeedback; //+ Message for delete? Notify others?
 		//} 
-		//return null;
-	//}
+		return null;
+	}
 	
 	
 	@RabbitListener(queues = "caliber.panelfeedback.list")

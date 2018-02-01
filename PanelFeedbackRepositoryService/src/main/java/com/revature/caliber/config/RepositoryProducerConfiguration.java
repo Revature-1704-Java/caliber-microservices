@@ -9,13 +9,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.google.gson.JsonObject;
-import com.revature.caliber.service.PanelFeedbackCompositionMessagingService;
+import com.revature.caliber.service.PanelFeedbackRepositoryMessagingService;
 
 @Configuration
 public class RepositoryProducerConfiguration {
 
 	@Autowired
-	private PanelFeedbackCompositionMessagingService mms;
+	private PanelFeedbackRepositoryMessagingService mms;
 	
 	@Bean
 	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
