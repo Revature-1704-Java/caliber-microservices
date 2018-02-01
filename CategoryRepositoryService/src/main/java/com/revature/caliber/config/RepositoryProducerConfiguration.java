@@ -23,21 +23,4 @@ public class RepositoryProducerConfiguration {
 		rabbitTemplate.setExchange("revature.caliber.repos");
 		return new RabbitTemplate(factory);
 	}
-	
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			//findOne test
-			JsonObject object = new JsonObject();
-			object.addProperty("methodName", "findOne");
-			object.addProperty("panelFeedbackId", 1);
-			
-			//findAll test
-			JsonObject object2 = new JsonObject();
-			object2.addProperty("methodName", "findAll");
-			
-			mms.send("4jZ2GMxLP7VyQPBn", object.toString()); //single 
-			//mms.send("5MKVoktka2jXh9yR", object.toString());              //Lists
-		};
-	}
 }

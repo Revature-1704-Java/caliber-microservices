@@ -24,6 +24,7 @@ public class RepositoryProducerConfiguration {
 		return new RabbitTemplate(factory);
 	}
 	
+	/*
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
@@ -40,4 +41,5 @@ public class RepositoryProducerConfiguration {
 			//mms.send("5MKVoktka2jXh9yR", object.toString());              //Lists
 		};
 	}
+	*/
 }

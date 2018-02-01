@@ -33,6 +33,7 @@ public class PanelFeedbackRepositoryMessagingService {
 	AmqpTemplate rabbitTemplate;
 	
 	public SimpleCategory sendCategory(String routingKey, String message) {
+		
 		SimpleCategory response = (SimpleCategory) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
 		if (response != null) {
 			System.out.println(response);
@@ -41,9 +42,9 @@ public class PanelFeedbackRepositoryMessagingService {
 		System.out.println("Response NOT recieved");
 		return null;
 	}
-	/*
-	public SimplePanel sendPanel(String routingKey, String message) {
-		SimplePanel response = (SimplePanel) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
+	
+	public PanelFeedback sendPanel(String routingKey, String message) {
+		PanelFeedback response = (PanelFeedback) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
 		if (response != null) {
 			System.out.println(response);
 			return response;
@@ -51,9 +52,9 @@ public class PanelFeedbackRepositoryMessagingService {
 		System.out.println("Response NOT recieved");
 		return null;
 	}
-	*/
 	
-	@RabbitListener(queues = "caliber.panelfeedback")
+	
+	@RabbitListener(queues = "revature.caliber.repos.panelfeedback")
 	public PanelFeedback receiveSingle(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
@@ -71,7 +72,7 @@ public class PanelFeedbackRepositoryMessagingService {
 			JsonObject categoryMsg = new JsonObject();
 			categoryMsg.addProperty("methodName", "findOne");
 			categoryMsg.addProperty("categoryId", 1);
-			SimpleCategory simpleCategory = mms.sendCategory("catKey", categoryMsg.toString());
+			SimpleCategory simpleCategory = mms.sendCategory("utMPxDus2M9qy9Bh", categoryMsg.toString());
 			
 			//Make "complex category"
 			Category category = new Category();
@@ -87,6 +88,7 @@ public class PanelFeedbackRepositoryMessagingService {
 			panelMsg.addProperty("categoryId", 1);
 			SimplePanel simplePanel= mms.sendCategory("panelKey", panelMsg.toString());
 			*/
+			
 			/*
 			//Make "complex" panel
 			Panel panel = new Panel();
@@ -117,7 +119,10 @@ public class PanelFeedbackRepositoryMessagingService {
 			panelFeedback.setTechnology(category);
 			panelFeedback.setStatus(simplePanelFeedback.getStatus());
 			panelFeedback.setResult(simplePanelFeedback.getResult());
+			panelFeedback.setComment(simplePanelFeedback.getComment());
 			panelFeedback.setPanel(null);
+			
+			System.out.println("panelF to return " +panelFeedback.toString());
 			return panelFeedback;
 		}
 		
@@ -142,7 +147,7 @@ public class PanelFeedbackRepositoryMessagingService {
 		return null;
 	}
 	
-	
+	/*
 	@RabbitListener(queues = "caliber.panelfeedback.list")
 	public List<SimplePanelFeedback> receiveList(String message) {
 		JsonParser parser = new JsonParser();
@@ -172,6 +177,6 @@ public class PanelFeedbackRepositoryMessagingService {
 			return null;
 		}
 		*/
-	}
+	//}
 	
 }

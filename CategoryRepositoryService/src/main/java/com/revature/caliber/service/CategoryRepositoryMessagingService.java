@@ -36,7 +36,7 @@ public class CategoryRepositoryMessagingService {
 		return false;
 	}
 	
-	@RabbitListener(queues = "caliber.panelfeedback")
+	@RabbitListener(queues = "revature.caliber.repos.category")
 	public SimpleCategory receiveSingle(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
@@ -72,7 +72,7 @@ public class CategoryRepositoryMessagingService {
 		return null;
 	}
 	
-	
+	/*
 	@RabbitListener(queues = "caliber.panelfeedback.list")
 	public List<SimpleCategory> receiveList(String message) {
 		JsonParser parser = new JsonParser();
@@ -102,5 +102,5 @@ public class CategoryRepositoryMessagingService {
 			return null;
 		}
 		*/
-	}
+	//}
 }
