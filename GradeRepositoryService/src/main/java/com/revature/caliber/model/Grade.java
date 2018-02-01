@@ -39,7 +39,7 @@ public class Grade implements Serializable {
 	 * Assessment - The specified assessment taken by the Trainee
 	 */
 	@Column(name = "ASSESSMENT_ID")
-	private Integer assessmentId;
+	private Long assessmentId;
 
 	
 
@@ -70,7 +70,7 @@ public class Grade implements Serializable {
 	}
 
 
-	public Grade(Integer assessmentId, Integer traineeId, Date dateReceived, double score) {
+	public Grade(Long assessmentId, Integer traineeId, Date dateReceived, double score) {
 		super();
 		this.assessmentId = assessmentId;
 		this.traineeId = traineeId;
@@ -86,11 +86,11 @@ public class Grade implements Serializable {
 		this.gradeId = gradeId;
 	}
 
-	public Integer getAssessment() {
+	public Long getAssessment() {
 		return assessmentId;
 	}
 
-	public void setAssessment(Integer assessmentId) {
+	public void setAssessment(Long assessmentId) {
 		this.assessmentId = assessmentId;
 	}
 
