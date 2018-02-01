@@ -5,52 +5,52 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.revature.caliber.model.Panel;
+import com.revature.caliber.model.SimplePanel;
 
-public interface PanelRepository extends JpaRepository<Panel, Integer> {
+public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	
 	/** find by trainee id 
 	 * @param traineeID the traineeId that identifies the trainee
 	 * @return a list of panels associated with the trainee
 	 */
-	List<Panel> findByTraineeId(Integer traineeId);
+	List<SimplePanel> findByTraineeId(Integer traineeId);
 
 	/** find by repanels ordered descending by interview date
 	 * @return a list of panels that have a status of Repanel
 	 */
 	@Query("SELECT p FROM Panel p WHERE p.statusId = com.revature.caliber.model.PanelStatus.Repanel ORDER BY p.interviewDate DESC")
-	List<Panel> findAllRepanels();
+	List<SimplePanel> findAllRepanels();
 	
 	/** find panels in the last 14 days NO DATA TO TEST ON
 	 * @return a list of panels that happen in the last 14 days
 	 */
 	@Query("FROM Panel p WHERE p.interviewDate >= TRUNC(SYSDATE) - 13")
-	List<Panel> findRecentPanels();
+	List<SimplePanel> findRecentPanels();
 
 	/** find all panels 
 	 * Useful for listing available panels 
 	 * @return a list of all panels
 	 */
-	List<Panel> findAll();
+	List<SimplePanel> findAll();
 	
 	/** find by panel id
 	 * @param id
 	 * @return a panel found with the id parameter
 	 */
-	Panel findOne(int id);
+	SimplePanel findOne(int id);
 	
 	/** Convenience method 
 	 * save a panel 
 	 * @return a new panel 
 	 */
 	@SuppressWarnings("unchecked")
-	Panel save(Panel panel);
+	SimplePanel save(SimplePanel panel);
 	
 	/** Convenience method 
 	 * delete a panel by panel id
 	 * @return a panel that was deleted by panel id
 	 */
-	Panel delete(int id);
+	SimplePanel delete(int id);
 	
 // 	need to communicate to another table
 //	/** find all trainees and panels

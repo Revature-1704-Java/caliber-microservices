@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PanelCompositionMessagingService {
+	
 	@Autowired
     AmqpTemplate rabbitTemplate;
     
     public boolean send(String routingKey, String message) {
-        Object response =  rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
+        Panel response =  (Panel) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
         System.out.println(response.toString());
         return true;
     }

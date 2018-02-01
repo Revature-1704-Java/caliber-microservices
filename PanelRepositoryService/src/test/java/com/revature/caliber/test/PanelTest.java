@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.caliber.model.Panel;
+import com.revature.caliber.model.SimplePanel;
 import com.revature.caliber.repository.PanelRepository;
 
 @RunWith(SpringRunner.class)
@@ -21,7 +21,7 @@ public class PanelTest {
 	/** Tests getting all panels */
 	@Test
 	public void findAllTest() {
-		List<Panel> panels = panelRepository.findAll();
+		List<SimplePanel> panels = panelRepository.findAll();
 		System.out.println(panels);
 		assertFalse(panels.isEmpty());
 	}
@@ -29,7 +29,7 @@ public class PanelTest {
 	/** Tests getting all panels belonging to a trainee */
 	@Test
 	public void findByTraineeTraineeIdTest() {
-		List<Panel> panels = panelRepository.findByTraineeId(5501);
+		List<SimplePanel> panels = panelRepository.findByTraineeId(5501);
 		System.out.println(panels);
 		assertFalse(panels.isEmpty());
 	}
@@ -37,7 +37,7 @@ public class PanelTest {
 	/** Tests getting all repanels */
 	@Test
 	public void findAllRepanelsTest() {
-		List<Panel> panels = panelRepository.findAllRepanels();
+		List<SimplePanel> panels = panelRepository.findAllRepanels();
 		System.out.println(panels);
 		assertFalse(panels.isEmpty());		
 	}
@@ -45,7 +45,7 @@ public class PanelTest {
 	/** Tests getting all panels within the last 14 days */
 	@Test
 	public void findRecentPanelsTest() {
-		List<Panel> panels = panelRepository.findRecentPanels();
+		List<SimplePanel> panels = panelRepository.findRecentPanels();
 		System.out.println(panels);
 		assertTrue(panels.isEmpty()); /* DATA SET HAS NO PANELS WITHIN LAST 14 DAYS */
 	}
@@ -53,7 +53,7 @@ public class PanelTest {
 	/** Tests getting one panel by panel Id */
 	@Test
 	public void findOneTest() {
-		Panel panel = panelRepository.findOne(5);
+		SimplePanel panel = panelRepository.findOne(5);
 		System.out.println(panel);
 		assertFalse(panel == null);
 	}
@@ -61,7 +61,7 @@ public class PanelTest {
 	/** Tests deleting a panel by panel Id */
 	@Test
 	public void deleteTest() {
-		Panel panel = panelRepository.delete(5);
+		SimplePanel panel = panelRepository.delete(5);
 		System.out.println(panel);
 		assertTrue(panel == null); 
 	}
