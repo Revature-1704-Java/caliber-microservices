@@ -1,5 +1,6 @@
 package com.revature.caliber.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -22,16 +23,23 @@ public class PanelfeedbackRepositoryMessagingService {
 	private PanelFeedbackRepository panelFeedbackRepository;
 	
 	@RabbitListener(queues = "caliber.panelfeedback")
-	public SimplePanelFeedback receive(String message) {
+	public SimplePanelFeedback receiveSingle(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
 		Gson gson = new Gson();
 		
+		System.out.println(request);
+		return null;
+		
 		//FindOne
-		if(request.get("methodName").getAsString().equals("findOne")) {
-			SimplePanelFeedback panelFeedback = panelFeedbackRepository.findOne(request.get("panelFeedbackId").getAsLong());
-			return panelFeedback;
+		//if(request.get("methodName").getAsString().equals("findOne")) {
+		//	SimplePanelFeedback panelFeedback = panelFeedbackRepository.findOne(request.get("panelFeedbackId").getAsLong());
+		//	return panelFeedback;
+		//}
+		//else if(request.get("methodName").getAsString().equals("findOne")) {
+		//	SimplePanelFeedback panelFeedback = panelFeedbackRepository.findOne(request.get("panelId").getAsLong());
+		//	return panelFeedback;
 		}
 		//update --  what the heck to we expect here? A bean? The updated fields?
 		//else if(request.get("methodName").getAsString().equals("update")) {
@@ -46,40 +54,44 @@ public class PanelfeedbackRepositoryMessagingService {
 			//return panelFeedback; //+ Message for save? Notify others?
 		//}
 		//delete
-		else if(request.get("methodName").getAsString().equals("delete")) {
-			SimplePanelFeedback panelFeedback = panelFeedbackRepository.findOne(request.get("panelFeedbackId").getAsLong());
-			panelFeedbackRepository.delete(request.get("panelFeedbackId").getAsLong());
-			return panelFeedback; //+ Message for delete? Notify others?
-		} 
-		return null;
-	}
+		//else if(request.get("methodName").getAsString().equals("delete")) {
+		//	SimplePanelFeedback panelFeedback = panelFeedbackRepository.findOne(request.get("panelFeedbackId").getAsLong());
+		//	panelFeedbackRepository.delete(request.get("panelFeedbackId").getAsLong());
+		//	return panelFeedback; //+ Message for delete? Notify others?
+		//} 
+		//return null;
+	//}
 	
-	/*
+	
 	@RabbitListener(queues = "caliber.panelfeedback.list")
-	public List<SimplePanelFeedback> receive(String message) {
+	public List<SimplePanelFeedback> receiveList(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
 		Gson gson = new Gson();
 		
+		List<SimplePanelFeedback> panelFeedbacks = new ArrayList<>();
+		return panelFeedbacks;
+		
+		/*
 		if(request.get("methodName").getAsString().equals("findAll")) {
-			List<SimplePanelFeedback> panelFeedbacks = panelFeedbackRepository.findAll();
+			panelFeedbacks = panelFeedbackRepository.findAll();
 			return panelFeedbacks; //+ Message for delete?
 		}
 		
 		else if(request.get("methodName").getAsString().equals("findAllForPanel")) {
-			List<SimplePanelFeedback> panelFeedbacks = panelFeedbackRepository.findAllForPanel(request.get("panelId").getAsInt());
+			panelFeedbacks = panelFeedbackRepository.findAllForPanel(request.get("panelId").getAsInt());
 			return panelFeedbacks; //+ Message for delete?
 		}
 		
 		else if(request.get("methodName").getAsString().equals("findFailedFeedbackByPanel")) {
-			List<SimplePanelFeedback> panelFeedbacks = panelFeedbackRepository.findFailedFeedbackByPanel(request.get("panelId").getAsInt());
-			panelFeedbackRepository.delete(request.get("panelFeedbackId").getAsLong());
+			panelFeedbacks = panelFeedbackRepository.findFailedFeedbackByPanel(request.get("panelId").getAsInt());
 			return panelFeedbacks;
 		}
 		else {
 			return null;
 		}
+		*/
 	}
-	*/
+	
 }

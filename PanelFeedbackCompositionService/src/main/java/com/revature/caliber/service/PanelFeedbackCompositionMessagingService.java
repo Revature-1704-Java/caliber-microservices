@@ -11,8 +11,12 @@ public class PanelFeedbackCompositionMessagingService {
 	AmqpTemplate rabbitTemplate;
 	
 	public boolean send(String routingKey, String message) {
-		String response = (String) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
-		System.out.println(response);
-		return true;
+		Object response = rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
+		if (response != null) {
+			System.out.println("Response recieved");
+			return true;
+		}
+		System.out.println("Response NOT recieved");
+		return false;
 	}
 }

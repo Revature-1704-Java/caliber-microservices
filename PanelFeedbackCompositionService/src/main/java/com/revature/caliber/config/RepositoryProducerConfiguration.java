@@ -33,11 +33,11 @@ public class RepositoryProducerConfiguration {
 			object.addProperty("panelFeedbackId", 1);
 			
 			//findAll test
-			//JsonObject object2 = new JsonObject();
-			//object.addProperty("methodName", "findAll");
+			JsonObject object2 = new JsonObject();
+			object.addProperty("methodName", "findAll");
 			
 			mms.send("4jZ2GMxLP7VyQPBn", object.toString()); //single 
-			//mms.send("5MKVoktka2jXh9yR", "");              //Lists
+			mms.send("5MKVoktka2jXh9yR", object.toString());              //Lists
 		};
 	}
 }
