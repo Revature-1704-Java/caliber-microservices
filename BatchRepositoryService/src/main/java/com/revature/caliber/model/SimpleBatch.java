@@ -343,5 +343,15 @@ public class SimpleBatch implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "SimpleBatch [batchId=" + batchId + ", resourceId=" + resourceId + ", trainingName=" + trainingName
+				+ ", trainerId=" + trainerId + ", coTrainerId=" + coTrainerId + ", skillType=" + skillType
+				+ ", trainingType=" + trainingType + ", startDate=" + startDate + ", endDate=" + endDate + ", location="
+				+ location + ", addressId=" + addressId + ", goodGradeThreshold=" + goodGradeThreshold
+				+ ", borderlineGradeThreshold=" + borderlineGradeThreshold + ", weeks=" + weeks + ", gradedWeeks="
+				+ gradedWeeks + "]";
+	}
+
 	
 }

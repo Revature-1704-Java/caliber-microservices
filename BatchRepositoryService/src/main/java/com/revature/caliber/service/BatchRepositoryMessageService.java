@@ -19,6 +19,7 @@ public class BatchRepositoryMessageService {
 	
 	@RabbitListener(queues = "caliber.batch")
 	public SimpleBatch receive(String message) {
+		System.out.println(message);
 		JsonObject request=getRequest(message);
 		String methodName = request.get("methodName").getAsString();
 		switch(methodName) {
