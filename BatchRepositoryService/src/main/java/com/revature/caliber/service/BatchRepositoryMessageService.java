@@ -1,5 +1,7 @@
 package com.revature.caliber.service;
 
+import java.util.List;
+
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,9 +33,18 @@ public class BatchRepositoryMessageService {
 		}
 	}
 	@RabbitListener(queues = "caliber.batch.list")
-	public SimpleBatch receiveList(String message) {
+	public List<SimpleBatch> receiveList(String message) {
 		JsonObject request=getRequest(message);
-		String method = request.get("methodName").getAsString()
+		String methodName = request.get("methodName").getAsString();
+		if(methodName.contains("Current")){
+			if(request.get("trainerId")==null) {
+				return repo.findAllCurrent();
+			}else{
+				return repo.findAllCurrent(request.get("trainerId").getAsInt());
+			}
+		}else{
+			return repo.findAll();
+		}
 	}
 	
 	public JsonObject getRequest(String message){

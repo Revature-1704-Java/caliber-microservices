@@ -8,12 +8,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import com.revature.caliber.model.SimpleBatch;
+
 @Service
 public class BatchCompositionMessagingService {
 	@Autowired
 	AmqpTemplate rabbitTemplate;
 	
-	public String send(String msg) {
-		return (String) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", "XLNbCWqQzFHr9JfZ", msg);
+	public SimpleBatch send(String msg) {
+		return (SimpleBatch ) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", "XLNbCWqQzFHr9JfZ", msg);
 	}
 }
