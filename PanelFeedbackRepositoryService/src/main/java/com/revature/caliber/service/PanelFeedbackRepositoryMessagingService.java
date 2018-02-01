@@ -13,6 +13,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.revature.caliber.model.Category;
+import com.revature.caliber.model.Panel;
+import com.revature.caliber.model.PanelFeedback;
+import com.revature.caliber.model.SimpleCategory;
 import com.revature.caliber.model.SimplePanelFeedback;
 import com.revature.caliber.repository.PanelFeedbackRepository;
 
@@ -22,22 +26,35 @@ public class PanelFeedbackRepositoryMessagingService {
 	private static final Logger log = Logger.getLogger(PanelFeedbackRepositoryMessagingService.class);
 	@Autowired
 	private PanelFeedbackRepository panelFeedbackRepository;
+	@Autowired
+	private PanelFeedbackRepositoryMessagingService mms;
 	
 	@Autowired
 	AmqpTemplate rabbitTemplate;
 	
-	public boolean send(String routingKey, String message) {
-		SimplePanelFeedback response = (SimplePanelFeedback) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
+	public SimpleCategory sendCategory(String routingKey, String message) {
+		SimpleCategory response = (SimpleCategory) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
 		if (response != null) {
 			System.out.println(response);
-			return true;
+			return response;
 		}
 		System.out.println("Response NOT recieved");
-		return false;
+		return null;
 	}
+	/*
+	public SimplePanel sendPanel(String routingKey, String message) {
+		SimplePanel response = (SimplePanel) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
+		if (response != null) {
+			System.out.println(response);
+			return response;
+		}
+		System.out.println("Response NOT recieved");
+		return null;
+	}
+	*/
 	
 	@RabbitListener(queues = "caliber.panelfeedback")
-	public SimplePanelFeedback receiveSingle(String message) {
+	public PanelFeedback receiveSingle(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
@@ -47,10 +64,63 @@ public class PanelFeedbackRepositoryMessagingService {
 		
 		//FindOne
 		if(request.get("methodName").getAsString().equals("findOne")) {
-			SimplePanelFeedback panelFeedback = panelFeedbackRepository.findOne(request.get("panelFeedbackId").getAsLong());
-			System.out.println("Panel to return: "+panelFeedback);
+			//Get SimplePanelFeedback from own DAO
+			SimplePanelFeedback simplePanelFeedback = panelFeedbackRepository.findOne(request.get("panelFeedbackId").getAsLong());
+			
+			//Message Category for simple bean
+			JsonObject categoryMsg = new JsonObject();
+			categoryMsg.addProperty("methodName", "findOne");
+			categoryMsg.addProperty("categoryId", 1);
+			SimpleCategory simpleCategory = mms.sendCategory("catKey", categoryMsg.toString());
+			
+			//Make "complex category"
+			Category category = new Category();
+			category.setCategoryId(simpleCategory.getCategoryId());
+			category.setSkillCategory(simpleCategory.getSkillCategory());
+			category.setActive(simpleCategory.isActive());
+			category.setAssessments(null);
+			
+			/*
+			//Message Panel for simple bean
+			JsonObject panelMsg = new JsonObject();
+			panelMsg.addProperty("methodName", "findOne");
+			panelMsg.addProperty("categoryId", 1);
+			SimplePanel simplePanel= mms.sendCategory("panelKey", panelMsg.toString());
+			*/
+			/*
+			//Make "complex" panel
+			Panel panel = new Panel();
+			panel.setId(simplePanel.getId());
+			panel.setTrainee(null); //Object - Trainee
+			panel.setPanelist(null); //Object - Trainer
+			panel.setInterviewDate(simplePanel.getInterviewDate());
+			panel.setDuration(simplePanel.getDuration());
+			panel.setFormat(simplePanel.getFormat());
+			panel.setInternet(simplePanel.getInternet());
+			panel.setPanelRound(simplePanel.getPanelRound());
+			panel.setRecordingConsent(simplePanel.getRecordingConsent());
+			panel.setRecordingLink(simplePanel.getRecordingLink());
+			panel.setStatus(simplePanel.getStatus());
+			panel.setFeedback(null); //List of PanelFeedbacks
+			panel.setAssociateIntro(simplePanel.getAssociateIntro());
+			panel.setProjectOneDescription(simplePanel.getProjectOneDescription());
+			panel.setProjectTwoDescription(simplePanel.getProjectTwoDescription());
+			panel.setProjectThreeDescription(simplePanel.getProjectThreeDescription());
+			panel.setCommunicationSkills(simplePanel.getCommunicationSkills());
+			panel.setOverall(simplePanel.getOverall());
+			*/
+			
+			
+			//Compose simple beans into Complex and return
+			PanelFeedback panelFeedback = new PanelFeedback();
+			panelFeedback.setId(simplePanelFeedback.getId());
+			panelFeedback.setTechnology(category);
+			panelFeedback.setStatus(simplePanelFeedback.getStatus());
+			panelFeedback.setResult(simplePanelFeedback.getResult());
+			panelFeedback.setPanel(null);
 			return panelFeedback;
 		}
+		
 		//update --  what the heck to we expect here? A bean? The updated fields?
 		//else if(request.get("methodName").getAsString().equals("update")) {
 			//panelFeedbackRepository.save(panelFeedback);
