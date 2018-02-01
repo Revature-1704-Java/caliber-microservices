@@ -30,7 +30,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name = "CALIBER_BATCH")
 @Cacheable
-public class Batch implements Serializable {	
+public class SimpleBatch implements Serializable {	
 
 	/**
 	 * 
@@ -106,7 +106,7 @@ public class Batch implements Serializable {
 	@Column(name = "GRADED_WEEKS")
 	private int gradedWeeks;
 	
-	public Batch() {
+	public SimpleBatch() {
 		super();
 		this.weeks = 1;
 		this.gradedWeeks = 7;
@@ -125,7 +125,7 @@ public class Batch implements Serializable {
 	 * @param endDate
 	 * @param location
 	 */
-	public Batch(String trainingName, Integer trainerId, Date startDate, Date endDate, String location) {
+	public SimpleBatch(String trainingName, Integer trainerId, Date startDate, Date endDate, String location) {
 		this();
 		this.trainingName = trainingName;
 		this.trainerId = trainerId;
@@ -285,7 +285,7 @@ public class Batch implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Batch other = (Batch) obj;
+		SimpleBatch other = (SimpleBatch) obj;
 		if (addressId == null) {
 			if (other.addressId != null)
 				return false;

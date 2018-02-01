@@ -27,7 +27,7 @@ public class PanelfeedbackRepositoryMessagingService {
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
 		Gson gson = new Gson();
-		
+		System.out.println(message);
 		//FindOne
 		if(request.get("methodName").getAsString().equals("findOne")) {
 			SimplePanelFeedback panelFeedback = panelFeedbackRepository.findOne(request.get("panelFeedbackId").getAsLong());

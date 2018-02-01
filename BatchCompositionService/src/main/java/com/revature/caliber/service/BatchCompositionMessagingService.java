@@ -16,12 +16,4 @@ public class BatchCompositionMessagingService {
 	public String send(String msg) {
 		return (String) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", "XLNbCWqQzFHr9JfZ", msg);
 	}
-	
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			System.out.println("here we go");
-			System.out.println(send("hellow"));
-		};
-	}
 }

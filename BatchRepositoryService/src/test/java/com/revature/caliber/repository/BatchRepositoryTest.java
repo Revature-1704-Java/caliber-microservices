@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.caliber.model.Batch;
+import com.revature.caliber.model.SimpleBatch;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -26,10 +26,10 @@ public class BatchRepositoryTest {
 
 	@Test
 	public void testFindAllByTrainerId() {
-		Batch b=new Batch("trainingName", 1, Date.from(Instant.now()), Date.from(Instant.now()), "location");
+		SimpleBatch b=new SimpleBatch("trainingName", 1, Date.from(Instant.now()), Date.from(Instant.now()), "location");
 		int id = (int) entityManager.persistAndGetId(b);
 		entityManager.flush();
-		List<Batch> test = batchRepo.findAllByTrainerId(1);
+		List<SimpleBatch> test = batchRepo.findAllByTrainerId(1);
 		assertFalse("Test Batch Not Empty", test.size()==0);
 	
 	}
