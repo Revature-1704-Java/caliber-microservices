@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.caliber.model.Grade;
+import com.revature.caliber.model.SimpleGrade;
 import com.revature.caliber.repository.GradeRepository;
 
 @RunWith(SpringRunner.class)
@@ -28,7 +28,7 @@ public class GradeRepositoryTest {
 	
 	@Test
 	public void findAllTest() {
-		List<Grade> grades = gradeRepository.findAll();
+		List<SimpleGrade> grades = gradeRepository.findAll();
 		
 		System.out.println(grades.size());
 		
@@ -37,7 +37,7 @@ public class GradeRepositoryTest {
 	
 	@Test
 	public void findGradeByTraineeTest() {
-		List<Grade> grades = gradeRepository.findByTraineeId(1);
+		List<SimpleGrade> grades = gradeRepository.findByTraineeId(1);
 		
 		for(int i = 0; i < grades.size(); i++) {
 			assertEquals(grades.get(i).getTrainee(), (Integer)1);
@@ -46,10 +46,18 @@ public class GradeRepositoryTest {
 	
 	@Test
 	public void findGradeByAssessmentTest() {
-		List<Grade> grades = gradeRepository.findByAssessmentId(2063L);
+		List<SimpleGrade> grades = gradeRepository.findByAssessmentId(2063L);
 		
 		for(int i = 0; i < grades.size(); i++) {
 			assertEquals(grades.get(i).getAssessment(), (Long)2063L);
 		}
+	}
+	
+	
+	@Test
+	public void finOneTest() {
+	
+		SimpleGrade grade = gradeRepository.findOne(2063L);
+		assertEquals(grade.getGradeId(), 2063L);
 	}
 }

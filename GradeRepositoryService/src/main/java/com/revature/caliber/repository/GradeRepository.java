@@ -7,12 +7,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
-import com.revature.caliber.model.Grade;
+import com.revature.caliber.model.SimpleGrade;
 
 @RepositoryRestResource(collectionResourceRel = "grade", path = "grade")
-public interface GradeRepository extends JpaRepository<Grade, Integer>{
+public interface GradeRepository extends JpaRepository<SimpleGrade, Long>{
 	
-	List<Grade> findAll();
+	List<SimpleGrade> findAll();
 
 	/**
 	 * Returns all grades for an assessment. 
@@ -20,7 +20,7 @@ public interface GradeRepository extends JpaRepository<Grade, Integer>{
 	 * @param assessmentId
 	 * @return
 	 */
-	public List<Grade> findByAssessmentId(@Param("assessmentId") Long assessmentId);
+	public List<SimpleGrade> findByAssessmentId(@Param("assessmentId") Long assessmentId);
 	
 	
 	
@@ -31,7 +31,7 @@ public interface GradeRepository extends JpaRepository<Grade, Integer>{
 	 * @param traineeId
 	 * @return
 	 */
-	public List<Grade> findByTraineeId(@Param("traineeId")Integer traineeId);
+	public List<SimpleGrade> findByTraineeId(@Param("traineeId")Integer traineeId);
 	
 	
 	

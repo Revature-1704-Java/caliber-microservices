@@ -12,15 +12,17 @@ import org.springframework.stereotype.Service;
 public class GradeCompositionMessagingService {
 	
 	@Autowired
-	AmqpTemplate rabbitTemplate;
+	private AmqpTemplate rabbitTemplate;
 	
-	public boolean send(String routingKey, String message) {
-			System.out.println(message);
-	       List<String> response = (ArrayList<String>) rabbitTemplate.convertSendAndReceive("revature.caliber.repos", routingKey, message);
-	       System.out.println(response);
-	       for(int i = 0; i < response.size(); i++) {
-	    	   System.out.println(response.get(i));
-	       }
+	private static final String SINGLE_GRADE_ROUTING_KEY = "aYF4wPtsGMjq72Lu";
+	private static final String LIST_GRADE_ROUTING_KEY = "V6hbpnyZRH8ZQQ9e";
+	
+	
+	public boolean sendSingleGradeRequest() {
 	       return true;
+	}
+	
+	public boolean sendListGradeRquest() {
+		return true;
 	}
 }

@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
 import com.revature.caliber.service.GradeCompositionMessagingService;
 
 @Configuration
-public class RepositoryProducerConfiguration {
+public class GradeCompositionServiceConfiguration {
 		@Autowired
 	   private GradeCompositionMessagingService mms;
 	   
@@ -22,16 +22,5 @@ public class RepositoryProducerConfiguration {
 	       return new RabbitTemplate(factory);
 	   }
 	   
-	   @Bean
-	   public CommandLineRunner runner() {
-	       return args -> {
-	    	   JsonObject json = new JsonObject();
-	    	   json.addProperty("methodName", "findGradesbyTrainee");
-	    	   json.addProperty("traineeId", 1);
-	    	   	
-	    	   String jsonString = json.toString();
-	   
-	           mms.send("V6hbpnyZRH8ZQQ9e", jsonString);
-	       };
-	   }
+	  
 }
