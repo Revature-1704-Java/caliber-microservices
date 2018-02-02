@@ -18,70 +18,42 @@ import javax.validation.constraints.NotNull;
 /**
  * The type Panel.
  */
-@Entity
-@Table(name = "CALIBER_PANEL")
-@Cacheable
 public class SimplePanel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@Column(name = "PANEL_ID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PANEL_ID_SEQUENCE")
-	@SequenceGenerator(name = "PANEL_ID_SEQUENCE", sequenceName = "PANEL_ID_SEQUENCE")
+	
 	private Integer panelId;
 
-	@Column(name = "TRAINEE_ID", nullable = false)
 	private Integer traineeId;
 
-	@Column(name = "PANELIST_ID", nullable = false)
 	private Integer panelist;
 
-	@Column(name = "INTERVIEW_DATE")
 	private Date interviewDate;
 
-	@Column(name = "DURATION")
 	private String duration;
 
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "INTERVIEW_FORMAT")
 	private InterviewFormat formatId;
 
-	@Column(name = "INTERNET_CONNECTIVITY")
 	private String internet;
 
-	@Min(value = 1)
-	@Column(name = "PANEL_ROUND", nullable = false)
 	private Integer panelRound;
 
-	@Column(name = "RECORDING_CONSENT")
 	private boolean recordingConsent;
 
-	@Column(name = "RECORDING_LINK")
 	private String recordingLink;
 
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "PANEL_STATUS")
 	private PanelStatus statusId;
-
-	@Column(name = "ASSOCIATE_INTRO", nullable = true)
+	
 	private String associateIntro;
 
-	@Column(name = "PROJECT_ONE_DESCRIPTION", nullable = true)
 	private String projectOneDescription;
 
-	@Column(name = "PROJECT_TWO_DESCRIPTION", nullable = true)
 	private String projectTwoDescription;
 
-	@Column(name = "PROJECT_THREE_DESCRIPTION", nullable = true)
 	private String projectThreeDescription;
 
-	@Column(name = "COMMUNICATION_SKILLS", nullable = true)
 	private String communicationSkills;
 
-	@Column(name = "OVERALL_FEEDBACK", nullable = true)
 	private String overall;
 
 	/** constructors */
