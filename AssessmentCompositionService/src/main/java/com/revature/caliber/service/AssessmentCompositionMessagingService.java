@@ -4,13 +4,10 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AssessmentRepositoryMessagingService {
-	
+public class AssessmentCompositionMessagingService {
 	@RabbitListener(queues = "caliber.assessment")
 	public String receive(String message) {
-//		JsonParser parser = new JsonParser();
-//		JsonElement element = parser.parse(message);
-		System.out.println("Recieved from caliber.assessment" + message);
-		return "Received from Consumer";
+		System.out.println(message);
+		return "AssessmentCompositionMessagingService is ready";
 	}
 }
