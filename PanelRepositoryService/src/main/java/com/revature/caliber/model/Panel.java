@@ -30,6 +30,10 @@ public class Panel implements Serializable {
 		super();
 		this.interviewDate = new Date();
 	}
+	
+	public Panel(SimplePanel simplePanel) {
+
+	}
 
 	public int getId() {
 		return id;

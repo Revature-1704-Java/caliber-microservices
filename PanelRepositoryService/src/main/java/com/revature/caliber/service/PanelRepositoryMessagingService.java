@@ -15,20 +15,21 @@ import com.revature.caliber.repository.PanelRepository;
 public class PanelRepositoryMessagingService {
 	
 	@Autowired
-	private PanelRepository panelRepository;
+	private PanelRepositoryRequestDispatcher panelRepositoryRequestDispatcer;
 	
 	@RabbitListener(queues = "caliber.panel")
-    public SimplePanel receive(String message) {
-        System.out.println(message);
+	public SimplePanel receiveSingleSimpleNoteRequest(String message) {
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(message);
         JsonObject request = element.getAsJsonObject();
         
-        Gson gson = new Gson();
-        if(request.get("methodName").getAsString().equals("findOne")) {
-        	SimplePanel panel = panelRepository.findOne(request.get("panelId").getAsInt());
-        	return panel;
-        } else 
-        	return null;
+        return panelRepositoryRequestDispatcher.processSingleSimplePanelRequest(request);
+        
+//        Gson gson = new Gson();
+//        if(request.get("methodName").getAsString().equals("findOne")) {
+//        	SimplePanel panel = panelRepository.findOne(request.get("panelId").getAsInt());
+//        	return panel;
+//        } else 
+//        	return null;
     }
 }
