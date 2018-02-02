@@ -34,6 +34,7 @@ public class BatchRepositoryMessageService {
 	public SimpleBatch receiveList(String message) {
 		JsonObject request=getRequest(message);
 		String method = request.get("methodName").getAsString()
+		
 	}
 	
 	public JsonObject getRequest(String message){
