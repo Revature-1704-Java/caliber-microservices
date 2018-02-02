@@ -9,36 +9,31 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.revature.caliber.model.NoteType;
 import com.revature.caliber.model.SimpleNote;
-import com.revature.caliber.repository.NoteRepository;
 
 @Service
 public class NoteRepositoryMessagingService {
 	
 	@Autowired
-	private NoteRepository noteRepository;
+	private NoteRepositoryRequestDispatcher noteRepositoryRequestDispatcher;
 	
+//	@RabbitListener(queues = "revature.caliber.repos.note")
 	@RabbitListener(queues = "caliber.note")
-	public SimpleNote receiveSimpleRequest(String message) {
+	public SimpleNote receiveSingleSimpleNoteRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
 		
-		if(request.get("methodName").getAsString().equals("findTraineeNote")) {
-			List<SimpleNote> notes = noteRepository.findByTraineeIdAndWeekAndQcFeedbackAndType(request.get("traineeId").getAsInt(), request.get("week").getAsShort(), false, NoteType.TRAINEE);
-			SimpleNote note = null;
-			if(notes.size() == 1)
-				note = notes.get(0);
-			return note;
-		} else
-			return null;
+		return noteRepositoryRequestDispatcher.processSingleSimpleNoteRequest(request);
 	}
 	
+//	@RabbitListener(queues = "revature.caliber.repos.note.list")
 	@RabbitListener(queues = "caliber.note.list")
-	public List<SimpleNote> receiveListRequest(String message) {
-		List<SimpleNote> notes = null;
+	public List<SimpleNote> receiveListSimpleNoteRequest(String message) {
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(message);
+		JsonObject request = element.getAsJsonObject();
 		
-		return notes;
+		return noteRepositoryRequestDispatcher.processListSimpleNoteRequest(request);
 	}
 }
