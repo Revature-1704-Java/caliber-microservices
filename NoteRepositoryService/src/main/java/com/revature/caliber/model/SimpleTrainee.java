@@ -23,7 +23,6 @@ public class SimpleTrainee implements Serializable {
 
 	public SimpleTrainee() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public SimpleTrainee(int traineeId, String resourceId, String name, String email, TrainingStatus trainingStatus,

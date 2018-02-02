@@ -1,5 +1,7 @@
 package com.revature.caliber.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +25,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "CALIBER_PANEL_FEEDBACK")
 @Cacheable
-public class SimplePanelFeedback {
+public class SimplePanelFeedback implements Serializable {
+
+	private static final long serialVersionUID = 8110514896738077383L;
 
 	@Id
 	@Column(name = "PANEL_FEEDBACK_ID")
