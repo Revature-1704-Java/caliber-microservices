@@ -29,7 +29,7 @@ public class AssessmentCompositionServiceConfiguration {
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
-			Assessment assessment = assessmentCompositionService.getAssessment((long) 5175);
+			Assessment assessment = assessmentCompositionService.findOne((long) 5175);
 
 			System.out.println(assessment);
 		};
