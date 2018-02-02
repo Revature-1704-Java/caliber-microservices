@@ -1,0 +1,18 @@
+server:
+  port: 5225
+  
+spring:
+  application:
+    name: salesforce-service
+    
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+security:
+  basic:
+    enabled: false
