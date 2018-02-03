@@ -129,7 +129,11 @@ public class GradeCompositionService {
 	}
 	
 	private Grade composeGrade(SimpleGrade src) {
+		System.out.println(src);
 		SimpleTrainee simpleTrainee = gradeCompositionMessagingService.sendSimpleTraineeRequest(src.getTraineeId());
+		if(simpleTrainee == null) {
+			System.out.println("simpletrainee is null");
+		}
 		SimpleAssessment simpleAssessment = gradeCompositionMessagingService.sendSimpleAssessmentRequest(src.getAssessmentId());
 		
 		Trainee trainee = new Trainee(simpleTrainee);

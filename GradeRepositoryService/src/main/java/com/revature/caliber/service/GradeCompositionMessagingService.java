@@ -18,8 +18,8 @@ public class GradeCompositionMessagingService {
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 	
-	private static final String SINGLE_ASSESSMENT_ROUTING_KEY = "7c6tMqRRPpZ8Z7xh";
-	private static final String SINGLE_TRAINEE_ROUTING_KEY = "eRQ7GaBRnHgGdV9D";
+	private static final String SINGLE_ASSESSMENT_ROUTING_KEY = "F82jS9KJpwqLk3dj";
+	private static final String SINGLE_TRAINEE_ROUTING_KEY = "JyoH3uRmktGn9MnW";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 	
 	/*
@@ -43,7 +43,7 @@ public class GradeCompositionMessagingService {
 		JsonObject assessmentRequest = new JsonObject();
 		
 		assessmentRequest.addProperty("methodName", "findOne");
-		assessmentRequest.addProperty("assessment", assessmentId);
+		assessmentRequest.addProperty("assessmentId", assessmentId);
 		
 		return (SimpleAssessment) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_ASSESSMENT_ROUTING_KEY, assessmentRequest.toString());
 	}
