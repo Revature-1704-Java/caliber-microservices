@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.caliber.model.Batch;
 import com.revature.caliber.model.Category;
@@ -18,6 +19,7 @@ import com.revature.caliber.model.SimplePanelFeedback;
 import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.PanelFeedbackRepository;
+
 
 public class PanelFeedbackCompositionService {
 
@@ -92,13 +94,13 @@ public class PanelFeedbackCompositionService {
 	
 	private PanelFeedback composePanelFeedback(SimplePanelFeedback src) {
 		SimpleCategory simpleCategory = panelFeedbackCompositionMessagingService.sendSingleSimpleCategoryRequest(src.getCategoryId());
-		SimplePanel simplePanel = panelFeedbackCompositionMessagingService.sendSingleSimplePanelRequest(src.getPanelId());
+		//SimplePanel simplePanel = panelFeedbackCompositionMessagingService.sendSingleSimplePanelRequest(src.getPanelId());
 		Category category = new Category(simpleCategory);
-		Panel panel = new Panel(simplePanel);
+		//Panel panel = new Panel(simplePanel);
 		PanelFeedback dest = new PanelFeedback(src);
 		
 		dest.setTechnology(category);
-		dest.setPanel(panel);
+		//dest.setPanel(panel);
 		
 		return dest;
 	}
