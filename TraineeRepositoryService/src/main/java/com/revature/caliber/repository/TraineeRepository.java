@@ -16,6 +16,6 @@ public interface TraineeRepository extends JpaRepository<SimpleTrainee, Integer>
 
 	List<SimpleTrainee> findAllBySkypeId(String searchTerm);
 
-	List<SimpleTrainee> findAllByBatchId();
+	List<SimpleTrainee> findAllByBatchId(Integer batchId);
 	
 }

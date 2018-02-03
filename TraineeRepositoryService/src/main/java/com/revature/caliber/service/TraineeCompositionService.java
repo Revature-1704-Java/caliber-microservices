@@ -32,7 +32,7 @@ public class TraineeCompositionService {
 	}
 
 	public List<Trainee> findAllTraineesByBatch(Integer batchId) {
-		List<SimpleTrainee> basis = traineeRepository.findAllByBatchId();
+		List<SimpleTrainee> basis = traineeRepository.findAllByBatchId(batchId);
 		List<Trainee> trainees = (List<Trainee>) composeListOfTrainees(basis);
 
 		return trainees;

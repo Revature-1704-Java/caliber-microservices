@@ -19,7 +19,7 @@ public class AssessmentRepositoryMessagingService {
 	@Autowired
 	private AssessmentRepositoryRequestDispatcher assessmentRepositoryRequestDispatcher;
 
-	@RabbitListener(queues = "caliber.assessment")
+	@RabbitListener(queues = "revature.caliber.repos.assessment")
 	public SimpleAssessment receiveSingleSimpleAssessmentRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
@@ -28,7 +28,7 @@ public class AssessmentRepositoryMessagingService {
 		return assessmentRepositoryRequestDispatcher.processSingleSimpleAssessmentRequest(request);
 	}
 
-	@RabbitListener(queues = "caliber.assessment.list")
+	@RabbitListener(queues = "revature.caliber.repos.assessment.list")
 	public List<SimpleAssessment> receiveListSimpleAssessmentRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);

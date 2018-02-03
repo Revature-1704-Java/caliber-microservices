@@ -17,7 +17,7 @@ public class TraineeRepositoryMessagingService {
 	@Autowired
 	private TraineeRepositoryRequestDispatcher traineeRepositoryRequestDispatcher;
 
-	@RabbitListener(queues = "caliber.trainee")
+	@RabbitListener(queues = "revature.caliber.repos.trainee")
 	public SimpleTrainee receiveSingleSimpleTraineeRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
@@ -26,7 +26,7 @@ public class TraineeRepositoryMessagingService {
 		return traineeRepositoryRequestDispatcher.processSingleSimpleTraineeRequest(request);
 	}
 
-	@RabbitListener(queues = "caliber.trainee.list")
+	@RabbitListener(queues = "revature.caliber.repos.trainee.list")
 	public List<SimpleTrainee> receiveListSimpleTraineeRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
