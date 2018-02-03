@@ -30,6 +30,27 @@ public class Panel implements Serializable {
 		super();
 		this.interviewDate = new Date();
 	}
+	
+	public Panel(SimplePanel simplePanel) {
+		this.id = simplePanel.getPanelId();
+		this.trainee = null;
+		this.panelist = null;
+		this.interviewDate = simplePanel.getInterviewDate();
+		this.duration = simplePanel.getDuration();
+		this.format = simplePanel.getFormatId();
+		this.internet = simplePanel.getInternet();
+		this.panelRound = simplePanel.getPanelRound();
+		this.recordingConsent = simplePanel.isRecordingConsent();
+		this.recordingLink = simplePanel.getRecordingLink();
+		this.status = simplePanel.getStatusId();
+		this.feedback = null;
+		this.associateIntro = simplePanel.getAssociateIntro();
+		this.projectOneDescription = simplePanel.getProjectOneDescription();
+		this.projectTwoDescription = simplePanel.getProjectTwoDescription();
+		this.projectThreeDescription = simplePanel.getProjectThreeDescription();
+		this.communicationSkills = simplePanel.getCommunicationSkills();
+		this.overall = simplePanel.getCommunicationSkills();
+	}
 
 	public int getId() {
 		return id;
