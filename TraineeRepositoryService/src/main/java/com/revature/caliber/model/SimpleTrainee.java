@@ -1,128 +1,50 @@
- package com.revature.model;
+package com.revature.caliber.model;
 
 import java.io.Serializable;
-import java.util.Set;
-import java.util.TreeSet;
 
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+public class SimpleTrainee implements Serializable {
+	private static final long serialVersionUID = 7741153496228057046L;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OrderBy;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-/**
- * The type Trainee.
- * 
- * (NOTE) Further iterations should include the following from the Salesforce:
- * recruiter_name, account_name, project_completion This way we can analyze
- * performance based on where they went to college, who recruited them, and if
- * they finished RevaturePro.
- */
-@Entity
-@Table(name = "CALIBER_TRAINEE")
-@Cacheable
-public class Trainee implements Serializable {
-
-	private static final long serialVersionUID = -9090223980655307018L;
-	
-	@Id
-	@Column(name = "TRAINEE_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRAINEE_ID_SEQUENCE")
-	@SequenceGenerator(name = "TRAINEE_ID_SEQUENCE", sequenceName = "TRAINEE_ID_SEQUENCE")
 	private int traineeId;
-
-	@Column(name = "RESOURCE_ID")
 	private String resourceId;
-
-	@NotEmpty
-	@Column(name = "TRAINEE_NAME")
 	private String name;
-
-	@NotEmpty
-	@Email
-	@Column(name = "TRAINEE_EMAIL", nullable = false)
 	private String email;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "TRAINING_STATUS")
 	private TrainingStatus trainingStatus;
-	
-	@NotEmpty
-	@Column(name= "BATCH_ID")
-	private String batchid;
-
-	
-
-	@Column(name = "PHONE_NUMBER")
+	private int batchId;
 	private String phoneNumber;
-
-	@Column(name = "SKYPE_ID")
 	private String skypeId;
-
-	@Column(name = "PROFILE_URL")
 	private String profileUrl;
-	
-	// new columns
-	@Column(name = "RECRUITER_NAME")
 	private String recruiterName;
-	
-	@Column(name = "COLLEGE")
 	private String college;
-	
-	@Column(name = "DEGREE")
 	private String degree;
-	
-	@Column(name = "MAJOR")
 	private String major;
-	
-	@Column(name = "TECH_SCREENER_NAME")
 	private String techScreenerName;
-	
-	@Column(name = "REVPRO_PROJECT_COMPLETION")
 	private String projectCompletion;
-	// end of new columns
-	
 
-	
-	public Trainee() {
+	public SimpleTrainee() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Constructor used mostly for testing. Default TrainingStatus as Training
-	 * @param name
-	 * @param resourceId
-	 * @param email
-	 * @param batch
-	 */
-	public Trainee(String name, String resourceId, String email, String batchId) {
+	public SimpleTrainee(int traineeId, String resourceId, String name, String email, TrainingStatus trainingStatus,
+			int batchId, String phoneNumber, String skypeId, String profileUrl, String recruiterName, String college,
+			String degree, String major, String techScreenerName, String projectCompletion) {
 		super();
-		this.name = name;
+		this.traineeId = traineeId;
 		this.resourceId = resourceId;
+		this.name = name;
 		this.email = email;
-		this.trainingStatus = TrainingStatus.Training;
-		this.batchid = batchId;
+		this.trainingStatus = trainingStatus;
+		this.batchId = batchId;
+		this.phoneNumber = phoneNumber;
+		this.skypeId = skypeId;
+		this.profileUrl = profileUrl;
+		this.recruiterName = recruiterName;
+		this.college = college;
+		this.degree = degree;
+		this.major = major;
+		this.techScreenerName = techScreenerName;
+		this.projectCompletion = projectCompletion;
 	}
 
 	public int getTraineeId() {
@@ -131,6 +53,14 @@ public class Trainee implements Serializable {
 
 	public void setTraineeId(int traineeId) {
 		this.traineeId = traineeId;
+	}
+
+	public String getResourceId() {
+		return resourceId;
+	}
+
+	public void setResourceId(String resourceId) {
+		this.resourceId = resourceId;
 	}
 
 	public String getName() {
@@ -156,12 +86,13 @@ public class Trainee implements Serializable {
 	public void setTrainingStatus(TrainingStatus trainingStatus) {
 		this.trainingStatus = trainingStatus;
 	}
-	public String getBatchid() {
-		return batchid;
+
+	public int getBatchId() {
+		return batchId;
 	}
 
-	public void setBatchid(String batchid) {
-		this.batchid = batchid;
+	public void setBatchId(int batchId) {
+		this.batchId = batchId;
 	}
 
 	public String getPhoneNumber() {
@@ -188,19 +119,59 @@ public class Trainee implements Serializable {
 		this.profileUrl = profileUrl;
 	}
 
-	public String getResourceId() {
-		return resourceId;
+	public String getRecruiterName() {
+		return recruiterName;
 	}
 
-	public void setResourceId(String resourceId) {
-		this.resourceId = resourceId;
+	public void setRecruiterName(String recruiterName) {
+		this.recruiterName = recruiterName;
 	}
-	
+
+	public String getCollege() {
+		return college;
+	}
+
+	public void setCollege(String college) {
+		this.college = college;
+	}
+
+	public String getDegree() {
+		return degree;
+	}
+
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
+	}
+
+	public String getTechScreenerName() {
+		return techScreenerName;
+	}
+
+	public void setTechScreenerName(String techScreenerName) {
+		this.techScreenerName = techScreenerName;
+	}
+
+	public String getProjectCompletion() {
+		return projectCompletion;
+	}
+
+	public void setProjectCompletion(String projectCompletion) {
+		this.projectCompletion = projectCompletion;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((batchid == null) ? 0 : batchid.hashCode());
+		result = prime * result + batchId;
 		result = prime * result + ((college == null) ? 0 : college.hashCode());
 		result = prime * result + ((degree == null) ? 0 : degree.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
@@ -226,11 +197,8 @@ public class Trainee implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Trainee other = (Trainee) obj;
-		if (batchid == null) {
-			if (other.batchid != null)
-				return false;
-		} else if (!batchid.equals(other.batchid))
+		SimpleTrainee other = (SimpleTrainee) obj;
+		if (batchId != other.batchId)
 			return false;
 		if (college == null) {
 			if (other.college != null)
@@ -301,55 +269,11 @@ public class Trainee implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Trainee [traineeId=" + traineeId +", name=" + name + ", email=" + email + ", trainingStatus="
-				+ trainingStatus + ", major=" + major +  "]";
+		return "SimpleTrainee [traineeId=" + traineeId + ", resourceId=" + resourceId + ", name=" + name + ", email="
+				+ email + ", trainingStatus=" + trainingStatus + ", batchId=" + batchId + ", phoneNumber=" + phoneNumber
+				+ ", skypeId=" + skypeId + ", profileUrl=" + profileUrl + ", recruiterName=" + recruiterName
+				+ ", college=" + college + ", degree=" + degree + ", major=" + major + ", techScreenerName="
+				+ techScreenerName + ", projectCompletion=" + projectCompletion + "]";
 	}
 
-	public String getRecruiterName() {
-		return recruiterName;
-	}
-
-	public void setRecruiterName(String recruiterName) {
-		this.recruiterName = recruiterName;
-	}
-
-	public String getCollege() {
-		return college;
-	}
-
-	public void setCollege(String college) {
-		this.college = college;
-	}
-
-	public String getDegree() {
-		return degree;
-	}
-
-	public void setDegree(String degree) {
-		this.degree = degree;
-	}
-
-	public String getMajor() {
-		return major;
-	}
-
-	public void setMajor(String major) {
-		this.major = major;
-	}
-
-	public String getTechScreenerName() {
-		return techScreenerName;
-	}
-
-	public void setTechScreenerName(String techScreenerName) {
-		this.techScreenerName = techScreenerName;
-	}
-
-	public String getProjectCompletion() {
-		return projectCompletion;
-	}
-
-	public void setProjectCompletion(String projectCompletion) {
-		this.projectCompletion = projectCompletion;
-	}
 }

@@ -18,22 +18,22 @@ public class AssessmentRepositoryMessagingService {
 
 	@Autowired
 	private AssessmentRepositoryRequestDispatcher assessmentRepositoryRequestDispatcher;
-	
+
 	@RabbitListener(queues = "caliber.assessment")
 	public SimpleAssessment receiveSingleSimpleAssessmentRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		
+
 		return assessmentRepositoryRequestDispatcher.processSingleSimpleAssessmentRequest(request);
 	}
-	
+
 	@RabbitListener(queues = "caliber.assessment.list")
 	public List<SimpleAssessment> receiveListSimpleAssessmentRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		
+
 		return assessmentRepositoryRequestDispatcher.processListSimpleAssessmentRequest(request);
-}
+	}
 }
