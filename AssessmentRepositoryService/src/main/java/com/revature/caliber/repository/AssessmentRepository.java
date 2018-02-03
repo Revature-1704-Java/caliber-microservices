@@ -15,4 +15,5 @@ public interface AssessmentRepository extends JpaRepository<SimpleAssessment, Lo
 	List<SimpleAssessment> findDistinctByWeek(@Param("week") Short week);
 	List<SimpleAssessment> findDistinctByBatchId(@Param("batchId") Integer batchId);
 	List<SimpleAssessment> findByBatchIdAndWeek(@Param("batchId") Integer batchId, @Param("week") Short week);
+	List<SimpleAssessment> findByCategoryId(@Param("categoryId") Integer categoryId);
 }

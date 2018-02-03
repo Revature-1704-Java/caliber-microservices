@@ -3,27 +3,11 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class SimpleCategory implements Serializable {
-
-	private static final long serialVersionUID = 3363756954535297728L;
+	private static final long serialVersionUID = 8740866186523960143L;
 
 	private int categoryId;
-
 	private String skillCategory;
-	
 	private boolean active;
 
 	/**
@@ -35,6 +19,7 @@ public class SimpleCategory implements Serializable {
 
 	/**
 	 * Create new category
+	 * 
 	 * @param skillCategory
 	 * @param active
 	 */
@@ -122,4 +107,5 @@ public class SimpleCategory implements Serializable {
 	public String toString() {
 		return skillCategory;
 	}
+	
 }

@@ -9,14 +9,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.google.gson.JsonObject;
-import com.revature.caliber.service.CategoryCompositionService;
-import com.revature.caliber.service.CategoryRepositoryMessagingService;
+import com.revature.caliber.service.PanelFeedbackCompositionService;
+import com.revature.caliber.service.PanelFeedbackRepositoryMessagingService;
 
 @Configuration
-public class RepositoryProducerConfiguration {
+public class PanelFeedbackRepositoryServiceConfiguration {
 
 	@Autowired
-	CategoryCompositionService categoryCompositionService;
+	PanelFeedbackCompositionService panelFeedbackCompositionService;
 	
 	@Bean
 	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
@@ -24,7 +24,7 @@ public class RepositoryProducerConfiguration {
 	}
 	
 	@Bean
-	public CategoryCompositionService panelFeedbackCompositionService() {
-		return new CategoryCompositionService();
+	public PanelFeedbackCompositionService panelFeedbackCompositionService() {
+		return new PanelFeedbackCompositionService();
 	}
 }

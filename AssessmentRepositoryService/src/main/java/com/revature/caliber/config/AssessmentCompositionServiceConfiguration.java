@@ -8,23 +8,30 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.google.gson.JsonObject;
-import com.revature.caliber.service.CategoryCompositionService;
-import com.revature.caliber.service.CategoryRepositoryMessagingService;
+import com.revature.caliber.model.Assessment;
+import com.revature.caliber.service.AssessmentCompositionService;
 
 @Configuration
-public class RepositoryProducerConfiguration {
-
+public class AssessmentCompositionServiceConfiguration {
 	@Autowired
-	CategoryCompositionService categoryCompositionService;
-	
+	AssessmentCompositionService assessmentCompositionService;
+
 	@Bean
 	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
 		return new RabbitTemplate(factory);
 	}
-	
+
 	@Bean
-	public CategoryCompositionService panelFeedbackCompositionService() {
-		return new CategoryCompositionService();
+	public AssessmentCompositionService assessmentCompositionService() {
+		return new AssessmentCompositionService();
+	}
+
+	@Bean
+	public CommandLineRunner runner() {
+		return args -> {
+			Assessment assessment = assessmentCompositionService.findOne((long) 5175);
+
+			System.out.println(assessment);
+		};
 	}
 }
