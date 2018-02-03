@@ -14,7 +14,7 @@ import com.revature.caliber.model.SimpleTrainer;
 import com.revature.caliber.model.TrainerRole;
 
 @Repository
-public interface TrainerDAO extends JpaRepository<SimpleTrainer, Integer> {
+public interface TrainerRepository extends JpaRepository<SimpleTrainer, Integer> {
 
 	@Query("select distinct t from SimpleTrainer t where t.tier<>com.revature.caliber.model.TrainerRole.ROLE_INACTIVE")
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
