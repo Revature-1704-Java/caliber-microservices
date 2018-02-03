@@ -9,7 +9,7 @@ public class Panel implements Serializable {
 	
 	private int id;
 	private Trainee trainee;
-	private Trainer panelist;
+	private Trainer panelist;	// wtf root of confusion
 	private Date interviewDate;
 	private String duration;
 	private InterviewFormat format;
@@ -49,6 +49,10 @@ public class Panel implements Serializable {
 
 	public void setTrainee(Trainee trainee) {
 		this.trainee = trainee;
+	}
+	
+	public void setTrainer(Trainer trainer) {
+		panelist = trainer;		// wtf
 	}
 
 	public Trainer getPanelist() {

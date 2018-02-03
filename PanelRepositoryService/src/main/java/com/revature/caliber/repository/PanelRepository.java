@@ -9,12 +9,18 @@ import com.revature.caliber.model.SimplePanel;
 
 public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	
-	/** find by trainee id 
-	 * @param traineeID the traineeId that identifies the trainee
-	 * @return a list of panels associated with the trainee
+	/** find by panel id
+	 * @param id
+	 * @return a panel found with the id parameter
 	 */
-	List<SimplePanel> findByTraineeId(Integer traineeId);
-
+	SimplePanel findOne(int id);
+	
+	/** find all panels 
+	 * Useful for listing available panels 
+	 * @return a list of all panels
+	 */
+	List<SimplePanel> findAll();
+	
 	/** find by repanels ordered descending by interview date
 	 * @return a list of panels that have a status of Repanel
 	 */
@@ -26,31 +32,12 @@ public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	 */
 	@Query("FROM Panel p WHERE p.interviewDate >= TRUNC(SYSDATE) - 13")
 	List<SimplePanel> findRecentPanels();
-
-	/** find all panels 
-	 * Useful for listing available panels 
-	 * @return a list of all panels
-	 */
-	List<SimplePanel> findAll();
 	
-	/** find by panel id
-	 * @param id
-	 * @return a panel found with the id parameter
+	/** find by trainee id 
+	 * @param traineeID the traineeId that identifies the trainee
+	 * @return a list of panels associated with the trainee
 	 */
-	SimplePanel findOne(int id);
-	
-	/** Convenience method 
-	 * save a panel 
-	 * @return a new panel 
-	 */
-	@SuppressWarnings("unchecked")
-	SimplePanel save(SimplePanel panel);
-	
-	/** Convenience method 
-	 * delete a panel by panel id
-	 * @return a panel that was deleted by panel id
-	 */
-	SimplePanel delete(int id);
+	List<SimplePanel> findByTraineeId(Integer traineeId);
 	
 // 	need to communicate to another table
 //	/** find all trainees and panels
@@ -60,5 +47,19 @@ public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 //	@Query("SELECT T FROM Trainee T LEFT JOIN FETCH T.panelInterviews P WHERE T.batch.batchId = ?1 AND T.trainingStatus <> com.revature.caliber.beans.TrainingStatus.Dropped")
 //	List<Trainee> findAllTraineesAndPanelsByBatch(int batchId);	
 	
-
+	
+	/** Convenience method 
+	 * save a panel 
+	 * @return a new panel 
+	 */
+	@SuppressWarnings("unchecked")
+	SimplePanel save(SimplePanel panel);
+	
+	// update();
+	
+	/** Convenience method 
+	 * delete a panel by panel id
+	 * @return a panel that was deleted by panel id
+	 */
+	SimplePanel delete(int id);
 }

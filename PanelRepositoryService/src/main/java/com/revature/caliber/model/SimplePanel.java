@@ -127,7 +127,11 @@ public class SimplePanel implements Serializable {
 	public Integer getTraineeId() {
 		return traineeId;
 	}
-
+	
+	public Integer getTrainerId() {		// ?????
+		return null;					// ?????
+	}
+	
 	public void setTraineeId(Integer traineeId) {
 		this.traineeId = traineeId;
 	}
@@ -375,4 +379,6 @@ public class SimplePanel implements Serializable {
 			return false;
 		return true;
 	}
+
+
 }

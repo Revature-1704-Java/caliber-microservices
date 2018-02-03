@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.Panel;
 import com.revature.caliber.service.PanelCompositionMessagingService;
+import com.revature.caliber.service.PanelCompositionService;
 
 @Configuration
 public class RepositoryProducerConfiguration {

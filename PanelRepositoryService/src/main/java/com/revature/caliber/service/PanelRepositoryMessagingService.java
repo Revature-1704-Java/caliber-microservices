@@ -17,19 +17,13 @@ public class PanelRepositoryMessagingService {
 	@Autowired
 	private PanelRepositoryRequestDispatcher panelRepositoryRequestDispatcer;
 	
-	@RabbitListener(queues = "caliber.panel")
+	@RabbitListener(queues = "revature.caliber.repos.panel")
 	public SimplePanel receiveSingleSimpleNoteRequest(String message) {
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(message);
         JsonObject request = element.getAsJsonObject();
         
-        return panelRepositoryRequestDispatcher.processSingleSimplePanelRequest(request);
-        
-//        Gson gson = new Gson();
-//        if(request.get("methodName").getAsString().equals("findOne")) {
-//        	SimplePanel panel = panelRepository.findOne(request.get("panelId").getAsInt());
-//        	return panel;
-//        } else 
-//        	return null;
+        return panelRepositoryRequestDispatcer.processSingleSimplePanelRequest(request);
+
     }
 }
