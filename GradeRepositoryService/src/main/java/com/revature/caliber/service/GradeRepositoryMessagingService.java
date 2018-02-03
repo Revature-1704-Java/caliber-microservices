@@ -30,7 +30,7 @@ public class GradeRepositoryMessagingService {
 
 	}
 	
-	@RabbitListener(queues = "caliber.grade")
+	@RabbitListener(queues = "revature.caliber.repos.grade")
 	public SimpleGrade receive(String message) {
 		System.out.println(message);
 		JsonParser parser = new JsonParser();

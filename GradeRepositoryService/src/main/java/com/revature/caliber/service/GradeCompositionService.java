@@ -23,7 +23,7 @@ public class GradeCompositionService {
 	public Grade findOne(Long gradeId) {
 		SimpleGrade basis = gradeRepository.findOne(gradeId);
 		Grade result = composeGrade(basis);
-		return null;
+		return result;
 	}
 	
 	/**

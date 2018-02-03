@@ -7,13 +7,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.google.gson.JsonObject;
-
+import com.revature.caliber.model.Grade;
 import com.revature.caliber.service.GradeCompositionMessagingService;
+import com.revature.caliber.service.GradeCompositionService;
 
 @Configuration
 public class GradeCompositionServiceConfiguration {
+	
 		@Autowired
-	   private GradeCompositionMessagingService mms;
+		private GradeCompositionMessagingService mms;
+		
+		@Autowired
+		private GradeCompositionService gcs;
 	   
 	   @Bean
 	   public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
@@ -22,5 +27,20 @@ public class GradeCompositionServiceConfiguration {
 	       return new RabbitTemplate(factory);
 	   }
 	   
+	   @Bean
+		public GradeCompositionService gradeCompositionService() {
+			return new GradeCompositionService();
+		}
+	   
+	   @Bean
+		public CommandLineRunner runner() {
+			return args -> {
+				Grade grade = gcs.findOne((long) 2063);
+				if(grade == null) {
+					System.out.println("grade is null");
+				}
+				System.out.println(grade);
+			};
+		}
 	  
 }

@@ -43,7 +43,7 @@ public class GradeCompositionMessagingService {
 		JsonObject assessmentRequest = new JsonObject();
 		
 		assessmentRequest.addProperty("methodName", "findOne");
-		assessmentRequest.addProperty("traineeId", assessmentId);
+		assessmentRequest.addProperty("assessment", assessmentId);
 		
 		return (SimpleAssessment) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_ASSESSMENT_ROUTING_KEY, assessmentRequest.toString());
 	}
