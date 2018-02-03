@@ -55,7 +55,7 @@ public class NoteRepositoryTest {
 	@Test
 	public void findBatchNotesTest() {
 		short week = 2;
-		List<SimpleNote> notes = noteRepository.findByBatchIdAndWeekAndQcFeedbackAndType(TEST_BATCH_ID, week, false, NoteType.BATCH);
+		List<SimpleNote> notes = noteRepository.findAllByBatchIdAndWeekAndQcFeedbackAndType(TEST_BATCH_ID, week, false, NoteType.BATCH);
 		SimpleNote testNote = notes.get(0);
 		
 		System.out.println("Find batch notes:\n" + notes);
@@ -73,7 +73,7 @@ public class NoteRepositoryTest {
 	@Test
 	public void findAllPublicIndividualNotesTest() {
 		short week = 1;
-		List<SimpleNote> notes = noteRepository.findByTraineeIdAndType(TEST_TRAINEE_ID, NoteType.TRAINEE);
+		List<SimpleNote> notes = noteRepository.findAllByTraineeIdAndType(TEST_TRAINEE_ID, NoteType.TRAINEE);
 		SimpleNote testNote = notes.get(0);
 		
 		System.out.println("Find all public individual notes test:\n" + notes);
@@ -93,8 +93,7 @@ public class NoteRepositoryTest {
 	@Test
 	public void findTraineeNoteTest() {
 		short week = 2;
-		List<SimpleNote> notes = noteRepository.findByTraineeIdAndWeekAndQcFeedbackAndType(TEST_TRAINEE_ID, week, false, NoteType.TRAINEE);
-		SimpleNote testNote = notes.get(0);
+		SimpleNote testNote = noteRepository.findOneByTraineeIdAndWeekAndQcFeedbackAndType(TEST_TRAINEE_ID, week, false, NoteType.TRAINEE);
 		
 		System.out.println("Find trainee note:\n" + testNote);
 		
@@ -111,7 +110,7 @@ public class NoteRepositoryTest {
 	 */
 	@Test
 	public void findAllBatchQCNotesTest() {
-		List<SimpleNote> notes = noteRepository.findByBatchIdAndType(TEST_QC_BATCH_ID, NoteType.QC_BATCH);
+		List<SimpleNote> notes = noteRepository.findAllByBatchIdAndType(TEST_QC_BATCH_ID, NoteType.QC_BATCH);
 		SimpleNote testNote = notes.get(0);
 		
 		System.out.println("Find all batch QC notes:\n" + testNote);
@@ -127,7 +126,7 @@ public class NoteRepositoryTest {
 	@Test
 	public void findAllBatchNotesTest() {
 		short week = 2;
-		List<SimpleNote> notes = noteRepository.findByBatchIdAndWeekAndType(TEST_BATCH_ID, week, NoteType.BATCH);
+		List<SimpleNote> notes = noteRepository.findAllByBatchIdAndWeekAndType(TEST_BATCH_ID, week, NoteType.BATCH);
 		SimpleNote testNote = notes.get(0);
 		
 		System.out.println("Find all batch notes:\n" + notes);
@@ -143,7 +142,7 @@ public class NoteRepositoryTest {
 	 */
 	public void findIndividualNotes() {
 		short week = 2;
-		List<SimpleNote> notes = noteRepository.findByBatchIdAndWeekAndQcFeedbackAndType(TEST_BATCH_ID, week, false, NoteType.TRAINEE);
+		List<SimpleNote> notes = noteRepository.findAllByBatchIdAndWeekAndQcFeedbackAndType(TEST_BATCH_ID, week, false, NoteType.TRAINEE);
 		
 		System.out.println("Find individual notes:\n" + notes);
 		

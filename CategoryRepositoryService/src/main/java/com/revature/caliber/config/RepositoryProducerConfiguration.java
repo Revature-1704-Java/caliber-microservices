@@ -9,18 +9,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.google.gson.JsonObject;
+import com.revature.caliber.service.CategoryCompositionService;
 import com.revature.caliber.service.CategoryRepositoryMessagingService;
 
 @Configuration
 public class RepositoryProducerConfiguration {
 
 	@Autowired
-	private CategoryRepositoryMessagingService mms;
+	CategoryCompositionService categoryCompositionService;
 	
 	@Bean
 	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
-		RabbitTemplate rabbitTemplate = new RabbitTemplate(factory);
-		rabbitTemplate.setExchange("revature.caliber.repos");
 		return new RabbitTemplate(factory);
+	}
+	
+	@Bean
+	public CategoryCompositionService panelFeedbackCompositionService() {
+		return new CategoryCompositionService();
 	}
 }
