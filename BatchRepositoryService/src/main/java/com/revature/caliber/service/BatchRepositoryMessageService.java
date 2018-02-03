@@ -17,9 +17,9 @@ public class BatchRepositoryMessageService {
 	@Autowired
 	BatchRepository repo;
 	
-	@RabbitListener(queues = "caliber.batch")
+	@RabbitListener(queues = "revature.caliber.repos.batch")
 	public SimpleBatch receive(String message) {
-		System.out.println(message);
+		System.out.println("got a message");
 		JsonObject request=getRequest(message);
 		String methodName = request.get("methodName").getAsString();
 		switch(methodName) {
@@ -33,8 +33,9 @@ public class BatchRepositoryMessageService {
 				return null;
 		}
 	}
-	@RabbitListener(queues = "caliber.batch.list")
+	@RabbitListener(queues = "revature.caliber.repos.batch.list")
 	public List<SimpleBatch> receiveList(String message) {
+		System.out.println("got a message");
 		JsonObject request=getRequest(message);
 		String methodName = request.get("methodName").getAsString();
 		if(methodName.contains("Current")){
@@ -43,6 +44,8 @@ public class BatchRepositoryMessageService {
 			}else{
 				return repo.findAllCurrent(request.get("trainerId").getAsInt());
 			}
+		}else if("methodName".contains("findAllByTrainerId")){
+			return repo.findAllByTrainerId(request.get("trainerId").getAsInt());
 		}else{
 			return repo.findAll();
 		}
