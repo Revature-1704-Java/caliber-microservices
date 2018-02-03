@@ -10,17 +10,22 @@ import com.revature.caliber.model.SimpleNote;
 
 @Repository
 public interface NoteRepository extends JpaRepository<SimpleNote, Integer> {
-	List<SimpleNote> findByBatchIdAndType(Integer batchId, NoteType type);
-	List<SimpleNote> findByTraineeIdAndType(Integer traineeId, NoteType type);
+	List<SimpleNote> findAllByTraineeId(Integer traineeId);
+	List<SimpleNote> findAllByBatchId(Integer batchId);
 	
-	List<SimpleNote> findByBatchIdAndWeekAndType(Integer batchId, Short week, NoteType type);
-	List<SimpleNote> findByTraineeIdAndWeekAndType(Integer traineeId, Short week, NoteType type);
+	List<SimpleNote> findAllByBatchIdAndType(Integer batchId, NoteType type);
+	List<SimpleNote> findAllByTraineeIdAndType(Integer traineeId, NoteType type);
 	
-	List<SimpleNote> findByBatchIdAndWeekAndQcFeedbackAndType(Integer batchId, Short week, boolean qcFeedback, NoteType type);
-	List<SimpleNote> findByTraineeIdAndWeekAndQcFeedbackAndType(Integer traineeId, Short week, boolean qcFeedback, NoteType type);
+	List<SimpleNote> findAllByBatchIdAndWeekAndType(Integer batchId, Short week, NoteType type);
+	List<SimpleNote> findAllByTraineeIdAndWeekAndType(Integer traineeId, Short week, NoteType type);
 	
-	List<SimpleNote> findByTraineeIdAndTypeOrderByWeekAsc(Integer traineeId, NoteType type);
-	List<SimpleNote> findByTraineeIdAndQcFeedbackAndTypeOrderByWeekAsc(Integer traineeId, boolean qcFeedback, NoteType type);
-	List<SimpleNote> findByBatchIdAndQcFeedbackAndTypeOrderByWeekAsc(Integer batchId, boolean qcFeedback, NoteType type);
-	List<SimpleNote> findByBatchIdAndWeekAndQcFeedbackAndTypeOrderByWeekAsc(Integer batchId, Short week, boolean qcFeedback, NoteType type);
+	List<SimpleNote> findAllByBatchIdAndWeekAndQcFeedbackAndType(Integer batchId, Short week, boolean qcFeedback, NoteType type);
+	SimpleNote findOneByBatchIdAndWeekAndQcFeedbackAndType(Integer batchId, Short week, boolean qcFeedback, NoteType type);
+	List<SimpleNote> findAllByTraineeIdAndWeekAndQcFeedbackAndType(Integer traineeId, Short week, boolean qcFeedback, NoteType type);
+	SimpleNote findOneByTraineeIdAndWeekAndQcFeedbackAndType(Integer traineeId, Short week, boolean qcFeedback, NoteType type);
+	
+	List<SimpleNote> findAllByTraineeIdAndTypeOrderByWeekAsc(Integer traineeId, NoteType type);
+	List<SimpleNote> findAllByTraineeIdAndQcFeedbackAndTypeOrderByWeekAsc(Integer traineeId, boolean qcFeedback, NoteType type);
+	List<SimpleNote> findAllByBatchIdAndQcFeedbackAndTypeOrderByWeekAsc(Integer batchId, boolean qcFeedback, NoteType type);
+	List<SimpleNote> findAllByBatchIdAndWeekAndQcFeedbackAndTypeOrderByWeekAsc(Integer batchId, Short week, boolean qcFeedback, NoteType type);
 }
