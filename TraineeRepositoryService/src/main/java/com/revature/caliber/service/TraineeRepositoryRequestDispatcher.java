@@ -33,6 +33,9 @@ public class TraineeRepositoryRequestDispatcher {
 		if(methodName.equals("findAll")) {
 			result = traineeRepository.findAll();
 		}
+		else if(methodName.equals("findAllByBatchId")){
+			result = traineeRepository.findAllByBatchId(request.get("batchId").getAsInt());
+		}
 		
 		return result;
 	}

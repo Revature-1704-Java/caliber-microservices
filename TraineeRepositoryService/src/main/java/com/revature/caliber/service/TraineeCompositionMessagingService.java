@@ -13,7 +13,7 @@ public class TraineeCompositionMessagingService {
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 
-	private static final String SINGLE_BATCH_ROUTING_KEY = "JyoH3uRmktGn9MnW";
+	private static final String SINGLE_BATCH_ROUTING_KEY = "XLNbCWqQzFHr9JfZ";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
