@@ -17,8 +17,7 @@ public class NoteRepositoryMessagingService {
 	@Autowired
 	private NoteRepositoryRequestDispatcher noteRepositoryRequestDispatcher;
 	
-//	@RabbitListener(queues = "revature.caliber.repos.note")
-	@RabbitListener(queues = "caliber.note")
+	@RabbitListener(queues = "revature.caliber.repos.note")
 	public SimpleNote receiveSingleSimpleNoteRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
@@ -27,8 +26,7 @@ public class NoteRepositoryMessagingService {
 		return noteRepositoryRequestDispatcher.processSingleSimpleNoteRequest(request);
 	}
 	
-//	@RabbitListener(queues = "revature.caliber.repos.note.list")
-	@RabbitListener(queues = "caliber.note.list")
+	@RabbitListener(queues = "revature.caliber.repos.note.list")
 	public List<SimpleNote> receiveListSimpleNoteRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);

@@ -15,10 +15,5 @@ public class NoteCompositionServiceConfiguration {
 	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
 		return new RabbitTemplate(factory);
 	}
-	
-	@Bean
-	public NoteCompositionService noteCompositionService() {
-		return new NoteCompositionService();
-	}
 
 }
