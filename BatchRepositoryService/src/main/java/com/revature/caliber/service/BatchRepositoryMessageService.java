@@ -14,14 +14,16 @@ import com.revature.caliber.model.SimpleBatch;
 @Service
 public class BatchRepositoryMessageService {
 	@Autowired
-	BatchRepositoryDispatcher bpd;
+	BatchRepositoryDispatcher brd;
 	@RabbitListener(queues = "revature.caliber.repos.batch")
 	public SimpleBatch receive(String message) {
-		return bpd.processSimpleBatchRequest(getRequest(message));
+		System.out.println("message recieved 1");
+		return brd.processSimpleBatchRequest(getRequest(message));
 	}
 	@RabbitListener(queues = "revature.caliber.repos.batch.list")
 	public List<SimpleBatch> receiveList(String message) {
-		return bpd.processListSimpleBatchRequest(getRequest(message));
+		System.out.println("message recieved");
+		return brd.processListSimpleBatchRequest(getRequest(message));
 	}
 	
 	public JsonObject getRequest(String message){

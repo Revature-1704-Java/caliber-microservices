@@ -6,6 +6,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.revature.caliber.service.BatchRepositoryDispatcher;
+
 @Configuration
 public class BatchRepositoryServiceConfiguration {
 	@Bean
@@ -14,4 +16,10 @@ public class BatchRepositoryServiceConfiguration {
 		rabbitTemplate.setExchange("revature.caliber.repos");
 		return new RabbitTemplate(factory);
 	}
+	@Bean
+	public BatchRepositoryDispatcher brd(){
+		return new BatchRepositoryDispatcher();
+	}
+//	@Bean
+//	public BeanCompositionService 
 }

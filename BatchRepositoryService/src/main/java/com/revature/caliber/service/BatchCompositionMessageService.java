@@ -23,6 +23,7 @@ public class BatchCompositionMessageService {
 	public List<SimpleTrainee> sendListSimpleTraineeRequest(Integer batchId){
 		JsonObject SimpleTraineeListRequest = new JsonObject();
 		SimpleTraineeListRequest.addProperty("methodName", "findAllByBatchId");
+		SimpleTraineeListRequest.addProperty("batchId", batchId);
 		List<?> SimpleTraineeList=(List<?>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE,
 				LIST_TRAINEE_ROUTING_KEY, SimpleTraineeListRequest.toString());
 		return SimpleTraineeList.stream().map(x->(SimpleTrainee)x).collect(Collectors.toList());
@@ -31,6 +32,7 @@ public class BatchCompositionMessageService {
 	public List<SimpleNote> sendListSimpleNoteRequest(Integer batchId){
 		JsonObject SimpleNoteListRequest = new JsonObject();
 		SimpleNoteListRequest.addProperty("methodName", "findAllByBatchId");
+		SimpleNoteListRequest.addProperty("batchId", batchId);
 		List<?> SimpleNoteList = (List<?>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE,
 				LIST_NOTE_ROUTING_KEY, SimpleNoteListRequest.toString());
 		return SimpleNoteList.stream().map(x->(SimpleNote) x).collect(Collectors.toList());
