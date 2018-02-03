@@ -44,7 +44,7 @@ public class PanelFeedbackCompositionService {
 	
 	//findAllForPanel
 	public List<PanelFeedback> findAllForPanel(int panelId) {
-		List<SimplePanelFeedback> basis = panelFeedbackRepository.findById(panelId);
+		List<SimplePanelFeedback> basis = panelFeedbackRepository.findByPanelId(panelId);
 		List<PanelFeedback> result = composeListOfPanelFeedback(basis);
 		
 		return result;
@@ -52,7 +52,7 @@ public class PanelFeedbackCompositionService {
 	
 	//findFailedFeedbackByPanel
 	public List<PanelFeedback> findFailedFeedbackByPanel(int panelId) {
-		List<SimplePanelFeedback> basis = panelFeedbackRepository.findByIdAndStatus(panelId, PanelStatus.Repanel);
+		List<SimplePanelFeedback> basis = panelFeedbackRepository.findByPanelIdAndStatus(panelId, PanelStatus.Repanel);
 		List<PanelFeedback> result = composeListOfPanelFeedback(basis);
 		
 		return result;

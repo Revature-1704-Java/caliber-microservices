@@ -14,7 +14,7 @@ import com.revature.caliber.model.SimplePanelFeedback;
 @Repository
 public interface PanelFeedbackRepository extends JpaRepository<SimplePanelFeedback, Long> {
 	
-	List<SimplePanelFeedback> findById(long id);
+	List<SimplePanelFeedback> findByPanelId(int id);
 	
-	List<SimplePanelFeedback> findByIdAndStatus(long id, PanelStatus status);
+	List<SimplePanelFeedback> findByPanelIdAndStatus(int id, PanelStatus status);
 }

@@ -11,9 +11,6 @@ import com.revature.caliber.service.PanelFeedbackRepositoryMessagingService;
 
 @SpringBootApplication
 public class PanelFeedbackRepositoryServiceApplication {
-	
-	@Autowired
-	private PanelFeedbackRepositoryMessagingService mms;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PanelFeedbackRepositoryServiceApplication.class, args);
