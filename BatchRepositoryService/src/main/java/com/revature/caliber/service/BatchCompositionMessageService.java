@@ -32,7 +32,7 @@ public class BatchCompositionMessageService {
 		JsonObject SimpleNoteListRequest = new JsonObject();
 		SimpleNoteListRequest.addProperty("methodName", "findAllByBatchId");
 		List<?> SimpleNoteList = (List<?>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE,
-				LIST_TRAINEE_ROUTING_KEY, SimpleNoteListRequest.toString());
+				LIST_NOTE_ROUTING_KEY, SimpleNoteListRequest.toString());
 		return SimpleNoteList.stream().map(x->(SimpleNote) x).collect(Collectors.toList());
 	}
 }

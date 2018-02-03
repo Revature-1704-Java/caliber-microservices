@@ -10,45 +10,18 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.revature.caliber.model.SimpleBatch;
-import com.revature.caliber.repository.BatchRepository;
 
 @Service
 public class BatchRepositoryMessageService {
 	@Autowired
-	BatchRepository repo;
-	
+	BatchRepositoryDispatcher bpd;
 	@RabbitListener(queues = "revature.caliber.repos.batch")
 	public SimpleBatch receive(String message) {
-		System.out.println("got a message");
-		JsonObject request=getRequest(message);
-		String methodName = request.get("methodName").getAsString();
-		switch(methodName) {
-			case "findOne":
-				return repo.findOne(request.get("batchId").getAsInt());
-			case "findOneWithDroppedTrainees":
-				return repo.findOne(request.get("batchId").getAsInt());
-			case "findOneWithTraineesAndGrades" :
-				return repo.findOne(request.get("batchId").getAsInt());
-			default:
-				return null;
-		}
+		return bpd.processSimpleBatchRequest(getRequest(message));
 	}
 	@RabbitListener(queues = "revature.caliber.repos.batch.list")
 	public List<SimpleBatch> receiveList(String message) {
-		System.out.println("got a message");
-		JsonObject request=getRequest(message);
-		String methodName = request.get("methodName").getAsString();
-		if(methodName.contains("Current")){
-			if(request.get("trainerId")==null) {
-				return repo.findAllCurrent();
-			}else{
-				return repo.findAllCurrent(request.get("trainerId").getAsInt());
-			}
-		}else if("methodName".contains("findAllByTrainerId")){
-			return repo.findAllByTrainerId(request.get("trainerId").getAsInt());
-		}else{
-			return repo.findAll();
-		}
+		return bpd.processListSimpleBatchRequest(getRequest(message));
 	}
 	
 	public JsonObject getRequest(String message){
