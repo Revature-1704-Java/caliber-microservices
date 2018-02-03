@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.SimpleTrainer;
-// import com.revature.caliber.model.SimpleTrainer;
 
 @Service
 public class PanelCompositionMessagingService {
@@ -35,4 +34,5 @@ public class PanelCompositionMessagingService {
     	
     	return (SimpleTrainer) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_PANEL_ROUTING_KEY, trainerRequest.toString());
     }
+    
 }

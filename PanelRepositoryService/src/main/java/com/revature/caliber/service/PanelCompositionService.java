@@ -11,6 +11,7 @@ import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.SimpleTrainer;
 // import com.revature.caliber.model.SimpleTrainer;
 import com.revature.caliber.model.Trainee;
+import com.revature.caliber.model.Trainer;
 import com.revature.caliber.model.TrainingStatus;
 // import com.revature.caliber.model.Trainer;
 import com.revature.caliber.repository.PanelRepository;
@@ -58,10 +59,11 @@ public class PanelCompositionService {
 		return result;
 	}
 
+	// move to trainee
 	// public List<Trainee> findAllTraineesAndPanels(Integer batchId) {
-	// List<SimplePanel> basis =
+	// List<SimpleTrainee> basis =
 	// panelRepository.findAllTraineesAndPanelsByBatch(batchId);
-	// List<Panel> result = composeListOfPanels(basis, false);
+	// List<Trainee> result = composeListOfPanels(basis, false);
 	//
 	// return result;
 	// }
@@ -95,16 +97,17 @@ public class PanelCompositionService {
 	private Panel composePanel(SimplePanel src) {
 		SimpleTrainee simpleTrainee = panelCompositionMessagingService
 				.sendSingleSimpleTraineeRequest(src.getTraineeId());
-		 SimpleTrainer simpleTrainer = panelCompositionMessagingService.sendSingleSimpleTrainerRequest(src.getTrainerId());	// ????????
-		// panelCompositionMessagingService.sendSingleSimpleTrainerRequest(src.getTrainerId());
+		SimpleTrainer simpleTrainer = panelCompositionMessagingService
+				.sendSingleSimpleTrainerRequest(src.getTrainerId()); 
+		panelCompositionMessagingService.sendSingleSimpleTrainerRequest(src.getTrainerId());
 
 		Trainee trainee = new Trainee(simpleTrainee);
-		// Trainer trainer = new Trainer(simpleTrainer);
+		Trainer trainer = new Trainer(simpleTrainer);
 
 		Panel dest = new Panel(src);
 
 		dest.setTrainee(trainee);
-		// dest.setTrainer(trainer);
+		dest.setTrainer(trainer);
 
 		return dest;
 	}

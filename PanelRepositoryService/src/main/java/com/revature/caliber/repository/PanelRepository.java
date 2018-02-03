@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.revature.caliber.model.SimplePanel;
+import com.revature.caliber.model.SimpleTrainee;
+import com.revature.caliber.model.Trainee;
 
 public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	
@@ -39,14 +41,11 @@ public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	 */
 	List<SimplePanel> findByTraineeId(Integer traineeId);
 	
-// 	need to communicate to another table
-//	/** find all trainees and panels
-//	 * @param batchId
-//	 * @return a list of trainees and panels by batch id
-//	 */
-//	@Query("SELECT T FROM Trainee T LEFT JOIN FETCH T.panelInterviews P WHERE T.batch.batchId = ?1 AND T.trainingStatus <> com.revature.caliber.beans.TrainingStatus.Dropped")
-//	List<Trainee> findAllTraineesAndPanelsByBatch(int batchId);	
-	
+	/** find all trainees and panels
+	 * @param batchId
+	 * @return a list of trainees and panels by batch id
+	 */
+	List<SimpleTrainee> findAllTraineesAndPanelsByBatch(int batchId);	
 	
 	/** Convenience method 
 	 * save a panel 

@@ -9,7 +9,7 @@ public class Panel implements Serializable {
 	
 	private int id;
 	private Trainee trainee;
-	private Trainer panelist;	// wtf root of confusion
+	private Trainer panelist;
 	private Date interviewDate;
 	private String duration;
 	private InterviewFormat format;
@@ -52,7 +52,7 @@ public class Panel implements Serializable {
 	}
 	
 	public void setTrainer(Trainer trainer) {
-		panelist = trainer;		// wtf
+		panelist = trainer;		// i had to make this
 	}
 
 	public Trainer getPanelist() {
