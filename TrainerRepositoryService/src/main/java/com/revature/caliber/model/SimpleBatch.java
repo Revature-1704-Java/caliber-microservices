@@ -352,6 +352,5 @@ public class SimpleBatch implements Serializable {
 				+ ", borderlineGradeThreshold=" + borderlineGradeThreshold + ", weeks=" + weeks + ", gradedWeeks="
 				+ gradedWeeks + "]";
 	}
-
 	
 }

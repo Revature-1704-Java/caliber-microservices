@@ -23,9 +23,15 @@ public class TrainerProducerConfiguration {
 	}
 
 	@Bean
+	public TrainerCompositionService trainerCompositionService() {
+		return new TrainerCompositionService();
+	}
+
+	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
-			System.out.println(mms.send("BSVihZkuxwdg9Dxy", "Hello world!"));
+
 		};
 	}
+
 }

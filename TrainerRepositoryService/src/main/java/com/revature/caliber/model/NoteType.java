@@ -12,7 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Patrick Walsh
  *
  */
-public enum NoteType implements Serializable{
+
+public enum NoteType implements Serializable {
 	@JsonProperty("TRAINEE")
 	TRAINEE,
 	@JsonProperty("BATCH")

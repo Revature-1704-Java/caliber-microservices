@@ -1,67 +1,17 @@
 package com.revature.caliber.model;
 
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-/**
- * Notes and results for each category that the panelist
- * goes over with the associate.
- * 
- * @author Patrick Walsh
- *
- */
-@Entity
-@Table(name = "CALIBER_PANEL_FEEDBACK")
-@Cacheable
-public class PanelFeedback {
-
-	@Id
-	@Column(name = "PANEL_FEEDBACK_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PANEL_FEEDBACK_ID_SEQUENCE")
-	@SequenceGenerator(name = "PANEL_FEEDBACK_ID_SEQUENCE", sequenceName = "PANEL_FEEDBACK_ID_SEQUENCE")
+public class PanelFeedback implements Serializable {
+	private static final long serialVersionUID = -7997716749941674836L;
+	
 	private long id;
-	
-	@NotNull
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-	@JoinColumn(name="CATEGORY_ID", nullable=false)
 	private Category technology;
-	
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "PANEL_STATUS", nullable = false)
 	private PanelStatus status;
-	
-	@Min(0)
-	@Max(10)
-	@NotNull
-	@Column(name = "PANEL_RESULT")
 	private int result;
-	
-	@Column(name = "PANELIST_COMMENTS")
 	private String comment;
-	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="PANEL_ID", nullable=false)
-	@JsonBackReference(value = "feedback")
 	private Panel panel;
-
+	
 	public PanelFeedback() {
 		super();
 	}
