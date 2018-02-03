@@ -20,6 +20,18 @@ public class Note implements Serializable {
 		this.maxVisibility = TrainerRole.ROLE_TRAINER;
 	}
 	
+	public Note(SimpleNote note) {
+		this.noteId = note.getNoteId();
+		this.content = note.getContent();
+		this.week = note.getWeek();
+		this.batch = null;
+		this.trainee = null;
+		this.maxVisibility = note.getMaxVisibility();
+		this.type = note.getType();
+		this.qcFeedback = note.isQcFeedback();
+		this.qcStatus = note.getQcStatus();
+	}
+	
 	/**
 	 * QC Status for the batch. Constructs the note and it's visibility If the
 	 * feedback is public, anyone can view. If not, the feedback can only be

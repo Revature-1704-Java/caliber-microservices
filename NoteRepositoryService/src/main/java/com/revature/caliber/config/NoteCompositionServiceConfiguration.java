@@ -29,7 +29,7 @@ public class NoteCompositionServiceConfiguration {
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
-			Note note = noteCompositionService.getNote(5175);
+			Note note = noteCompositionService.findOne(5175);
 			
 			System.out.println(note);
 		};
