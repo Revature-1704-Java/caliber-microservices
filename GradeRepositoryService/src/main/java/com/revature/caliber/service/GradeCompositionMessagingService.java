@@ -8,21 +8,43 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonObject;
+import com.revature.caliber.model.SimpleAssessment;
+import com.revature.caliber.model.SimpleTrainee;
+
 @Service
 public class GradeCompositionMessagingService {
 	
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 	
-	private static final String SINGLE_GRADE_ROUTING_KEY = "aYF4wPtsGMjq72Lu";
-	private static final String LIST_GRADE_ROUTING_KEY = "V6hbpnyZRH8ZQQ9e";
+	private static final String SINGLE_ASSESSMENT_ROUTING_KEY = "7c6tMqRRPpZ8Z7xh";
+	private static final String SINGLE_TRAINEE_ROUTING_KEY = "eRQ7GaBRnHgGdV9D";
+	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 	
-	
-	public boolean sendSingleGradeRequest() {
+	/*
+	 * Dont have the SimpleAssessment so I will skip for now
+	public SimpleAssessment sendSingleGradeRequest() {
 	       return true;
 	}
+	*/
 	
-	public boolean sendListGradeRquest() {
-		return true;
+	public SimpleTrainee sendSimpleTraineeRequest(Integer traineeId) {
+		JsonObject traineeRequest = new JsonObject();
+		
+		traineeRequest.addProperty("methodName", "findOne");
+		traineeRequest.addProperty("traineeId", traineeId);
+		
+		return (SimpleTrainee) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_ROUTING_KEY, traineeRequest.toString());
+	}
+	
+	
+	public SimpleAssessment sendSimpleAssessmentRequest(Long assessmentId) {
+		JsonObject assessmentRequest = new JsonObject();
+		
+		assessmentRequest.addProperty("methodName", "findOne");
+		assessmentRequest.addProperty("traineeId", assessmentId);
+		
+		return (SimpleAssessment) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_ASSESSMENT_ROUTING_KEY, assessmentRequest.toString());
 	}
 }

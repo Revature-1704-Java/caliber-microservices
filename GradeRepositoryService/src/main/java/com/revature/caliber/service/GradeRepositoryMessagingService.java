@@ -17,29 +17,17 @@ import com.revature.caliber.repository.GradeRepository;
 public class GradeRepositoryMessagingService {
 	
 	@Autowired
-	private GradeRepository gradeRepository;
+	private GradeRepositoryRequestDispatcher gradeRepositoryRequestDispatcher;
 	
-	@RabbitListener(queues = "caliber.grade.list")
+	@RabbitListener(queues = "revature.caliber.repos.grade.list")
 	public List<SimpleGrade> receiveList(String message) {
 		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-
-		if(request.get("methodName").getAsString().equals("findGradesbyTrainee")) {
-			List<SimpleGrade> grades = gradeRepository.findByTraineeId(request.get("traineeId").getAsInt());
-			
-			
-			return grades;
-		} 
-		else if((request.get("methodName").getAsString().equals("findGradesbyAssessment"))){
-			List<SimpleGrade> grades = gradeRepository.findByAssessmentId(request.get("traineeId").getAsLong());
-			return grades;
-		}
-		else {
-			return null;
-		}
 		
+		return gradeRepositoryRequestDispatcher.processListSimpleGradeRequest(request);
+
 	}
 	
 	@RabbitListener(queues = "caliber.grade")
@@ -49,13 +37,7 @@ public class GradeRepositoryMessagingService {
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
 		
-		if(request.get("methodName").getAsString().equals("findGrade")) {
-			SimpleGrade grade = gradeRepository.findOne(request.get("gradeId").getAsLong());
-			return grade;
-		}
-		else {
-			return null;
-		}
+		return gradeRepositoryRequestDispatcher.processSingleSimpleGradeRequest(request);
 	}
 	
 	

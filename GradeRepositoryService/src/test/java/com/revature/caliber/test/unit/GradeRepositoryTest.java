@@ -40,7 +40,7 @@ public class GradeRepositoryTest {
 		List<SimpleGrade> grades = gradeRepository.findByTraineeId(1);
 		
 		for(int i = 0; i < grades.size(); i++) {
-			assertEquals(grades.get(i).getTrainee(), (Integer)1);
+			assertEquals(grades.get(i).getTraineeId(), (Integer)1);
 		}
 	}
 	
@@ -49,13 +49,13 @@ public class GradeRepositoryTest {
 		List<SimpleGrade> grades = gradeRepository.findByAssessmentId(2063L);
 		
 		for(int i = 0; i < grades.size(); i++) {
-			assertEquals(grades.get(i).getAssessment(), (Long)2063L);
+			assertEquals(grades.get(i).getAssessmentId(), (Long)2063L);
 		}
 	}
 	
 	
 	@Test
-	public void finOneTest() {
+	public void findOneTest() {
 	
 		SimpleGrade grade = gradeRepository.findOne(2063L);
 		assertEquals(grade.getGradeId(), 2063L);

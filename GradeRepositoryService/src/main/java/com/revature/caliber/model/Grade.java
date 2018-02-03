@@ -23,6 +23,14 @@ public class Grade implements Serializable {
 		this.dateReceived = dateReceived;
 		this.score = score;
 	}
+	
+	public Grade(SimpleGrade grade) {
+		this.gradeId = grade.getGradeId();
+		this.assessment = null;
+		this.trainee = null;
+		this.dateReceived = grade.getDateReceived();
+		this.score = grade.getScore();
+	}
 
 	public long getGradeId() {
 		return gradeId;

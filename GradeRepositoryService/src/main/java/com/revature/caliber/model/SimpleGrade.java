@@ -77,6 +77,9 @@ public class SimpleGrade implements Serializable {
 		this.dateReceived = dateReceived;
 		this.score = score;
 	}
+	
+	
+	
 
 	public long getGradeId() {
 		return gradeId;
@@ -86,19 +89,19 @@ public class SimpleGrade implements Serializable {
 		this.gradeId = gradeId;
 	}
 
-	public Long getAssessment() {
+	public Long getAssessmentId() {
 		return assessmentId;
 	}
 
-	public void setAssessment(Long assessmentId) {
+	public void setAssessmentId(Long assessmentId) {
 		this.assessmentId = assessmentId;
 	}
 
-	public Integer getTrainee() {
+	public Integer getTraineeId() {
 		return traineeId;
 	}
 
-	public void setTrainee(Integer traineeId) {
+	public void setTraineeId(Integer traineeId) {
 		this.traineeId = traineeId;
 	}
 
