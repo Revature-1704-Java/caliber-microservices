@@ -21,18 +21,17 @@ public class RepositoryProducerConfiguration {
     
     @Bean
     public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
-        //RabbitTemplate rabbitTemplate = new RabbitTemplate(factory);
-        //rabbitTemplate.setExchange("revature.caliber.repos");
-        return new RabbitTemplate(factory);
+    	return new RabbitTemplate(factory);
+    }
+    
+    @Bean
+    public PanelCompositionService panelCompositionService() {
+    	return new PanelCompositionService();
     }
     
     @Bean
     public CommandLineRunner runner() {
         return args -> {
-        	//JsonObject object = new JsonObject();
-        	//object.addProperty("methodName", "findOne");
-        	//object.addProperty("panelId", 1);
-        	//mms.send("B8ptbVDNyVB28mVA", object.toString());
         	Panel panel = panelCompositionService.findOne(1);
         };
     }

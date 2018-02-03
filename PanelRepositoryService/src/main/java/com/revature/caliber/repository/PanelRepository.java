@@ -26,13 +26,13 @@ public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	/** find by repanels ordered descending by interview date
 	 * @return a list of panels that have a status of Repanel
 	 */
-	@Query("SELECT p FROM Panel p WHERE p.statusId = com.revature.caliber.model.PanelStatus.Repanel ORDER BY p.interviewDate DESC")
+	@Query("SELECT p FROM SimplePanel p WHERE p.statusId = com.revature.caliber.model.PanelStatus.Repanel ORDER BY p.interviewDate DESC")
 	List<SimplePanel> findAllRepanels();
 	
-	/** find panels in the last 14 days NO DATA TO TEST ON
+	/** find panels in the last 14 days
 	 * @return a list of panels that happen in the last 14 days
 	 */
-	@Query("FROM Panel p WHERE p.interviewDate >= TRUNC(SYSDATE) - 13")
+	@Query("SELECT p FROM SimplePanel p WHERE p.interviewDate >= TRUNC(SYSDATE) - 13")
 	List<SimplePanel> findRecentPanels();
 	
 	/** find by trainee id 
@@ -45,7 +45,7 @@ public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	 * @param batchId
 	 * @return a list of trainees and panels by batch id
 	 */
-	List<SimpleTrainee> findAllTraineesAndPanelsByBatch(int batchId);	
+	// List<SimpleTrainee> findAllTraineesAndPanelsByBatch(int batchId);	
 	
 	/** Convenience method 
 	 * save a panel 

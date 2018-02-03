@@ -50,10 +50,6 @@ public class Panel implements Serializable {
 	public void setTrainee(Trainee trainee) {
 		this.trainee = trainee;
 	}
-	
-	public void setTrainer(Trainer trainer) {
-		panelist = trainer;		// i had to make this
-	}
 
 	public Trainer getPanelist() {
 		return panelist;

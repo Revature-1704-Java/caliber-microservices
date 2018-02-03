@@ -107,7 +107,7 @@ public class PanelCompositionService {
 		Panel dest = new Panel(src);
 
 		dest.setTrainee(trainee);
-		dest.setTrainer(trainer);
+		dest.setPanelist(trainer);
 
 		return dest;
 	}
