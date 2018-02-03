@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleBatch;
-import com.revature.caliber.model.SimpleCategory;
 
 @Service
 public class TraineeCompositionMessagingService {
@@ -14,7 +13,7 @@ public class TraineeCompositionMessagingService {
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 
-	private static final String SINGLE_BATCH_ROUTING_KEY = "F82jS9KJpwqLk3dj";
+	private static final String SINGLE_BATCH_ROUTING_KEY = "JyoH3uRmktGn9MnW";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
@@ -25,15 +24,5 @@ public class TraineeCompositionMessagingService {
 
 		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY,
 				batchRequest.toString());
-	}
-
-	public SimpleCategory sendSingleSimpleCategoryRequest(Integer categoryId) {
-		JsonObject categoryRequest = new JsonObject();
-
-		categoryRequest.addProperty("methodName", "findOne");
-		categoryRequest.addProperty("categoryId", categoryId);
-
-		return (SimpleCategory) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY,
-				categoryRequest.toString());
 	}
 }

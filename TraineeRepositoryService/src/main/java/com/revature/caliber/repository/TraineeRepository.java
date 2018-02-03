@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.revature.caliber.model.SimpleTrainee;
-import com.revature.caliber.model.Trainee;
 
 @Repository
 public interface TraineeRepository extends JpaRepository<SimpleTrainee, Integer> {
