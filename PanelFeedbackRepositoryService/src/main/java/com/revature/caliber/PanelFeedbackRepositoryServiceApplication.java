@@ -18,16 +18,4 @@ public class PanelFeedbackRepositoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PanelFeedbackRepositoryServiceApplication.class, args);
 	}
-	
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			//findOne test
-			JsonObject object = new JsonObject();
-			object.addProperty("methodName", "findOne");
-			object.addProperty("panelFeedbackId", 1);
-			
-			mms.sendPanel("4jZ2GMxLP7VyQPBn", object.toString());
-		};
-	}
 }

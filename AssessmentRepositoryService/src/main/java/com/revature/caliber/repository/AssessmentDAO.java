@@ -14,7 +14,7 @@ import com.revature.caliber.model.SimpleAssessment;
 public interface AssessmentDAO extends JpaRepository<SimpleAssessment, Long> {
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	SimpleAssessment findByAssessmentId(long id);
+	SimpleAssessment findByAssessmentId(Long id);
 
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	List<SimpleAssessment> findDistinctByWeek(short week);
