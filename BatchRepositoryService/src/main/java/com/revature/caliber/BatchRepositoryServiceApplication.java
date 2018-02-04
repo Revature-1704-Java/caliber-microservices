@@ -18,7 +18,7 @@ public class BatchRepositoryServiceApplication {
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
-			System.out.println(bcs.getBatchNotes(2100));
+			System.out.println(bcs.findOne(2100).getNotes());
 		};
 	}
 }

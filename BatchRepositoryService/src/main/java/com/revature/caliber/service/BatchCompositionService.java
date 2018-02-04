@@ -10,12 +10,14 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.caliber.model.Address;
 import com.revature.caliber.model.Batch;
 import com.revature.caliber.model.Note;
 import com.revature.caliber.model.SimpleBatch;
 import com.revature.caliber.model.SimpleNote;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.Trainee;
+import com.revature.caliber.model.Trainer;
 import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.BatchRepository;
 @Service
@@ -79,7 +81,7 @@ public class BatchCompositionService {
 		return composeListOfBatch(repo.findAllByStartDateAfter(date), false, true, true);
 	}
 	
-	private Set<Trainee> getBatchTrainees(int batchId, boolean includeDropped){
+	public Set<Trainee> getBatchTrainees(int batchId, boolean includeDropped){
 		List<SimpleTrainee> simpleTList = BCMS.sendListSimpleTraineeRequest(batchId);
 		return simpleTList.stream()
 				.filter(s->includeDropped||s.getTrainingStatus()!=TrainingStatus.Dropped)
@@ -93,18 +95,40 @@ public class BatchCompositionService {
 				.map(n-> new Note(n))
 				.collect(Collectors.toSet());
 	}
-	
-	private List<Batch> composeListOfBatch(List<SimpleBatch> src, boolean includeDropped, boolean withTrainees, boolean withNotes){
+	public Batch setAddressAndTrainer(SimpleBatch src){
+		Address a = null;
+		Trainer t = new Trainer(BCMS.sendSimpleTrainerRequest(src.getTrainerId()));
+		Trainer c = null;
+		if(src.getAddressId()!=null){
+			a = BCMS.sendSimpleAddressRequest(src.getAddressId());
+		}
+		if(src.getCoTrainerId()!=null){
+			c = new Trainer(BCMS.sendSimpleTrainerRequest(src.getCoTrainerId()));
+		}
+		Batch b= new Batch(src);
+		b.setAddress(a);
+		b.setTrainer(t);
+		if(!c.equals(null)) {
+			b.setCoTrainer(c);
+		}
+		return b;
+	}
+	private List<Batch> composeListOfBatch(List<SimpleBatch> src, 
+			boolean includeDropped, boolean withTrainees, boolean withNotes){
 		if(withTrainees&&withNotes){
-			return src.stream().map(b->composeBatch(b, includeDropped)).collect(Collectors.toList());
+			return src.stream()
+					.map(b->composeBatch(b, includeDropped))
+					.collect(Collectors.toList());
 		}else{
-			List<Batch> batches = src.stream().map(b-> new Batch(b)).collect(Collectors.toList());
+			List<Batch> batches = src.stream()
+					.map(b-> setAddressAndTrainer(b)).collect(Collectors.toList());
 			if(withTrainees){
 				return batches.stream()
-				.map(b-> {
-					b.setTrainees(getBatchTrainees(b.getBatchId(), includeDropped));
-					return b;
-				}).collect(Collectors.toList());
+						.map(b-> {
+							b.setTrainees(getBatchTrainees(b.getBatchId(), includeDropped));
+							return b;
+						})
+						.collect(Collectors.toList());
 			}else if(withNotes) {
 				return batches.stream().map(b->{
 					b.setNotes(getBatchNotes(b.getBatchId()));
@@ -116,8 +140,7 @@ public class BatchCompositionService {
 		}
 	}
 	private Batch composeBatch(SimpleBatch src, boolean includeDropped) {
-		
-		Batch b= new Batch(src);
+		Batch b = setAddressAndTrainer(src);
 		b.setTrainees(getBatchTrainees(src.getBatchId(), includeDropped));
 		b.setNotes(getBatchNotes(src.getBatchId()));
 		return b;	
