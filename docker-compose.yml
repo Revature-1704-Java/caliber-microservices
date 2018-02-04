@@ -1,20 +1,4 @@
 version: "3"
 services:
-  noterepositoryservice:
+  noterepositoryservices:
     build: ./NoteRepositoryService
-#  zuul:
-#    build: ./zuul
-#    ports: 
-#    - "8080:8181"
-#  config:
-#    build: ./config
-#  panel:
-#    build: ./panel
-#  trainer:
-#   build: ./trainer
-#  pdf:
-#    build: ./pdf
-#  category:
-#    build: ./category
-#  eureka:
-#    build: ./eureka
