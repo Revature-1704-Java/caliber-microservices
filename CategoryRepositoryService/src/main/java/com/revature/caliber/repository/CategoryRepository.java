@@ -14,7 +14,7 @@ import com.revature.caliber.model.SimpleCategory;
 @Repository
 public interface CategoryRepository extends JpaRepository<SimpleCategory, Integer> {
 
-	List<SimpleCategory> findByCategoryIdOrderBySkillCategoryAsc();
+	List<SimpleCategory> findAllByOrderBySkillCategoryAsc();
 	
 	List<SimpleCategory> findByActiveOrderByCategoryIdAsc(boolean active);
 }

@@ -29,7 +29,7 @@ public class CategoryCompositionService {
 	
 	//findAll
 	public List<Category> findAll() {
-		List<SimpleCategory> basis = categoryRepository.findByCategoryIdOrderBySkillCategoryAsc();
+		List<SimpleCategory> basis = categoryRepository.findAllByOrderBySkillCategoryAsc();
 		List<Category> result = composeListOfCategory(basis);
 		
 		return result;
