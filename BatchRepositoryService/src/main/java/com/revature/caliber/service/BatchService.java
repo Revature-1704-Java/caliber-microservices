@@ -34,7 +34,7 @@ public class BatchService {
 	//private AmqpTemplate rabbitMqBatchDAO;
 	
 	@Autowired
-	BatchCompositionService batchDAO = new BatchCompositionService();
+	private BatchCompositionService batchDAO = new BatchCompositionService();
 
 	/*
 	 *******************************************************
