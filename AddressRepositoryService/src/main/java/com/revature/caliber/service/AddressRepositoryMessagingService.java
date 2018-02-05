@@ -4,14 +4,12 @@ import java.util.List;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.revature.caliber.model.Address;
 
-@Service
 public class AddressRepositoryMessagingService {
 	@Autowired
 	private AddressRepositoryRequestDispatcher requestDispatcher;
