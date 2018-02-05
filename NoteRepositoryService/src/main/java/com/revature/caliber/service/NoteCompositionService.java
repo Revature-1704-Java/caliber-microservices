@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.caliber.model.Batch;
 import com.revature.caliber.model.Note;
@@ -15,6 +16,7 @@ import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.NoteRepository;
 
+@Service
 public class NoteCompositionService {
 	@Autowired
 	private NoteRepository noteRepository;
@@ -135,14 +137,14 @@ public class NoteCompositionService {
 	}
 	
 	private Note composeNote(SimpleNote src) {
-		SimpleBatch simpleBatch = noteCompositionMessagingService.sendSingleSimpleBatchRequest(src.getBatchId());
+//		SimpleBatch simpleBatch = noteCompositionMessagingService.sendSingleSimpleBatchRequest(src.getBatchId());
 		SimpleTrainee simpleTrainee = noteCompositionMessagingService.sendSingleSimpleTraineeRequest(src.getTraineeId());
-		Batch batch = new Batch(simpleBatch);
+//		Batch batch = new Batch(simpleBatch);
 		Trainee trainee = new Trainee(simpleTrainee);
 		Note dest = new Note(src);
 		
-		trainee.setBatch(batch);
-		dest.setBatch(batch);
+//		trainee.setBatch(batch);
+//		dest.setBatch(batch);
 		dest.setTrainee(trainee);
 		
 		return dest;

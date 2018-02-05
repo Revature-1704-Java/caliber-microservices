@@ -98,8 +98,9 @@ public class PanelCompositionService {
 		SimpleTrainee simpleTrainee = panelCompositionMessagingService
 				.sendSingleSimpleTraineeRequest(src.getTraineeId());
 		SimpleTrainer simpleTrainer = panelCompositionMessagingService
-				.sendSingleSimpleTrainerRequest(src.getTrainerId()); 
-		panelCompositionMessagingService.sendSingleSimpleTrainerRequest(src.getTrainerId());
+				.sendSingleSimpleTrainerRequest(src.getPanelist());
+		
+		panelCompositionMessagingService.sendSingleSimpleTrainerRequest(src.getPanelist());
 
 		Trainee trainee = new Trainee(simpleTrainee);
 		Trainer trainer = new Trainer(simpleTrainer);
