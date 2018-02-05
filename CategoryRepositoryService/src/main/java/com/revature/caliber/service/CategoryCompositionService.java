@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.revature.caliber.model.Category;
 import com.revature.caliber.model.SimpleCategory;
 import com.revature.caliber.repository.CategoryRepository;
-import com.revature.caliber.test.unit.CategoryRepositoryTest;
 
 
 public class CategoryCompositionService {
