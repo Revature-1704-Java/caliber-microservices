@@ -20,6 +20,7 @@ public class BatchRepositoryMessageService {
 		System.out.println("message recieved 1");
 		return brd.processSimpleBatchRequest(getRequest(message));
 	}
+
 	@RabbitListener(queues = "revature.caliber.repos.batch.list")
 	public List<SimpleBatch> receiveList(String message) {
 		System.out.println("message recieved");

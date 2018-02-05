@@ -13,17 +13,17 @@ import com.revature.caliber.repository.PanelRepository;
 
 @Service
 public class PanelRepositoryMessagingService {
-	
+
 	@Autowired
 	private PanelRepositoryRequestDispatcher panelRepositoryRequestDispatcer;
-	
-	@RabbitListener(queues = "revature.caliber.repos.panel")
-	public SimplePanel receiveSingleSimpleNoteRequest(String message) {
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(message);
-        JsonObject request = element.getAsJsonObject();
-        
-        return panelRepositoryRequestDispatcer.processSingleSimplePanelRequest(request);
 
-    }
+	@RabbitListener(queues = "revature.caliber.repos.panel")
+	public SimplePanel receiveSingleSimplePanelRequest(String message) {
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(message);
+		JsonObject request = element.getAsJsonObject();
+
+		return panelRepositoryRequestDispatcer.processSingleSimplePanelRequest(request);
+
+	}
 }

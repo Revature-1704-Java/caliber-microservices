@@ -9,31 +9,32 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.revature.caliber.model.AssessmentType;
 import com.revature.caliber.model.SimpleAssessment;
-import com.revature.caliber.repository.AssessmentRepository;
 
 @Service
 public class AssessmentRepositoryMessagingService {
 
 	@Autowired
 	private AssessmentRepositoryRequestDispatcher assessmentRepositoryRequestDispatcher;
-	
-	@RabbitListener(queues = "caliber.assessment")
+
+	@RabbitListener(queues = "revature.caliber.repos.assessment")
 	public SimpleAssessment receiveSingleSimpleAssessmentRequest(String message) {
+		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		
+
 		return assessmentRepositoryRequestDispatcher.processSingleSimpleAssessmentRequest(request);
 	}
-	
-	@RabbitListener(queues = "caliber.assessment.list")
+
+	@RabbitListener(queues = "revature.caliber.repos.assessment.list")
 	public List<SimpleAssessment> receiveListSimpleAssessmentRequest(String message) {
+		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		
+		System.out.println(request);
+
 		return assessmentRepositoryRequestDispatcher.processListSimpleAssessmentRequest(request);
-}
+	}
 }

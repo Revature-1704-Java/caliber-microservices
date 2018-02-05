@@ -9,7 +9,20 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>AddressRepositoryService</module>
+	<module>AssessmentRepositoryService</module>
+	<module>BatchRepositoryService</module>
+<!--	<module>CategoryRepositoryService</module>-->
+	<module>ConfigService</module>
+	<module>EurekaService</module>
+	<module>GradeRepositoryService</module>
         <module>NoteRepositoryService</module>
+	<module>PanelFeedbackRepositoryService</module>
+	<module>PanelRepositoryService</module>
+	<module>PDFService</module>
+	<module>TraineeRepositoryService</module>
+	<module>TrainerRepositoryService</module>
+	<module>ZuulService</module>
     </modules>
 
 </project>

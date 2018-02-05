@@ -14,7 +14,8 @@ public class AssessmentCompositionMessagingService {
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 
-	private static final String SINGLE_BATCH_ROUTING_KEY = "F82jS9KJpwqLk3dj";
+	private static final String SINGLE_BATCH_ROUTING_KEY = "XLNbCWqQzFHr9JfZ";
+	private static final String SINGLE_CATEGORY_ROUTING_KEY = "utMPxDus2M9qy9Bh";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
@@ -33,7 +34,7 @@ public class AssessmentCompositionMessagingService {
 		categoryRequest.addProperty("methodName", "findOne");
 		categoryRequest.addProperty("categoryId", categoryId);
 
-		return (SimpleCategory) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY,
+		return (SimpleCategory) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_CATEGORY_ROUTING_KEY,
 				categoryRequest.toString());
 	}
 }
