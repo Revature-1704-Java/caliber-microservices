@@ -48,20 +48,20 @@ public class Trainee implements Serializable {
 	
 	public Trainee(SimpleTrainee trainee) {
 		this();
-		this.traineeId = this.getTraineeId();
-		this.resourceId = this.getResourceId();
-		this.name = this.getName();
-		this.email = this.getEmail();
-		this.trainingStatus = this.getTrainingStatus();
-		this.phoneNumber = this.getPhoneNumber();
-		this.skypeId = this.getSkypeId();
-		this.profileUrl = this.getProfileUrl();
-		this.recruiterName = this.getRecruiterName();
-		this.college = this.getCollege();
-		this.degree = this.getDegree();
-		this.major = this.getMajor();
-		this.techScreenerName = this.getTechScreenerName();
-		this.projectCompletion = this.getProjectCompletion();
+		this.traineeId = trainee.getTraineeId();
+		this.resourceId = trainee.getResourceId();
+		this.name = trainee.getName();
+		this.email = trainee.getEmail();
+		this.trainingStatus = trainee.getTrainingStatus();
+		this.phoneNumber = trainee.getPhoneNumber();
+		this.skypeId = trainee.getSkypeId();
+		this.profileUrl = trainee.getProfileUrl();
+		this.recruiterName = trainee.getRecruiterName();
+		this.college = trainee.getCollege();
+		this.degree = trainee.getDegree();
+		this.major = trainee.getMajor();
+		this.techScreenerName = trainee.getTechScreenerName();
+		this.projectCompletion = trainee.getProjectCompletion();
 	}
 
 	public int getTraineeId() {
