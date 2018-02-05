@@ -9,32 +9,32 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.revature.caliber.model.SimpleAssessment;
+import com.revature.caliber.model.SimpleTrainee;
 
 @Service
-public class AssessmentRepositoryMessagingService {
+public class TraineeRepositoryMessagingService {
 
 	@Autowired
-	private AssessmentRepositoryRequestDispatcher assessmentRepositoryRequestDispatcher;
+	private TraineeRepositoryRequestDispatcher traineeRepositoryRequestDispatcher;
 
-	@RabbitListener(queues = "revature.caliber.repos.assessment")
-	public SimpleAssessment receiveSingleSimpleAssessmentRequest(String message) {
+	@RabbitListener(queues = "revature.caliber.repos.trainee")
+	public SimpleTrainee receiveSingleSimpleTraineeRequest(String message) {
 		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
 
-		return assessmentRepositoryRequestDispatcher.processSingleSimpleAssessmentRequest(request);
+		return traineeRepositoryRequestDispatcher.processSingleSimpleTraineeRequest(request);
 	}
 
-	@RabbitListener(queues = "revature.caliber.repos.assessment.list")
-	public List<SimpleAssessment> receiveListSimpleAssessmentRequest(String message) {
+	@RabbitListener(queues = "revature.caliber.repos.trainee.list")
+	public List<SimpleTrainee> receiveListSimpleTraineeRequest(String message) {
 		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
 		System.out.println(request);
 
-		return assessmentRepositoryRequestDispatcher.processListSimpleAssessmentRequest(request);
+		return traineeRepositoryRequestDispatcher.processListSimpleTraineeRequest(request);
 	}
 }
