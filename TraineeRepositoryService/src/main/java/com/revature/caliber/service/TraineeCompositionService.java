@@ -1,10 +1,7 @@
 package com.revature.caliber.service;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,6 +9,7 @@ import com.revature.caliber.model.Batch;
 import com.revature.caliber.model.SimpleBatch;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.Trainee;
+import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.TraineeRepository;
 
 public class TraineeCompositionService {
@@ -21,65 +19,90 @@ public class TraineeCompositionService {
 	private TraineeCompositionMessagingService traineeCompositionMessagingService;
 
 	public void save(Trainee trainee) {
-
+		SimpleTrainee simpleTrainee = new SimpleTrainee(trainee);
+		traineeRepository.save(simpleTrainee);
 	}
 
-	public List<Trainee> findAllTrainees() {
+	public List<Trainee> findAll() {
 		List<SimpleTrainee> basis = traineeRepository.findAll();
-		List<Trainee> trainees = (List<Trainee>) composeListOfTrainees(basis);
+		List<Trainee> trainees = composeListOfTrainees(basis);
 
 		return trainees;
 	}
-
-	public List<Trainee> findAllTraineesByBatch(Integer batchId) {
-		List<SimpleTrainee> basis = traineeRepository.findAllByBatchId(batchId);
-		List<Trainee> trainees = (List<Trainee>) composeListOfTrainees(basis);
-
+	
+	public List<Trainee> findAllNotDropped() {
+		List<SimpleTrainee> basis = traineeRepository.findAllByTrainingStatusNot(TrainingStatus.Dropped);
+		List<Trainee> trainees = composeListOfTrainees(basis);
+		
 		return trainees;
 	}
 
-//	public List<Trainee> findAllDroppedTraineesByBatch(Integer batchId) {
-//		List<SimpleTrainee> basis = traineeRepository.findAll();
-//		List<Trainee> trainees = (List<Trainee>) composeListOfTrainees(basis);
-//
-//		return trainees;
-//	}
+	public List<Trainee> findAllByBatch(Integer batchId) {
+		List<SimpleTrainee> basis = traineeRepository.findAllByBatchIdAndTrainingStatusNot(batchId, TrainingStatus.Dropped);
+		List<Trainee> trainees = composeListOfTrainees(basis);
 
-//	public List<Trainee> findAllTraineesByTrainer(int trainerId) {
-//		List<SimpleTrainee> basis = traineeRepository.findAll();
-//		List<Trainee> trainees = (List<Trainee>) composeListOfTrainees(basis);
-//
-//		return trainees;
-//	}
-
-	public Trainee findTrainee(Integer traineeId) {
-		SimpleTrainee basis = traineeRepository.findOne(traineeId);
+		return trainees;
+	}
+	
+	public List<Trainee> findAllDroppedByBatch(Integer batchId) {
+		List<SimpleTrainee> basis = traineeRepository.findAllByBatchIdAndTrainingStatus(batchId, TrainingStatus.Dropped);
+		List<Trainee> trainees = composeListOfTrainees(basis);
+		
+		return trainees;
+	}
+	
+	public List<Trainee> findAllByTrainer(Integer trainerId) {
+		List<SimpleBatch> trainerBatches = traineeCompositionMessagingService.sendListSimpleBatchRequest(trainerId);
+		List<SimpleTrainee> basis = new LinkedList<SimpleTrainee>();//traineeRepository.findAllByBatchIdAndTrainingStatusNot(trainerId, TrainingStatus.Dropped);
+		List<Trainee> trainees = null;
+		
+		for(SimpleBatch b : trainerBatches) {
+			List<SimpleTrainee> batchTrainees = traineeRepository.findAllByBatchIdAndTrainingStatusNot(b.getBatchId(), TrainingStatus.Dropped);
+			basis.addAll(batchTrainees);
+		}
+		
+		trainees = composeListOfTrainees(basis);
+		
+		return trainees;
+	}
+	
+	public Trainee findOne(Integer traineeId) {
+		SimpleTrainee basis = traineeRepository.findOneByTraineeIdAndTrainingStatusNot(traineeId, TrainingStatus.Dropped);
 		Trainee result = composeTrainee(basis);
 
 		return result;
 	}
-
-	public Set<Trainee> search(String searchTerm) {
-		Set<SimpleTrainee> result = new HashSet<>();
-		List<SimpleTrainee> traineeByEmail = traineeRepository.findAllByEmail(searchTerm);
-		result.addAll(traineeByEmail);
-		List<SimpleTrainee> traineeByName = traineeRepository.findAllByName(searchTerm);
-		result.addAll(traineeByName);
-		List<SimpleTrainee> traineeBySkypeId = traineeRepository.findAllBySkypeId(searchTerm);
-		result.addAll(traineeBySkypeId);
-
-		Set<Trainee> traineeSet = (Set<Trainee>) composeListOfTrainees(result);
+	
+	public List<Trainee> findByEmail(String email) {
+		List<SimpleTrainee> basis = traineeRepository.findAllByEmailLikeAndTrainingStatusNot(email, TrainingStatus.Dropped);
+		List<Trainee> trainees = composeListOfTrainees(basis);
 		
-		return traineeSet;
+		return trainees;
+	}
+	
+	public List<Trainee> findByName(String name) {
+		List<SimpleTrainee> basis = traineeRepository.findAllByNameLikeAndTrainingStatusNot(name, TrainingStatus.Dropped);
+		List<Trainee> trainees = composeListOfTrainees(basis);
+		
+		return trainees;
+	}
+	
+	public List<Trainee> findBySkypeId(String skypeId) {
+		List<SimpleTrainee> basis = traineeRepository.findAllBySkypeIdLikeAndTrainingStatusNot(skypeId, TrainingStatus.Dropped);
+		List<Trainee> trainees = composeListOfTrainees(basis);
+		
+		return trainees;
 	}
 
 	public void delete(Trainee trainee) {
+		traineeRepository.delete(trainee.getTraineeId());
 	}
 
 	public void update(Trainee trainee) {
+		save(trainee);
 	}
 
-	private Collection<Trainee> composeListOfTrainees(Collection<SimpleTrainee> simpleTrainees) {
+	private List<Trainee> composeListOfTrainees(List<SimpleTrainee> simpleTrainees) {
 		List<Trainee> trainees = new LinkedList<Trainee>();
 
 		for (SimpleTrainee simpleTrainee : simpleTrainees) {
