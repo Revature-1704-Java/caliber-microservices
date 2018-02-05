@@ -81,4 +81,10 @@ public class CategoryRepositoryTest {
 		Long after = jdbcTemplate.queryForObject(CATEGORY_COUNT, Long.class);
 		assertEquals(++before, after);
 	}
+	
+	@Test
+	public void delete() {
+		log.info("Testing delete method from CategoryDAO");
+		categoryRepository.delete(categoryRepository.findOne(1));
+	}
 }
