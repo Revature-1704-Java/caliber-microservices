@@ -27,6 +27,14 @@ public class Trainer implements Serializable {
 		this.email = email;
 		this.tier = tier;
 	}
+	
+	public Trainer(SimpleTrainer trainer) {
+		this.email = email;
+		this.name = name;
+		this.title = title;
+		this.tier = tier;
+	}
+
 
 	public Trainer(SimpleTrainer src) {
 		this.name = src.getName();
