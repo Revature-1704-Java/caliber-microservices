@@ -21,15 +21,15 @@ public class BatchCompositionMessageService {
 	
 	private static final String LIST_TRAINEE_ROUTING_KEY = "eRQ7GaBRnHgGdV9D";
 	private static final String LIST_NOTE_ROUTING_KEY = "cf22J9CGs8V95Rbm";
-	private static final String TRAINEE_ROUTING_KEY = "9xdaX72tPYuz8xDP";
+	private static final String TRAINER_ROUTING_KEY = "9xdaX72tPYuz8xDP";
 	private static final String ADDRESS_ROUTING_KEY = "oEKQeav8rcejeYgq";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 	public SimpleTrainer sendSimpleTrainerRequest(Integer trainerId) {
 		JsonObject SimpleTrainerRequest = new JsonObject();
-		SimpleTrainerRequest.addProperty("methodName", "findByTrainerId");
+		SimpleTrainerRequest.addProperty("methodName", "findOne");
 		SimpleTrainerRequest.addProperty("trainerId", trainerId);
 		return (SimpleTrainer) rabbitTemplate.convertSendAndReceive(
-				RABBIT_REPO_EXCHANGE, TRAINEE_ROUTING_KEY, SimpleTrainerRequest.toString());
+				RABBIT_REPO_EXCHANGE, TRAINER_ROUTING_KEY, SimpleTrainerRequest.toString());
 		
 	}
 	public Address sendSimpleAddressRequest(Integer addressId) {
