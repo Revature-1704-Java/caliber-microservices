@@ -26,11 +26,8 @@ public class TraineeService {
 
 	private static final Logger log = Logger.getLogger(TraineeService.class);
 	
-	//@Autowired
-	//private AmqpTemplate rabbitMqTraineeDAO;
-	
 	@Autowired
-	private TraineeCompositionService traineeDAO = new TraineeCompositionService();
+	private AmqpTemplate rabbitMqTraineeDAO;
 
 	/*
 	 *******************************************************
@@ -45,7 +42,8 @@ public class TraineeService {
 	 */
 	public void save(Trainee trainee) {
 		log.debug("Save trainee: " + trainee);
-		traineeDAO.save(trainee);
+		//traineeDAO.save(trainee);
+		//rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "save("+trainee+")");
 		
 	}
 
@@ -56,7 +54,8 @@ public class TraineeService {
 	 */
 	public List<Trainee> findAllTrainees() {
 		log.debug("Find all trainees");
-		return traineeDAO.findAll();
+		//return traineeDAO.findAll();
+		return (List<Trainee>) rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "findAllTrainees()");
 	}
 
 	/**
@@ -67,7 +66,8 @@ public class TraineeService {
 	 */
 	public List<Trainee> findAllTraineesByBatch(Integer batchId) {
 		log.debug("Find trainees by batch");
-		return traineeDAO.findAllByBatch(batchId);
+		//return traineeDAO.findAllByBatch(batchId);
+		return (List<Trainee>) rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "findAllTraineesByBatch("+batchId+")");
 	}
 
 	/**
@@ -78,7 +78,8 @@ public class TraineeService {
 	 */
 	public List<Trainee> findAllDroppedTraineesByBatch(Integer batchId) {
 		log.debug("Find dropped trainees by batch");
-		return traineeDAO.findAllDroppedByBatch(batchId);
+		//return traineeDAO.findAllDroppedByBatch(batchId);
+		return (List<Trainee>) rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "findAllDroppedTraineesByBatch("+batchId+")");
 	}
 
 	/**
@@ -89,7 +90,8 @@ public class TraineeService {
 	 */
 	public List<Trainee> findAllTraineesByTrainer(int trainerId) {
 		log.debug("Find trainees by trainer id: " + trainerId);
-		return traineeDAO.findAllByTrainer(trainerId);
+		//return traineeDAO.findAllByTrainer(trainerId);
+		return (List<Trainee>) rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "findAllTraineesByTrainer("+trainerId+")");
 	}
 
 	/**
@@ -100,7 +102,8 @@ public class TraineeService {
 	 */
 	public Trainee findTrainee(Integer traineeId) {
 		log.debug("Find trainee by id: " + traineeId);
-		return traineeDAO.findOne(traineeId);
+		//return traineeDAO.findOne(traineeId);
+		return (Trainee) rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "findTrainee("+traineeId+")");
 	}
 
 	/**
@@ -112,11 +115,14 @@ public class TraineeService {
 	public Set<Trainee> search(String searchTerm) {
 		log.debug("Find trainee : " + searchTerm);
 		Set<Trainee> result = new HashSet<>();
-		List<Trainee> traineeByEmail = traineeDAO.findByEmail(searchTerm);
+		//List<Trainee> traineeByEmail = traineeDAO.findByEmail(searchTerm);
+		List<Trainee> traineeByEmail = (List<Trainee>) rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "findByEmail("+searchTerm+")");
 		result.addAll(traineeByEmail);
-		List<Trainee> traineeByName = traineeDAO.findByName(searchTerm);
+		//List<Trainee> traineeByName = traineeDAO.findByName(searchTerm);
+		List<Trainee> traineeByName = (List<Trainee>) rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "findByName("+searchTerm+")");
 		result.addAll(traineeByName);
-		List<Trainee> traineeBySkypeId = traineeDAO.findBySkypeId(searchTerm);
+		//List<Trainee> traineeBySkypeId = traineeDAO.findBySkypeId(searchTerm);
+		List<Trainee> traineeBySkypeId = (List<Trainee>) rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "findBySkypeId("+searchTerm+")");
 		result.addAll(traineeBySkypeId);
 		return result;
 	}
@@ -129,7 +135,8 @@ public class TraineeService {
 	 */
 	public void delete(Trainee trainee) {
 		log.debug("Delete trainee " + trainee);
-		traineeDAO.delete(trainee);
+		//traineeDAO.delete(trainee);
+		rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "delete("+trainee+")");
 	}
 
 	/**
@@ -139,7 +146,8 @@ public class TraineeService {
 	 */
 	public void update(Trainee trainee) {
 		log.debug("Update trainee " + trainee);
-		traineeDAO.update(trainee);
+		//traineeDAO.update(trainee);
+		rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "update("+trainee+")");
 	}
 
 }
