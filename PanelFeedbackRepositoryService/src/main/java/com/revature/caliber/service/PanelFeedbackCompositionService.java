@@ -60,22 +60,23 @@ public class PanelFeedbackCompositionService {
 		return result;
 	}
 	
-	/*
 	//save
-	public ? save(PanelFeedback panelFeedback) {
-		
+	public void save(PanelFeedback panelFeedback) {
+		//Must decompose panelFeedback 
+		SimplePanelFeedback toSave = new SimplePanelFeedback(panelFeedback);
+		panelFeedbackRepository.save(toSave);
 	}
 	
 	//update
-	public ? update(PanelFeedback panelFeedback) {
-		
+	public void update(PanelFeedback panelFeedback) {
+		SimplePanelFeedback toSave = new SimplePanelFeedback(panelFeedback);
+		panelFeedbackRepository.save(toSave);
 	}
 	
 	//delete
-	public ? delete(Long panelFeedbackd) {
-		
+	public void delete(Long panelFeedbackId) {
+		panelFeedbackRepository.delete(panelFeedbackId);
 	}
-	*/
 	
 	private List<PanelFeedback> composeListOfPanelFeedback(List<SimplePanelFeedback> src) {
 		List<PanelFeedback> dest = new LinkedList<PanelFeedback>();
