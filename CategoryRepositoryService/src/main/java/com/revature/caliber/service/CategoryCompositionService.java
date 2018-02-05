@@ -3,11 +3,13 @@ package com.revature.caliber.service;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.revature.caliber.model.Category;
 import com.revature.caliber.model.SimpleCategory;
 import com.revature.caliber.repository.CategoryRepository;
+import com.revature.caliber.test.unit.CategoryRepositoryTest;
 
 
 public class CategoryCompositionService {
@@ -15,9 +17,11 @@ public class CategoryCompositionService {
 	private CategoryRepository categoryRepository;
 	@Autowired
 	private CategoryCompositionMessagingService categoryCompositionMessagingService;
+	private static final Logger log = Logger.getLogger(CategoryCompositionService.class);
 	
 	//findOne
 	public Category findOne(int categoryId) {
+		log.info("Finding one simple category");
 		SimpleCategory basis = categoryRepository.findOne(categoryId);
 		Category result = composeCategory(basis);
 		return result;

@@ -81,12 +81,8 @@ public class PanelFeedbackCompositionService {
 		List<PanelFeedback> dest = new LinkedList<PanelFeedback>();
 		
 		for(SimplePanelFeedback curr : src) {
-			PanelFeedback panelFeedBack = new PanelFeedback(curr);
-			dest.add(new PanelFeedback(curr));
-			//if(!includeDropped && note.getTrainee().getTrainingStatus() != TrainingStatus.Dropped)
-				//dest.add(new PanelFeedback(curr));
-			//else if(includeDropped)
-				//dest.add(new PanelFeedback(curr));
+			PanelFeedback panelFeedback = new PanelFeedback(curr);
+			dest.add(panelFeedback);
 		}
 		
 		return dest;
@@ -94,13 +90,13 @@ public class PanelFeedbackCompositionService {
 	
 	private PanelFeedback composePanelFeedback(SimplePanelFeedback src) {
 		SimpleCategory simpleCategory = panelFeedbackCompositionMessagingService.sendSingleSimpleCategoryRequest(src.getCategoryId());
-		//SimplePanel simplePanel = panelFeedbackCompositionMessagingService.sendSingleSimplePanelRequest(src.getPanelId());
+		SimplePanel simplePanel = panelFeedbackCompositionMessagingService.sendSingleSimplePanelRequest(src.getPanelId());
 		Category category = new Category(simpleCategory);
-		//Panel panel = new Panel(simplePanel);
+		Panel panel = new Panel(simplePanel);
 		PanelFeedback dest = new PanelFeedback(src);
 		
 		dest.setTechnology(category);
-		//dest.setPanel(panel);
+		dest.setPanel(panel);
 		
 		return dest;
 	}
