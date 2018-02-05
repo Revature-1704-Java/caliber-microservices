@@ -23,6 +23,14 @@ public class CategoryRepositoryRequestDispatcher {
 			int categoryId = request.get("categoryId").getAsInt();
 			result = categoryRepository.findOne(categoryId);
 		}
+		/*
+		else if (methodName.equals("save")) {
+		
+		}
+		else if (methodName.equals("update")) {
+		
+		}
+		 */
 		
 		return result;
 	}
