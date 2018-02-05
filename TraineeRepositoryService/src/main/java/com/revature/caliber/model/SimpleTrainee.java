@@ -80,7 +80,24 @@ public class SimpleTrainee implements Serializable {
 
 	public SimpleTrainee() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	
+	public SimpleTrainee(Trainee src) {
+		this.traineeId = src.getTraineeId();
+		this.resourceId = src.getResourceId();
+		this.name = src.getName();
+		this.email = src.getEmail();
+		this.trainingStatus = src.getTrainingStatus();
+		this.batchId = src.getBatch().getBatchId();
+		this.phoneNumber = src.getPhoneNumber();
+		this.skypeId = src.getSkypeId();
+		this.profileUrl = src.getProfileUrl();
+		this.recruiterName = src.getRecruiterName();
+		this.college = src.getCollege();
+		this.degree = src.getDegree();
+		this.major = src.getMajor();
+		this.techScreenerName = src.getTechScreenerName();
+		this.projectCompletion = src.getProjectCompletion();
 	}
 
 	public SimpleTrainee(int traineeId, String resourceId, String name, String email, TrainingStatus trainingStatus,
