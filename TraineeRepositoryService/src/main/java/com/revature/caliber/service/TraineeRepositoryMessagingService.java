@@ -19,7 +19,6 @@ public class TraineeRepositoryMessagingService {
 
 	@RabbitListener(queues = "revature.caliber.repos.trainee")
 	public SimpleTrainee receiveSingleSimpleTraineeRequest(String message) {
-		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
@@ -29,11 +28,9 @@ public class TraineeRepositoryMessagingService {
 
 	@RabbitListener(queues = "revature.caliber.repos.trainee.list")
 	public List<SimpleTrainee> receiveListSimpleTraineeRequest(String message) {
-		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		System.out.println(request);
 
 		return traineeRepositoryRequestDispatcher.processListSimpleTraineeRequest(request);
 	}
