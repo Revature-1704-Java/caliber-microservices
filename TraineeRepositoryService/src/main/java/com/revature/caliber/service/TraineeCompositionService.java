@@ -12,7 +12,6 @@ import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.TraineeRepository;
-
 @Service
 public class TraineeCompositionService {
 	@Autowired
