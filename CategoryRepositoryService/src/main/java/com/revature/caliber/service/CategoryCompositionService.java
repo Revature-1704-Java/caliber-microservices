@@ -28,16 +28,16 @@ public class CategoryCompositionService {
 	}
 	
 	//findAll
-	public List<Category> findAll(int categoryId) {
-		List<SimpleCategory> basis = categoryRepository.findByCategoryIdOrderBySkillCategoryAsc(categoryId);
+	public List<Category> findAll() {
+		List<SimpleCategory> basis = categoryRepository.findAllByOrderBySkillCategoryAsc();
 		List<Category> result = composeListOfCategory(basis);
 		
 		return result;
 	}
 	
 	//findAllActive
-	public List<Category> findAllActive(boolean active) {
-		List<SimpleCategory> basis = categoryRepository.findByActiveOrderByCategoryIdAsc(active);
+	public List<Category> findAllActive() {
+		List<SimpleCategory> basis = categoryRepository.findByActiveOrderByCategoryIdAsc(true);
 		List<Category> result = composeListOfCategory(basis);
 		
 		return result;
