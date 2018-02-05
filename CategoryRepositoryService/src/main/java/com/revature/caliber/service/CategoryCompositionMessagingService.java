@@ -1,8 +1,11 @@
 package com.revature.caliber.service;
 
+import org.springframework.stereotype.Service;
+
 import com.google.gson.JsonObject;
 //import com.revature.caliber.model.SimpleAssessment;
 
+@Service
 public class CategoryCompositionMessagingService {
 
 	private static final String SINGLE_PANEL_ROUTING_KEY = "7c6tMqRRPpZ8Z7xh";
