@@ -14,9 +14,6 @@ import com.revature.caliber.service.CategoryRepositoryMessagingService;
 
 @Configuration
 public class RepositoryProducerConfiguration {
-
-	@Autowired
-	CategoryCompositionService categoryCompositionService;
 	
 	@Bean
 	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {

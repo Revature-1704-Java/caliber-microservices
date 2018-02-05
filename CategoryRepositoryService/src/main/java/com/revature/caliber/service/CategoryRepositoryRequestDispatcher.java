@@ -3,11 +3,13 @@ package com.revature.caliber.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleCategory;
 import com.revature.caliber.repository.CategoryRepository;
 
+@Service
 public class CategoryRepositoryRequestDispatcher {
 
 	@Autowired
