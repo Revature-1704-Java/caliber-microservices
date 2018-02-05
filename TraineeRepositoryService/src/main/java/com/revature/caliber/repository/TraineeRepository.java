@@ -6,16 +6,24 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.revature.caliber.model.SimpleTrainee;
+import com.revature.caliber.model.TrainingStatus;
 
 @Repository
 public interface TraineeRepository extends JpaRepository<SimpleTrainee, Integer> {
+	SimpleTrainee findOneByTraineeIdAndTrainingStatusNot(Integer traineeId, TrainingStatus status);
+	
+	List<SimpleTrainee> findAllByEmailLikeAndTrainingStatusNot(String email, TrainingStatus status);
 
-	List<SimpleTrainee> findAllByEmail(String searchTerm);
+	List<SimpleTrainee> findAllByNameLikeAndTrainingStatusNot(String name, TrainingStatus status);
 
-	List<SimpleTrainee> findAllByName(String searchTerm);
+	List<SimpleTrainee> findAllBySkypeIdLikeAndTrainingStatusNot(String skypeId, TrainingStatus status);
 
-	List<SimpleTrainee> findAllBySkypeId(String searchTerm);
-
+	List<SimpleTrainee> findAllByBatchIdAndTrainingStatusNot(Integer batchId, TrainingStatus status);
+	
+	List<SimpleTrainee> findAllByBatchIdAndTrainingStatus(Integer batchId, TrainingStatus status);
+	
+	List<SimpleTrainee> findAllByTrainingStatusNot(TrainingStatus status);
+	
 	List<SimpleTrainee> findAllByBatchId(Integer batchId);
 	
 }
