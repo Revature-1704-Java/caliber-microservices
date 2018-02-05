@@ -43,7 +43,8 @@ public class TraineeService {
 	public void save(Trainee trainee) {
 		log.debug("Save trainee: " + trainee);
 		//traineeDAO.save(trainee);
-		rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "save("+trainee+")");
+		//rabbitMqTraineeDAO.convertSendAndReceive("caliber.exchange", "caliber.queue", "save("+trainee+")");
+		
 	}
 
 	/**

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 //import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Isolation;
@@ -27,6 +28,7 @@ import com.revature.caliber.model.Address;
 import com.revature.caliber.model.Batch;
 import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.Trainer;
+import com.revature.caliber.security.models.SalesforceUser;
 //import com.revature.caliber.security.models.SalesforceUser;
 import com.revature.caliber.service.BatchService;
 //import com.revature.caliber.services.TrainingService;
@@ -182,7 +184,7 @@ public class BatchController {
 	 * @param auth
 	 * @return
 	 */
-	/*private Trainer getPrincipal(Authentication auth) {
+	private Trainer getPrincipal(Authentication auth) {
 		return ((SalesforceUser) auth.getPrincipal()).getCaliberUser();
-	}*/
+	}
 }
