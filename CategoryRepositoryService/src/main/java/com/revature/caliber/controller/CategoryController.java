@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.service.CategoryCompositionService;
+import com.revature.caliber.model.Category;
 import com.revature.caliber.model.SimpleCategory;
 import com.revature.caliber.repository.CategoryRepository;
 
@@ -41,23 +42,23 @@ public class CategoryController {
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	public ResponseEntity<List<Category>> findAllActive() {
 		log.debug("Getting categories");
-		List<Category> categories = categoryService.findAllForPanel(true);
+		List<Category> categories = categoryService.findAllActive(true);
 		return new ResponseEntity<>(categories, HttpStatus.OK);
 	}
 	//Calls a method that will return all Categories both ACTIVE and INACTIVE. Intended to be used by VP only.
 	@RequestMapping(value = "/vp/category", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-	public ResponseEntity<List<SimpleCategory>> findAll() {
+	public ResponseEntity<List<Category>> findAll() {
 		log.debug("Getting categories");
-		List<Category> categories = categoryService.findAll();
+		List<Category> categories = categoryService.findAll(0);
 		return new ResponseEntity<>(categories, HttpStatus.OK);
 	}
 	//Calls a method that will find a category based on id. 
 	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
-	public ResponseEntity<SimpleCategory> findCategoryById(@PathVariable int id) {
+	public ResponseEntity<Category> findCategoryById(@PathVariable int id) {
 		log.debug("Getting category: " + id);
 		Category category = categoryService.findOne(id);
 		log.info(category.toString());
@@ -76,7 +77,7 @@ public class CategoryController {
 	@RequestMapping(value = "/vp/category", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@PreAuthorize("hasAnyRole('VP')")
-	public ResponseEntity<SimpleCategory> saveCategory(@Valid @RequestBody SimpleCategory category) {
+	public ResponseEntity<Category> saveCategory(@Valid @RequestBody Category category) {
 		//save
 		//categoryService.saveCategory(category);
 		return new ResponseEntity<>(category, HttpStatus.CREATED);
