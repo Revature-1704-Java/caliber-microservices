@@ -14,9 +14,6 @@ import com.revature.caliber.service.PanelFeedbackRepositoryMessagingService;
 
 @Configuration
 public class PanelFeedbackRepositoryServiceConfiguration {
-
-	@Autowired
-	PanelFeedbackCompositionService panelFeedbackCompositionService;
 	
 	@Bean
 	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {

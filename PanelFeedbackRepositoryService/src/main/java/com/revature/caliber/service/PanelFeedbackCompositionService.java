@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.caliber.model.Batch;
 import com.revature.caliber.model.Category;
@@ -18,6 +19,7 @@ import com.revature.caliber.model.SimplePanelFeedback;
 import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.PanelFeedbackRepository;
+
 
 public class PanelFeedbackCompositionService {
 
@@ -44,7 +46,7 @@ public class PanelFeedbackCompositionService {
 	
 	//findAllForPanel
 	public List<PanelFeedback> findAllForPanel(int panelId) {
-		List<SimplePanelFeedback> basis = panelFeedbackRepository.findById(panelId);
+		List<SimplePanelFeedback> basis = panelFeedbackRepository.findByPanelId(panelId);
 		List<PanelFeedback> result = composeListOfPanelFeedback(basis);
 		
 		return result;
@@ -52,7 +54,7 @@ public class PanelFeedbackCompositionService {
 	
 	//findFailedFeedbackByPanel
 	public List<PanelFeedback> findFailedFeedbackByPanel(int panelId) {
-		List<SimplePanelFeedback> basis = panelFeedbackRepository.findByIdAndStatus(panelId, PanelStatus.Repanel);
+		List<SimplePanelFeedback> basis = panelFeedbackRepository.findByPanelIdAndStatus(panelId, PanelStatus.Repanel);
 		List<PanelFeedback> result = composeListOfPanelFeedback(basis);
 		
 		return result;
@@ -79,12 +81,8 @@ public class PanelFeedbackCompositionService {
 		List<PanelFeedback> dest = new LinkedList<PanelFeedback>();
 		
 		for(SimplePanelFeedback curr : src) {
-			PanelFeedback panelFeedBack = new PanelFeedback(curr);
-			dest.add(new PanelFeedback(curr));
-			//if(!includeDropped && note.getTrainee().getTrainingStatus() != TrainingStatus.Dropped)
-				//dest.add(new PanelFeedback(curr));
-			//else if(includeDropped)
-				//dest.add(new PanelFeedback(curr));
+			PanelFeedback panelFeedback = new PanelFeedback(curr);
+			dest.add(panelFeedback);
 		}
 		
 		return dest;
