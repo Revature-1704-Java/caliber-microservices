@@ -2,47 +2,15 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
-@Entity
-@Table(name="CALIBER_ADDRESS")
 public class Address implements Serializable {
-	private static final long serialVersionUID = -7886621867644813683L;
+	private static final long serialVersionUID = -5649489166844504113L;
 
-	@Id
-	@Column(name = "ADDRESS_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADDRESS_ID_SEQUENCE")
-	@SequenceGenerator(name = "ADDRESS_ID_SEQUENCE", sequenceName = "ADDRESS_ID_SEQUENCE")
 	private int addressId;
-
-	@Column(name = "ADDRESS_STREET")
-	@NotEmpty
 	private String street;
-
-	@Column(name = "ADDRESS_CITY")
-	@NotEmpty
 	private String city;
-
-	@Column(name = "ADDRESS_STATE")
-	@NotEmpty
 	private String state;
-
-	@Column(name = "ADDRESS_ZIPCODE")
-	@NotEmpty
 	private String zipcode;
-
-	@Column(name = "ADDRESS_COMPANY")
 	private String company;
-
-	@Column(name = "ACTIVE")
 	private boolean active;
 
 	public Address() {
@@ -173,4 +141,5 @@ public class Address implements Serializable {
 	public String toString() {
 		return company + ", " + street + " " + city + " " + state + " " + zipcode;
 	}
+
 }

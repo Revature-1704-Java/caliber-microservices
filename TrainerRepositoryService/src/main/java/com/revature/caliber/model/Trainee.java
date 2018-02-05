@@ -1,120 +1,31 @@
- package com.revature.caliber.model;
+package com.revature.caliber.model;
 
+import java.awt.Panel;
 import java.io.Serializable;
 import java.util.Set;
-import java.util.TreeSet;
 
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.annotations.OrderBy;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-/**
- * The type Trainee.
- * 
- * (NOTE) Further iterations should include the following from the Salesforce:
- * recruiter_name, account_name, project_completion This way we can analyze
- * performance based on where they went to college, who recruited them, and if
- * they finished RevaturePro.
- */
-@Entity
-@Table(name = "CALIBER_TRAINEE")
-@Cacheable
 public class Trainee implements Serializable {
-
-	private static final long serialVersionUID = -9090223980655307018L;
-
-	@Id
-	@Column(name = "TRAINEE_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRAINEE_ID_SEQUENCE")
-	@SequenceGenerator(name = "TRAINEE_ID_SEQUENCE", sequenceName = "TRAINEE_ID_SEQUENCE")
+	private static final long serialVersionUID = -6103923098134644806L;
+	
 	private int traineeId;
-
-	@Column(name = "RESOURCE_ID")
 	private String resourceId;
-
-	@NotEmpty
-	@Column(name = "TRAINEE_NAME")
 	private String name;
-
-	@NotEmpty
-	@Email
-	@Column(name = "TRAINEE_EMAIL", nullable = false)
 	private String email;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "TRAINING_STATUS")
 	private TrainingStatus trainingStatus;
-
-	@NotNull
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@JoinColumn(name = "BATCH_ID", nullable = false)
-	@JsonBackReference(value = "traineeAndBatch")
 	private Batch batch;
-
-	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
-
-	@Column(name = "SKYPE_ID")
 	private String skypeId;
-
-	@Column(name = "PROFILE_URL")
 	private String profileUrl;
-	
-	// new columns
-	@Column(name = "RECRUITER_NAME")
 	private String recruiterName;
-	
-	@Column(name = "COLLEGE")
 	private String college;
-	
-	@Column(name = "DEGREE")
 	private String degree;
-	
-	@Column(name = "MAJOR")
 	private String major;
-	
-	@Column(name = "TECH_SCREENER_NAME")
 	private String techScreenerName;
-	
-	@Column(name = "REVPRO_PROJECT_COMPLETION")
 	private String projectCompletion;
-	// end of new columns
-	
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
 	private Set<Grade> grades;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
 	private Set<Note> notes;
+	private Set<Panel> panelInterviews;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
-	@OrderBy(clause = "INTERVIEW_DATE DESC")
-	private Set<Panel> panelInterviews = new TreeSet<>();
-
 	public Trainee() {
 		super();
 	}
@@ -133,6 +44,24 @@ public class Trainee implements Serializable {
 		this.email = email;
 		this.trainingStatus = TrainingStatus.Training;
 		this.batch = batch;
+	}
+	
+	public Trainee(SimpleTrainee trainee) {
+		this.traineeId = trainee.getTraineeId();
+		this.resourceId = trainee.getResourceId();
+		this.name = trainee.getName();
+		this.email = trainee.getEmail();
+		this.trainingStatus = trainee.getTrainingStatus();
+		this.batch = null;
+		this.phoneNumber = trainee.getPhoneNumber();
+		this.skypeId = trainee.getSkypeId();
+		this.profileUrl = trainee.getProfileUrl();
+		this.recruiterName = trainee.getRecruiterName();
+		this.college = trainee.getCollege();
+		this.degree = trainee.getDegree();
+		this.major = trainee.getMajor();
+		this.techScreenerName = trainee.getTechScreenerName();
+		this.projectCompletion = trainee.getProjectCompletion();
 	}
 
 	public int getTraineeId() {

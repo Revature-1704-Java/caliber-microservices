@@ -1,114 +1,31 @@
 package com.revature.caliber.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-//import com.revature.caliber.validator.ValidPanel;
-
-/**
- * Results of the final panel interview for each associate.
- * @author Patrick Walsh
- *
- */
-@Entity
-@Table(name = "CALIBER_PANEL")
-//@ValidPanel
-@Cacheable
-public class Panel {
-
-	// Interview Details
-	@Id
-	@Column(name = "PANEL_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PANEL_ID_SEQUENCE")
-	@SequenceGenerator(name = "PANEL_ID_SEQUENCE", sequenceName = "PANEL_ID_SEQUENCE")
+public class Panel implements Serializable {
+	private static final long serialVersionUID = -3904962254572382770L;
+	
 	private int id;
-	
-	@NotNull
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "TRAINEE_ID", nullable = false)
 	private Trainee trainee;
-	
-	@NotNull
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "PANELIST_ID", nullable = false)
 	private Trainer panelist;
-	
-	@Temporal(TemporalType.DATE)
-	@Column(name="INTERVIEW_DATE")
 	private Date interviewDate;
-	
-	@Column(name="DURATION")
-	private String duration; // 1hr 30 minutes
-	
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name="INTERVIEW_FORMAT")
-	private InterviewFormat format; 
-	
-	@Column(name="INTERNET_CONNECTIVITY")
-	private String internet; // stable/unstable
-	
-	@NotNull
-	@Min(value = 1)
-	@Column(name="PANEL_ROUND", nullable=false)
+	private String duration;
+	private InterviewFormat format;
+	private String internet;
 	private int panelRound;
-	
-	@Column(name="RECORDING_CONSENT")
 	private boolean recordingConsent;
-	
-	@Column(name="RECORDING_LINK")
 	private String recordingLink;
-	
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "PANEL_STATUS", nullable = false)
 	private PanelStatus status;
-	
-	// Technical Feedback
-	@OneToMany(mappedBy = "panel", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JsonManagedReference(value = "feedback")
 	private Set<PanelFeedback> feedback;
-	
-	// Comments and General Feedback
-	@Column(name = "ASSOCIATE_INTRO", nullable = true)
 	private String associateIntro;
-	
-	@Column(name = "PROJECT_ONE_DESCRIPTION", nullable = true)
 	private String projectOneDescription;
-	
-	@Column(name = "PROJECT_TWO_DESCRIPTION", nullable = true)
 	private String projectTwoDescription;
-	
-	@Column(name = "PROJECT_THREE_DESCRIPTION", nullable = true)
 	private String projectThreeDescription;
-	
-	@Column(name = "COMMUNICATION_SKILLS", nullable = true)
 	private String communicationSkills;
-	
-	@Column(name = "OVERALL_FEEDBACK", nullable = true)
 	private String overall;
-
+	
 	public Panel() {
 		super();
 		this.interviewDate = new Date();
@@ -371,5 +288,4 @@ public class Panel {
 				+ projectTwoDescription + ", projectThreeDescription=" + projectThreeDescription
 				+ ", communicationSkills=" + communicationSkills + ", overall=" + overall + "]";
 	}
-
 }
