@@ -23,6 +23,24 @@ public class NoteCompositionService {
 	@Autowired
 	private NoteCompositionMessagingService noteCompositionMessagingService;
 	
+	public Note save(Note note) {
+		SimpleNote simpleNote = new SimpleNote(note);
+		
+		noteRepository.save(simpleNote);
+		
+		return note;
+	}
+	
+	public Note update(Note note) {
+		return save(note);
+	}
+	
+	public Note delete(Note note) {
+		noteRepository.delete(note.getNoteId());
+		
+		return note;
+	}
+	
 	public Note findOne(Integer noteId) {
 		SimpleNote basis = noteRepository.findOne(noteId);
 		Note result = composeNote(basis);
