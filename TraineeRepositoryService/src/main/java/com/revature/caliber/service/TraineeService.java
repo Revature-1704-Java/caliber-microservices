@@ -1,4 +1,4 @@
-package com.revature.caliber.services;
+package com.revature.caliber.service;
 
 import java.util.HashSet;
 import java.util.List;
