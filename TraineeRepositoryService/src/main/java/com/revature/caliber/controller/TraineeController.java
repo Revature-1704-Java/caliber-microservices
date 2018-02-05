@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //import com.revature.caliber.security.models.SalesforceUser;
 import com.revature.caliber.services.TraineeService;
-import com.revature.model.Trainee;
+import com.revature.caliber.model.Trainee;
 
 /**
  * Services requests for Trainer, Trainee, and Batch information
@@ -42,7 +42,7 @@ public class TraineeController {
 	private TraineeService traineeService;
 
 	@Autowired
-	public void setTrainingService(TraineeService trainingService) {
+	public void setTrainingService(TraineeService traineeService) {
 		this.traineeService = traineeService;
 	}
 

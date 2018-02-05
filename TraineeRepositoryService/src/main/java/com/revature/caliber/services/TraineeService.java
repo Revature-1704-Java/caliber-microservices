@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.revature.model.Trainee;
+import com.revature.caliber.model.Trainee;
 
 /**
  * Provides logic concerning trainer and trainee data. Application logic has no

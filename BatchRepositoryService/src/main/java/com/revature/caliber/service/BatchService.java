@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
+import com.revature.caliber.model.Address;
+import com.revature.caliber.model.Batch;
 import com.revature.caliber.model.SimpleBatch;;
 
 /**
@@ -51,7 +53,7 @@ public class BatchService {
 	public List<Address> findCommonLocations() {
 		//return addressDAO.findAll();
 		message.add("findCommonLocations", null);
-		return rabbitMqBatchDAO.convertSendAndReceive("rabbit.exchange", "rabbit.queue", "FindCommonLocations");
+		return (List<Address>) rabbitMqBatchDAO.convertSendAndReceive("rabbit.exchange", "rabbit.queue", "FindCommonLocations");
 	}
 
 	/**
@@ -61,12 +63,14 @@ public class BatchService {
 	 */
 	public void addWeek(Integer batchId) {
 		log.debug("Adding week to batch: " + batchId);
-		Batch batch = batchDAO.findOne(batchId);
-		if (batch == null)
-			throw new IllegalArgumentException("Invalid batch");
-		int weeks = batch.getWeeks();
-		batch.setWeeks(++weeks);
-		batchDAO.update(batch);
+		//Batch batch = batchDAO.findOne(batchId);
+		//if (batch == null)
+		//	throw new IllegalArgumentException("Invalid batch");
+		//int weeks = batch.getWeeks();
+		//batch.setWeeks(++weeks);
+		//batchDAO.update(batch);
+		JsonObject message = new JsonObject();
+		message.addProperty("method", "addWeek");
 	}
 
 	/**
@@ -76,7 +80,9 @@ public class BatchService {
 	 */
 	public void save(Batch batch) {
 		log.debug("Saving batch: " + batch);
-		batchDAO.save(batch);
+		//batchDAO.save(batch);
+		JsonObject message = new JsonObject();
+		message.addProperty("method", "save");
 	}
 
 	/**
@@ -86,7 +92,10 @@ public class BatchService {
 	 */
 	public List<Batch> findAllBatches() {
 		log.debug("Find all batches");
-		return batchDAO.findAll();
+		//return batchDAO.findAll();
+		JsonObject message = new JsonObject();
+		message.addProperty("method", "findAllBatches");
+		return (List<Batch>) rabbitMqBatchDAO.convertSendAndReceive("rabbit.exchange", "rabbit.queue", "findAllBatches");
 	}
 
 	/**
@@ -96,7 +105,8 @@ public class BatchService {
 	 */
 	public List<Batch> findAllCurrentBatches() {
 		log.debug("Find all current batches");
-		return batchDAO.findAllCurrent();
+		//return batchDAO.findAllCurrent();\
+		return (List<Batch>) rabbitMqBatchDAO.convertSendAndReceive("rabbit.exchange", "rabbit.queue", "findAllCurrentBatches");
 	}
 
 	/**
@@ -107,7 +117,8 @@ public class BatchService {
 	 */
 	public List<Batch> findAllBatches(int trainerId) {
 		log.debug("Find all batches for trainer: " + trainerId);
-		return batchDAO.findAllByTrainer(trainerId);
+		//return batchDAO.findAllByTrainer(trainerId);
+		return (List<Batch>) rabbitMqBatchDAO.convertSendAndReceive("rabbit.exchange", "rabbit.queue", "findAllBatches");
 	}
 
 	/**
@@ -118,7 +129,8 @@ public class BatchService {
 	 */
 	public List<Batch> findAllCurrentBatches(int trainerId) {
 		log.debug("Find all current batches for trainer: " + trainerId);
-		return batchDAO.findAllCurrent(trainerId);
+		//return batchDAO.findAllCurrent(trainerId);
+		return (List<Batch>) rabbitMqBatchDAO.convertSendAndReceive("rabbit.exchange", "rabbit.queue", "findAllCurrentBatches");
 	}
 
 	/**
@@ -129,7 +141,8 @@ public class BatchService {
 	 */
 	public Batch findBatch(Integer batchId) {
 		log.debug("Finding batch with id: " + batchId);
-		return batchDAO.findOne(batchId);
+		//return batchDAO.findOne(batchId);
+		return (Batch) rabbitMqBatchDAO.convertSendAndReceive("rabbit.exchange", "rabbit.queue", "findBatch");
 	}
 
 	/**
@@ -139,7 +152,7 @@ public class BatchService {
 	 */
 	public void update(Batch batch) {
 		log.debug("Update batch " + batch);
-		batchDAO.update(batch);
+		//batchDAO.update(batch);
 	}
 
 	/**
@@ -148,9 +161,9 @@ public class BatchService {
 	 * @param batch
 	 */
 	public void delete(Batch batch) {
-		Batch fullBatch = batchDAO.findOneWithDroppedTrainees(batch.getBatchId());
-		log.debug("Delete batch " + fullBatch);
-		batchDAO.delete(fullBatch);
+		//Batch fullBatch = batchDAO.findOneWithDroppedTrainees(batch.getBatchId());
+		//log.debug("Delete batch " + fullBatch);
+		//batchDAO.delete(fullBatch);
 	}
 
 }

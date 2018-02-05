@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
+//import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,13 +23,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.caliber.beans.Address;
-import com.revature.caliber.beans.Batch;
-import com.revature.caliber.beans.Trainee;
-import com.revature.caliber.beans.Trainer;
-import com.revature.caliber.security.models.SalesforceUser;
+import com.revature.caliber.model.Address;
+import com.revature.caliber.model.Batch;
+import com.revature.caliber.model.Trainee;
+import com.revature.caliber.model.Trainer;
+//import com.revature.caliber.security.models.SalesforceUser;
 import com.revature.caliber.service.BatchService;
-import com.revature.caliber.services.TrainingService;
+//import com.revature.caliber.services.TrainingService;
 
 /**
  * Services requests for Trainer, Trainee, and Batch information
@@ -40,14 +40,14 @@ import com.revature.caliber.services.TrainingService;
 @RestController
 //@PreAuthorize("isAuthenticated()")
 @CrossOrigin(origins = "http://localhost:8090")
-public class TrainingController {
+public class BatchController {
 
-	private static final Logger log = Logger.getLogger(TrainingController.class);
-	private BatchService trainingService;
+	private static final Logger log = Logger.getLogger(BatchController.class);
+	private BatchService batchService;
 
 	@Autowired
-	public void setTrainingService(BatchService trainingService) {
-		this.trainingService = trainingService;
+	public void setTrainingService(BatchService batchService) {
+		this.batchService = batchService;
 	}
 
 	/*
@@ -69,7 +69,7 @@ public class TrainingController {
 	public ResponseEntity<List<Batch>> findAllBatchesByTrainer(Authentication auth) {
 		Trainer userPrincipal = getPrincipal(auth);
 		log.info("Getting all batches for trainer: " + userPrincipal);
-		List<Batch> batches = trainingService.findAllBatches(userPrincipal.getTrainerId());
+		List<Batch> batches = batchService.findAllBatches(userPrincipal.getTrainerId());
 		return new ResponseEntity<>(batches, HttpStatus.OK);
 	}
 
@@ -85,7 +85,7 @@ public class TrainingController {
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
 	public ResponseEntity<Batch> createBatch(@Valid @RequestBody Batch batch) {
 		log.info("Saving batch: " + batch);
-		trainingService.save(batch);
+		batchService.save(batch);
 		return new ResponseEntity<>(batch, HttpStatus.CREATED);
 	}
 
@@ -100,7 +100,7 @@ public class TrainingController {
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
 	public ResponseEntity<Void> updateBatch(@Valid @RequestBody Batch batch) {
 		log.info("Updating batch: " + batch);
-		trainingService.update(batch);
+		batchService.update(batch);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
@@ -117,7 +117,7 @@ public class TrainingController {
 		Batch batch = new Batch();
 		batch.setBatchId(id);
 		log.info("Deleting batch: " + id);
-		trainingService.delete(batch);
+		batchService.delete(batch);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
@@ -132,7 +132,7 @@ public class TrainingController {
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
 	public ResponseEntity<List<Batch>> getAllCurrentBatches() {
 		log.info("Fetching all current batches");
-		List<Batch> batches = trainingService.findAllCurrentBatches();
+		List<Batch> batches = batchService.findAllCurrentBatches();
 		return new ResponseEntity<>(batches, HttpStatus.OK);
 	}
 
@@ -147,7 +147,7 @@ public class TrainingController {
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'STAGING', 'PANEL')")
 	public ResponseEntity<List<Batch>> getAllBatches() {
 		log.info("Fetching all batches");
-		List<Batch> batches = trainingService.findAllBatches();
+		List<Batch> batches = batchService.findAllBatches();
 		return new ResponseEntity<>(batches, HttpStatus.OK);
 
 	}
@@ -163,7 +163,7 @@ public class TrainingController {
 	//@PreAuthorize("hasAnyRole('VP', 'QC','TRAINER', 'PANEL')")
 	public ResponseEntity<Void> createWeek(@PathVariable int batchId) {
 		log.info("Adding week to batch: " + batchId);
-		trainingService.addWeek(batchId);
+		batchService.addWeek(batchId);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
@@ -172,7 +172,7 @@ public class TrainingController {
 	//@PreAuthorize("hasAnyRole('VP', 'STAGING', 'QC', 'TRAINER', 'PANEL')")
 	public ResponseEntity<List<Address>> findCommonLocations() {
 		log.info("Fetching common training locations");
-		return new ResponseEntity<>(trainingService.findCommonLocations(), HttpStatus.OK);
+		return new ResponseEntity<>(batchService.findCommonLocations(), HttpStatus.OK);
 	}
 
 	/**
