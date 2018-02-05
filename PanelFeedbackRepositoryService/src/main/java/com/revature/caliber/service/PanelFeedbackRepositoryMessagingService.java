@@ -16,13 +16,13 @@ public class PanelFeedbackRepositoryMessagingService {
 
 	@Autowired
 	private PanelFeedbackRepositoryRequestDispatcher panelFeedbackRepositoryRequestDispatcher;
-	
+
 	@RabbitListener(queues = "revature.caliber.repos.panelfeedback")
 	public SimplePanelFeedback receiveSingleSimplePanelFeedbackRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		
+
 		return panelFeedbackRepositoryRequestDispatcher.processSingleSimplePanelFeedbackRequest(request);
 	}
 
@@ -31,7 +31,7 @@ public class PanelFeedbackRepositoryMessagingService {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		
+
 		return panelFeedbackRepositoryRequestDispatcher.processListSimplePanelFeedbackRequest(request);
 	}
 }

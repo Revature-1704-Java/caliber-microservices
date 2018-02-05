@@ -5,9 +5,11 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.revature.caliber.beans.Trainer;
+
 public class Batch implements Serializable {
 	private static final long serialVersionUID = 5368888406682098953L;
-	
+
 	private int batchId;
 	private String resourceId;
 	private String trainingName;
@@ -25,7 +27,7 @@ public class Batch implements Serializable {
 	private int weeks;
 	private int gradedWeeks;
 	private Set<Note> notes;
-	
+
 	public Batch() {
 		super();
 		this.weeks = 1;
@@ -192,7 +194,7 @@ public class Batch implements Serializable {
 	public void setGradedWeeks(int gradedWeeks) {
 		this.gradedWeeks = gradedWeeks;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -272,7 +274,7 @@ public class Batch implements Serializable {
 	@Override
 	public String toString() {
 		return "Batch [batchId=" + batchId + ", trainingName=" + trainingName + ", skillType=" + skillType
-				+ ", trainingType=" + trainingType +", location=" + location + "]";
+				+ ", trainingType=" + trainingType + ", location=" + location + "]";
 	}
-	
+
 }
