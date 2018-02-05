@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.caliber.model.Batch;
 import com.revature.caliber.model.SimpleBatch;
@@ -12,6 +13,7 @@ import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.TraineeRepository;
 
+@Service
 public class TraineeCompositionService {
 	@Autowired
 	private TraineeRepository traineeRepository;
