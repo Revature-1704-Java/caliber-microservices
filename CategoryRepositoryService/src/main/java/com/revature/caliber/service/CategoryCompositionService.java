@@ -36,7 +36,7 @@ public class CategoryCompositionService {
 	}
 	
 	//findAllActive
-	public List<Category> findAllForPanel(boolean active) {
+	public List<Category> findAllActive(boolean active) {
 		List<SimpleCategory> basis = categoryRepository.findByActiveOrderByCategoryIdAsc(active);
 		List<Category> result = composeListOfCategory(basis);
 		
