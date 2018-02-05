@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +33,7 @@ public class BatchService {
 	//@Autowired
 	//private AmqpTemplate rabbitMqBatchDAO;
 	
+	@Autowired
 	BatchCompositionService batchDAO = new BatchCompositionService();
 
 	/*
@@ -50,8 +50,10 @@ public class BatchService {
 	 *
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Address> findCommonLocations() {
-		return;
+		BatchCompositionMessageService findAddress = new BatchCompositionMessageService();
+		return (List<Address>) findAddress.sendSimpleAddressListRequest();
 	}
 
 	/**
