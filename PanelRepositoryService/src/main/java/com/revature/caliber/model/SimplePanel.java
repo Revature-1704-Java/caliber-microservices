@@ -128,10 +128,6 @@ public class SimplePanel implements Serializable {
 		return traineeId;
 	}
 	
-	public Integer getTrainerId() {		// ?????
-		return null;					// ?????
-	}
-	
 	public void setTraineeId(Integer traineeId) {
 		this.traineeId = traineeId;
 	}
