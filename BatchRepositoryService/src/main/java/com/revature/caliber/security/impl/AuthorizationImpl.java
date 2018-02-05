@@ -108,7 +108,7 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 		
 		try {
 			tryAuthorize(servletRequest, servletResponse, salesTokenString);
-		} catch (AuthenticationCredentialsNotFoundException | JSONException e) {
+		} catch (AuthenticationCredentialsNotFoundException e) {
 			log.error("error thrown:", e);
 			return new ModelAndView("redirect:/");
 		}
@@ -119,7 +119,7 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 	//added JSONException b/c error for not doing so when migrating this code over to MSA 
 	@RequestMapping(value = "/authenticated_token")
 	public void authenticateAPI(HttpServletRequest servletRequest, HttpServletResponse servletResponse)
-			throws IOException, URISyntaxException, JSONException {
+			throws IOException, URISyntaxException {
 		log.info("API log in test");
 		String salesTokenString = servletRequest.getParameter("salestoken");
 		
@@ -223,7 +223,7 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 	}
 	
 	//added JSONException b/c error for not doing so when migrating this code over to MSA 
-	private void tryAuthorize(HttpServletRequest servletRequest, HttpServletResponse servletResponse, String salesTokenString) throws URISyntaxException, IOException, JSONException {
+	private void tryAuthorize(HttpServletRequest servletRequest, HttpServletResponse servletResponse, String salesTokenString) throws URISyntaxException, IOException {
 		SalesforceUser salesforceUser;
 		
 		if (debug) {
@@ -257,7 +257,7 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 	 * @throws JSONException // error for not doing so when migrating this code over to MSA
 	 */
 	private void authorize(String jsonString, SalesforceUser salesforceUser, HttpServletResponse servletResponse)
-			throws IOException, JSONException {
+			throws IOException {
 		JSONObject jsonObject = new JSONObject(jsonString);
 		if (jsonObject.getString("email").equals(salesforceUser.getEmail())) {
 			log.info("Logged in user " + jsonObject.getString("email") + " now hasRole: "

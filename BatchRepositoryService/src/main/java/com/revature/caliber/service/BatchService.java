@@ -1,17 +1,13 @@
 package com.revature.caliber.service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.JsonObject;
 import com.revature.caliber.model.Address;
 import com.revature.caliber.model.Batch;
-import com.revature.caliber.BatchRepositoryServiceApplication;
 
 /**
  * Provides logic concerning trainer and trainee data. Application logic has no
@@ -25,17 +21,13 @@ import com.revature.caliber.BatchRepositoryServiceApplication;
 public class BatchService {
 
 	private static final Logger log = Logger.getLogger(BatchService.class);
-	//private TrainerDAO trainerDAO;
-	//private TraineeDAO traineeDAO;
-	//private BatchDAO batchDAO;
-	//private AddressDAO addressDAO;
-	
-	//@Autowired
-	//private AmqpTemplate rabbitMqBatchDAO;
 	
 	@Autowired
-	private BatchCompositionService batchDAO = new BatchCompositionService();
-
+	private BatchCompositionService batchDAO;
+	
+	@Autowired
+	private BatchCompositionMessageService batchMessage;
+	
 	/*
 	 *******************************************************
 	 * BATCH SERVICES
@@ -50,10 +42,8 @@ public class BatchService {
 	 *
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public List<Address> findCommonLocations() {
-		BatchCompositionMessageService findAddress = new BatchCompositionMessageService();
-		return (List<Address>) findAddress.sendSimpleAddressListRequest();
+		return (List<Address>) batchMessage.sendSimpleAddressListRequest();
 	}
 
 	/**

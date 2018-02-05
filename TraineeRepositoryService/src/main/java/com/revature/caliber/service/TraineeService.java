@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.revature.caliber.model.Trainee;
@@ -20,17 +18,13 @@ import com.revature.caliber.model.Trainee;
  * @author Patrick Walsh
  *
  */
-//@Service
-@Component
+@Service
 public class TraineeService {
 
 	private static final Logger log = Logger.getLogger(TraineeService.class);
 	
-	//@Autowired
-	//private AmqpTemplate rabbitMqTraineeDAO;
-	
 	@Autowired
-	private TraineeCompositionService traineeDAO = new TraineeCompositionService();
+	private TraineeCompositionService traineeDAO;
 
 	/*
 	 *******************************************************

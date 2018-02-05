@@ -23,6 +23,7 @@ public class BatchCompositionMessageService {
 	private static final String LIST_NOTE_ROUTING_KEY = "cf22J9CGs8V95Rbm";
 	private static final String TRAINEE_ROUTING_KEY = "9xdaX72tPYuz8xDP";
 	private static final String ADDRESS_ROUTING_KEY = "oEKQeav8rcejeYgq";
+	private static final String ADDRESS_LIST_ROUTING_KEY = "Jf2zpP6hPvPHEXsV";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 	public SimpleTrainer sendSimpleTrainerRequest(Integer trainerId) {
 		JsonObject SimpleTrainerRequest = new JsonObject();
@@ -41,11 +42,12 @@ public class BatchCompositionMessageService {
 		
 	}
 	
-	public Address sendSimpleAddressListRequest() {
+	@SuppressWarnings("unchecked")
+	public List<Address> sendSimpleAddressListRequest() {
 		JsonObject SimpleAddressRequest = new JsonObject();
 		SimpleAddressRequest.addProperty("methodName", "findAll");
-		return (Address) rabbitTemplate.convertSendAndReceive(
-				RABBIT_REPO_EXCHANGE, ADDRESS_ROUTING_KEY, SimpleAddressRequest.toString());
+		return (List<Address>) rabbitTemplate.convertSendAndReceive(
+				RABBIT_REPO_EXCHANGE, ADDRESS_LIST_ROUTING_KEY, SimpleAddressRequest.toString());
 	}
 	public List<SimpleTrainee> sendListSimpleTraineeRequest(Integer batchId){
 		JsonObject SimpleTraineeListRequest = new JsonObject();

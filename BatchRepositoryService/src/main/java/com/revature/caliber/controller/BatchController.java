@@ -1,7 +1,6 @@
 package com.revature.caliber.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -21,17 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.model.Address;
 import com.revature.caliber.model.Batch;
-import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.Trainer;
 import com.revature.caliber.security.models.SalesforceUser;
-//import com.revature.caliber.security.models.SalesforceUser;
 import com.revature.caliber.service.BatchService;
-//import com.revature.caliber.services.TrainingService;
 
 /**
  * Services requests for Trainer, Trainee, and Batch information
