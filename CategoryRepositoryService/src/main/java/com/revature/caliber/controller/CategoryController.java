@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.caliber.service.CategoryService;
+import com.revature.caliber.service.CategoryCompositionService;
 import com.revature.caliber.model.SimpleCategory;
 import com.revature.caliber.repository.CategoryRepository;
 
@@ -29,19 +29,19 @@ import com.revature.caliber.repository.CategoryRepository;
 @CrossOrigin(origins = "http://ec2-54-163-132-124.compute-1.amazonaws.com")
 public class CategoryController {
 	private static final Logger log = Logger.getLogger(CategoryController.class);
-	private CategoryRepository categoryService;
+	private CategoryCompositionService categoryService;
 
 	@Autowired
-	public void setCategoryService(CategoryRepository categoryService) {
+	public void setCategoryService(CategoryCompositionService categoryService) {
 		this.categoryService = categoryService;
 	}
 	//Calls a method that will return all ACTIVE Categories. This will NOT return INACTIVE Categories. 
 	@RequestMapping(value = "/category/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	public ResponseEntity<List<SimpleCategory>> findAllActive() {
+	public ResponseEntity<List<Category>> findAllActive() {
 		log.debug("Getting categories");
-		List<SimpleCategory> categories = categoryService.findAllActive();
+		List<Category> categories = categoryService.findAllForPanel(true);
 		return new ResponseEntity<>(categories, HttpStatus.OK);
 	}
 	//Calls a method that will return all Categories both ACTIVE and INACTIVE. Intended to be used by VP only.
@@ -50,7 +50,7 @@ public class CategoryController {
 	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
 	public ResponseEntity<List<SimpleCategory>> findAll() {
 		log.debug("Getting categories");
-		List<SimpleCategory> categories = categoryService.findAll();
+		List<Category> categories = categoryService.findAll();
 		return new ResponseEntity<>(categories, HttpStatus.OK);
 	}
 	//Calls a method that will find a category based on id. 
@@ -59,7 +59,7 @@ public class CategoryController {
 	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
 	public ResponseEntity<SimpleCategory> findCategoryById(@PathVariable int id) {
 		log.debug("Getting category: " + id);
-		SimpleCategory category = categoryService.findOne(id);
+		Category category = categoryService.findOne(id);
 		log.info(category.toString());
 		return new ResponseEntity<>(category, HttpStatus.OK);
 	}
@@ -67,7 +67,7 @@ public class CategoryController {
 	@RequestMapping(value = "/vp/category/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@PreAuthorize("hasAnyRole('VP')")
-	public ResponseEntity<SimpleCategory> updateCategory(@Valid @RequestBody SimpleCategory category) {
+	public ResponseEntity<Category> updateCategory(@Valid @RequestBody Category category) {
 		// update?
 		//categoryService.updateCategory(category);
 		return new ResponseEntity<>(category, HttpStatus.OK);
