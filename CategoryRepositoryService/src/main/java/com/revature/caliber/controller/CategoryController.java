@@ -42,7 +42,7 @@ public class CategoryController {
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	public ResponseEntity<List<Category>> findAllActive() {
 		log.debug("Getting categories");
-		List<Category> categories = categoryService.findAllActive(true);
+		List<Category> categories = categoryService.findAllActive();
 		return new ResponseEntity<>(categories, HttpStatus.OK);
 	}
 	//Calls a method that will return all Categories both ACTIVE and INACTIVE. Intended to be used by VP only.
@@ -51,7 +51,7 @@ public class CategoryController {
 	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
 	public ResponseEntity<List<Category>> findAll() {
 		log.debug("Getting categories");
-		List<Category> categories = categoryService.findAll(0);
+		List<Category> categories = categoryService.findAll();
 		return new ResponseEntity<>(categories, HttpStatus.OK);
 	}
 	//Calls a method that will find a category based on id. 
