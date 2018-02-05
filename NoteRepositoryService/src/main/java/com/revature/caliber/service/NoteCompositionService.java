@@ -11,6 +11,8 @@ import com.revature.caliber.model.Note;
 import com.revature.caliber.model.NoteType;
 import com.revature.caliber.model.SimpleBatch;
 import com.revature.caliber.model.SimpleNote;
+import com.revature.caliber.model.SimpleTrainee;
+import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.NoteRepository;
 
@@ -135,15 +137,15 @@ public class NoteCompositionService {
 	}
 	
 	private Note composeNote(SimpleNote src) {
-		SimpleBatch simpleBatch = noteCompositionMessagingService.sendSingleSimpleBatchRequest(src.getBatchId());
-//		SimpleTrainee simpleTrainee = noteCompositionMessagingService.sendSingleSimpleTraineeRequest(src.getTraineeId());
-		Batch batch = new Batch(simpleBatch);
-//		Trainee trainee = new Trainee(simpleTrainee);
+//		SimpleBatch simpleBatch = noteCompositionMessagingService.sendSingleSimpleBatchRequest(src.getBatchId());
+		SimpleTrainee simpleTrainee = noteCompositionMessagingService.sendSingleSimpleTraineeRequest(src.getTraineeId());
+//		Batch batch = new Batch(simpleBatch);
+		Trainee trainee = new Trainee(simpleTrainee);
 		Note dest = new Note(src);
 		
 //		trainee.setBatch(batch);
-		dest.setBatch(batch);
-//		dest.setTrainee(trainee);
+//		dest.setBatch(batch);
+		dest.setTrainee(trainee);
 		
 		return dest;
 	}

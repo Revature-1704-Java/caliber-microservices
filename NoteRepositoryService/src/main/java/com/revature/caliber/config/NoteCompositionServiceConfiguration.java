@@ -24,9 +24,9 @@ public class NoteCompositionServiceConfiguration {
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
-//			Note n = ncs.findTraineeNote(5529, (short) 2);
-//			
-//			System.out.println(n);
+			Note n = ncs.findTraineeNote(5529, (short) 2);
+			
+			System.out.println(n);
 		};
 	}
 
