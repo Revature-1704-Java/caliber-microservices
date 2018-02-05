@@ -20,13 +20,4 @@ public class PanelFeedbackRepositoryServiceApplication {
 	
 	@Autowired
 	PanelFeedbackCompositionService panelFeedbackCompositionService;
-	
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			
-			System.out.println(panelFeedbackCompositionService.findOne(1L));
-			
-		};
-	}
 }
