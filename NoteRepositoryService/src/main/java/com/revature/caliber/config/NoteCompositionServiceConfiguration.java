@@ -14,7 +14,7 @@ import com.revature.caliber.service.NoteCompositionService;
 @Configuration
 public class NoteCompositionServiceConfiguration {
 	@Autowired
-	NoteCompositionService noteCompositionService;
+	NoteCompositionService ncs;
 	
 	@Bean
 	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
@@ -22,16 +22,12 @@ public class NoteCompositionServiceConfiguration {
 	}
 	
 	@Bean
-	public NoteCompositionService noteCompositionService() {
-		return new NoteCompositionService();
-	}
-	
-	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
-			Note note = noteCompositionService.findOne(5175);
+			Note n = ncs.findTraineeNote(5529, (short) 2);
 			
-			System.out.println(note);
+			System.out.println(n);
 		};
 	}
+
 }

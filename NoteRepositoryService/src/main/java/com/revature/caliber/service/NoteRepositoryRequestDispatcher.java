@@ -32,6 +32,10 @@ public class NoteRepositoryRequestDispatcher {
 		
 		if(methodName.equals("findAll")) {
 			result = noteRepository.findAll();
+		} else if(methodName.equals("findAllByTraineeId")) {
+			result = noteRepository.findAllByTraineeId(request.get("traineeId").getAsInt());
+		} else if(methodName.equals("findAllByBatchId")) {
+			result = noteRepository.findAllByBatchId(request.get("batchId").getAsInt());
 		}
 		
 		return result;
