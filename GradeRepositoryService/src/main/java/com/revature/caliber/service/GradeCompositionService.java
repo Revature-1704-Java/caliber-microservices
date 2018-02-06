@@ -20,6 +20,8 @@ public class GradeCompositionService {
 	@Autowired
 	private GradeCompositionMessagingService gradeCompositionMessagingService;
 	
+	
+	
 	public Grade findOne(Long gradeId) {
 		SimpleGrade basis = gradeRepository.findOne(gradeId);
 		Grade result = composeGrade(basis);

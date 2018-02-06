@@ -21,9 +21,16 @@ public class GradeRepositoryRequestDispatcher {
 		if(methodName.equals("findOne")) {
 			Long gradeId = request.get("gradeId").getAsLong();
 			result = gradeRepository.findOne(gradeId);
-		} else if(methodName.equals("deleteById")) {
-			Long gradeId = request.get("gradeId").getAsLong();
-		
+		} else if(methodName.equals("delete")) {
+			if(request.has("traineeId")) {
+				Integer traineeId = request.get("traineeId").getAsInt();
+				gradeRepository.deleteByTraineeId(traineeId);
+			}
+			else if(request.has("assessmentId")) {
+				Long assessmentId = request.get("assessmentId").getAsLong();
+				gradeRepository.deleteByAssessmentId(assessmentId);
+			}
+			
 		}
 		
 		return result;
