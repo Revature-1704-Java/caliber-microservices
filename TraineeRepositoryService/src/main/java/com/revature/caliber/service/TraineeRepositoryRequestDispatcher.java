@@ -29,19 +29,27 @@ public class TraineeRepositoryRequestDispatcher {
 	}
 	
 	public List<SimpleTrainee> processListSimpleTraineeRequest(JsonObject request) {
+		System.out.println("Hey hello");
 		List<SimpleTrainee> result = null;
 		String methodName = request.get("methodName").getAsString();
 		
 		if(methodName.equals("findAll")) {
+			System.out.println("find all");
 			result = traineeRepository.findAll();
 		} else if(methodName.equals("findAllByBatchId")){
+			System.out.println("find batch");
 			result = traineeRepository.findAllByBatchId(request.get("batchId").getAsInt());
-		} /*else if(methodName.equals("delete")) {
+		} else if(methodName.equals("delete")) {
+			System.out.println("delete");
 			result = traineeRepository.findAllByBatchId(request.get("batchId").getAsInt());
 			for(SimpleTrainee t : result) {
+				System.out.println(t);
 				traineeRepository.delete(t.getTraineeId());
 			}
-		} */
+			result = null;
+		}
+		
+		System.out.println("return");
 		
 		return result;
 	}

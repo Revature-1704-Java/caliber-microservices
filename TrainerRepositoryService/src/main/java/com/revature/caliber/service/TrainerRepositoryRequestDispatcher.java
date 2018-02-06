@@ -29,6 +29,7 @@ public class TrainerRepositoryRequestDispatcher {
 			result = trainerRepository.findOne(trainerId);
 		} else if(methodName.equals("delete")) {
 			trainerRepository.delete(request.get("trainerId").getAsInt());
+			result = null;
 		}
 		
 		return result;
