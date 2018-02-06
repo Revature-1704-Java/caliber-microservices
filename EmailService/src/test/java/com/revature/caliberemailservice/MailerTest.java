@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.gson.JsonObject;
 import com.revature.caliber.CaliberTest;
-import com.revature.caliber.beans.Trainer;
 //import com.revature.caliber.data.TrainerDAO;
 import com.revature.caliber.email.Mailer;
+import com.revature.caliber.model.Trainer;
 
 /**
  * Tests that the correct trainers are selected for emailing.

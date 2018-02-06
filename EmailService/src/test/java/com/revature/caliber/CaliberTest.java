@@ -15,8 +15,8 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.jdbc.SqlConfig.TransactionMode;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.revature.caliber.beans.Trainer;
-import com.revature.caliber.beans.TrainerRole;
+import com.revature.caliber.model.Trainer;
+import com.revature.caliber.model.TrainerRole;
 import com.revature.caliber.security.models.SalesforceUser;
 
 /**

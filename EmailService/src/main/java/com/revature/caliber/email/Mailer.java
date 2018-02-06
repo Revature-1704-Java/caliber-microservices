@@ -21,15 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonObject;
-import com.revature.caliber.beans.Assessment;
-import com.revature.caliber.beans.Batch;
-import com.revature.caliber.beans.Grade;
-import com.revature.caliber.beans.Trainee;
-import com.revature.caliber.beans.Trainer;
-import com.revature.caliber.beans.TrainingStatus;
-//import com.revature.caliber.data.AssessmentDAO;
-//import com.revature.caliber.data.BatchDAO;
-//import com.revature.caliber.data.GradeDAO;
+import com.revature.caliber.model.Assessment;
+import com.revature.caliber.model.Batch;
+import com.revature.caliber.model.Grade;
+import com.revature.caliber.model.Trainee;
+import com.revature.caliber.model.Trainer;
+import com.revature.caliber.model.TrainingStatus;
 
 /**
  * This class sends reminder emails to trainers who have not submitted all grades for their batch.

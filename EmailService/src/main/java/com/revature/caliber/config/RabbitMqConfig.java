@@ -12,7 +12,6 @@ public class RabbitMqConfig {
 	@Bean
 	AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(factory);
-		rabbitTemplate.setQueue("caliber.producer");
 		return rabbitTemplate;
 	}
 	
