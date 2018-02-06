@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleNote;
 import com.revature.caliber.repository.NoteRepository;
@@ -21,6 +22,9 @@ public class NoteRepositoryRequestDispatcher {
 		if(methodName.equals("findOne")) {
 			Integer noteId = request.get("noteId").getAsInt();
 			result = noteRepository.findOne(noteId);
+		} else if(methodName.equals("save")) {
+			Gson gson = new Gson();
+			result = noteRepository.save(gson.fromJson(request, SimpleNote.class));
 		}
 		
 		return result;
