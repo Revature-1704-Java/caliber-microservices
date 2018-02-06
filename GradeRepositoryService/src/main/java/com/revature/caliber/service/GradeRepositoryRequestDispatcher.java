@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
+import com.revature.caliber.model.Grade;
 import com.revature.caliber.model.SimpleGrade;
 import com.revature.caliber.repository.GradeRepository;
 
@@ -13,6 +14,9 @@ import com.revature.caliber.repository.GradeRepository;
 public class GradeRepositoryRequestDispatcher {
 	@Autowired
 	private GradeRepository gradeRepository;
+	
+	@Autowired
+	private GradeCompositionService gradeCompositionService;
 	
 	public SimpleGrade processSingleSimpleGradeRequest(JsonObject request) {
 		SimpleGrade result = null;
@@ -51,5 +55,15 @@ public class GradeRepositoryRequestDispatcher {
 		return result;
 	}
 	
-	
+	public List<Grade> processListComplexGradeRequest(JsonObject request){
+		List<Grade> result = null;
+		String methodName = request.get("methodName").getAsString();
+		
+		if(methodName.equals("findByTrainee")) {
+			result = gradeCompositionService.findByTrainee(request.get("traineeId").getAsInt());
+		} else if (methodName.equals("findyByBatch")) {
+			result = gradeCompositionService.findByBatch(request.get("batchId").getAsInt());
+		}
+		return result;
+	}
 }

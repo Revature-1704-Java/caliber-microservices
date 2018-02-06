@@ -47,4 +47,14 @@ public class GradeCompositionMessagingService {
 		
 		return (SimpleAssessment) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_ASSESSMENT_ROUTING_KEY, assessmentRequest.toString());
 	}
+	
+	public List<SimpleTrainee> sendSimpleFindAllByBatchIdRequest(Integer batchId) {
+		JsonObject traineeByBatchRequest = new JsonObject();
+		
+		traineeByBatchRequest.addProperty("methodName", "findAllByBatchId");
+		traineeByBatchRequest.addProperty("batchId", batchId);
+		
+		return (List<SimpleTrainee>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_ROUTING_KEY, traineeByBatchRequest.toString());
+
+	}
 }
