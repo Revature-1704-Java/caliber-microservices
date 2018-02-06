@@ -67,8 +67,8 @@ public class SimpleNote implements Serializable {
 		this.noteId = src.getNoteId();
 		this.content = src.getContent();
 		this.week = src.getWeek();
-		this.batchId = src.getBatch().getBatchId();
-		this.traineeId = src.getTrainee().getTraineeId();
+		this.batchId = src.getBatch() != null ? src.getBatch().getBatchId() : null;
+		this.traineeId = src.getTrainee() != null ? src.getTrainee().getTraineeId() : null;
 		this.maxVisibility = src.getMaxVisibility();
 		this.type = src.getType();
 		this.qcFeedback = src.isQcFeedback();

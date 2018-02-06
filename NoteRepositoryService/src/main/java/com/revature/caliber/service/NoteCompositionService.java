@@ -23,22 +23,18 @@ public class NoteCompositionService {
 	@Autowired
 	private NoteCompositionMessagingService noteCompositionMessagingService;
 	
-	public Note save(Note note) {
+	public void save(Note note) {
 		SimpleNote simpleNote = new SimpleNote(note);
 		
 		noteRepository.save(simpleNote);
-		
-		return note;
 	}
 	
-	public Note update(Note note) {
-		return save(note);
+	public void update(Note note) {
+		save(note);
 	}
 	
-	public Note delete(Note note) {
+	public void delete(Note note) {
 		noteRepository.delete(note.getNoteId());
-		
-		return note;
 	}
 	
 	public Note findOne(Integer noteId) {
@@ -155,14 +151,14 @@ public class NoteCompositionService {
 	}
 	
 	private Note composeNote(SimpleNote src) {
-//		SimpleBatch simpleBatch = noteCompositionMessagingService.sendSingleSimpleBatchRequest(src.getBatchId());
+		SimpleBatch simpleBatch = noteCompositionMessagingService.sendSingleSimpleBatchRequest(src.getBatchId());
 		SimpleTrainee simpleTrainee = noteCompositionMessagingService.sendSingleSimpleTraineeRequest(src.getTraineeId());
-//		Batch batch = new Batch(simpleBatch);
+		Batch batch = new Batch(simpleBatch);
 		Trainee trainee = new Trainee(simpleTrainee);
 		Note dest = new Note(src);
 		
-//		trainee.setBatch(batch);
-//		dest.setBatch(batch);
+		trainee.setBatch(batch);
+		dest.setBatch(batch);
 		dest.setTrainee(trainee);
 		
 		return dest;

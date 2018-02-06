@@ -15,10 +15,10 @@ public class BatchRepositoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BatchRepositoryServiceApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			System.out.println(bcs.findOne(2100).getNotes());
-		};
-	}
+//	@Bean
+//	public CommandLineRunner runner() {
+//		return args -> {
+//			System.out.println(bcs.findOne(2100).getTrainees());
+//		};
+//	}
 }
