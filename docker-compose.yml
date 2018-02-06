@@ -10,8 +10,8 @@ services:
     build: ./AssessmentRepositoryService
   batchrepositoryservice:
     build: ./BatchRepositoryService
-#  categoryrepositoryservice:
-#    build: ./CategoryRepositoryService
+  categoryrepositoryservice:
+    build: ./CategoryRepositoryService
   configservice:
     build: ./ConfigService
   graderepositoryservice:
