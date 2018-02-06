@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Grade implements Serializable {
-	private static final long serialVersionUID = -2020456497011531928L;
+	private static final long serialVersionUID = -2031135710502844800L;
 
 	private long gradeId;
 	private Assessment assessment;
