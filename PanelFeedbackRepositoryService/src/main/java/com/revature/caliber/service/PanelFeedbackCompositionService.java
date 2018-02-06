@@ -1,25 +1,19 @@
+
 package com.revature.caliber.service;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import com.revature.caliber.model.Batch;
-import com.revature.caliber.model.Category;
-import com.revature.caliber.model.Note;
-import com.revature.caliber.model.NoteType;
-import com.revature.caliber.model.Panel;
-import com.revature.caliber.model.PanelFeedback;
-import com.revature.caliber.model.PanelStatus;
+import com.revature.caliber.beans.Category;
+import com.revature.caliber.beans.Panel;
+import com.revature.caliber.beans.PanelFeedback;
+import com.revature.caliber.beans.PanelStatus;
+import com.revature.caliber.beans.SimplePanel;
+import com.revature.caliber.beans.SimplePanelFeedback;
 import com.revature.caliber.model.SimpleCategory;
-import com.revature.caliber.model.SimplePanel;
-import com.revature.caliber.model.SimplePanelFeedback;
-import com.revature.caliber.model.Trainee;
-import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.PanelFeedbackRepository;
-
 
 public class PanelFeedbackCompositionService {
 
@@ -27,77 +21,85 @@ public class PanelFeedbackCompositionService {
 	private PanelFeedbackRepository panelFeedbackRepository;
 	@Autowired
 	private PanelFeedbackCompositionMessagingService panelFeedbackCompositionMessagingService;
-	
-	//findOne
+
+	// findOne
 	public PanelFeedback findOne(Long panelFeedbackId) {
 		SimplePanelFeedback basis = panelFeedbackRepository.findOne(panelFeedbackId);
 		PanelFeedback result = composePanelFeedback(basis);
-		
+
 		return result;
 	}
-	
-	//findAll
+
+	// findAll
 	public List<PanelFeedback> findAll() {
 		List<SimplePanelFeedback> basis = panelFeedbackRepository.findAll();
 		List<PanelFeedback> result = composeListOfPanelFeedback(basis);
-		
+
 		return result;
 	}
-	
-	//findAllForPanel
+
+	// findAllForPanel
 	public List<PanelFeedback> findAllForPanel(int panelId) {
 		List<SimplePanelFeedback> basis = panelFeedbackRepository.findByPanelId(panelId);
 		List<PanelFeedback> result = composeListOfPanelFeedback(basis);
-		
+
 		return result;
 	}
-	
-	//findFailedFeedbackByPanel
+
+	// findFailedFeedbackByPanel
 	public List<PanelFeedback> findFailedFeedbackByPanel(int panelId) {
 		List<SimplePanelFeedback> basis = panelFeedbackRepository.findByPanelIdAndStatus(panelId, PanelStatus.Repanel);
 		List<PanelFeedback> result = composeListOfPanelFeedback(basis);
-		
+
 		return result;
 	}
-	
-	/*
-	//save
-	public ? save(PanelFeedback panelFeedback) {
-		
+
+	// save
+	public void save(PanelFeedback panelFeedback) {
+		// Must decompose panelFeedback
+		SimplePanelFeedback toSave = new SimplePanelFeedback(panelFeedback);
+		panelFeedbackRepository.save(toSave);
 	}
-	
-	//update
-	public ? update(PanelFeedback panelFeedback) {
-		
+
+	// update
+	public void update(PanelFeedback panelFeedback) {
+		SimplePanelFeedback toSave = new SimplePanelFeedback(panelFeedback);
+		panelFeedbackRepository.save(toSave);
 	}
 	
 	//delete
-	public ? delete(Long panelFeedbackd) {
-		
+	public void delete(long panelFeedbackId) {
+		panelFeedbackRepository.delete(panelFeedbackId);
 	}
-	*/
+
+	//Panel was deleted -- remove the orphans
+	public void delete(int panelId) {
+		panelFeedbackRepository.deleteByPanelId(panelId);
+	}
 	
 	private List<PanelFeedback> composeListOfPanelFeedback(List<SimplePanelFeedback> src) {
 		List<PanelFeedback> dest = new LinkedList<PanelFeedback>();
-		
-		for(SimplePanelFeedback curr : src) {
+
+		for (SimplePanelFeedback curr : src) {
 			PanelFeedback panelFeedback = new PanelFeedback(curr);
 			dest.add(panelFeedback);
 		}
-		
+
 		return dest;
 	}
-	
+
 	private PanelFeedback composePanelFeedback(SimplePanelFeedback src) {
-		SimpleCategory simpleCategory = panelFeedbackCompositionMessagingService.sendSingleSimpleCategoryRequest(src.getCategoryId());
-		SimplePanel simplePanel = panelFeedbackCompositionMessagingService.sendSingleSimplePanelRequest(src.getPanelId());
+		SimpleCategory simpleCategory = panelFeedbackCompositionMessagingService
+				.sendSingleSimpleCategoryRequest(src.getCategoryId());
+		SimplePanel simplePanel = panelFeedbackCompositionMessagingService
+				.sendSingleSimplePanelRequest(src.getPanelId());
 		Category category = new Category(simpleCategory);
 		Panel panel = new Panel(simplePanel);
 		PanelFeedback dest = new PanelFeedback(src);
-		
+
 		dest.setTechnology(category);
 		dest.setPanel(panel);
-		
+
 		return dest;
 	}
 }

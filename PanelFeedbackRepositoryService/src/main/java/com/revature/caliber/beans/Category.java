@@ -1,4 +1,4 @@
-package com.revature.caliber.model;
+package com.revature.caliber.beans;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -22,14 +25,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "CALIBER_CATEGORY")
 @Cacheable
-public class SimpleCategory implements Serializable {
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+public class Category implements Serializable {
 
 	private static final long serialVersionUID = 3363756954535297728L;
 
 	@Id
 	@Column(name = "CATEGORY_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORY_ID_SEQUENCE")
-	@SequenceGenerator(name = "CATEGORY_ID_SEQUENCE", sequenceName = "CATEGORY_ID_SEQUENCE", initialValue = 1, allocationSize = 1)
+	@SequenceGenerator(name = "CATEGORY_ID_SEQUENCE", sequenceName = "CATEGORY_ID_SEQUENCE")
 	@JsonProperty(value = "categoryId")
 	private int categoryId;
 
@@ -41,17 +45,16 @@ public class SimpleCategory implements Serializable {
 	@Column(name = "IS_ACTIVE", nullable=false)
 	private boolean active;
 
+	@OneToMany(mappedBy = "category")
+	@JsonIgnore
+	@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
+	private Set<Assessment> assessments;
+
 	/**
 	 * Instantiates a new Category.
 	 */
-	public SimpleCategory() {
+	public Category() {
 		super();
-	}
-	
-	public SimpleCategory(Category category) {
-		this.categoryId = category.getCategoryId();
-		this.skillCategory = category.getSkillCategory();
-		this.active = category.isActive();
 	}
 
 	/**
@@ -59,7 +62,7 @@ public class SimpleCategory implements Serializable {
 	 * @param skillCategory
 	 * @param active
 	 */
-	public SimpleCategory(String skillCategory, boolean active) {
+	public Category(String skillCategory, boolean active) {
 		super();
 		this.skillCategory = skillCategory;
 		this.active = active;
@@ -111,6 +114,25 @@ public class SimpleCategory implements Serializable {
 		this.active = active;
 	}
 
+	/**
+	 * Gets assessments.
+	 *
+	 * @return the assessments
+	 */
+	public Set<Assessment> getAssessments() {
+		return assessments;
+	}
+
+	/**
+	 * Sets assessments.
+	 *
+	 * @param assessments
+	 *            the assessments
+	 */
+	public void setAssessments(Set<Assessment> assessments) {
+		this.assessments = assessments;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -128,7 +150,7 @@ public class SimpleCategory implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SimpleCategory other = (SimpleCategory) obj;
+		Category other = (Category) obj;
 		if (active != other.active)
 			return false;
 		if (skillCategory == null) {
@@ -143,4 +165,5 @@ public class SimpleCategory implements Serializable {
 	public String toString() {
 		return skillCategory;
 	}
+
 }
