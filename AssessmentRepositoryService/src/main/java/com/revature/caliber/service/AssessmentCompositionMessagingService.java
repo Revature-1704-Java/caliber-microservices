@@ -20,33 +20,33 @@ public class AssessmentCompositionMessagingService {
 	private static final String SINGLE_GRADE_ROUTING_KEY = "aYF4wPtsGMjq72Lu";
 
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
-		JsonObject batchRequest = new JsonObject();
+		JsonObject batchFindRequest = new JsonObject();
 
-		batchRequest.addProperty("methodName", "findOne");
-		batchRequest.addProperty("batchId", batchId);
+		batchFindRequest.addProperty("methodName", "findOne");
+		batchFindRequest.addProperty("batchId", batchId);
 
 		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY,
-				batchRequest.toString());
+				batchFindRequest.toString());
 	}
 
 	public SimpleCategory sendSingleSimpleCategoryRequest(Integer categoryId) {
-		JsonObject categoryRequest = new JsonObject();
+		JsonObject categoryFindRequest = new JsonObject();
 
-		categoryRequest.addProperty("methodName", "findOne");
-		categoryRequest.addProperty("categoryId", categoryId);
+		categoryFindRequest.addProperty("methodName", "findOne");
+		categoryFindRequest.addProperty("categoryId", categoryId);
 
 		return (SimpleCategory) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_CATEGORY_ROUTING_KEY,
-				categoryRequest.toString());
+				categoryFindRequest.toString());
 	}
 
 	public void sendGradeDeleteRequestForAssessmentId(Integer assessmentId) {
-		JsonObject categoryRequest = new JsonObject();
+		JsonObject gradeDeleteRequest = new JsonObject();
 
-		categoryRequest.addProperty("methodName", "delete");
-		categoryRequest.addProperty("assessmentId", assessmentId);
+		gradeDeleteRequest.addProperty("methodName", "delete");
+		gradeDeleteRequest.addProperty("assessmentId", assessmentId);
 
 		rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_GRADE_ROUTING_KEY,
-				categoryRequest.toString());
+				gradeDeleteRequest.toString());
 	}
 
 }
