@@ -60,7 +60,12 @@ public class AssessmentCompositionService {
 	public void update(Assessment assessment) {
 	}
 
-	public void delete(Assessment assessment) {
+	public void deleteByAssessmnetId(Long assessmentId) {
+		assessmentRepository.deleteByAssessmentId(assessmentId);
+	}
+	
+	public void deleteByBatchId(Integer batchId) {
+		assessmentRepository.deleteByBatchId(batchId);
 	}
 
 	private List<Assessment> composeListOfAssessments(List<SimpleAssessment> simpleAssessments) {
