@@ -29,13 +29,13 @@ public class NoteCompositionServiceConfiguration {
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
-			Note n = ncs.findTraineeNote(5529, (short) 2);
-			//Batch ID = 2201
-			n.getBatch().setGradedWeeks(20);
-			n.getTrainee().setName("Kei Peralta");
-			System.out.println(n);
-			System.out.println(n.getTrainee().getBatch());
-			ncs.save(n);
+//			Note n = ncs.findTraineeNote(5529, (short) 2);
+//			//Batch ID = 2201
+//			n.getBatch().setGradedWeeks(20);
+//			n.getTrainee().setName("Kei Peralta");
+//			System.out.println(n);
+//			System.out.println(n.getTrainee().getBatch());
+//			ncs.save(n);
 
 //			SimpleNote n2 = new SimpleNote(n);
 //			n2.setContent("test");
