@@ -33,5 +33,5 @@ public class PanelFeedbackRepositoryMessagingService {
 		JsonObject request = element.getAsJsonObject();
 
 		return panelFeedbackRepositoryRequestDispatcher.processListSimplePanelFeedbackRequest(request);
-	}
+	}	
 }

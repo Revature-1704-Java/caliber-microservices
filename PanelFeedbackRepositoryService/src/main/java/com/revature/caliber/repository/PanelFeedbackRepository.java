@@ -17,4 +17,6 @@ public interface PanelFeedbackRepository extends JpaRepository<SimplePanelFeedba
 	List<SimplePanelFeedback> findByPanelId(int id);
 	
 	List<SimplePanelFeedback> findByPanelIdAndStatus(int id, PanelStatus status);
+	
+	void deleteByPanelId(int panelId);
 }

@@ -66,12 +66,17 @@ public class PanelFeedbackCompositionService {
 		SimplePanelFeedback toSave = new SimplePanelFeedback(panelFeedback);
 		panelFeedbackRepository.save(toSave);
 	}
-
-	// delete
-	public void delete(Long panelFeedbackId) {
+	
+	//delete
+	public void delete(long panelFeedbackId) {
 		panelFeedbackRepository.delete(panelFeedbackId);
 	}
 
+	//Panel was deleted -- remove the orphans
+	public void delete(int panelId) {
+		panelFeedbackRepository.deleteByPanelId(panelId);
+	}
+	
 	private List<PanelFeedback> composeListOfPanelFeedback(List<SimplePanelFeedback> src) {
 		List<PanelFeedback> dest = new LinkedList<PanelFeedback>();
 
