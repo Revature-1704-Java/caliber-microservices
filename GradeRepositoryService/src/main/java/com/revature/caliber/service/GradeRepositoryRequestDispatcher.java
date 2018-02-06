@@ -21,7 +21,11 @@ public class GradeRepositoryRequestDispatcher {
 		if(methodName.equals("findOne")) {
 			Long gradeId = request.get("gradeId").getAsLong();
 			result = gradeRepository.findOne(gradeId);
+		} else if(methodName.equals("deleteById")) {
+			Long gradeId = request.get("gradeId").getAsLong();
+		
 		}
+		
 		return result;
 	}
 	
