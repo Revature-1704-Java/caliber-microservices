@@ -56,7 +56,6 @@ public class Batch implements Serializable {
 		this.endDate = endDate;
 		this.location = location;
 	}
-	
 	public Batch(SimpleBatch batch) {
 		this.batchId = batch.getBatchId();
 		this.trainingName = batch.getTrainingName();
@@ -73,6 +72,32 @@ public class Batch implements Serializable {
 		this.weeks = batch.getWeeks();
 		this.gradedWeeks = batch.getGradedWeeks();
 		this.notes = null;
+	}
+	// quality of life shortcut
+	public SimpleBatch toSimple(){
+		SimpleBatch b= new SimpleBatch();
+		if(this.batchId>0) {
+			b.setBatchId(this.batchId);
+		}
+		b.setTrainingName(this.trainingName);
+		b.setBorderlineGradeThreshold(this.borderlineGradeThreshold);
+		b.setEndDate(this.endDate);
+		b.setGoodGradeThreshold(this.goodGradeThreshold);
+		b.setGradedWeeks(this.gradedWeeks);
+		b.setLocation(this.location);
+		b.setResourceId(this.resourceId);
+		b.setSkillType(this.skillType);
+		b.setStartDate(this.startDate);
+		b.setTrainerId(this.trainer.getTrainerId());
+		b.setTrainingType(this.trainingType);
+		b.setWeeks(this.weeks);
+		if(this.address!=null) {
+			b.setAddressId(this.address.getAddressId());
+		}
+		if(this.coTrainer!=null) {
+			b.setCoTrainerId(this.coTrainer.getTrainerId());
+		}
+		return b;
 	}
 
 	public int getBatchId() {
