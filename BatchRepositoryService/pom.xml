@@ -76,10 +76,10 @@
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		</dependency>
-<!-- 		<dependency>
+ 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-		</dependency> -->
+		</dependency>
 		
 		<!-- (below) added this because TraineeController calls Salesforce-related classes...2/5/18 Jon C -->
 		<dependency>
