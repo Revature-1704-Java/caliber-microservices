@@ -21,6 +21,8 @@ public class TraineeRepositoryRequestDispatcher {
 		if(methodName.equals("findOne")) {
 			Integer traineeId = request.get("traineeId").getAsInt();
 			result = traineeRepository.findOne(traineeId);
+		} else if(methodName.equals("delete")) {
+			traineeRepository.delete(request.get("traineeId").getAsInt());
 		}
 		
 		return result;
@@ -32,10 +34,14 @@ public class TraineeRepositoryRequestDispatcher {
 		
 		if(methodName.equals("findAll")) {
 			result = traineeRepository.findAll();
-		}
-		else if(methodName.equals("findAllByBatchId")){
+		} else if(methodName.equals("findAllByBatchId")){
 			result = traineeRepository.findAllByBatchId(request.get("batchId").getAsInt());
-		}
+		} /*else if(methodName.equals("delete")) {
+			result = traineeRepository.findAllByBatchId(request.get("batchId").getAsInt());
+			for(SimpleTrainee t : result) {
+				traineeRepository.delete(t.getTraineeId());
+			}
+		} */
 		
 		return result;
 	}
