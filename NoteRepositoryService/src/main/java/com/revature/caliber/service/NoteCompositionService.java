@@ -25,6 +25,11 @@ public class NoteCompositionService {
 	
 	public void save(Note note) {
 		SimpleNote simpleNote = new SimpleNote(note);
+		SimpleBatch simpleBatch = new SimpleBatch(note.getBatch());
+		SimpleTrainee simpleTrainee = new SimpleTrainee(note.getTrainee());
+		
+		noteCompositionMessagingService.sendSaveSimpleBatchRequest(simpleBatch);
+		noteCompositionMessagingService.sendSaveSimpleTraineeRequest(simpleTrainee);
 		
 		noteRepository.save(simpleNote);
 	}

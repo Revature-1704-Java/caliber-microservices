@@ -10,6 +10,7 @@ import com.revature.caliber.model.SimpleNote;
 
 @Repository
 public interface NoteRepository extends JpaRepository<SimpleNote, Integer> {
+	void deleteByTraineeId(Integer traineeId);
 	List<SimpleNote> findAllByTraineeId(Integer traineeId);
 	List<SimpleNote> findAllByBatchId(Integer batchId);
 	

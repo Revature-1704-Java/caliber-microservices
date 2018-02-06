@@ -114,6 +114,25 @@ public class SimplePanel implements Serializable {
 		this.overall = overall;
 	}
 
+	public SimplePanel(Panel panel) {
+		this.panelId = panel.getId();
+		this.traineeId = panel.getTrainee() != null ? panel.getTrainee().getTraineeId() : null;
+		this.panelist = panel.getPanelist() != null ? panel.getPanelist().getTrainerId() : null;
+		this.interviewDate = panel.getInterviewDate();
+		this.duration = panel.getDuration();
+		this.formatId = panel.getFormat();
+		this.internet = panel.getInternet();
+		this.panelRound = panel.getPanelRound();
+		this.recordingConsent = panel.isRecordingConsent();
+		this.recordingLink = panel.getRecordingLink();
+		this.statusId = panel.getStatus();
+		this.projectOneDescription = panel.getProjectOneDescription();
+		this.projectTwoDescription = panel.getProjectTwoDescription();
+		this.projectThreeDescription = panel.getProjectThreeDescription();
+		this.communicationSkills = panel.getCommunicationSkills();
+		this.overall = panel.getOverall();
+	}
+
 	/** getters and setters */
 
 	public Integer getPanelId() {
