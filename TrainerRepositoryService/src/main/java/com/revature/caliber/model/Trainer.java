@@ -1,71 +1,40 @@
 package com.revature.caliber.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Set;
 
 /**
  * The type Trainer.
  */
-@Entity
-@Table(name = "CALIBER_TRAINER")
-@Cacheable
 public class Trainer implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "TRAINER_ID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRAINER_ID_SEQUENCE")
-	@SequenceGenerator(name = "TRAINER_ID_SEQUENCE", sequenceName = "TRAINER_ID_SEQUENCE")
-	@JsonProperty
+	private static final long serialVersionUID = -2546407792912483570L;
 	private int trainerId;
-
-	@NotEmpty
-	@Email
-	@Column(name = "EMAIL", nullable = false, unique = true, updatable = true)
-	@JsonProperty
-	private String email;
-
-	@NotEmpty
-	@Column(name = "NAME", nullable = false)
-	@JsonProperty
 	private String name;
-
-	@NotEmpty
-	@Column(name = "TITLE", nullable = false)
-	@JsonProperty
 	private String title;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "TIER")
+	private String email;
 	private TrainerRole tier;
+	private Set<Batch> batches;
 
 	public Trainer() {
 		super();
 	}
 
-	public Trainer(String email, String name, String title, TrainerRole tier) {
+	public Trainer(String name, String title, String email, TrainerRole tier) {
 		super();
-		this.email = email;
 		this.name = name;
 		this.title = title;
+		this.email = email;
 		this.tier = tier;
+	}
+
+
+	public Trainer(SimpleTrainer src) {
+		this.name = src.getName();
+		this.title = src.getTitle();
+		this.email = src.getEmail();
+		this.tier = src.getTier();
+		this.batches = null;
 	}
 
 	public int getTrainerId() {
@@ -74,14 +43,6 @@ public class Trainer implements Serializable {
 
 	public void setTrainerId(int trainerId) {
 		this.trainerId = trainerId;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getName() {
@@ -100,6 +61,14 @@ public class Trainer implements Serializable {
 		this.title = title;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public TrainerRole getTier() {
 		return tier;
 	}
@@ -108,14 +77,22 @@ public class Trainer implements Serializable {
 		this.tier = tier;
 	}
 
+	public Set<Batch> getBatches() {
+		return batches;
+	}
+
+	public void setBatches(Set<Batch> batches) {
+		this.batches = batches;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((tier == null) ? 0 : tier.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
 
@@ -138,19 +115,19 @@ public class Trainer implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (tier != other.tier)
+			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
 		} else if (!title.equals(other.title))
-			return false;
-		if (tier != other.tier)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Trainer [trainerId=" + trainerId + ", email=" + email + ", name=" + name + ", title=" + title
+		return "Trainer [trainerId=" + trainerId + ", name=" + name + ", title=" + title + ", email=" + email
 				+ ", tier=" + tier + "]";
 	}
 

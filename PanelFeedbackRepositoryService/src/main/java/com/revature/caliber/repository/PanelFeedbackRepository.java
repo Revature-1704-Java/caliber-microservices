@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
-import com.revature.caliber.model.PanelFeedback;
+import com.revature.caliber.model.PanelStatus;
+import com.revature.caliber.model.SimplePanelFeedback;
 
-public interface PanelFeedbackRepository extends JpaRepository<PanelFeedback, Long> {
-
-	@Query("SELECT DISTINCT pf FROM PanelFeedback pf")
-	List<PanelFeedback> findAll();
+@Repository
+public interface PanelFeedbackRepository extends JpaRepository<SimplePanelFeedback, Long> {
 	
-	@Query("SELECT DISTINCT pf FROM PanelFeedback pf WHERE pf.panelId= ?1")
-	List<PanelFeedback> findAllForPanel(int panelId);
+	List<SimplePanelFeedback> findByPanelId(int id);
 	
-	@Query("SELECT DISTINCT pf FROM PanelFeedback pf WHERE pf.panelId= ?1 and pf.status='Repanel'")
-	List<PanelFeedback> findFailedFeedbackByPanel(int panelId);
+	List<SimplePanelFeedback> findByPanelIdAndStatus(int id, PanelStatus status);
 }

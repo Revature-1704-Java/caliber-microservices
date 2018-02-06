@@ -1,58 +1,28 @@
 package com.revature.caliber.model;
 
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-@Entity
-@Table(name = "CALIBER_PANEL_FEEDBACK")
-@Cacheable
-public class PanelFeedback {
-
-	@Id
-	@Column(name = "PANEL_FEEDBACK_ID")
-	@SequenceGenerator(name = "PANEL_FEEDBACK_ID_SEQUENCE", sequenceName = "PANEL_FEEDBACK_ID_SEQUENCE", initialValue = 1, allocationSize = 600)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PANEL_FEEDBACK_ID_SEQUENCE")
+public class PanelFeedback implements Serializable {
+	private static final long serialVersionUID = -7997716749941674836L;
+	
 	private long id;
-	
-	@JoinColumn(name="CATEGORY_ID", nullable=false)
-	private int categoryId;
-	
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "PANEL_STATUS", nullable = false)
+	private Category technology;
 	private PanelStatus status;
-	
-	@Min(0)
-	@Max(10)
-	@NotNull
-	@Column(name = "PANEL_RESULT")
 	private int result;
-	
-	@Column(name = "PANELIST_COMMENTS")
 	private String comment;
+	private Panel panel;
 	
-	@JoinColumn(name="PANEL_ID", nullable=false)
-	private int panelId;
-
 	public PanelFeedback() {
 		super();
+	}
+	
+	public PanelFeedback(SimplePanelFeedback simplePanelFeedback) {
+		this.id = simplePanelFeedback.getId();
+		this.technology = null;
+		this.status = simplePanelFeedback.getStatus();
+		this.result = simplePanelFeedback.getResult();
+		this.comment = simplePanelFeedback.getComment();
+		this.panel = null;
 	}
 
 	public long getId() {
@@ -63,12 +33,12 @@ public class PanelFeedback {
 		this.id = id;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public Category getTechnology() {
+		return technology;
 	}
 
-	public void setTechnology(int categoryId) {
-		this.categoryId = categoryId;
+	public void setTechnology(Category technology) {
+		this.technology = technology;
 	}
 
 	public PanelStatus getStatus() {
@@ -95,12 +65,12 @@ public class PanelFeedback {
 		this.comment = comment;
 	}
 
-	public int getPanelId() {
-		return panelId;
+	public Panel getPanel() {
+		return panel;
 	}
 
-	public void setPanelId(int panelId) {
-		this.panelId = panelId;
+	public void setPanel(Panel panel) {
+		this.panel = panel;
 	}
 
 	@Override
@@ -108,10 +78,10 @@ public class PanelFeedback {
 		final int prime = 31;
 		int hashCodeResult = 1;
 		hashCodeResult = prime * hashCodeResult + ((comment == null) ? 0 : comment.hashCode());
-		hashCodeResult = prime * hashCodeResult + panelId;
+		hashCodeResult = prime * hashCodeResult + ((panel == null) ? 0 : panel.hashCode());
 		hashCodeResult = prime * hashCodeResult + this.result;
 		hashCodeResult = prime * hashCodeResult + ((status == null) ? 0 : status.hashCode());
-		hashCodeResult = prime * hashCodeResult + categoryId;
+		hashCodeResult = prime * hashCodeResult + ((technology == null) ? 0 : technology.hashCode());
 		return hashCodeResult;
 	}
 
@@ -129,25 +99,25 @@ public class PanelFeedback {
 				return false;
 		} else if (!comment.equals(other.comment))
 			return false;
-		if (panelId == 0) {
-			if (other.panelId != 0)
+		if (panel == null) {
+			if (other.panel != null)
 				return false;
 		} 
 		if (result != other.result)
 			return false;
 		if (status != other.status)
 			return false;
-		if (categoryId == 0) {
-			if (other.categoryId != 0)
+		if (technology == null) {
+			if (other.technology != null)
 				return false;
-		} else if (categoryId != other.categoryId)
+		} else if (!technology.equals(other.technology))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "PanelFeedback [id=" + id + ", categoryId=" + categoryId + ", status=" + status + ", result=" + result
+		return "PanelFeedback [id=" + id + ", technology=" + technology + ", status=" + status + ", result=" + result
 				+ ", comment=" + comment + "]";
 	}
 	

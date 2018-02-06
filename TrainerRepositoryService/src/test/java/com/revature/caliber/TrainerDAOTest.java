@@ -15,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.caliber.model.Trainer;
+import com.revature.caliber.model.SimpleTrainer;
 import com.revature.caliber.model.TrainerRole;
-import com.revature.caliber.repository.TrainerDAO;
+import com.revature.caliber.repository.TrainerRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -29,14 +29,14 @@ public class TrainerDAOTest {
 	private String email = "patrick.walsh@revature.com";
 
 	@Autowired
-	TrainerDAO dao;
+	TrainerRepository dao;
 
-	Trainer test;
+	SimpleTrainer test;
 
 	@Before
 	public void initialize() {
 		log.info("Initalizing a Test Trainer for use in Tests");
-		test = new Trainer();
+		test = new SimpleTrainer();
 		test.setName("TRAINER_NAME");
 		test.setTitle("TRAINER_TITLE");
 		test.setEmail("TRAINER@EMAIL.COM");
@@ -46,8 +46,8 @@ public class TrainerDAOTest {
 	@Test
 	public void testFindAll() {
 		log.info("Getting All Trainers");
-		List<Trainer> trainers = dao.findAll();
-		for (Trainer t : trainers) {
+		List<SimpleTrainer> trainers = dao.findAll();
+		for (SimpleTrainer t : trainers) {
 			if(t.getTier() == TrainerRole.ROLE_INACTIVE)
 				Assert.fail("Found Inactive Trainer: " + t.toString());
 		}
@@ -57,30 +57,30 @@ public class TrainerDAOTest {
 	@Test
 	public void findByTrainerId() {
 		log.info("Getting by trainerId");
-		Trainer trainer = dao.findByTrainerId(trainerId);
+		SimpleTrainer trainer = dao.findByTrainerId(trainerId);
 		assertEquals(trainerId, trainer.getTrainerId());
 	}
 
 	@Test
 	public void addTrainer() {
 		log.info("Adding Trainer");
-		Trainer savedTrainer = dao.save(test);
+		SimpleTrainer savedTrainer = dao.save(test);
 		assertEquals(test.getTrainerId(), savedTrainer.getTrainerId());
 	}
 
 	@Test
 	public void updateTrainer() {
 		log.info("Updating Trainer");
-		Trainer savedTrainer = dao.save(test);
+		SimpleTrainer savedTrainer = dao.save(test);
 		savedTrainer.setTitle("UPDATED_TITLE");
-		Trainer updatedTrainer = dao.save(savedTrainer);
+		SimpleTrainer updatedTrainer = dao.save(savedTrainer);
 		assertEquals(savedTrainer.getTitle(), updatedTrainer.getTitle());
 	}
 
 	@Test
 	public void deleteTrainer() {
 		log.info("Deleting Trainer");
-		Trainer savedTrainer = dao.save(test);
+		SimpleTrainer savedTrainer = dao.save(test);
 		dao.delete(savedTrainer);
 		assertNull(dao.findByTrainerId(savedTrainer.getTrainerId()));
 	}
@@ -95,7 +95,7 @@ public class TrainerDAOTest {
 	@Test
 	public void findByEmail() {
 		log.info("Getting Trainer by Email");
-		Trainer trainer = dao.findByEmail(email);
+		SimpleTrainer trainer = dao.findByEmail(email);
 		assertEquals(email, trainer.getEmail());
 	}
 }
