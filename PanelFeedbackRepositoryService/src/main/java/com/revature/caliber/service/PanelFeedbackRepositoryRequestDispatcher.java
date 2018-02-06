@@ -23,6 +23,17 @@ public class PanelFeedbackRepositoryRequestDispatcher {
 			Long panelFeedbackId = request.get("panelFeedbackId").getAsLong();
 			result = panelFeedbackRepository.findOne(panelFeedbackId);
 		}
+		/*
+		else if (methodName.equals("save")) {
+			
+		}
+		else if (methodName.equals("update")) {
+			
+		}
+		else if (methodName.equals("delete")) {
+			
+		}
+		*/
 		
 		return result;
 	}

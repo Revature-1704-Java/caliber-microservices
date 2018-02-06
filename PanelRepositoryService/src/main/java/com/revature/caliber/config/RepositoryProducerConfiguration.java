@@ -17,22 +17,23 @@ import com.revature.caliber.service.PanelCompositionService;
 public class RepositoryProducerConfiguration {
 
 	@Autowired
-    PanelCompositionService panelCompositionService;
-    
-    @Bean
-    public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
-    	return new RabbitTemplate(factory);
-    }
-    
-    @Bean
-    public PanelCompositionService panelCompositionService() {
-    	return new PanelCompositionService();
-    }
-    
-    @Bean
-    public CommandLineRunner runner() {
-        return args -> {
-        	Panel panel = panelCompositionService.findOne(1);
-        };
-    }
+	PanelCompositionService panelCompositionService;
+
+	@Bean
+	public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
+		return new RabbitTemplate(factory);
+	}
+
+	@Bean
+	public PanelCompositionService panelCompositionService() {
+		return new PanelCompositionService();
+	}
+
+	@Bean
+	public CommandLineRunner runner() {
+		return args -> {
+			Panel panel = panelCompositionService.findOne(1);
+			System.out.println(panel);
+		};
+	}
 }

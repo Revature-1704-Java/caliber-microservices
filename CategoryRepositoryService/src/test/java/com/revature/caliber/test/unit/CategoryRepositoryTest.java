@@ -38,7 +38,6 @@ public class CategoryRepositoryTest {
 		assertTrue(true);
 	}
 	
-	/*
 	@Test
 	public void findOne() {
 		log.info("Testing findOne method from CategoryDAO");
@@ -46,6 +45,21 @@ public class CategoryRepositoryTest {
 		assertNotNull(myCat);
 		assertTrue(categoryRepository.findOne(1) instanceof SimpleCategory);
 		assertEquals(categoryRepository.findOne(1).toString(), "Java");
+	}
+	
+	@Test
+	public void testAll() {
+		int expected = categoryRepository.findAll().size();
+		int actual = jdbcTemplate.queryForObject(CATEGORY_COUNT, Integer.class);
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testAllActive() {
+		log.info("Testing findAllActive from CategoryDAO");
+		int expected = categoryRepository.findByActiveOrderByCategoryIdAsc(true).size();
+		int actual = jdbcTemplate.queryForObject(ACTIVE_CATEGORY,Integer.class);
+		assertEquals(expected, actual);
 	}
 	
 	@Test
@@ -69,18 +83,8 @@ public class CategoryRepositoryTest {
 	}
 	
 	@Test
-	public void testAll() {
-		int expected = categoryRepository.findAllActive().size();
-		int actual = jdbcTemplate.queryForObject(CATEGORY_COUNT, Integer.class);
-		Assert.assertEquals(expected, actual);
+	public void delete() {
+		log.info("Testing delete method from CategoryDAO");
+		categoryRepository.delete(categoryRepository.findOne(1));
 	}
-	
-	@Test
-	public void testAllActive() {
-		log.info("Testing findAllActive from CategoryDAO");
-		int expected = categoryRepository.findAllActive().size();
-		int actual = jdbcTemplate.queryForObject(ACTIVE_CATEGORY,Integer.class);
-		assertEquals(expected, actual);
-	}
-	*/
 }

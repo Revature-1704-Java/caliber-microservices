@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.caliber.model.Batch;
 import com.revature.caliber.model.Note;
@@ -15,11 +16,26 @@ import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.NoteRepository;
 
+@Service
 public class NoteCompositionService {
 	@Autowired
 	private NoteRepository noteRepository;
 	@Autowired
 	private NoteCompositionMessagingService noteCompositionMessagingService;
+	
+	public void save(Note note) {
+		SimpleNote simpleNote = new SimpleNote(note);
+		
+		noteRepository.save(simpleNote);
+	}
+	
+	public void update(Note note) {
+		save(note);
+	}
+	
+	public void delete(Note note) {
+		noteRepository.delete(note.getNoteId());
+	}
 	
 	public Note findOne(Integer noteId) {
 		SimpleNote basis = noteRepository.findOne(noteId);

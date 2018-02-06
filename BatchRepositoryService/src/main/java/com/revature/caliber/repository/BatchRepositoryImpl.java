@@ -44,7 +44,10 @@ public class BatchRepositoryImpl implements BatchRepositoryCustom {
 			cb.and(
 				cb.between(b.get("startDate"), Date.from(aMonthAgo.toInstant()), Date.from(now.toInstant())),
 				cb.greaterThan(b.get("endDate"), Date.from(now.toInstant())),
-				cb.equal(b.get("trainerId"), trainerId)
+				cb.or(
+					cb.equal(b.get("trainerId"), trainerId),
+					cb.equal(b.get("coTrainerId"), trainerId)
+				)
 			)
 		);
 		return entityManager.createQuery(q).getResultList();
