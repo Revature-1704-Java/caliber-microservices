@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.repository.TraineeRepository;
@@ -17,10 +18,14 @@ public class TraineeRepositoryRequestDispatcher {
 	public SimpleTrainee processSingleSimpleTraineeRequest(JsonObject request) {
 		SimpleTrainee result = null;
 		String methodName = request.get("methodName").getAsString();
+		Gson gson = new Gson();
 		
 		if(methodName.equals("findOne")) {
 			Integer traineeId = request.get("traineeId").getAsInt();
 			result = traineeRepository.findOne(traineeId);
+		} if(methodName.equals("save")) {
+			SimpleTrainee trainee = gson.fromJson(request.get("trainee").getAsString(), SimpleTrainee.class);
+			result = traineeRepository.save(trainee);
 		}
 		
 		return result;
