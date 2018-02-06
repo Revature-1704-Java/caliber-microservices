@@ -44,7 +44,7 @@ public class AssessmentCompositionService {
 	}
 
 	public List<Assessment> findByBatchId(Integer batchId) {
-		List<SimpleAssessment> basis = assessmentRepository.findDistinctByBatchId(batchId);
+		List<SimpleAssessment> basis = assessmentRepository.findByBatchId(batchId);
 		List<Assessment> assessments = composeListOfAssessments(basis);
 
 		return assessments;
