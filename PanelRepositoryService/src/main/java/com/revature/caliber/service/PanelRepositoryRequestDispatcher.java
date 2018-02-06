@@ -26,6 +26,10 @@ public class PanelRepositoryRequestDispatcher {
 		if(methodName.equals("findOne")) {
 			Integer panelId = request.get("panelId").getAsInt();
 			result = panelRepository.findOne(panelId);
+		} else if(methodName.equals("delete")) {
+			if(request.has("traineeId")) {
+				panelRepository.deleteByTraineeId(request.get("traineeId").getAsInt());
+			}
 		}
 		return result;
 	}
