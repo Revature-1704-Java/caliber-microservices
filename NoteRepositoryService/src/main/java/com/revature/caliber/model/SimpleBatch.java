@@ -3,35 +3,14 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
-//import com.fasterxml.jackson.annotation.JsonIgnore;
-//import com.fasterxml.jackson.annotation.JsonManagedReference;
-//import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
- * The type Batch.
+ * The type SimpleBatch.
  */
 
 public class SimpleBatch implements Serializable {
 	private static final long serialVersionUID = 6433997711397981988L;
 
-	private int batchId;
+	private Integer batchId;
 	private String resourceId;
 	private String trainingName;
 	private Integer trainerId;
@@ -42,10 +21,10 @@ public class SimpleBatch implements Serializable {
 	private Date endDate;
 	private String location;
 	private Integer addressId;
-	private short goodGradeThreshold;
-	private short borderlineGradeThreshold;
-	private int weeks;
-	private int gradedWeeks;
+	private Short goodGradeThreshold;
+	private Short borderlineGradeThreshold;
+	private Integer weeks;
+	private Integer gradedWeeks;
 	
 	public SimpleBatch() {
 		super();
@@ -54,6 +33,24 @@ public class SimpleBatch implements Serializable {
 		this.goodGradeThreshold = 80;
 		this.borderlineGradeThreshold = 70;
 		this.trainingType = TrainingType.Revature;
+	}
+	
+	public SimpleBatch(Batch batch) {
+		super();
+		this.batchId = batch.getBatchId();
+		this.resourceId = batch.getResourceId();
+		this.trainingName = batch.getTrainingName();
+		this.trainerId = batch.getTrainer() != null ? batch.getTrainer().getTrainerId() : null;
+		this.coTrainerId = batch.getCoTrainer() != null ? batch.getCoTrainer().getTrainerId() : null;
+		this.skillType = batch.getSkillType();
+		this.trainingType = batch.getTrainingType();
+		this.startDate = batch.getStartDate();
+		this.endDate = batch.getEndDate();
+		this.location = batch.getLocation();
+		this.addressId = batch.getAddress() != null ? batch.getAddress().getAddressId() : null;
+		this.goodGradeThreshold = batch.getGoodGradeThreshold();
+		this.borderlineGradeThreshold = batch.getBorderlineGradeThreshold();
+		this.trainingType = batch.getTrainingType();
 	}
 
 	/**
@@ -76,11 +73,11 @@ public class SimpleBatch implements Serializable {
 		this.location = location;
 	}
 
-	public int getBatchId() {
+	public Integer getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(Integer batchId) {
 		this.batchId = batchId;
 	}
 
@@ -164,35 +161,35 @@ public class SimpleBatch implements Serializable {
 		this.addressId = addressId;
 	}
 
-	public short getGoodGradeThreshold() {
+	public Short getGoodGradeThreshold() {
 		return goodGradeThreshold;
 	}
 
-	public void setGoodGradeThreshold(short goodGradeThreshold) {
+	public void setGoodGradeThreshold(Short goodGradeThreshold) {
 		this.goodGradeThreshold = goodGradeThreshold;
 	}
 
-	public short getBorderlineGradeThreshold() {
+	public Short getBorderlineGradeThreshold() {
 		return borderlineGradeThreshold;
 	}
 
-	public void setBorderlineGradeThreshold(short borderlineGradeThreshold) {
+	public void setBorderlineGradeThreshold(Short borderlineGradeThreshold) {
 		this.borderlineGradeThreshold = borderlineGradeThreshold;
 	}
 
-	public int getWeeks() {
+	public Integer getWeeks() {
 		return weeks;
 	}
 
-	public void setWeeks(int weeks) {
+	public void setWeeks(Integer weeks) {
 		this.weeks = weeks;
 	}
 
-	public int getGradedWeeks() {
+	public Integer getGradedWeeks() {
 		return gradedWeeks;
 	}
 
-	public void setGradedWeeks(int gradedWeeks) {
+	public void setGradedWeeks(Integer gradedWeeks) {
 		this.gradedWeeks = gradedWeeks;
 	}
 

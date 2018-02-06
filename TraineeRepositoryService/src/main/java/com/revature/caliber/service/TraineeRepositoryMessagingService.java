@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.revature.caliber.model.SimpleTrainee;
+import com.revature.caliber.model.Trainee;
 
 @Service
 public class TraineeRepositoryMessagingService {
@@ -19,7 +20,6 @@ public class TraineeRepositoryMessagingService {
 
 	@RabbitListener(queues = "revature.caliber.repos.trainee")
 	public SimpleTrainee receiveSingleSimpleTraineeRequest(String message) {
-		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
@@ -29,12 +29,19 @@ public class TraineeRepositoryMessagingService {
 
 	@RabbitListener(queues = "revature.caliber.repos.trainee.list")
 	public List<SimpleTrainee> receiveListSimpleTraineeRequest(String message) {
-		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		System.out.println(request);
 
 		return traineeRepositoryRequestDispatcher.processListSimpleTraineeRequest(request);
+	}
+	
+	@RabbitListener(queues = "revature.caliber.service.trainee.list")
+	public List<Trainee> receiveListTraineeRequest(String message) {
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(message);
+		JsonObject request = element.getAsJsonObject();
+
+		return traineeRepositoryRequestDispatcher.processListTraineeRequest(request);
 	}
 }

@@ -76,6 +76,16 @@
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		</dependency>
+ 		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+		</dependency>
+		
+		<!-- (below) added this because TraineeController calls Salesforce-related classes...2/5/18 Jon C -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
