@@ -47,6 +47,12 @@ public class SimpleCategory implements Serializable {
 	public SimpleCategory() {
 		super();
 	}
+	
+	public SimpleCategory(Category category) {
+		this.categoryId = category.getCategoryId();
+		this.skillCategory = category.getSkillCategory();
+		this.active = category.isActive();
+	}
 
 	/**
 	 * Create new category
