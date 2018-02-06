@@ -28,14 +28,16 @@ public class BatchCompositionService {
 	private BatchCompositionMessageService BCMS;
 	
 	public void save(Batch batch) {
-		
+		repo.save(batch.toSimple());
 	}
 	
 	public void update(Batch batch) {
-		
+		repo.save(batch.toSimple());
 	}
 	
 	public void delete(Batch batch) {
+		repo.delete(batch.getBatchId());
+		BCMS.sendSimpleTraineeDeleteRequest(batch.getBatchId());
 		
 	}
 	
