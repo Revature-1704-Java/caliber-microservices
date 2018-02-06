@@ -18,12 +18,11 @@ public class NoteRepositoryRequestDispatcher {
 	public SimpleNote processSingleSimpleNoteRequest(JsonObject request) {
 		SimpleNote result = null;
 		String methodName = request.get("methodName").getAsString();
-		Gson gson = new Gson();
 		
 		if(methodName.equals("findOne")) {
 			result = noteRepository.findOne(request.get("noteId").getAsInt());
-		} else if(methodName.equals("save")) {
-			result = noteRepository.save(gson.fromJson(request.get("note").getAsString(), SimpleNote.class));
+		} else if(methodName.equals("delete")) {
+			noteRepository.deleteByTraineeId(request.get("traineeId").getAsInt());
 		}
 		
 		return result;
