@@ -41,23 +41,23 @@ public class CategoryCompositionService {
 		
 		return result;
 	}
-	
-	/*
+
 	//save
-	public ? save(PanelFeedback panelFeedback) {
-		
+	public void save(Category category) {
+		SimpleCategory toSave = new SimpleCategory(category);
+		categoryRepository.save(toSave);
 	}
 	
 	//update
-	public ? update(PanelFeedback panelFeedback) {
-		
+	public void update(Category category) {
+		SimpleCategory toSave = new SimpleCategory(category);
+		categoryRepository.save(toSave);
 	}
 	
 	//delete
-	public ? delete(Long panelFeedbackd) {
-		
+	public void delete(int categoryId) {
+		categoryRepository.delete(categoryId);
 	}
-	*/
 	
 	private List<Category> composeListOfCategory(List<SimpleCategory> src) {
 		List<Category> dest = new LinkedList<Category>();

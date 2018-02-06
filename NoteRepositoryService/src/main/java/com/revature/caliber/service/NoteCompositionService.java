@@ -6,10 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.caliber.model.Batch;
 import com.revature.caliber.model.Note;
 import com.revature.caliber.model.NoteType;
-import com.revature.caliber.model.SimpleBatch;
 import com.revature.caliber.model.SimpleNote;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.Trainee;
@@ -23,22 +21,18 @@ public class NoteCompositionService {
 	@Autowired
 	private NoteCompositionMessagingService noteCompositionMessagingService;
 	
-	public Note save(Note note) {
+	public void save(Note note) {
 		SimpleNote simpleNote = new SimpleNote(note);
 		
 		noteRepository.save(simpleNote);
-		
-		return note;
 	}
 	
-	public Note update(Note note) {
-		return save(note);
+	public void update(Note note) {
+		save(note);
 	}
 	
-	public Note delete(Note note) {
+	public void delete(Note note) {
 		noteRepository.delete(note.getNoteId());
-		
-		return note;
 	}
 	
 	public Note findOne(Integer noteId) {

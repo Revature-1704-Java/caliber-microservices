@@ -1,3 +1,4 @@
+
 package com.revature.caliber.service;
 
 import java.util.LinkedList;
@@ -53,19 +54,23 @@ public class PanelFeedbackCompositionService {
 		return result;
 	}
 
-	/*
-	 * //save public ? save(PanelFeedback panelFeedback) {
-	 * 
-	 * }
-	 * 
-	 * //update public ? update(PanelFeedback panelFeedback) {
-	 * 
-	 * }
-	 * 
-	 * //delete public ? delete(Long panelFeedbackd) {
-	 * 
-	 * }
-	 */
+	// save
+	public void save(PanelFeedback panelFeedback) {
+		// Must decompose panelFeedback
+		SimplePanelFeedback toSave = new SimplePanelFeedback(panelFeedback);
+		panelFeedbackRepository.save(toSave);
+	}
+
+	// update
+	public void update(PanelFeedback panelFeedback) {
+		SimplePanelFeedback toSave = new SimplePanelFeedback(panelFeedback);
+		panelFeedbackRepository.save(toSave);
+	}
+
+	// delete
+	public void delete(Long panelFeedbackId) {
+		panelFeedbackRepository.delete(panelFeedbackId);
+	}
 
 	private List<PanelFeedback> composeListOfPanelFeedback(List<SimplePanelFeedback> src) {
 		List<PanelFeedback> dest = new LinkedList<PanelFeedback>();
