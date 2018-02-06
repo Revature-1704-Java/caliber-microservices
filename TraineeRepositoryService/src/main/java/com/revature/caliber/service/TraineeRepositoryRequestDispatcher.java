@@ -27,7 +27,9 @@ public class TraineeRepositoryRequestDispatcher {
 		if(methodName.equals("findOne")) {
 			Integer traineeId = request.get("traineeId").getAsInt();
 			result = traineeRepository.findOne(traineeId);
-		} if(methodName.equals("save")) {
+		} else if(methodName.equals("delete")) {
+			traineeRepository.delete(request.get("traineeId").getAsInt());
+		} else if(methodName.equals("save")) {
 			SimpleTrainee trainee = gson.fromJson(request.get("trainee").getAsString(), SimpleTrainee.class);
 			result = traineeRepository.save(trainee);
 		}
@@ -36,15 +38,27 @@ public class TraineeRepositoryRequestDispatcher {
 	}
 	
 	public List<SimpleTrainee> processListSimpleTraineeRequest(JsonObject request) {
+		System.out.println("Hey hello");
 		List<SimpleTrainee> result = null;
 		String methodName = request.get("methodName").getAsString();
 		
 		if(methodName.equals("findAll")) {
+			System.out.println("find all");
 			result = traineeRepository.findAll();
-		}
-		else if(methodName.equals("findAllByBatchId")){
+		} else if(methodName.equals("findAllByBatchId")){
+			System.out.println("find batch");
 			result = traineeRepository.findAllByBatchId(request.get("batchId").getAsInt());
+		} else if(methodName.equals("delete")) {
+			System.out.println("delete");
+			result = traineeRepository.findAllByBatchId(request.get("batchId").getAsInt());
+			for(SimpleTrainee t : result) {
+				System.out.println(t);
+				traineeRepository.delete(t.getTraineeId());
+			}
+			result = null;
 		}
+		
+		System.out.println("return");
 		
 		return result;
 	}
