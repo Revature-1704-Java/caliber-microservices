@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
+import com.revature.caliber.beans.SimplePanel;
 import com.revature.caliber.model.SimpleCategory;
-import com.revature.caliber.model.SimplePanel;
 
 @Service
 public class PanelFeedbackCompositionMessagingService {

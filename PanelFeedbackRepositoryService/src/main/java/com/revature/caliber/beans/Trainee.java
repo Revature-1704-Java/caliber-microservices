@@ -1,4 +1,4 @@
-package com.revature.caliber.beans;
+ package com.revature.caliber.beans;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -29,10 +29,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.revature.caliber.model.Batch;
-import com.revature.caliber.model.Grade;
-import com.revature.caliber.model.Note;
-import com.revature.caliber.model.TrainingStatus;
 
 /**
  * The type Trainee.
@@ -88,26 +84,27 @@ public class Trainee implements Serializable {
 
 	@Column(name = "PROFILE_URL")
 	private String profileUrl;
-
+	
 	// new columns
 	@Column(name = "RECRUITER_NAME")
 	private String recruiterName;
-
+	
 	@Column(name = "COLLEGE")
 	private String college;
-
+	
 	@Column(name = "DEGREE")
 	private String degree;
-
+	
 	@Column(name = "MAJOR")
 	private String major;
-
+	
 	@Column(name = "TECH_SCREENER_NAME")
 	private String techScreenerName;
-
+	
 	@Column(name = "REVPRO_PROJECT_COMPLETION")
 	private String projectCompletion;
 	// end of new columns
+	
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
@@ -118,7 +115,7 @@ public class Trainee implements Serializable {
 	@OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Note> notes;
-
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -131,7 +128,6 @@ public class Trainee implements Serializable {
 
 	/**
 	 * Constructor used mostly for testing. Default TrainingStatus as Training
-	 * 
 	 * @param name
 	 * @param resourceId
 	 * @param email
@@ -302,8 +298,8 @@ public class Trainee implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Trainee [traineeId=" + traineeId + ", name=" + name + ", email=" + email + ", trainingStatus="
-				+ trainingStatus + ", major=" + major + "]";
+		return "Trainee [traineeId=" + traineeId +", name=" + name + ", email=" + email + ", trainingStatus="
+				+ trainingStatus + ", major=" + major +  "]";
 	}
 
 	public String getRecruiterName() {

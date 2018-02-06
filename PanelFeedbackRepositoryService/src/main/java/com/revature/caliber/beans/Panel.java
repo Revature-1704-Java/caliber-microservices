@@ -27,13 +27,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.revature.caliber.model.InterviewFormat;
-import com.revature.caliber.model.Trainee;
 import com.revature.caliber.validator.ValidPanel;
 
 /**
  * Results of the final panel interview for each associate.
- * 
  * @author Patrick Walsh
  *
  */
@@ -41,7 +38,7 @@ import com.revature.caliber.validator.ValidPanel;
 @Table(name = "CALIBER_PANEL")
 @ValidPanel
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Panel {
 
 	// Interview Details
@@ -50,71 +47,71 @@ public class Panel {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PANEL_ID_SEQUENCE")
 	@SequenceGenerator(name = "PANEL_ID_SEQUENCE", sequenceName = "PANEL_ID_SEQUENCE")
 	private int id;
-
+	
 	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "TRAINEE_ID", nullable = false)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Trainee trainee;
-
+	
 	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PANELIST_ID", nullable = false)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Trainer panelist;
-
+	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "INTERVIEW_DATE")
+	@Column(name="INTERVIEW_DATE")
 	private Date interviewDate;
-
-	@Column(name = "DURATION")
+	
+	@Column(name="DURATION")
 	private String duration; // 1hr 30 minutes
-
+	
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(name = "INTERVIEW_FORMAT")
-	private InterviewFormat format;
-
-	@Column(name = "INTERNET_CONNECTIVITY")
+	@Column(name="INTERVIEW_FORMAT")
+	private InterviewFormat format; 
+	
+	@Column(name="INTERNET_CONNECTIVITY")
 	private String internet; // stable/unstable
-
+	
 	@NotNull
 	@Min(value = 1)
-	@Column(name = "PANEL_ROUND", nullable = false)
+	@Column(name="PANEL_ROUND", nullable=false)
 	private int panelRound;
-
-	@Column(name = "RECORDING_CONSENT")
+	
+	@Column(name="RECORDING_CONSENT")
 	private boolean recordingConsent;
-
-	@Column(name = "RECORDING_LINK")
+	
+	@Column(name="RECORDING_LINK")
 	private String recordingLink;
-
+	
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "PANEL_STATUS", nullable = false)
 	private PanelStatus status;
-
+	
 	// Technical Feedback
-	@OneToMany(mappedBy = "panel", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "panel", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonManagedReference(value = "feedback")
 	private Set<PanelFeedback> feedback;
-
+	
 	// Comments and General Feedback
 	@Column(name = "ASSOCIATE_INTRO", nullable = true)
 	private String associateIntro;
-
+	
 	@Column(name = "PROJECT_ONE_DESCRIPTION", nullable = true)
 	private String projectOneDescription;
-
+	
 	@Column(name = "PROJECT_TWO_DESCRIPTION", nullable = true)
 	private String projectTwoDescription;
-
+	
 	@Column(name = "PROJECT_THREE_DESCRIPTION", nullable = true)
 	private String projectThreeDescription;
-
+	
 	@Column(name = "COMMUNICATION_SKILLS", nullable = true)
 	private String communicationSkills;
-
+	
 	@Column(name = "OVERALL_FEEDBACK", nullable = true)
 	private String overall;
 
