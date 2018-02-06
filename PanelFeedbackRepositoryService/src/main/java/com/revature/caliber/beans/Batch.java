@@ -32,9 +32,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.revature.caliber.model.Note;
-import com.revature.caliber.model.SkillType;
-import com.revature.caliber.model.TrainingType;
 import com.revature.caliber.validator.ValidBatch;
 
 /**
@@ -124,7 +121,7 @@ public class Batch implements Serializable {
 
 	@Column(name = "NUMBER_OF_WEEKS", nullable = false)
 	private int weeks;
-
+	
 	@Column(name = "GRADED_WEEKS")
 	private int gradedWeeks;
 
@@ -132,7 +129,7 @@ public class Batch implements Serializable {
 	@OneToMany(mappedBy = "batch")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Note> notes;
-
+	
 	public Batch() {
 		super();
 		this.weeks = 1;
@@ -299,7 +296,7 @@ public class Batch implements Serializable {
 	public void setGradedWeeks(int gradedWeeks) {
 		this.gradedWeeks = gradedWeeks;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -379,7 +376,7 @@ public class Batch implements Serializable {
 	@Override
 	public String toString() {
 		return "Batch [batchId=" + batchId + ", trainingName=" + trainingName + ", skillType=" + skillType
-				+ ", trainingType=" + trainingType + ", location==" + location + "]";
+				+ ", trainingType=" + trainingType +", location==" + location + "]";
 	}
 
 }

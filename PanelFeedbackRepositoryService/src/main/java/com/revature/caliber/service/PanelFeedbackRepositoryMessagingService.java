@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.revature.caliber.model.SimplePanelFeedback;
+import com.revature.caliber.beans.SimplePanelFeedback;
 
 @Service
 public class PanelFeedbackRepositoryMessagingService {

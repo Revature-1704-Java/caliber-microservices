@@ -6,13 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.revature.caliber.model.Category;
-import com.revature.caliber.model.Panel;
-import com.revature.caliber.model.PanelFeedback;
-import com.revature.caliber.model.PanelStatus;
+import com.revature.caliber.beans.Category;
+import com.revature.caliber.beans.Panel;
+import com.revature.caliber.beans.PanelFeedback;
+import com.revature.caliber.beans.PanelStatus;
+import com.revature.caliber.beans.SimplePanel;
+import com.revature.caliber.beans.SimplePanelFeedback;
 import com.revature.caliber.model.SimpleCategory;
-import com.revature.caliber.model.SimplePanel;
-import com.revature.caliber.model.SimplePanelFeedback;
 import com.revature.caliber.repository.PanelFeedbackRepository;
 
 public class PanelFeedbackCompositionService {
