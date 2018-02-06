@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.revature.caliber.model.SimplePanel;
-import com.revature.caliber.model.SimpleTrainee;
-import com.revature.caliber.model.Trainee;
 
 public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 
@@ -75,4 +73,6 @@ public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	 * @return a panel that was deleted by panel id
 	 */
 	SimplePanel delete(int id);
+	
+	void deleteByTraineeId(Integer traineeId);
 }

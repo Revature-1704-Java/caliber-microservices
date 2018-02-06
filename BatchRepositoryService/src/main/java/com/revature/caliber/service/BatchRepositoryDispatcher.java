@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleBatch;
 import com.revature.caliber.repository.BatchRepository;
@@ -12,6 +14,7 @@ public class BatchRepositoryDispatcher {
 	@Autowired
 	BatchRepository repo;
 	public SimpleBatch processSimpleBatchRequest(JsonObject request) {
+		Gson gson=new GsonBuilder().setDateFormat("mm-dd-yyy").create();
 		String methodName = request.get("methodName").getAsString();
 		switch(methodName) {
 			case "findOne":
@@ -20,6 +23,10 @@ public class BatchRepositoryDispatcher {
 				return repo.findOne(request.get("batchId").getAsInt());
 			case "findOneWithTraineesAndGrades" :
 				return repo.findOne(request.get("batchId").getAsInt());
+			case "save":
+				System.out.println(request.get("batch"));
+				repo.save(gson.fromJson(request.get("batch").getAsString(), SimpleBatch.class));
+				return null;
 			default:
 				return null;
 		}

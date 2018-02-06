@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleBatch;
 import com.revature.caliber.model.SimpleTrainee;
@@ -39,19 +40,19 @@ public class NoteCompositionMessagingService {
 	
 	public SimpleBatch sendSaveSimpleBatchRequest(SimpleBatch batch) {
 		JsonObject batchRequest = new JsonObject();
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("MM-dd-YYYY").create();
 		batchRequest.addProperty("methodName", "save");
 		batchRequest.addProperty("batch", gson.toJson(batch, SimpleBatch.class));
 		
 		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY, batchRequest.toString());
 	}
 	
-	public SimpleBatch sendSaveSimpleTraineeRequest(SimpleTrainee trainee) {
+	public SimpleTrainee sendSaveSimpleTraineeRequest(SimpleTrainee trainee) {
 		JsonObject traineeRequest = new JsonObject();
 		Gson gson = new Gson();
 		traineeRequest.addProperty("methodName", "save");
 		traineeRequest.addProperty("trainee", gson.toJson(trainee, SimpleTrainee.class));
 		
-		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_ROUTING_KEY, traineeRequest.toString());
+		return (SimpleTrainee) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_ROUTING_KEY, traineeRequest.toString());
 	}
 }

@@ -28,6 +28,20 @@ public class TrainerCompositionService {
 	@Autowired
 	private TrainerCompositionMessagingService trainerCompositionMessagingService;
 
+	public void save(Trainer trainer) {
+		SimpleTrainer simpleTrainer = new SimpleTrainer(trainer);
+		
+		trainerRepository.save(simpleTrainer);
+	}
+	
+	public void update(Trainer trainer) {
+		save(trainer);
+	}
+	
+	public void delete(Trainer trainer) {
+		trainerRepository.delete(trainer.getTrainerId());
+	}
+	
 	public Trainer findOne(Integer trainerId) {
 		SimpleTrainer basis = trainerRepository.findOne(trainerId);
 		Trainer result = composeTrainer(basis);

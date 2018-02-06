@@ -58,6 +58,15 @@ public class SimplePanelFeedback implements Serializable {
 	public SimplePanelFeedback() {
 		super();
 	}
+	
+	public SimplePanelFeedback(PanelFeedback pf) {
+		this.id = pf.getId();
+		this.categoryId = pf.getTechnology().getCategoryId();
+		this.status = pf.getStatus();
+		this.result = pf.getResult();
+		this.comment = pf.getComment();
+		this.panelId = pf.getPanel().getId();
+	}
 
 	public long getId() {
 		return id;
