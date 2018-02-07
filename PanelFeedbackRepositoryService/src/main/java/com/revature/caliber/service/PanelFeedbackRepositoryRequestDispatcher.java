@@ -9,6 +9,13 @@ import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimplePanelFeedback;
 import com.revature.caliber.repository.PanelFeedbackRepository;
 
+/**
+ * Processes messages from other services.
+ * FindOne and findAll are requests from other services needed
+ * to construct their complex beans for the front end.
+ * 
+ * Delete removes orphaned panel feedbacks if the parent panel is deleted.
+ */
 @Service
 public class PanelFeedbackRepositoryRequestDispatcher {
 
