@@ -69,8 +69,7 @@ public class CategoryController {
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@PreAuthorize("hasAnyRole('VP')")
 	public ResponseEntity<Category> updateCategory(@Valid @RequestBody Category category) {
-		// update?
-		//categoryService.updateCategory(category);
+		categoryService.update(category);
 		return new ResponseEntity<>(category, HttpStatus.OK);
 	}
 	//Calls a method that creates a new Category
@@ -78,8 +77,7 @@ public class CategoryController {
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@PreAuthorize("hasAnyRole('VP')")
 	public ResponseEntity<Category> saveCategory(@Valid @RequestBody Category category) {
-		//save
-		//categoryService.saveCategory(category);
+		categoryService.save(category);
 		return new ResponseEntity<>(category, HttpStatus.CREATED);
 	}
 }

@@ -1,8 +1,10 @@
 package com.revature.caliber.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,6 +14,7 @@ import com.revature.caliber.model.SimpleAssessment;
 import com.revature.caliber.model.SimpleGrade;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.Trainee;
+import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.GradeRepository;
 
 public class GradeCompositionService {
@@ -21,7 +24,14 @@ public class GradeCompositionService {
 	@Autowired
 	private GradeCompositionMessagingService gradeCompositionMessagingService;
 	
+	public void save(Grade grade) {
+		SimpleGrade sGrade = new SimpleGrade(grade);
+		gradeRepository.save(sGrade);
+	}
 	
+	public void update(Grade grade) {
+		save(grade);
+	}
 	
 	public Grade findOne(Long gradeId) {
 		SimpleGrade basis = gradeRepository.findOne(gradeId);
@@ -80,7 +90,6 @@ public class GradeCompositionService {
 	 * @return
 	 */
 	public List<Grade> findByBatch(Integer batchId) {
-
 		List<SimpleTrainee> trainees = gradeCompositionMessagingService.sendSimpleFindAllByBatchIdRequest(batchId); //get list of trainees belonging to the batch
 		List<Grade> part = null;
 		List<Grade> result = new ArrayList<Grade>();
@@ -100,7 +109,14 @@ public class GradeCompositionService {
 	 * @return
 	 */
 	public List<Grade> findByCategory(Integer categoryId) {
-		return null;
+		List<SimpleAssessment> catAssessments = gradeCompositionMessagingService.sendListAssessmentRequest(categoryId);
+		List<SimpleGrade> sGrades = new ArrayList<SimpleGrade>();
+		
+		for(SimpleAssessment a : catAssessments) {
+			sGrades.addAll(gradeRepository.findByAssessmentId(a.getAssessmentId()));
+		}
+		
+		return composeListOfGrade(sGrades);
 	}
 	
 	/**
@@ -113,7 +129,21 @@ public class GradeCompositionService {
 	 * @return
 	 */
 	public List<Grade> findByWeek(Integer batchId, Integer week) {
-		return null;
+		List<Grade> grades = new ArrayList<Grade>();
+		List<SimpleTrainee> trainees = gradeCompositionMessagingService.sendSimpleFindAllByBatchIdRequest(batchId); //get list of trainees belonging to the batch
+		
+		for(SimpleTrainee trainee : trainees) {
+			if(trainee.getTrainingStatus() != TrainingStatus.Dropped) {
+				List<Grade> traineeGrades = findByTrainee(trainee.getTraineeId());
+				for(Grade grade : traineeGrades) {
+					if(grade.getAssessment().getWeek() == week.shortValue()) {
+						grades.add(grade);
+					}
+				}
+			}
+		}
+		
+		return grades;
 	}
 	
 	/**
@@ -134,6 +164,7 @@ public class GradeCompositionService {
 		
 		for(SimpleGrade curr : src) {
 			Grade grade = new Grade(curr);
+			dest.add(grade);
 		}
 		
 		return dest;
@@ -155,8 +186,26 @@ public class GradeCompositionService {
 		dest.setAssessment(assessment);
 		dest.setTrainee(trainee);
 		
-		return dest;
-			
+		return dest;		
 	}
+
+	public Map<Integer, List<Grade>> findGradesByWeek(Integer batchId, Integer week) {
+		List<Grade> grades = findByWeek(batchId, week);
+		Map<Integer, List<Grade>> table = new HashMap<>();
+		
+		for(Grade grade : grades) {
+			Integer key = grade.getTrainee().getTraineeId();
+			if(table.containsKey(key)) {
+				table.get(key).add(grade);
+			} else {
+				List<Grade> assessments = new ArrayList<>();
+				assessments.add(grade);
+				table.put(key, assessments);
+			}
+		}
+		
+		return table;
+	}
+	
 }
 	
