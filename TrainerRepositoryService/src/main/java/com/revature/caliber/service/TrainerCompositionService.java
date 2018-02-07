@@ -26,7 +26,7 @@ public class TrainerCompositionService {
 	AmqpTemplate rabbitTemplate;
 
 	@Autowired
-	TrainerRepository trainerRepository;
+	public TrainerRepository trainerRepository;
 
 	@Autowired
 	private TrainerCompositionMessagingService trainerCompositionMessagingService;
