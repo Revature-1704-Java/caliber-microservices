@@ -20,6 +20,12 @@ public class NoteCompositionMessagingService {
 	private static final String SINGLE_TRAINEE_ROUTING_KEY = "JyoH3uRmktGn9MnW";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 	
+	/**
+	 * Sends a request for a SimpleBatch to the Batch service identified by
+	 * a batchId
+	 * @param batchId The batchId that identifies the SimpleBatch
+	 * @return The SimpleBatch returned by the Batch service
+	 */
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
 		JsonObject batchRequest = new JsonObject();
 		
@@ -29,6 +35,12 @@ public class NoteCompositionMessagingService {
 		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY, batchRequest.toString());
 	}
 	
+	/**
+	 * Sends a request for a SimpleTrainee to the Trainee service identified by
+	 * a traineeId
+	 * @param traineeId The traineeId that identifies the SimpleTrainee
+	 * @return The SimpleTrainee returned by the Trainee service
+	 */
 	public SimpleTrainee sendSingleSimpleTraineeRequest(Integer traineeId) {
 		JsonObject traineeRequest = new JsonObject();
 		
@@ -38,6 +50,12 @@ public class NoteCompositionMessagingService {
 		return (SimpleTrainee) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_ROUTING_KEY, traineeRequest.toString());
 	}
 	
+	/**
+	 * Sends a save request for a SimpleBatch to the Batch service.
+	 * The SimpleBatch is sent as a JsonObject.
+	 * @param batch The batch to be saved
+	 * @return The SimpleBatch that was saved
+	 */
 	public SimpleBatch sendSaveSimpleBatchRequest(SimpleBatch batch) {
 		JsonObject batchRequest = new JsonObject();
 		Gson gson = new GsonBuilder().setDateFormat("MM-dd-YYYY").create();
@@ -47,6 +65,12 @@ public class NoteCompositionMessagingService {
 		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY, batchRequest.toString());
 	}
 	
+	/**
+	 * Sends a save request for a SimpleTrainee to the Trainee service.
+	 * The SimpleTrainee is sent as a JsonObject.
+	 * @param trainee The trainee to be saved
+	 * @return The SimpleTrainee that was saved
+	 */
 	public SimpleTrainee sendSaveSimpleTraineeRequest(SimpleTrainee trainee) {
 		JsonObject traineeRequest = new JsonObject();
 		Gson gson = new Gson();
