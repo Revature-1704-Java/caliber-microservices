@@ -1,0 +1,25 @@
+server:
+  port: 5269
+
+security:
+  basic: 
+    enabled: false  
+  
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+  rabbitmq:
+    host: ec2-35-168-22-185.compute-1.amazonaws.com
+    port: 5672
+    username: user
+    password: user
+  application:
+    name: email-service    
+    
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
