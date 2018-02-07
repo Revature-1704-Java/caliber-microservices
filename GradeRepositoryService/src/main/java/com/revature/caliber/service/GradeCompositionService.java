@@ -2,6 +2,7 @@ package com.revature.caliber.service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +20,15 @@ public class GradeCompositionService {
 	private GradeRepository gradeRepository;
 	@Autowired
 	private GradeCompositionMessagingService gradeCompositionMessagingService;
+	
+	public void save(Grade grade) {
+		SimpleGrade sGrade = new SimpleGrade(grade);
+		gradeRepository.save(sGrade);
+	}
+	
+	public void update(Grade grade) {
+		save(grade);
+	}
 	
 	public Grade findOne(Long gradeId) {
 		SimpleGrade basis = gradeRepository.findOne(gradeId);
@@ -144,8 +154,8 @@ public class GradeCompositionService {
 		dest.setAssessment(assessment);
 		dest.setTrainee(trainee);
 		
-		return dest;
-			
+		return dest;		
 	}
+	
 }
 	

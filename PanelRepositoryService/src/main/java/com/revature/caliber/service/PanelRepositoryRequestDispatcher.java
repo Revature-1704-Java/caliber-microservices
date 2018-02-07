@@ -29,6 +29,8 @@ public class PanelRepositoryRequestDispatcher {
 		} else if(methodName.equals("delete")) {
 			if(request.has("traineeId")) {
 				panelRepository.deleteByTraineeId(request.get("traineeId").getAsInt());
+			} else if(request.has("panelId")) {
+				panelRepository.delete(request.get("panelId").getAsInt());
 			}
 		}
 		return result;

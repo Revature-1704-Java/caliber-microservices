@@ -61,8 +61,6 @@ public class PanelTest {
 	/** Tests deleting a panel by panel Id */
 	@Test
 	public void deleteTest() {
-		SimplePanel panel = panelRepository.delete(5);
-		System.out.println(panel);
-		assertTrue(panel == null); 
+		panelRepository.delete(5); 
 	}
 }
