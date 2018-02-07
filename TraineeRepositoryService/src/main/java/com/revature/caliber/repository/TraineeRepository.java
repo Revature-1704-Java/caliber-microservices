@@ -10,6 +10,8 @@ import com.revature.caliber.model.TrainingStatus;
 
 @Repository
 public interface TraineeRepository extends JpaRepository<SimpleTrainee, Integer> {
+	SimpleTrainee findOneByResourceId(String resourceId);
+	
 	SimpleTrainee findOneByTraineeIdAndTrainingStatusNot(Integer traineeId, TrainingStatus status);
 	
 	List<SimpleTrainee> findAllByEmailLikeAndTrainingStatusNot(String email, TrainingStatus status);
