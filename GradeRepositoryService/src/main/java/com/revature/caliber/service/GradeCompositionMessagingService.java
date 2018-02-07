@@ -19,7 +19,6 @@ public class GradeCompositionMessagingService {
 	private AmqpTemplate rabbitTemplate;
 	
 	private static final String SINGLE_ASSESSMENT_ROUTING_KEY = "F82jS9KJpwqLk3dj";
-	private static final String LIST_ASSESSMENT_ROUTING_KEY = "7c6tMqRRPpZ8Z7xh";
 	private static final String SINGLE_TRAINEE_ROUTING_KEY = "JyoH3uRmktGn9MnW";
 	private static final String SINGLE_TRAINEE_LIST_ROUTING_KEY = "eRQ7GaBRnHgGdV9D";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
@@ -57,15 +56,6 @@ public class GradeCompositionMessagingService {
 		traineeByBatchRequest.addProperty("batchId", batchId);
 		
 		return (List<SimpleTrainee>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_LIST_ROUTING_KEY, traineeByBatchRequest.toString());
+
 	}
-	
-	public List<SimpleAssessment> sendListAssessmentRequest(Integer categoryId) {
-		JsonObject assessmentRequest = new JsonObject();
-		
-		assessmentRequest.addProperty("methodName",	"findByCategoryId");
-		assessmentRequest.addProperty("categoryId", categoryId);
-		
-		return (List<SimpleAssessment>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_ASSESSMENT_ROUTING_KEY, assessmentRequest.toString());
-	}
-	
 }

@@ -3,11 +3,13 @@ package com.revature.caliber.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
 
 import com.revature.caliber.model.SimpleGrade;
 
-@Repository
+@RepositoryRestResource(collectionResourceRel = "grade", path = "grade")
 public interface GradeRepository extends JpaRepository<SimpleGrade, Long>{
 	
 	List<SimpleGrade> findAll();
@@ -19,7 +21,7 @@ public interface GradeRepository extends JpaRepository<SimpleGrade, Long>{
 	 * @param gradeId
 	 * @return
 	 */
-	public void deleteByAssessmentId(Long assessmentId);
+	public void deleteByAssessmentId(@Param("assessmentId") Long assessmentId);
 	
 	/**
 	 * Delete an grade by traineeId
@@ -27,7 +29,7 @@ public interface GradeRepository extends JpaRepository<SimpleGrade, Long>{
 	 * @param gradeId
 	 * @return
 	 */
-	public void deleteByTraineeId(Integer traineeId);
+	public void deleteByTraineeId(@Param("traineeId") Integer traineeId);
 	
 
 	/**
@@ -36,7 +38,7 @@ public interface GradeRepository extends JpaRepository<SimpleGrade, Long>{
 	 * @param assessmentId
 	 * @return
 	 */
-	public List<SimpleGrade> findByAssessmentId(Long assessmentId);
+	public List<SimpleGrade> findByAssessmentId(@Param("assessmentId") Long assessmentId);
 	
 	
 	
@@ -47,6 +49,13 @@ public interface GradeRepository extends JpaRepository<SimpleGrade, Long>{
 	 * @param traineeId
 	 * @return
 	 */
-	public List<SimpleGrade> findByTraineeId(Integer traineeId);
+	public List<SimpleGrade> findByTraineeId(@Param("traineeId")Integer traineeId);
+	
+	
+	
+	
+	
+	
+	
 	
 }

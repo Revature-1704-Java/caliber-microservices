@@ -101,7 +101,7 @@ public class PanelController {
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@PreAuthorize("hasAnyRole('VP','PANEL')")
 	public ResponseEntity<Panel> updatePanel(@Valid @RequestBody Panel panel) {
-		panelService.update(panel);
+		//panelService.update(panel);
 		return new ResponseEntity<>(panel, HttpStatus.OK);
 	}
 
@@ -128,7 +128,7 @@ public class PanelController {
 		if (panelService.findOne(panelId) == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		panelService.delete(panelId);
+		//panelService.deletePanel(panelId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
@@ -154,7 +154,7 @@ public class PanelController {
 	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
 	public ResponseEntity<List<Map<String, String>>> getBatchAllTraineesPanelTable(
 			@PathVariable Integer batchId) {
-			return null;
+				return null;
 		//log.info("getBatchOverallPanelTable   ===>   /all/reports/batch/{batchId}/overall/panel-batch-overall");
 		//if (panelService.getBatchPanels(batchId).isEmpty()) {
 			//return new ResponseEntity<>(HttpStatus.NOT_FOUND);

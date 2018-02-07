@@ -5,11 +5,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -29,7 +33,7 @@ public class SimpleGrade implements Serializable {
 	@Column(name = "GRADE_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GRADE_ID_SEQUENCE")
 	@SequenceGenerator(name = "GRADE_ID_SEQUENCE", sequenceName = "GRADE_ID_SEQUENCE")
-	private Long gradeId;
+	private long gradeId;
 
 	/**
 	 * Assessment - The specified assessment taken by the Trainee
@@ -59,7 +63,7 @@ public class SimpleGrade implements Serializable {
 	 */
 	@Min(value=0)
 	@Column(name = "SCORE")
-	private Double score;
+	private double score;
 
 	public SimpleGrade() {
 		super();
@@ -77,20 +81,11 @@ public class SimpleGrade implements Serializable {
 	
 	
 
-	public SimpleGrade(Grade grade) {
-		this.gradeId = grade.getGradeId();
-		this.assessmentId = grade.getAssessment() != null ? grade.getAssessment().getAssessmentId() : null;
-		this.traineeId = grade.getTrainee() != null ? grade.getTrainee().getTraineeId() : null;
-		this.dateReceived = grade.getDateReceived();
-		this.score = grade.getScore();
-	}
-
-
-	public Long getGradeId() {
+	public long getGradeId() {
 		return gradeId;
 	}
 
-	public void setGradeId(Long gradeId) {
+	public void setGradeId(long gradeId) {
 		this.gradeId = gradeId;
 	}
 
@@ -118,11 +113,11 @@ public class SimpleGrade implements Serializable {
 		this.dateReceived = dateReceived;
 	}
 
-	public Double getScore() {
+	public double getScore() {
 		return score;
 	}
 
-	public void setScore(Double score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 	

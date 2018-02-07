@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 public class Category implements Serializable {
-	private static final long serialVersionUID = 3363756954535297728L;
+	private static final long serialVersionUID = 8740866186523960143L;
 
 	private int categoryId;
 	private String skillCategory;

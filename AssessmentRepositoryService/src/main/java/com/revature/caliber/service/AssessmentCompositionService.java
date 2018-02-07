@@ -44,7 +44,7 @@ public class AssessmentCompositionService {
 	}
 
 	public List<Assessment> findByBatchId(Integer batchId) {
-		List<SimpleAssessment> basis = assessmentRepository.findByBatchId(batchId);
+		List<SimpleAssessment> basis = assessmentRepository.findDistinctByBatchId(batchId);
 		List<Assessment> assessments = composeListOfAssessments(basis);
 
 		return assessments;
@@ -60,12 +60,7 @@ public class AssessmentCompositionService {
 	public void update(Assessment assessment) {
 	}
 
-	public void deleteByAssessmnetId(Long assessmentId) {
-		assessmentRepository.deleteByAssessmentId(assessmentId);
-	}
-	
-	public void deleteByBatchId(Integer batchId) {
-		assessmentRepository.deleteByBatchId(batchId);
+	public void delete(Assessment assessment) {
 	}
 
 	private List<Assessment> composeListOfAssessments(List<SimpleAssessment> simpleAssessments) {
