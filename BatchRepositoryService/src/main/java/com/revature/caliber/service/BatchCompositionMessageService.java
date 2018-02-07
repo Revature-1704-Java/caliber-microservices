@@ -46,6 +46,13 @@ public class BatchCompositionMessageService {
 				RABBIT_REPO_EXCHANGE, ADDRESS_ROUTING_KEY, SimpleAddressRequest.toString());
 		
 	}
+	@SuppressWarnings("unchecked")
+	public List<Address> sendSimpleAddressListRequest() {
+		JsonObject SimpleAddressRequest = new JsonObject();
+		SimpleAddressRequest.addProperty("methodName", "findAll");
+		return (List<Address>) rabbitTemplate.convertSendAndReceive(
+				RABBIT_REPO_EXCHANGE, ADDRESS_LIST_ROUTING_KEY, SimpleAddressRequest.toString());
+	}
 	public List<SimpleTrainee> sendListSimpleTraineeRequest(Integer batchId){
 		JsonObject SimpleTraineeListRequest = new JsonObject();
 		SimpleTraineeListRequest.addProperty("methodName", "findAllByBatchId");
