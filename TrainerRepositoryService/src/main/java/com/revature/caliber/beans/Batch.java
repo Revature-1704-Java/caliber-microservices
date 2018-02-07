@@ -32,14 +32,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.revature.caliber.validator.ValidBatch;
+import com.revature.caliber.model.Note;
+//import com.revature.caliber.validator.ValidBatch;
 
 /**
  * The type Batch.
  */
 @Entity
 @Table(name = "CALIBER_BATCH")
-@ValidBatch
+//@ValidBatch
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Batch implements Serializable {

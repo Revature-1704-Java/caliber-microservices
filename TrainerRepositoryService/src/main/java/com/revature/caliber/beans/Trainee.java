@@ -29,6 +29,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.revature.caliber.model.Grade;
+import com.revature.caliber.model.Note;
+import com.revature.caliber.model.Panel;
+import com.revature.caliber.model.TrainingStatus;
 
 /**
  * The type Trainee.
