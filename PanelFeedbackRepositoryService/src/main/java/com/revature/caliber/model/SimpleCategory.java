@@ -16,29 +16,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * The type Category.
- */
-@Entity
-@Table(name = "CALIBER_CATEGORY")
-@Cacheable
 public class SimpleCategory implements Serializable {
 
 	private static final long serialVersionUID = 3363756954535297728L;
 
-	@Id
-	@Column(name = "CATEGORY_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORY_ID_SEQUENCE")
-	@SequenceGenerator(name = "CATEGORY_ID_SEQUENCE", sequenceName = "CATEGORY_ID_SEQUENCE", initialValue = 1, allocationSize = 1)
-	@JsonProperty(value = "categoryId")
 	private int categoryId;
 
-	@JsonProperty(value = "skillCategory")
-	@Column(name = "SKILL_CATEGORY")
 	private String skillCategory;
 	
-	@JsonProperty(value = "active")
-	@Column(name = "IS_ACTIVE", nullable=false)
 	private boolean active;
 
 	/**

@@ -15,6 +15,15 @@ public class PanelFeedback implements Serializable {
 	public PanelFeedback() {
 		super();
 	}
+	
+	public PanelFeedback(SimplePanelFeedback simplePanelFeedback) {
+		this.id = simplePanelFeedback.getId();
+		this.technology = null;
+		this.status = simplePanelFeedback.getStatus();
+		this.result = simplePanelFeedback.getResult();
+		this.comment = simplePanelFeedback.getComment();
+		this.panel = null;
+	}
 
 	public long getId() {
 		return id;

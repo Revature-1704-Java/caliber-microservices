@@ -58,7 +58,7 @@ public class AssessmentController {
 	 * @return assessment object
 	 */
 	@GetMapping(value = "/trainer/assessment/{assessmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public SimpleAssessment getAssessment(@PathVariable Integer assessmentId) {
+	public SimpleAssessment getAssessment(@PathVariable Long assessmentId) {
 		SimpleAssessment assessment = dao.findByAssessmentId(assessmentId);
 		return assessment;
 	}

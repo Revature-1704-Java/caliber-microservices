@@ -3,7 +3,7 @@ pipeline {
     stages {
       stage("stop docker"){
         steps {
-	  sh "docker-compose down"
+	  sh "docker-compose down --rmi all"
 	  sh "docker system prune -f"
 	}
       }

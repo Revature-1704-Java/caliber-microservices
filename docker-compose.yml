@@ -1,20 +1,31 @@
 version: "3"
 services:
+  eurekaservice:
+    build: ./EurekaService
+  zuulservice:
+    build: ./ZuulService
+  addressrepositoryservice:
+    build: ./AddressRepositoryService
+  assessmentrepositoryservice:
+    build: ./AssessmentRepositoryService
+  batchrepositoryservice:
+    build: ./BatchRepositoryService
+  categoryrepositoryservice:
+    build: ./CategoryRepositoryService
+  configservice:
+    build: ./ConfigService
+  graderepositoryservice:
+    build: ./GradeRepositoryService
   noterepositoryservice:
     build: ./NoteRepositoryService
-#  zuul:
-#    build: ./zuul
-#    ports: 
-#    - "8080:8181"
-#  config:
-#    build: ./config
-#  panel:
-#    build: ./panel
-#  trainer:
-#   build: ./trainer
-#  pdf:
-#    build: ./pdf
-#  category:
-#    build: ./category
-#  eureka:
-#    build: ./eureka
+  pdfservice:
+    build: ./PDFService
+  panelfeedbackrepositoryservice:
+    build: ./PanelFeedbackRepositoryService
+  panelrepositoryservice:
+    build: ./PanelRepositoryService
+  traineerepositoryservice:
+    build: ./TraineeRepositoryService
+  trainerrepositoryservice:
+    build: ./TrainerRepositoryService
+  
