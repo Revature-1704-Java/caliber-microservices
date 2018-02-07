@@ -3,6 +3,7 @@ package com.revature.caliber.test.unit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.revature.caliber.model.PanelStatus;
 import com.revature.caliber.model.SimplePanelFeedback;
 import com.revature.caliber.repository.PanelFeedbackRepository;
 
@@ -32,6 +34,11 @@ public class PanelFeedbackRepositoryTest {
 	private static final String PANEL_FEEDBACK_COUNT_ID = PANEL_FEEDBACK_COUNT + " WHERE panel_id = ";
 	
 	@Test
+	public void test() {
+		assertTrue(true);
+	}
+	
+	@Test
 	public void testFindAll() {
 		log.info("Getting all feedback using PanelFeedbackDAO getAll function");
 		long num = jdbcTemplate.queryForObject(PANEL_FEEDBACK_COUNT, Long.class);
@@ -42,14 +49,14 @@ public class PanelFeedbackRepositoryTest {
 	@Test
 	public void findAllForPanelDAO() {
 		int panelId = 40;
-		int actual = panelFeedBackRepository.findAllForPanel(panelId).size();
+		int actual = panelFeedBackRepository.findByPanelId(panelId).size();
 		System.out.println("number: " +actual);
 		int expected = jdbcTemplate.queryForObject(PANEL_FEEDBACK_COUNT_ID + panelId, Integer.class);
 
 		assertEquals(expected, actual);
 
 		panelId = -789;
-		actual = panelFeedBackRepository.findAllForPanel(panelId).size();
+		actual = panelFeedBackRepository.findByPanelId(panelId).size();
 		expected = jdbcTemplate.queryForObject(PANEL_FEEDBACK_COUNT_ID + panelId, Integer.class);
 		assertEquals(expected, actual);
 	}	
@@ -81,5 +88,24 @@ public class PanelFeedbackRepositoryTest {
 		actual.setComment(comment);
 		panelFeedBackRepository.save(actual);
 		assertEquals(panelFeedBackRepository.findOne(panelFId).getComment(), actual.getComment());
+	}
+	
+	@Test
+	public void findFailedFeedbackByPanelDAO() {
+		// positive testing
+		int panelId = 60;
+		int actual = panelFeedBackRepository.findByPanelIdAndStatus(panelId, PanelStatus.Repanel).size();
+		int expected = jdbcTemplate.queryForObject(PANEL_FEEDBACK_COUNT_ID + panelId + " AND panel_status = 'Repanel'",
+				Integer.class);
+
+		assertEquals(expected, actual);
+
+		// negative testing
+		panelId = -8309;
+		actual = panelFeedBackRepository.findByPanelIdAndStatus(panelId, PanelStatus.Repanel).size();
+		expected = jdbcTemplate.queryForObject(PANEL_FEEDBACK_COUNT_ID + panelId + " AND panel_status = 'Repanel'",
+				Integer.class);
+
+		assertEquals(expected, actual);
 	}
 }

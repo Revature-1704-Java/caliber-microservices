@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.revature.caliber.model.SimpleTrainer;
 import com.revature.caliber.model.TrainerRole;
-import com.revature.caliber.repository.TrainerDAO;
+import com.revature.caliber.repository.TrainerRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -29,7 +29,7 @@ public class TrainerDAOTest {
 	private String email = "patrick.walsh@revature.com";
 
 	@Autowired
-	TrainerDAO dao;
+	TrainerRepository dao;
 
 	SimpleTrainer test;
 

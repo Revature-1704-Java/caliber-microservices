@@ -2,133 +2,60 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 public class Panel implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3904962254572382770L;
 	
-	/** columns */
-	@Id
-	@Column(name = "PANEL_ID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PANEL_ID_SEQUENCE")
-	@SequenceGenerator(name = "PANEL_ID_SEQUENCE", sequenceName = "PANEL_ID_SEQUENCE")
-	private Integer panelId;
-
-	@Column(name = "TRAINEE_ID", nullable = false)
-	private Integer traineeId;
-
-	@Column(name = "PANELIST_ID", nullable = false)
-	private Integer panelist;
-
-	@Column(name = "INTERVIEW_DATE")
+	private int id;
+	private Trainee trainee;
+	private Trainer panelist;
 	private Date interviewDate;
-
-	@Column(name = "DURATION")
 	private String duration;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "INTERVIEW_FORMAT")
-	private Integer formatId;
-
-	@Column(name = "INTERNET_CONNECTIVITY")
+	private InterviewFormat format;
 	private String internet;
-
-	@Min(value = 1)
-	@Column(name = "PANEL_ROUND", nullable = false)
-	private Integer panelRound;
-
-	@Column(name = "RECORDING_CONSENT")
+	private int panelRound;
 	private boolean recordingConsent;
-
-	@Column(name = "RECORDING_LINK")
 	private String recordingLink;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "PANEL_STATUS")
-	private Integer statusId;
-
-	@Column(name = "ASSOCIATE_INTRO", nullable = true)
+	private PanelStatus status;
+	private Set<PanelFeedback> feedback;
 	private String associateIntro;
-
-	@Column(name = "PROJECT_ONE_DESCRIPTION", nullable = true)
 	private String projectOneDescription;
-
-	@Column(name = "PROJECT_TWO_DESCRIPTION", nullable = true)
 	private String projectTwoDescription;
-
-	@Column(name = "PROJECT_THREE_DESCRIPTION", nullable = true)
 	private String projectThreeDescription;
-
-	@Column(name = "COMMUNICATION_SKILLS", nullable = true)
 	private String communicationSkills;
-
-	@Column(name = "OVERALL_FEEDBACK", nullable = true)
 	private String overall;
-
-	/** constructors */
+	
 	public Panel() {
 		super();
 		this.interviewDate = new Date();
 	}
+	
+	public Panel(SimplePanel simplePanel) {
 
-	public Panel(Integer panelId, Integer traineeId, Integer panelist, Date interviewDate, String duration,
-			Integer formatId, String internet, Integer panelRound, boolean recordingConsent, String recordingLink,
-			Integer statusId, String associateIntro, String projectOneDescription, String projectTwoDescription,
-			String projectThreeDescription, String communicationSkills, String overall) {
-		super();
-		this.panelId = panelId;
-		this.traineeId = traineeId;
-		this.panelist = panelist;
-		this.interviewDate = interviewDate;
-		this.duration = duration;
-		this.formatId = formatId;
-		this.internet = internet;
-		this.panelRound = panelRound;
-		this.recordingConsent = recordingConsent;
-		this.recordingLink = recordingLink;
-		this.statusId = statusId;
-		this.associateIntro = associateIntro;
-		this.projectOneDescription = projectOneDescription;
-		this.projectTwoDescription = projectTwoDescription;
-		this.projectThreeDescription = projectThreeDescription;
-		this.communicationSkills = communicationSkills;
-		this.overall = overall;
 	}
 
-	/** getters and setters */
-
-	public Integer getPanelId() {
-		return panelId;
+	public int getId() {
+		return id;
 	}
 
-	public void setPanelId(Integer panelId) {
-		this.panelId = panelId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public Integer getTraineeId() {
-		return traineeId;
+	public Trainee getTrainee() {
+		return trainee;
 	}
 
-	public void setTraineeId(Integer traineeId) {
-		this.traineeId = traineeId;
+	public void setTrainee(Trainee trainee) {
+		this.trainee = trainee;
 	}
 
-	public Integer getPanelist() {
+	public Trainer getPanelist() {
 		return panelist;
 	}
 
-	public void setPanelist(Integer panelist) {
+	public void setPanelist(Trainer panelist) {
 		this.panelist = panelist;
 	}
 
@@ -148,12 +75,12 @@ public class Panel implements Serializable {
 		this.duration = duration;
 	}
 
-	public Integer getFormatId() {
-		return formatId;
+	public InterviewFormat getFormat() {
+		return format;
 	}
 
-	public void setFormatId(Integer formatId) {
-		this.formatId = formatId;
+	public void setFormat(InterviewFormat format) {
+		this.format = format;
 	}
 
 	public String getInternet() {
@@ -164,11 +91,11 @@ public class Panel implements Serializable {
 		this.internet = internet;
 	}
 
-	public Integer getPanelRound() {
+	public int getPanelRound() {
 		return panelRound;
 	}
 
-	public void setPanelRound(Integer panelRound) {
+	public void setPanelRound(int panelRound) {
 		this.panelRound = panelRound;
 	}
 
@@ -188,12 +115,20 @@ public class Panel implements Serializable {
 		this.recordingLink = recordingLink;
 	}
 
-	public Integer getStatusId() {
-		return statusId;
+	public PanelStatus getStatus() {
+		return status;
 	}
 
-	public void setStatusId(Integer statusId) {
-		this.statusId = statusId;
+	public void setStatus(PanelStatus status) {
+		this.status = status;
+	}
+
+	public Set<PanelFeedback> getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Set<PanelFeedback> feedback) {
+		this.feedback = feedback;
 	}
 
 	public String getAssociateIntro() {
@@ -244,11 +179,6 @@ public class Panel implements Serializable {
 		this.overall = overall;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	/** hashcode */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -256,24 +186,22 @@ public class Panel implements Serializable {
 		result = prime * result + ((associateIntro == null) ? 0 : associateIntro.hashCode());
 		result = prime * result + ((communicationSkills == null) ? 0 : communicationSkills.hashCode());
 		result = prime * result + ((duration == null) ? 0 : duration.hashCode());
-		result = prime * result + ((formatId == null) ? 0 : formatId.hashCode());
+		result = prime * result + ((format == null) ? 0 : format.hashCode());
 		result = prime * result + ((internet == null) ? 0 : internet.hashCode());
 		result = prime * result + ((interviewDate == null) ? 0 : interviewDate.hashCode());
 		result = prime * result + ((overall == null) ? 0 : overall.hashCode());
-		result = prime * result + ((panelId == null) ? 0 : panelId.hashCode());
-		result = prime * result + ((panelRound == null) ? 0 : panelRound.hashCode());
+		result = prime * result + panelRound;
 		result = prime * result + ((panelist == null) ? 0 : panelist.hashCode());
 		result = prime * result + ((projectOneDescription == null) ? 0 : projectOneDescription.hashCode());
 		result = prime * result + ((projectThreeDescription == null) ? 0 : projectThreeDescription.hashCode());
 		result = prime * result + ((projectTwoDescription == null) ? 0 : projectTwoDescription.hashCode());
 		result = prime * result + (recordingConsent ? 1231 : 1237);
 		result = prime * result + ((recordingLink == null) ? 0 : recordingLink.hashCode());
-		result = prime * result + ((statusId == null) ? 0 : statusId.hashCode());
-		result = prime * result + ((traineeId == null) ? 0 : traineeId.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((trainee == null) ? 0 : trainee.hashCode());
 		return result;
 	}
 
-	/** equals */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -298,10 +226,7 @@ public class Panel implements Serializable {
 				return false;
 		} else if (!duration.equals(other.duration))
 			return false;
-		if (formatId == null) {
-			if (other.formatId != null)
-				return false;
-		} else if (!formatId.equals(other.formatId))
+		if (format != other.format)
 			return false;
 		if (internet == null) {
 			if (other.internet != null)
@@ -318,15 +243,7 @@ public class Panel implements Serializable {
 				return false;
 		} else if (!overall.equals(other.overall))
 			return false;
-		if (panelId == null) {
-			if (other.panelId != null)
-				return false;
-		} else if (!panelId.equals(other.panelId))
-			return false;
-		if (panelRound == null) {
-			if (other.panelRound != null)
-				return false;
-		} else if (!panelRound.equals(other.panelRound))
+		if (panelRound != other.panelRound)
 			return false;
 		if (panelist == null) {
 			if (other.panelist != null)
@@ -355,16 +272,24 @@ public class Panel implements Serializable {
 				return false;
 		} else if (!recordingLink.equals(other.recordingLink))
 			return false;
-		if (statusId == null) {
-			if (other.statusId != null)
-				return false;
-		} else if (!statusId.equals(other.statusId))
+		if (status != other.status)
 			return false;
-		if (traineeId == null) {
-			if (other.traineeId != null)
+		if (trainee == null) {
+			if (other.trainee != null)
 				return false;
-		} else if (!traineeId.equals(other.traineeId))
+		} else if (!trainee.equals(other.trainee))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Panel [id=" + id + ", trainee=" + trainee + ", panelist=" + panelist + ", interviewDate="
+				+ interviewDate + ", duration=" + duration + ", format=" + format + ", internet=" + internet
+				+ ", panelRound=" + panelRound + ", recordingConsent=" + recordingConsent + ", recordingLink="
+				+ recordingLink + ", status=" + status + ", feedback=" + feedback + ", associateIntro=" + associateIntro
+				+ ", projectOneDescription=" + projectOneDescription + ", projectTwoDescription="
+				+ projectTwoDescription + ", projectThreeDescription=" + projectThreeDescription
+				+ ", communicationSkills=" + communicationSkills + ", overall=" + overall + "]";
 	}
 }

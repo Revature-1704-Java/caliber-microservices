@@ -30,3 +30,6 @@ nbdist/
 
 ## Code Recommenders
 .recommenders/
+
+## Visual Studio Code
+.vscode/

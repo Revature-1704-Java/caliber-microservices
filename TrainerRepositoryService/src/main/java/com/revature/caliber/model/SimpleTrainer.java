@@ -68,6 +68,14 @@ public class SimpleTrainer implements Serializable {
 		this.tier = tier;
 	}
 
+	public SimpleTrainer(Trainer trainer) {
+		super();
+		this.email = trainer.getEmail();
+		this.name = trainer.getName();
+		this.title = trainer.getTitle();
+		this.tier = trainer.getTier();
+	}
+
 	public int getTrainerId() {
 		return trainerId;
 	}

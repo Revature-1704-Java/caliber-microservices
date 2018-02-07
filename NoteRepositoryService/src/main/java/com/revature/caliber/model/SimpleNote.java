@@ -62,6 +62,19 @@ public class SimpleNote implements Serializable {
 		this.maxVisibility = TrainerRole.ROLE_TRAINER;
 	}
 	
+	public SimpleNote(Note src) {
+		super();
+		this.noteId = src.getNoteId();
+		this.content = src.getContent();
+		this.week = src.getWeek();
+		this.batchId = src.getBatch() != null ? src.getBatch().getBatchId() : null;
+		this.traineeId = src.getTrainee() != null ? src.getTrainee().getTraineeId() : null;
+		this.maxVisibility = src.getMaxVisibility();
+		this.type = src.getType();
+		this.qcFeedback = src.isQcFeedback();
+		this.qcStatus = src.getQcStatus();
+	}
+	
 	/**
 	 * Factory method to construct new QC weekly batch note
 	 * 
