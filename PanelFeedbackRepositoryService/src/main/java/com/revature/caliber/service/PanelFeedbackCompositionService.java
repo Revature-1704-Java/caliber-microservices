@@ -85,10 +85,10 @@ public class PanelFeedbackCompositionService {
 	}
 	
 	/**. 
-	 * 
+	 * Given a Panel Feedback create a simple version
+	 * and save it
 	 *
-	 *
-	 * @param Panel Feedback 
+	 * @param A Panel Feedback object to save
 	 */
 	public void save(PanelFeedback panelFeedback) {
 		SimplePanelFeedback toSave = new SimplePanelFeedback(panelFeedback);
@@ -96,14 +96,14 @@ public class PanelFeedbackCompositionService {
 	}
 
 	/**. 
-	 * 
+	 * Given a Panel Feedback create a simple version
+	 * and use it to update
 	 *
-	 *
-	 * @param Panel Feedback
+	 * @param A Panel Feedback object to update
 	 */
 	public void update(PanelFeedback panelFeedback) {
-		SimplePanelFeedback toSave = new SimplePanelFeedback(panelFeedback);
-		panelFeedbackRepository.save(toSave);
+		SimplePanelFeedback toUpdate = new SimplePanelFeedback(panelFeedback);
+		panelFeedbackRepository.save(toUpdate);
 	}
 	
 	/**. 

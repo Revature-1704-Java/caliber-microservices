@@ -9,6 +9,12 @@ import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleCategory;
 import com.revature.caliber.repository.CategoryRepository;
 
+/**
+ * Processes messages from other services.
+ * FindOne and findAll are requests from other services needed
+ * to construct their complex beans for the front end.
+ * 
+ */
 @Service
 public class CategoryRepositoryRequestDispatcher {
 
@@ -22,6 +28,10 @@ public class CategoryRepositoryRequestDispatcher {
 		if(methodName.equals("findOne")) {
 			int categoryId = request.get("categoryId").getAsInt();
 			result = categoryRepository.findOne(categoryId);
+		}
+		else if(methodName.equals("findOneBySkillCategory")) {
+			String skillCategory = request.get("skillCategory").getAsString();
+			result = categoryRepository.findOneBySkillCategory(skillCategory);
 		}
 		
 		return result;
