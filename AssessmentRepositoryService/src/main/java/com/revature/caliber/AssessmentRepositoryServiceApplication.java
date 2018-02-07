@@ -31,7 +31,7 @@ public class AssessmentRepositoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AssessmentRepositoryServiceApplication.class, args);
 	}
-	
+
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {

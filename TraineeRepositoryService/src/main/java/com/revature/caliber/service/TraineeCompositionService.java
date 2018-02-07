@@ -31,6 +31,10 @@ public class TraineeCompositionService {
 
 	public void delete(Trainee trainee) {
 		traineeRepository.delete(trainee.getTraineeId());
+
+		traineeCompositionMessagingService.sendSimpleNoteDeleteRequest(trainee.getTraineeId());
+		traineeCompositionMessagingService.sendSimpleGradeDeleteRequest(trainee.getTraineeId());
+		traineeCompositionMessagingService.sendSimplePanelDeleteRequest(trainee.getTraineeId());
 	}
 
 	public List<Trainee> findAll() {
