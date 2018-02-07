@@ -76,7 +76,7 @@ public class TrainerController {
 	//@PreAuthorize("permitAll")
 	public ResponseEntity<Trainer> findTrainer(@PathVariable String email) {
 		log.info("Find trainer by email " + email);
-		Trainer trainer = trainerCompositionService.findOne(email);
+		Trainer trainer = trainerCompositionService.findByEmail(email);
 		return new ResponseEntity<>(trainer, HttpStatus.OK);
 	}
 
@@ -118,7 +118,7 @@ public class TrainerController {
 	//@PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
 	public ResponseEntity<List<Trainer>> getAllTrainers() {
 		log.info("Fetching all trainers");
-		List<Trainer> trainers = trainerCompositionService.findAllTrainers();
+		List<Trainer> trainers = trainerCompositionService.findAll();
 		return new ResponseEntity<>(trainers, HttpStatus.OK);
 	}
 	

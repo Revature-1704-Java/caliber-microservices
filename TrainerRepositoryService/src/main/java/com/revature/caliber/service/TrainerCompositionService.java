@@ -1,11 +1,14 @@
 package com.revature.caliber.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,6 +50,25 @@ public class TrainerCompositionService {
 		Trainer result = composeTrainer(basis);
 
 		System.out.println(result);
+		return result;
+	}
+	
+	
+	
+	public Trainer findByEmail(String email) {
+		SimpleTrainer basis = trainerRepository.findByEmail(email);
+		Trainer result = composeTrainer(basis);
+		
+		return result;
+	}
+	
+	public List<Trainer> findAll() {
+		List<Trainer> result = new ArrayList();
+		List<SimpleTrainer> basis = trainerRepository.findAll();
+		for(SimpleTrainer t : basis) {
+			result.add(composeTrainer(t));
+		}
+		
 		return result;
 	}
 
