@@ -11,6 +11,24 @@ import com.revature.caliber.model.SimpleGrade;
 public interface GradeRepository extends JpaRepository<SimpleGrade, Long>{
 	
 	List<SimpleGrade> findAll();
+	
+	
+	/**
+	 * Delete an grade by assessmentId
+	 * 
+	 * @param gradeId
+	 * @return
+	 */
+	public void deleteByAssessmentId(Long assessmentId);
+	
+	/**
+	 * Delete an grade by traineeId
+	 * 
+	 * @param gradeId
+	 * @return
+	 */
+	public void deleteByTraineeId(Integer traineeId);
+	
 
 	/**
 	 * Returns all grades for an assessment. 
@@ -30,10 +48,5 @@ public interface GradeRepository extends JpaRepository<SimpleGrade, Long>{
 	 * @return
 	 */
 	public List<SimpleGrade> findByTraineeId(Integer traineeId);
-	
-	
-	
-	
-	
 	
 }

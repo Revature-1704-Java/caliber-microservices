@@ -41,7 +41,7 @@ public class SimpleBatch implements Serializable {
 	@Column(name = "BATCH_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BATCH_ID_SEQUENCE")
 	@SequenceGenerator(name = "BATCH_ID_SEQUENCE", sequenceName = "BATCH_ID_SEQUENCE")
-	private int batchId;
+	private Integer batchId;
 
 	@Column(name = "RESOURCE_ID")
 	private String resourceId;
@@ -90,7 +90,7 @@ public class SimpleBatch implements Serializable {
 	 */
 	@Min(value = 1)
 	@Column(name = "GOOD_GRADE_THRESHOLD")
-	private short goodGradeThreshold;
+	private Short goodGradeThreshold;
 
 	/**
 	 * Anything above this grade but below goodGradeThreshold is YELLOW Anything
@@ -98,13 +98,13 @@ public class SimpleBatch implements Serializable {
 	 */
 	@Min(value = 1)
 	@Column(name = "BORDERLINE_GRADE_THRESHOLD")
-	private short borderlineGradeThreshold;
+	private Short borderlineGradeThreshold;
 
 	@Column(name = "NUMBER_OF_WEEKS", nullable = false)
-	private int weeks;
+	private Integer weeks;
 	
 	@Column(name = "GRADED_WEEKS")
-	private int gradedWeeks;
+	private Integer gradedWeeks;
 	
 	public SimpleBatch() {
 		super();

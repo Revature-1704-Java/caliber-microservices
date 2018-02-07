@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 public class Trainee implements Serializable {
-	private static final long serialVersionUID = -6103923098134644806L;
+	private static final long serialVersionUID = -9090223980655307018L;
 	
 	private int traineeId;
 	private String resourceId;
