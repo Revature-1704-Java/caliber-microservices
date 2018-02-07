@@ -19,7 +19,19 @@ public class AssessmentCompositionService {
 	@Autowired
 	private AssessmentCompositionMessagingService assessmentCompositionMessagingService;
 
+	
+	/**
+	 * SAVE ASSESSMENT
+	 *
+	 * @param assessment
+	 */
 	public void save(Assessment assessment) {
+		SimpleAssessment simpleAssessment = new SimpleAssessment(assessment);
+		assessmentRepository.save(simpleAssessment);
+	}
+	
+	public void delete(long id) {
+		assessmentRepository.delete(id);
 	}
 
 	public Assessment findOne(long id) {
@@ -44,7 +56,7 @@ public class AssessmentCompositionService {
 	}
 
 	public List<Assessment> findByBatchId(Integer batchId) {
-		List<SimpleAssessment> basis = assessmentRepository.findByBatchId(batchId);
+		List<SimpleAssessment> basis = assessmentRepository.findDistinctByBatchId(batchId);
 		List<Assessment> assessments = composeListOfAssessments(basis);
 
 		return assessments;
@@ -57,15 +69,13 @@ public class AssessmentCompositionService {
 		return assessments;
 	}
 
+	/**
+	 * UPDATE ASSESSMENT
+	 *
+	 * @param assessment
+	 */
 	public void update(Assessment assessment) {
-	}
-
-	public void deleteByAssessmnetId(Long assessmentId) {
-		assessmentRepository.deleteByAssessmentId(assessmentId);
-	}
-	
-	public void deleteByBatchId(Integer batchId) {
-		assessmentRepository.deleteByBatchId(batchId);
+		save(assessment);
 	}
 
 	private List<Assessment> composeListOfAssessments(List<SimpleAssessment> simpleAssessments) {

@@ -1,6 +1,7 @@
 package com.revature.caliber.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 public class SimpleCategory implements Serializable {
 	private static final long serialVersionUID = 8740866186523960143L;

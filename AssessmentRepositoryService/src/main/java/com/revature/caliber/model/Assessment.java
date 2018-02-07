@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Assessment implements Serializable {
-	private static final long serialVersionUID = 5030264218154828822L;
+	private static final long serialVersionUID = 1000816169523198151L;
 	private long assessmentId;
 	private String title;
 	private Batch batch;
@@ -58,6 +58,10 @@ public class Assessment implements Serializable {
 	public Batch getBatch() {
 		return batch;
 	}
+	
+	public int getBatchId() {
+		return batch.getBatchId();
+	}
 
 	public void setBatch(Batch batch) {
 		this.batch = batch;
@@ -89,6 +93,10 @@ public class Assessment implements Serializable {
 
 	public Category getCategory() {
 		return category;
+	}
+	
+	public int getCategoryId() {
+		return category.getCategoryId();
 	}
 
 	public void setCategory(Category category) {
