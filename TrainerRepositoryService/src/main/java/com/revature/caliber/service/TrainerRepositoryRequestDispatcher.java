@@ -5,12 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.SimpleTrainer;
-import com.revature.caliber.model.Trainer;
 import com.revature.caliber.repository.TrainerRepository;
 
 @Service
@@ -19,9 +15,18 @@ public class TrainerRepositoryRequestDispatcher {
 	@Autowired
 	private TrainerRepository trainerRepository;
 	
+	/**
+	 * Parse JsonObject for method to execute
+	 * Executable methods: 
+	 * 		findOne - find a SimpleTrainer by trainerId
+	 * 		delete - delete a Trainer by trainerId
+	 *
+	 * @param request
+	 *
+	 * @return result
+	 */
 	public SimpleTrainer processSingleSimpleTrainerRequest(JsonObject request) {
 		SimpleTrainer result = null;
-		Gson gson = new Gson();
 		String methodName = request.get("methodName").getAsString();
 		
 		if(methodName.equals("findOne")) {
@@ -35,6 +40,15 @@ public class TrainerRepositoryRequestDispatcher {
 		return result;
 	}
 	
+	/**
+	 * Parse JsonObject for method to execute
+	 * Executable methods: 
+	 * 		findOne - find all SimpleTrainer
+	 *
+	 * @param request
+	 *
+	 * @return result
+	 */
 	public List<SimpleTrainer> processListSimpleTrainerRequest(JsonObject request) {
 		List<SimpleTrainer> result = null;
 		String methodName = request.get("methodName").getAsString();
