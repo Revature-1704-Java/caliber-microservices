@@ -207,7 +207,7 @@ public class Mailer implements Runnable {
 		 * */
 		JsonObject message = new JsonObject();
 		message.addProperty("methodName", "findAll");
-		List<Batch> response = (List<Batch>) rabbitMqTemplate.convertSendAndReceive("revature.caliber.repos", "XLNbCWqQzFHr9JfZ", message.toString());
+		List<Batch> response = (List<Batch>) rabbitMqTemplate.convertSendAndReceive("revature.caliber.service", "batchList", message.toString());
 		return response;
 //		return this.batchDAO.findAll();
 	}
@@ -216,7 +216,7 @@ public class Mailer implements Runnable {
 		JsonObject message = new JsonObject();
 		message.addProperty("methodName", "findByBatch");
 		message.addProperty("batchId", batchID);
-		List<Assessment> response = (List<Assessment>) rabbitMqTemplate.convertSendAndReceive("revature.caliber.repos", "F82jS9KJpwqLk3dj", message.toString());
+		List<Assessment> response = (List<Assessment>) rabbitMqTemplate.convertSendAndReceive("revature.caliber.service", "assessmentList", message.toString());
 		return response;
 //		return this.assessmentDAO.findByBatchId(batchID);
 	}
@@ -225,7 +225,7 @@ public class Mailer implements Runnable {
 		JsonObject message = new JsonObject();
 		message.addProperty("methodName", "findByBatch");
 		message.addProperty("batchId", batchID);
-		List<Grade> allGrades = (List<Grade>) rabbitMqTemplate.convertSendAndReceive("revature.caliber.repos", "grade", message.toString());
+		List<Grade> allGrades = (List<Grade>) rabbitMqTemplate.convertSendAndReceive("revature.caliber.service", "gradeList", message.toString());
 //		List<Grade> allGrades = gradeDAO.findByBatch(batchID);
 		int gradeCounter = 0;
 		for(Grade grade: allGrades) {
