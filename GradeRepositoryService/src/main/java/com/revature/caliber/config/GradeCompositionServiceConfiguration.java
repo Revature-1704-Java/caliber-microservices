@@ -31,9 +31,10 @@ public class GradeCompositionServiceConfiguration {
 		public GradeCompositionService gradeCompositionService() {
 			return new GradeCompositionService();
 		}
-	   
+	   /*
 	   @Bean
 		public CommandLineRunner runner() {
+		  
 			return args -> {
 				Grade grade = gcs.findOne((long) 2063);
 				if(grade == null) {
@@ -41,6 +42,7 @@ public class GradeCompositionServiceConfiguration {
 				}
 				System.out.println(grade);
 			};
+			
 		}
-	  
+	  */
 }

@@ -1,5 +1,6 @@
 package com.revature.caliber.service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class GradeCompositionService {
 	private GradeRepository gradeRepository;
 	@Autowired
 	private GradeCompositionMessagingService gradeCompositionMessagingService;
+	
+	
 	
 	public Grade findOne(Long gradeId) {
 		SimpleGrade basis = gradeRepository.findOne(gradeId);
@@ -77,7 +80,15 @@ public class GradeCompositionService {
 	 * @return
 	 */
 	public List<Grade> findByBatch(Integer batchId) {
-		return null;
+
+		List<SimpleTrainee> trainees = gradeCompositionMessagingService.sendSimpleFindAllByBatchIdRequest(batchId); //get list of trainees belonging to the batch
+		List<Grade> part = null;
+		List<Grade> result = new ArrayList<Grade>();
+		for(int i = 0; i < trainees.size(); i++) {
+			part = findByTrainee(trainees.get(i).getTraineeId());
+			result.addAll(part);
+		}
+		return result;
 	}
 	
 	
