@@ -34,7 +34,7 @@ public class SalesforceService {
 		List<Batch> allSalesForceBatches = salesforceDAO.getAllRelevantBatches();
 		JsonObject getAllBatches = new JsonObject();
 		getAllBatches.addProperty("methodName", "findAll");
-		List<Batch> allCaliberBatches = messageSender.sendToBatch(getAllBatches, "caliber.queue.batch");
+		List<Batch> allCaliberBatches = messageSender.sendToBatch(getAllBatches, "batchList");
 
 		// load trainer and co-trainer from Caliber DB
 		Map<String, Trainer> trainerMap = loadTrainers();
@@ -66,7 +66,7 @@ public class SalesforceService {
 	private Map<String, Trainer> loadTrainers() {
 		JsonObject getAllTrainers = new JsonObject();
 		getAllTrainers.addProperty("methodName", "findAll");
-		List<Trainer> trainers = messageSender.sendToTrainer(getAllTrainers, "caliber.queue.trainer");
+		List<Trainer> trainers = messageSender.sendToTrainer(getAllTrainers, "trainerList");
 		Map<String, Trainer> trainerMap = new HashMap<>();
 		for (Trainer t : trainers) {
 			trainerMap.putIfAbsent(t.getEmail(), t);
