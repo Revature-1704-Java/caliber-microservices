@@ -26,12 +26,12 @@ public class AssessmentCompositionServiceConfiguration {
 		return new AssessmentCompositionService();
 	}
 
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			Assessment assessment = assessmentCompositionService.findOne((long) 5175);
-
-			System.out.println(assessment);
-		};
-	}
+//	@Bean
+//	public CommandLineRunner runner() {
+//		return args -> {
+//			Assessment assessment = assessmentCompositionService.findOne((long) 5175);
+//
+//			System.out.println(assessment);
+//		};
+//	}
 }

@@ -33,6 +33,11 @@ public class AssessmentRepositoryRequestDispatcher {
 		if(methodName.equals("findAll")) {
 			result = assessmentRepository.findAll();
 		}
+		else if (methodName.equals("findByWeek")) {
+			Integer batchId = request.get("batchId").getAsInt();
+			Short week = request.get("week").getAsShort();
+			result = assessmentRepository.findByBatchIdAndWeek(batchId, week);
+		}
 		
 		return result;
 	}

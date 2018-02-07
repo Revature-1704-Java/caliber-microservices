@@ -1,37 +1,33 @@
 package com.revature.caliber.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
-public class Trainer implements Serializable {
+/**
+ * The type Trainer.
+ */
+public class SimpleTrainer implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = -2546407792912483570L;
 	private int trainerId;
-	private String name;
-	private String title;
-	private String email;
-	private TrainerRole tier;
-	private Set<Batch> batches;
 
-	public Trainer() {
+	private String email;
+
+	private String name;
+
+	private String title;
+
+	private TrainerRole tier;
+
+	public SimpleTrainer() {
 		super();
 	}
 
-	public Trainer(String name, String title, String email, TrainerRole tier) {
+	public SimpleTrainer(String email, String name, String title, TrainerRole tier) {
 		super();
+		this.email = email;
 		this.name = name;
 		this.title = title;
-		this.email = email;
 		this.tier = tier;
-	}
-
-
-	public Trainer(SimpleTrainer src) {
-		this.name = src.getName();
-		this.title = src.getTitle();
-		this.email = src.getEmail();
-		this.tier = src.getTier();
-		this.batches = null;
 	}
 
 	public int getTrainerId() {
@@ -40,6 +36,14 @@ public class Trainer implements Serializable {
 
 	public void setTrainerId(int trainerId) {
 		this.trainerId = trainerId;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getName() {
@@ -58,14 +62,6 @@ public class Trainer implements Serializable {
 		this.title = title;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public TrainerRole getTier() {
 		return tier;
 	}
@@ -74,22 +70,14 @@ public class Trainer implements Serializable {
 		this.tier = tier;
 	}
 
-	public Set<Batch> getBatches() {
-		return batches;
-	}
-
-	public void setBatches(Set<Batch> batches) {
-		this.batches = batches;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((tier == null) ? 0 : tier.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((tier == null) ? 0 : tier.hashCode());
 		return result;
 	}
 
@@ -101,7 +89,7 @@ public class Trainer implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Trainer other = (Trainer) obj;
+		SimpleTrainer other = (SimpleTrainer) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -112,19 +100,19 @@ public class Trainer implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (tier != other.tier)
-			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
+		if (tier != other.tier)
+			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Trainer [trainerId=" + trainerId + ", name=" + name + ", title=" + title + ", email=" + email
+		return "Trainer [trainerId=" + trainerId + ", email=" + email + ", name=" + name + ", title=" + title
 				+ ", tier=" + tier + "]";
 	}
 
