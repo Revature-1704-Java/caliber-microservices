@@ -15,7 +15,7 @@ public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	 * @param id
 	 * @return a panel found with the id parameter
 	 */
-	SimplePanel findOne(int id);
+	SimplePanel findOne(Integer id);
 
 	/**
 	 * find all panels Useful for listing available panels
@@ -72,7 +72,7 @@ public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	 * 
 	 * @return a panel that was deleted by panel id
 	 */
-	SimplePanel delete(int id);
+	void delete(Integer id);
 	
 	void deleteByTraineeId(Integer traineeId);
 }
