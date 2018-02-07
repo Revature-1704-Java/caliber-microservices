@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.caliber.beans.Address;
-import com.revature.caliber.data.AddressDAO;
+import com.revature.caliber.model.Address;
+import com.revature.caliber.repository.AddressRepository;
 
 /**
  * Used for assessment CRUD operations. Includes both Trainer and QC assessments
@@ -25,7 +25,7 @@ import com.revature.caliber.data.AddressDAO;
 public class AddressController {
 
 	@Autowired
-	AddressDAO adao;
+	AddressRepository adao;
 
 	/**
 	 * User gets all address objects from table
@@ -47,7 +47,7 @@ public class AddressController {
 	 */
 	@GetMapping(value = "/getAddress", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Address get_address(@RequestParam(value = "addressId", required = true) int addressId) {
-		Address address = adao.findByAddressId(addressId);
+		Address address = adao.findOne(addressId);
 		return address;
 	}
 
@@ -93,7 +93,7 @@ public class AddressController {
 			@RequestParam(value = "company", required = false) String company,
 			@RequestParam(value = "active", required = false) Boolean active) {
 
-		Address address = adao.findByAddressId(addressId);
+		Address address = adao.findOne(addressId);
 
 		if (street != null)
 			address.setStreet(street);
@@ -119,7 +119,7 @@ public class AddressController {
 	@GetMapping(value = "/deleteAddress", produces = MediaType.APPLICATION_JSON_VALUE)
 	public void delete_address(@RequestParam(value = "addressId", required = true) int addressId) {
 
-		Address address = adao.findByAddressId(addressId);
+		Address address = adao.findOne(addressId);
 		adao.delete(address);
 	}
 
