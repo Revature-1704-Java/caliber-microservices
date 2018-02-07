@@ -19,4 +19,6 @@ public interface CategoryRepository extends JpaRepository<SimpleCategory, Intege
 	
 	List<SimpleCategory> findByActiveOrderByCategoryIdAsc(boolean active);
 	
+	SimpleCategory findOneBySkillCategory(String skillCategory);
+	
 }
