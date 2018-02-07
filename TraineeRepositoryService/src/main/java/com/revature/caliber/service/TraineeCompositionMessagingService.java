@@ -15,8 +15,11 @@ public class TraineeCompositionMessagingService {
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 
+	private static final String LIST_NOTE_ROUTING_KEY = "cf22J9CGs8V95Rbm";
 	private static final String SINGLE_BATCH_ROUTING_KEY = "XLNbCWqQzFHr9JfZ";
 	private static final String LIST_BATCH_ROUTING_KEY = "BSVihZkuxwdg9Dxy";
+	private static final String LIST_GRADE_ROUTING_KEY = "V6hbpnyZRH8ZQQ9e";
+	private static final String LIST_PANEL_ROUTING_KEY = "8AzDbkAUCZn9Z2T3";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
@@ -28,12 +31,34 @@ public class TraineeCompositionMessagingService {
 		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY,
 				batchRequest.toString());
 	}
-	
+
 	public List<SimpleBatch> sendListSimpleBatchRequest(Integer trainerId) {
 		JsonObject batchRequest = new JsonObject();
 		batchRequest.addProperty("methodName", "findAllByTrainerId");
 		batchRequest.addProperty("trainerId", trainerId);
-		
-		return (List<SimpleBatch>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_BATCH_ROUTING_KEY, batchRequest.toString());
+
+		return (List<SimpleBatch>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_BATCH_ROUTING_KEY,
+				batchRequest.toString());
+	}
+
+	public void sendSimpleNoteDeleteRequest(Integer traineeId) {
+		JsonObject NoteDeleteRequest = new JsonObject();
+		NoteDeleteRequest.addProperty("methodName", "delete");
+		NoteDeleteRequest.addProperty("traineeId", traineeId);
+		rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_NOTE_ROUTING_KEY, NoteDeleteRequest.toString());
+	}
+	
+	public void sendSimpleGradeDeleteRequest(Integer traineeId) {
+		JsonObject GradeDeleteRequest = new JsonObject();
+		GradeDeleteRequest.addProperty("methodName", "delete");
+		GradeDeleteRequest.addProperty("traineeId", traineeId);
+		rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_GRADE_ROUTING_KEY, GradeDeleteRequest.toString());
+	}
+	
+	public void sendSimplePanelDeleteRequest(Integer traineeId) {
+		JsonObject PanelDeleteRequest = new JsonObject();
+		PanelDeleteRequest.addProperty("methodName", "delete");
+		PanelDeleteRequest.addProperty("traineeId", traineeId);
+		rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_PANEL_ROUTING_KEY, PanelDeleteRequest.toString());
 	}
 }

@@ -24,6 +24,20 @@ public class TraineeCompositionService {
 		traineeRepository.save(simpleTrainee);
 	}
 
+<<<<<<< Updated upstream
+=======
+	public void update(Trainee trainee) {
+		save(trainee);
+	}
+
+	public void delete(Trainee trainee) {
+		traineeRepository.delete(trainee.getTraineeId());
+		traineeCompositionMessagingService.sendSimpleNoteDeleteRequest(trainee.getTraineeId());
+		traineeCompositionMessagingService.sendSimpleGradeDeleteRequest(trainee.getTraineeId());
+		traineeCompositionMessagingService.sendSimplePanelDeleteRequest(trainee.getTraineeId());
+	}
+
+>>>>>>> Stashed changes
 	public List<Trainee> findAll() {
 		List<SimpleTrainee> basis = traineeRepository.findAll();
 		List<Trainee> trainees = composeListOfTrainees(basis);
