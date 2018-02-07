@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.revature.caliber.model.Grade;
 import com.revature.caliber.model.SimpleGrade;
 import com.revature.caliber.repository.GradeRepository;
 
@@ -40,5 +41,15 @@ public class GradeRepositoryMessagingService {
 		return gradeRepositoryRequestDispatcher.processSingleSimpleGradeRequest(request);
 	}
 	
+	
+	@RabbitListener(queues = "revature.caliber.service.grade.list")
+	public List<Grade> recieveBatchId(String message) {
+		System.out.println(message);
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(message);
+		JsonObject request = element.getAsJsonObject();
+		
+		return gradeRepositoryRequestDispatcher.processListComplexGradeRequest(request);
+	}
 	
 }

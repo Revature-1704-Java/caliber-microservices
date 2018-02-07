@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.revature.caliber.model.SimplePanel;
-import com.revature.caliber.model.SimpleTrainee;
-import com.revature.caliber.model.Trainee;
 
 public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 
@@ -17,7 +15,7 @@ public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	 * @param id
 	 * @return a panel found with the id parameter
 	 */
-	SimplePanel findOne(int id);
+	SimplePanel findOne(Integer id);
 
 	/**
 	 * find all panels Useful for listing available panels
@@ -74,5 +72,7 @@ public interface PanelRepository extends JpaRepository<SimplePanel, Integer> {
 	 * 
 	 * @return a panel that was deleted by panel id
 	 */
-	SimplePanel delete(int id);
+	void delete(Integer id);
+	
+	void deleteByTraineeId(Integer traineeId);
 }

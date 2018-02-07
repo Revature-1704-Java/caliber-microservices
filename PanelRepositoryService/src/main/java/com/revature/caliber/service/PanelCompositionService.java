@@ -68,17 +68,22 @@ public class PanelCompositionService {
 	// return result;
 	// }
 
-	// public void save(Panel panel) {
-	//
-	// }
-	//
-	// public void update(Panel panel) {
-	//
-	// }
-	//
-	// public void delete(int panelId) {
-	//
-	// }
+	public void save(Panel panel) {
+		SimplePanel simplePanel = new SimplePanel(panel);
+	 
+		panelRepository.save(simplePanel);
+	}
+	
+	public void update(Panel panel) {
+		save(panel);
+	}
+	
+	public void delete(Integer panelId) {
+		if(panelRepository.findOne(panelId) != null) {
+			panelRepository.delete(panelId);
+			panelCompositionMessagingService.sendPanelFeedbackDeleteRequest(panelId);
+		}
+	}
 
 	private List<Panel> composeListOfPanels(List<SimplePanel> src, boolean includeDropped) {
 		List<Panel> dest = new LinkedList<Panel>();

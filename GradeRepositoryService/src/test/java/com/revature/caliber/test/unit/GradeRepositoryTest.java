@@ -58,6 +58,6 @@ public class GradeRepositoryTest {
 	public void findOneTest() {
 	
 		SimpleGrade grade = gradeRepository.findOne(2063L);
-		assertEquals(grade.getGradeId(), 2063L);
+		assertEquals(grade.getGradeId().longValue(), 2063L);
 	}
 }
