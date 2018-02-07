@@ -4,35 +4,13 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OrderBy;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.revature.caliber.model.Grade;
-import com.revature.caliber.model.Note;
-import com.revature.caliber.model.Panel;
-import com.revature.caliber.model.TrainingStatus;
 
 /**
  * The type Trainee.
@@ -42,88 +20,38 @@ import com.revature.caliber.model.TrainingStatus;
  * performance based on where they went to college, who recruited them, and if
  * they finished RevaturePro.
  */
-@Entity
-@Table(name = "CALIBER_TRAINEE")
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Trainee implements Serializable {
 
 	private static final long serialVersionUID = -9090223980655307018L;
 
-	@Id
-	@Column(name = "TRAINEE_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRAINEE_ID_SEQUENCE")
-	@SequenceGenerator(name = "TRAINEE_ID_SEQUENCE", sequenceName = "TRAINEE_ID_SEQUENCE")
 	private int traineeId;
-
-	@Column(name = "RESOURCE_ID")
 	private String resourceId;
-
-	@NotEmpty
-	@Column(name = "TRAINEE_NAME")
 	private String name;
-
-	@NotEmpty
-	@Email
-	@Column(name = "TRAINEE_EMAIL", nullable = false)
 	private String email;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "TRAINING_STATUS")
 	private TrainingStatus trainingStatus;
 
-	@NotNull
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@JoinColumn(name = "BATCH_ID", nullable = false)
 	@JsonBackReference(value = "traineeAndBatch")
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Batch batch;
-
-	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
-
-	@Column(name = "SKYPE_ID")
 	private String skypeId;
-
-	@Column(name = "PROFILE_URL")
 	private String profileUrl;
 	
-	// new columns
-	@Column(name = "RECRUITER_NAME")
 	private String recruiterName;
-	
-	@Column(name = "COLLEGE")
 	private String college;
-	
-	@Column(name = "DEGREE")
 	private String degree;
-	
-	@Column(name = "MAJOR")
 	private String major;
-	
-	@Column(name = "TECH_SCREENER_NAME")
 	private String techScreenerName;
-	
-	@Column(name = "REVPRO_PROJECT_COMPLETION")
 	private String projectCompletion;
 	// end of new columns
 	
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Grade> grades;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private Set<Note> notes;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	@OrderBy(clause = "INTERVIEW_DATE DESC")
 	private Set<Panel> panelInterviews = new TreeSet<>();
 
 	public Trainee() {

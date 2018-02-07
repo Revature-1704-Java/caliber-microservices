@@ -22,6 +22,13 @@ public class TraineeCompositionMessagingService {
 	private static final String LIST_PANEL_ROUTING_KEY = "8AzDbkAUCZn9Z2T3";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 
+	/**
+	 * Create message for Batch to get a single Batch
+	 *
+	 * @param batchId
+	 *
+	 * @return SimpleBatch
+	 */
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
 		JsonObject batchRequest = new JsonObject();
 
@@ -32,6 +39,13 @@ public class TraineeCompositionMessagingService {
 				batchRequest.toString());
 	}
 
+	/**
+	 * Create message for Batch to get a List Batches for a given trainerId
+	 *
+	 * @param traineeId
+	 *
+	 * @return List of SimpleBatch
+	 */
 	public List<SimpleBatch> sendListSimpleBatchRequest(Integer trainerId) {
 		JsonObject batchRequest = new JsonObject();
 		batchRequest.addProperty("methodName", "findAllByTrainerId");
@@ -41,6 +55,13 @@ public class TraineeCompositionMessagingService {
 				batchRequest.toString());
 	}
 
+	/**
+	 * Create message for Note to delete Notes associated with a trainee
+	 *
+	 * @param batchId
+	 *
+	 * @return 
+	 */
 	public void sendSimpleNoteDeleteRequest(Integer traineeId) {
 		JsonObject NoteDeleteRequest = new JsonObject();
 		NoteDeleteRequest.addProperty("methodName", "delete");
@@ -48,6 +69,13 @@ public class TraineeCompositionMessagingService {
 		rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_NOTE_ROUTING_KEY, NoteDeleteRequest.toString());
 	}
 	
+	/**
+	 * Create message for Grade to delete Grades associated with a trainee
+	 *
+	 * @param batchId
+	 *
+	 * @return 
+	 */
 	public void sendSimpleGradeDeleteRequest(Integer traineeId) {
 		JsonObject GradeDeleteRequest = new JsonObject();
 		GradeDeleteRequest.addProperty("methodName", "delete");
@@ -55,6 +83,13 @@ public class TraineeCompositionMessagingService {
 		rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_GRADE_ROUTING_KEY, GradeDeleteRequest.toString());
 	}
 	
+	/**
+	 * Create message for Panel to delete Panels associated with a trainee
+	 *
+	 * @param batchId
+	 *
+	 * @return 
+	 */
 	public void sendSimplePanelDeleteRequest(Integer traineeId) {
 		JsonObject PanelDeleteRequest = new JsonObject();
 		PanelDeleteRequest.addProperty("methodName", "delete");

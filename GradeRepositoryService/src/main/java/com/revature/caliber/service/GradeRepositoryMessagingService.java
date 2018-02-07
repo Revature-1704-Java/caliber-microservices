@@ -20,6 +20,15 @@ public class GradeRepositoryMessagingService {
 	@Autowired
 	private GradeRepositoryRequestDispatcher gradeRepositoryRequestDispatcher;
 	
+	
+	/**
+	 * Listens for a request for a grade list and will parse the message. 
+	 * The message will be sent to repository request dispatcher for processing
+	 * and will return a list of grades.
+	 * 
+	 * @param message
+	 * @return 
+	 */
 	@RabbitListener(queues = "revature.caliber.repos.grade.list")
 	public List<SimpleGrade> receiveList(String message) {
 		System.out.println(message);
@@ -31,6 +40,15 @@ public class GradeRepositoryMessagingService {
 
 	}
 	
+	
+	/**
+	 * Listens for a request for a grade and will parse the message. 
+	 * The message will be sent to repository request dispatcher for processing
+	 * and will return the grade.
+	 * 
+	 * @param message
+	 * @return 
+	 */
 	@RabbitListener(queues = "revature.caliber.repos.grade")
 	public SimpleGrade receive(String message) {
 		System.out.println(message);
@@ -41,7 +59,14 @@ public class GradeRepositoryMessagingService {
 		return gradeRepositoryRequestDispatcher.processSingleSimpleGradeRequest(request);
 	}
 	
-	
+	/**
+	 * Listens for a request for a service grade list and will parse the message. 
+	 * The message will be sent to repository request dispatcher for processing
+	 * and will return a list of grades.
+	 * 
+	 * @param message
+	 * @return 
+	 */
 	@RabbitListener(queues = "revature.caliber.service.grade.list")
 	public List<Grade> recieveBatchId(String message) {
 		System.out.println(message);
