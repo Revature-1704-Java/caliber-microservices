@@ -67,5 +67,15 @@ public class GradeCompositionMessagingService {
 		
 		return (List<SimpleAssessment>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_ASSESSMENT_ROUTING_KEY, assessmentRequest.toString());
 	}
+
+
+	public SimpleTrainee sendSimpleTraineeRequest(String traineeResourceId) {
+		JsonObject traineeRequest = new JsonObject();
+		
+		traineeRequest.addProperty("methodName", "findOneByResourceId");
+		traineeRequest.addProperty("resourceId", traineeResourceId);
+		
+		return (SimpleTrainee) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_ROUTING_KEY, traineeRequest.toString());
+	}
 	
 }

@@ -52,4 +52,12 @@ public class GradeRepositoryMessagingService {
 		return gradeRepositoryRequestDispatcher.processListComplexGradeRequest(request);
 	}
 	
+	@RabbitListener(queues = "revature.caliber.dto.grade")
+	public Grade receiveGradeDTORequest(String message) {
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(message);
+		JsonObject request = element.getAsJsonObject();
+		
+		return gradeRepositoryRequestDispatcher.processGradeDTORequest(request);
+	}
 }

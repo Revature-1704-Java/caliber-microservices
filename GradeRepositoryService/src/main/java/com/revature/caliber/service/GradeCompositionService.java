@@ -206,6 +206,17 @@ public class GradeCompositionService {
 		
 		return table;
 	}
+
+	public void saveOrUpdateGradeFromDTO(long assessmentId, double score, String traineeResourceId) {
+		SimpleTrainee sTrainee = gradeCompositionMessagingService.sendSimpleTraineeRequest(traineeResourceId);
+		SimpleGrade sGrade = new SimpleGrade();
+		
+		sGrade.setTraineeId(sTrainee.getTraineeId());
+		sGrade.setAssessmentId(assessmentId);
+		sGrade.setScore(score);
+		
+		gradeRepository.save(sGrade);
+	}
 	
 }
 	
