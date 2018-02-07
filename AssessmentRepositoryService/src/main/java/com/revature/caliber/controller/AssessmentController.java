@@ -71,7 +71,7 @@ public class AssessmentController {
 	@GetMapping(value = "/trainer/assessment/{assessmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public SimpleAssessment getAssessment(@PathVariable Long assessmentId) {
 		Assessment a = assessmentService.findOne(assessmentId);
-		SimpleAssessment sa = new SimpleAssessment(a.getAssessmentId(), a.getRawScore(), a.getTitle(), a.getType(), a.getWeek(), a.getBatchId(), a.getCategoryId());
+		SimpleAssessment sa = new SimpleAssessment(a);
 		return sa;
 	}
 
@@ -86,7 +86,7 @@ public class AssessmentController {
 	@RequestMapping(value = "/trainer/assessment/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<Assessment> createAssessment(@Valid @RequestBody Assessment assessment) {
+	public ResponseEntity<SimpleAssessment> createAssessment(@Valid @RequestBody SimpleAssessment assessment) {
 		log.info("Creating assessment: " + assessment);
 		assessmentService.save(assessment);
 		return new ResponseEntity<>(assessment, HttpStatus.CREATED);
@@ -118,10 +118,10 @@ public class AssessmentController {
 	@RequestMapping(value = "/trainer/assessment/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE/*, produces = MediaType.APPLICATION_JSON_VALUE*/)
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<Void> updateAssessment(@Valid @RequestBody Assessment assessment) {
+	public ResponseEntity<SimpleAssessment> updateAssessment(@Valid @RequestBody SimpleAssessment assessment) {
 		log.info("Updating assessment: " + assessment);
 		assessmentService.update(assessment);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(assessment, HttpStatus.OK);
 	}
 
 	/**
@@ -132,14 +132,19 @@ public class AssessmentController {
 	 * @return
 	 */
 	@GetMapping(value = "/trainer/assessment/{batchId}/{week}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Assessment>> findAssessmentByWeek(@PathVariable Integer batchId,
+	public ResponseEntity<List<SimpleAssessment>> findAssessmentByWeek(@PathVariable Integer batchId,
 			@PathVariable Short week) {
 		log.debug("Find assessment by week number " + week + " for batch " + batchId + " ");
 		List<Assessment> assessments = assessmentService.findByWeek(batchId, week);
 		if (assessments.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(assessments, HttpStatus.OK);
+		List<SimpleAssessment> simpleAssessmentList = new ArrayList<SimpleAssessment>();
+		for (Assessment a : assessments) {
+			SimpleAssessment sa = new SimpleAssessment(a);
+			simpleAssessmentList.add(sa);
+		}
+		return new ResponseEntity<>(simpleAssessmentList, HttpStatus.OK);
 	}
 
 }

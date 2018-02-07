@@ -30,6 +30,15 @@ public class AssessmentCompositionService {
 		assessmentRepository.save(simpleAssessment);
 	}
 	
+	/**
+	 * SAVE ASSESSMENT
+	 *
+	 * @param assessment
+	 */
+	public void save(SimpleAssessment assessment) {
+		assessmentRepository.save(assessment);
+	}
+	
 	public void delete(long id) {
 		assessmentRepository.delete(id);
 	}
@@ -75,6 +84,15 @@ public class AssessmentCompositionService {
 	 * @param assessment
 	 */
 	public void update(Assessment assessment) {
+		save(assessment);
+	}
+	
+	/**
+	 * UPDATE ASSESSMENT
+	 *
+	 * @param assessment
+	 */
+	public void update(SimpleAssessment assessment) {
 		save(assessment);
 	}
 
