@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.model.SimpleTrainer;
+import com.revature.caliber.model.Trainer;
+import com.revature.caliber.model.TrainerRole;
 import com.revature.caliber.repository.TrainerRepository;
+import com.revature.caliber.service.TrainerCompositionService;
 
 @RestController
 @CrossOrigin
@@ -30,80 +33,171 @@ public class TrainerController {
 	private static final Logger log = Logger.getLogger(TrainerController.class);
 	
 	@Autowired
-	TrainerRepository dao;
-
-	/**
-	 * Gets all Trainers from database
-	 *
-	 * @param trainerId
-	 * @return trainerList
-	 */
-	@GetMapping(value = "/trainer", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<SimpleTrainer> getTrainers() {
-		log.info("Getting all trainers");
-		List<SimpleTrainer> trainerList = dao.findAll();
-		return trainerList;
-	}
-
-	/**
-	 * Get Trainer from database using provided id#, return object if found
-	 *
-	 * @param trainerId
-	 * @return trainer object
-	 */
-	@GetMapping(value = "/trainer/{trainerId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public SimpleTrainer getTrainer(@PathVariable int trainerId) {
-		log.info("Getting trainer with id: " + trainerId);
-		SimpleTrainer trainer = dao.findByTrainerId(trainerId);
-		return trainer;
-	}
+	private TrainerCompositionService trainerCompositionService;
 	
 	/**
-	 * Create new Trainer in database
-	 * 
+	 * Create trainer
+	 *
 	 * @param trainer
+	 *
 	 * @return the response entity
 	 */
-	@RequestMapping(value = "/trainer/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<SimpleTrainer> createTrainer(@Valid @RequestBody SimpleTrainer trainer) {
-		log.info("Creating trainer: " + trainer);
-		SimpleTrainer createdTrainer = dao.save(trainer);
-		return new ResponseEntity<>(createdTrainer, HttpStatus.CREATED);
+	@RequestMapping(value = "/vp/trainer/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	//@PreAuthorize("hasAnyRole('VP')")
+	public ResponseEntity<Trainer> createTrainer(@Valid @RequestBody Trainer trainer) {
+		log.info("Saving trainer: " + trainer);
+		trainerCompositionService.save(trainer);
+		return new ResponseEntity<>(trainer, HttpStatus.CREATED);
 	}
 
 	/**
-	 * Update Trainer response entity.
+	 * Update trainer
 	 *
 	 * @param trainer
-	 * 
+	 *
 	 * @return the response entity
 	 */
-	@RequestMapping(value = "/trainer/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<SimpleTrainer> updateTrainer(@Valid @RequestBody SimpleTrainer trainer) {
+	@RequestMapping(value = "/vp/trainer/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	//@PreAuthorize("hasAnyRole('VP')")
+	public ResponseEntity<Void> updateTrainer(@Valid @RequestBody Trainer trainer) {
 		log.info("Updating trainer: " + trainer);
-		dao.updateTrainerInfoById(trainer.getName(), trainer.getTitle(), trainer.getTier(), trainer.getTrainerId());
+		trainerCompositionService.update(trainer);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	/**
+	 * Finds a trainer by email. Used for logging in a user with the Salesforce
+	 * controller `
+	 *
+	 * @param email
+	 * @return
+	 */
+	@RequestMapping(value = "/training/trainer/byemail/{email}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	//@PreAuthorize("permitAll")
+	public ResponseEntity<Trainer> findTrainer(@PathVariable String email) {
+		log.info("Find trainer by email " + email);
+		Trainer trainer = trainerCompositionService.findByEmail(email);
 		return new ResponseEntity<>(trainer, HttpStatus.OK);
 	}
 
 	/**
-	 * Delete Trainer from database using provided id#
+	 * Deactivates the trainer
 	 *
-	 * @param id
-	 * 
-	 * @return the response entity
+	 * @param trainer
+	 * @return response entity
 	 */
-	@RequestMapping(value = "/trainer/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<Void> deleteTrainer(@PathVariable int id) {
-		log.info("Deleting trainer: " + id);
-		SimpleTrainer trainer = new SimpleTrainer();
-		trainer.setTrainerId(id);
-		dao.delete(trainer);
+	@RequestMapping(value = "/vp/trainer/delete", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	//@PreAuthorize("hasAnyRole('VP')")
+	public ResponseEntity<Void> makeInactive(@Valid @RequestBody Trainer trainer) {
+		log.info("Updating trainer: " + trainer);
+		trainer.setTier(TrainerRole.ROLE_INACTIVE);
+		trainerCompositionService.update(trainer);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+
+	/**
+	 * Returns all trainers titles from the database `
+	 *
+	 * @return
+	 */
+	@RequestMapping(value = "/vp/trainer/titles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	//@PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
+	public ResponseEntity<List<String>> getAllTrainersTitles() {
+		log.info("Fetching all trainers titles");
+		List<String> trainers = trainerCompositionService.trainerRepository.findAllTrainerTitles();
+		return new ResponseEntity<>(trainers, HttpStatus.OK);
+	}
+
+	/**
+	 * Returns all trainers from the database `
+	 *
+	 * @return
+	 */
+	@RequestMapping(value = "/all/trainer/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+	//@PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'QC', 'PANEL')")
+	public ResponseEntity<List<Trainer>> getAllTrainers() {
+		log.info("Fetching all trainers");
+		List<Trainer> trainers = trainerCompositionService.findAll();
+		return new ResponseEntity<>(trainers, HttpStatus.OK);
+	}
+	
+	
+//	@Autowired
+//	TrainerRepository dao;
+//
+//	/**
+//	 * Gets all Trainers from database
+//	 *
+//	 * @param trainerId
+//	 * @return trainerList
+//	 */
+//	@GetMapping(value = "/trainer", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public List<SimpleTrainer> getTrainers() {
+//		log.info("Getting all trainers");
+//		List<SimpleTrainer> trainerList = dao.findAll();
+//		return trainerList;
+//	}
+//
+//	/**
+//	 * Get Trainer from database using provided id#, return object if found
+//	 *
+//	 * @param trainerId
+//	 * @return trainer object
+//	 */
+//	@GetMapping(value = "/trainer/{trainerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public SimpleTrainer getTrainer(@PathVariable int trainerId) {
+//		log.info("Getting trainer with id: " + trainerId);
+//		SimpleTrainer trainer = dao.findByTrainerId(trainerId);
+//		return trainer;
+//	}
+//	
+//	/**
+//	 * Create new Trainer in database
+//	 * 
+//	 * @param trainer
+//	 * @return the response entity
+//	 */
+//	@RequestMapping(value = "/trainer/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+//	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+//	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
+//	public ResponseEntity<SimpleTrainer> createTrainer(@Valid @RequestBody SimpleTrainer trainer) {
+//		log.info("Creating trainer: " + trainer);
+//		SimpleTrainer createdTrainer = dao.save(trainer);
+//		return new ResponseEntity<>(createdTrainer, HttpStatus.CREATED);
+//	}
+//
+//	/**
+//	 * Update Trainer response entity.
+//	 *
+//	 * @param trainer
+//	 * 
+//	 * @return the response entity
+//	 */
+//	@RequestMapping(value = "/trainer/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+//	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
+//	public ResponseEntity<SimpleTrainer> updateTrainer(@Valid @RequestBody SimpleTrainer trainer) {
+//		log.info("Updating trainer: " + trainer);
+//		dao.updateTrainerInfoById(trainer.getName(), trainer.getTitle(), trainer.getTier(), trainer.getTrainerId());
+//		return new ResponseEntity<>(trainer, HttpStatus.OK);
+//	}
+//
+//	/**
+//	 * Delete Trainer from database using provided id#
+//	 *
+//	 * @param id
+//	 * 
+//	 * @return the response entity
+//	 */
+//	@RequestMapping(value = "/trainer/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+//	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+//	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
+//	public ResponseEntity<Void> deleteTrainer(@PathVariable int id) {
+//		log.info("Deleting trainer: " + id);
+//		SimpleTrainer trainer = new SimpleTrainer();
+//		trainer.setTrainerId(id);
+//		dao.delete(trainer);
+//		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//	}
 }
