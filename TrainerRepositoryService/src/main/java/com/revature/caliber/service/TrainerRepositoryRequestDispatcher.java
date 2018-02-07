@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleTrainer;
+import com.revature.caliber.model.Trainer;
 import com.revature.caliber.repository.TrainerRepository;
 
 @Service
@@ -14,6 +15,9 @@ public class TrainerRepositoryRequestDispatcher {
 
 	@Autowired
 	private TrainerRepository trainerRepository;
+	
+	@Autowired
+	private TrainerCompositionService trainerService;
 	
 	/**
 	 * Parse JsonObject for method to execute
@@ -55,6 +59,26 @@ public class TrainerRepositoryRequestDispatcher {
 		
 		if(methodName.equals("findAll")) {
 			result = trainerRepository.findAll();
+		}
+		
+		return result;
+	}
+
+	/**
+	 * Parse JsonObject for method to execute
+	 * Executable methods: 
+	 * 		findByEmail - find a Trainer by email
+	 *
+	 * @param request
+	 *
+	 * @return result
+	 */
+	public Trainer processSingleTrainerRequest(JsonObject request) {
+		Trainer result = null;
+		String methodName = request.get("methodName").getAsString();
+		
+		if(methodName.equals("findByEmail")) {
+			result = trainerService.findByEmail(request.get("email").getAsString());
 		}
 		
 		return result;

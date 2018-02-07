@@ -10,6 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.revature.caliber.model.SimpleTrainer;
+import com.revature.caliber.model.Trainer;
 
 @Service
 public class TrainerRepositoryMessagingService {
@@ -47,6 +48,22 @@ public class TrainerRepositoryMessagingService {
 		JsonObject request = element.getAsJsonObject();
 
 		return trainerRepositoryRequestDispatcher.processListSimpleTrainerRequest(request);
+	}
+	
+	/**
+	 * Listener for TrainerRequests for a single Trainer
+	 *
+	 * @param message
+	 *
+	 * @return Trainer
+	 */
+	@RabbitListener(queues = "revature.caliber.service.trainer")
+	public Trainer receiveSingleTrainerRequest(String message) {
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(message);
+		JsonObject request = element.getAsJsonObject();
+
+		return trainerRepositoryRequestDispatcher.processSingleTrainerRequest(request);
 	}
 
 }
