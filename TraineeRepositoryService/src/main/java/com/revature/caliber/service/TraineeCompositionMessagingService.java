@@ -31,7 +31,6 @@ public class TraineeCompositionMessagingService {
 	 * Team Data RABBITMQ Exchange Name
 	 */
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
-
 	
 	/**
 	 * sphuang 02/07/2018 
@@ -51,7 +50,6 @@ public class TraineeCompositionMessagingService {
 				batchRequest.toString());
 	}
 
-	
 	/**
 	 * sphuang 02/07/2018 
 	 * Sending a message string in json notation to Batch's queue containing method name findAllByTrainerId and a specific trainer ID.
@@ -59,7 +57,7 @@ public class TraineeCompositionMessagingService {
 	 * 
 	 * @param Integer - Trainee's Trainer Id
 	 * @return A List of SimpleBatch object
-	 */
+	*/
 	public List<SimpleBatch> sendListSimpleBatchRequest(Integer trainerId) {
 		JsonObject batchRequest = new JsonObject();
 		batchRequest.addProperty("methodName", "findAllByTrainerId");
@@ -76,7 +74,6 @@ public class TraineeCompositionMessagingService {
 	 * NoteRepositoryMessagingService will delete all notes with that trainee ID.
 	 * 
 	 * @param Integer - Trainee's Trainee Id
-	 *
 	 */
 	public void sendSimpleNoteDeleteRequest(Integer traineeId) {
 		JsonObject NoteDeleteRequest = new JsonObject();
@@ -86,7 +83,6 @@ public class TraineeCompositionMessagingService {
 	}
 	
 	/**
-
 	 * sphuang 02/07/2018 
 	 * Sending a message string in json notation to Grade's queue containing method name delete and a specific trainee ID.
 	 * GradeRepositoryMessagingService will delete all grades with that trainee ID.

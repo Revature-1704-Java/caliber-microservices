@@ -3,7 +3,7 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 
 public class Note implements Serializable {
-	private static final long serialVersionUID = -4960654794116385953L;
+	private static final long serialVersionUID = 1203665277195505838L;
 	
 	private int noteId;
 	private String content;

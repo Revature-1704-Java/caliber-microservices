@@ -40,7 +40,6 @@ public class TraineeRepositoryMessagingService {
 
 		return traineeRepositoryRequestDispatcher.processSingleSimpleTraineeRequest(request);
 	}
-
 	
 	/**
 	 * sphuang 02/08/2018 
@@ -67,7 +66,7 @@ public class TraineeRepositoryMessagingService {
 	 * 
 	 * 
 	 * @param String - message
-	 * @return List<SimpleTrainee> - List of simple Trainees
+	 * @return List<Trainee> - List of Complex Trainees
 	 */
 	@RabbitListener(queues = "revature.caliber.service.trainee.list")
 	public List<Trainee> receiveListTraineeRequest(String message) {
