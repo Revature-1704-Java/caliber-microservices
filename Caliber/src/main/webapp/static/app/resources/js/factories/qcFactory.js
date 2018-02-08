@@ -1,6 +1,6 @@
 /**
  * API that makes qc related AJAX calls to the backend
- * 
+ *
  * @param $log
  * @param $http
  * @returns {{}}
@@ -13,7 +13,7 @@ angular.module("api").factory("qcFactory", function($log, $http) {
 	/** ************************* Batch *********************** */
 	qc.getAllBatches = function() {
 		return $http({
-			url : "localhost:8081/batch/qc/batch/all/", //added "batch" and localhost in front
+			url : "http://localhost:8081/batch/qc/batch/all/", //added "batch" and localhost in front
 			method : "GET"
 		}).then(function(response) {
 			$log.log("Batches retrieved successfully");
@@ -49,8 +49,8 @@ angular.module("api").factory("qcFactory", function($log, $http) {
 			$log.error("There was an error: " + response.status);
 		});
 	};
-	
-	
+
+
 	qc.getTraineeWeek = function(traineeId, week) {
 		return $http({
 			url : "http://localhost:8081/note/vp/note/trainee/" + traineeId + "/" + week + "/",
@@ -62,7 +62,7 @@ angular.module("api").factory("qcFactory", function($log, $http) {
 			$log.error("There was an error: " + response.status);
 		});
 	};
-	
+
 	// Call EvaluationController's getAllQCTraineeNotes method
 	qc.getAllQCTraineeNote = function(batchId, week) {
 		return $http({
@@ -75,7 +75,7 @@ angular.module("api").factory("qcFactory", function($log, $http) {
 			$log.error("There was an error: " + response.status);
 		});
 	};
-	
+
 	// Call EvaluationController's getTraineeOverallNotes method
 	qc.getTraineeOverallNote = function(traineeId) {
 		return $http({
@@ -147,7 +147,7 @@ angular.module("api").factory("qcFactory", function($log, $http) {
 			$log.error("There was an error: " + response.status);
 		});
 	};
-	
+
 	// get all assessment categories for the week
 	qc.getAllAssessmentCategories = function(batchId, weekId) {
 		return $http({
@@ -181,7 +181,7 @@ angular.module("api").factory("qcFactory", function($log, $http) {
 	//
 	/**
 	 * Update note
-	 * 
+	 *
 	 * @param noteObj
 	 * @returns {*}
 	 */
@@ -209,11 +209,11 @@ angular.module("api").factory("qcFactory", function($log, $http) {
 				return response.data;
 			}else{
 				return response;
-			}				
+			}
 		},function(response){
 			$log.error("Error retrieving " + response.status);
 		})
 	};
-	
+
 	return qc;
 });

@@ -39,7 +39,7 @@ import com.revature.caliber.exceptions.MalformedRequestException;
  */
 @RestController
 @PreAuthorize("isAuthenticated()")
-@CrossOrigin(origins = "http://ec2-54-163-132-124.compute-1.amazonaws.com")
+@CrossOrigin
 public class PanelController {
 
 	private static final Logger log = Logger.getLogger(PanelController.class);
