@@ -22,7 +22,7 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 	// Gets all panels
 	panel.findAllPanels = function () {
 		return $http({
-			url: 'http://localhost:8081/panel/all',
+			url: 'http://localhost:8081/panel/panel/all',
 			method: 'GET'
 		}).then(function (response) {
 			$log.debug('Panel - AllPanels -- success');
@@ -36,7 +36,7 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 	// Gets the most recent panels for all trainees in a batch
 	panel.reportPanelTable = function (batchId) {
 		return $http({
-			url: 'http://localhost:8081/all/reports/batch/' + batchId + '/panel-batch-all-trainees',
+			url: 'http://localhost:8081/panel/all/reports/batch/' + batchId + '/panel-batch-all-trainees',
 			method: 'GET'
 		}).then(function (response) {
 			$log.debug('Panel - Batch - batchId -- success');
@@ -50,7 +50,7 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 	// Get a panel by its ID
 	panel.getPanelById = function (panelId) {
 		return $http({
-			url: 'http://localhost:8081/panel/' + panelId,
+			url: 'http://localhost:8081/panel/panel/' + panelId,
 			method: 'GET'
 		}).then(function (response) {
 			$log.debug('Panel - panelId -- success');
@@ -64,7 +64,7 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 	// Get all panels for a single trainee
 	panel.reportTraineePanels = function (traineeId) {
 		return $http({
-			url : 'http://localhost:8081/panel/trainee/' + traineeId,
+			url : 'http://localhost:8081/panel/panel/trainee/' + traineeId,
 			method : 'GET'
 		}).then(function (response) {
 			$log.debug('Retrieve all panels for trainee successful');
@@ -78,7 +78,7 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 	// Get all repanels across all trainees
 	panel.reportAllRepanels = function () {
 		return $http({
-			url : 'http://localhost:8081/panel/repanel/all',
+			url : 'http://localhost:8081/panel/panel/repanel/all',
 			method : 'GET'
 		}).then(function (response) {
 			$log.debug('Retrieve all repanels across all trainees successful');
@@ -107,7 +107,7 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 	// Create a panel
 	panel.createPanel = function (panelObj) {
 		return $http({
-			url : 'http://localhost:8081/panel/create',
+			url : 'http://localhost:8081/panel/panel/create',
 			method : 'POST',
 			data : panelObj
 		}).then(function (response) {
@@ -122,7 +122,7 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 	// Delete a panel by panelId
 	panel.deletePanel = function (panelId) {
 		return $http({
-			url : 'http://localhost:8081/panel/delete/' + panelId,
+			url : 'http://localhost:8081/panel/panel/delete/' + panelId,
 			method : 'DELETE'
 		}).then(function (response) {
 			$log.debug('Panel deleted successfully');
@@ -135,7 +135,7 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 	// Gets all trainees with last panel status = Repanel
 	panel.getRecentRepanels = function () {
 		return $http({
-			url : 'http://localhost:8081/panel/repanel/recent',
+			url : 'http://localhost:8081/panel/panel/repanel/recent',
 			method : 'GET'
 		}).then(function (response) {
 			$log.debug('Fetching all trainees whose last panel status was Repanel');

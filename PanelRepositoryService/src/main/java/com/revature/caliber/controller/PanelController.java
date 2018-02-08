@@ -112,7 +112,7 @@ public class PanelController {
 	@RequestMapping(value = "/panel/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@PreAuthorize("hasAnyRole('VP','PANEL')")
-	public ResponseEntity<Panel> savePanel(@Valid @CookieValue("email") String email, @CookieValue("role") String role, @RequestBody Panel panel) throws MalformedRequestException {
+	public ResponseEntity<Panel> savePanel(@CookieValue("email") String email, @CookieValue("role") String role, @Valid @RequestBody Panel panel) throws MalformedRequestException {
 
 		/*
 		SalesforceUser user = (SalesforceUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
