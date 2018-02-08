@@ -115,19 +115,7 @@
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
 	</dependencies>
-<<<<<<< HEAD
-		<dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-=======
+
 	
 	<dependencyManagement>
   		<dependencies>
@@ -140,7 +128,6 @@
     		</dependency>
   		</dependencies>
 	</dependencyManagement>
->>>>>>> 418dc636890fadeccaffa00907b48fa33ec55880
 
 	<build>
 		<plugins>
