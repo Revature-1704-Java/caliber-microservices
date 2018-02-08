@@ -18,7 +18,7 @@ import com.revature.caliber.services.SalesforceService;
 
 @RestController
 @PreAuthorize("isAuthenticated()")
-@CrossOrigin(origins = "http://ec2-54-163-132-124.compute-1.amazonaws.com")
+@CrossOrigin
 public class SalesforceController {
 
 	private static final Logger log = Logger.getLogger(SalesforceController.class);
