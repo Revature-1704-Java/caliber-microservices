@@ -9,11 +9,19 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import com.revature.caliber.model.SimpleAssessment;
 
 @RepositoryRestResource(collectionResourceRel = "assessment", path = "assessment")
-public interface AssessmentRepository extends JpaRepository<SimpleAssessment, Long> {	
+public interface AssessmentRepository extends JpaRepository<SimpleAssessment, Long> {
 
 	SimpleAssessment findByAssessmentId(@Param("assessmentId") Long assessmentId);
-	List<SimpleAssessment> findDistinctByWeek(@Param("week") Short week);
-	List<SimpleAssessment> findDistinctByBatchId(@Param("batchId") Integer batchId);
+
+	List<SimpleAssessment> findByBatchId(@Param("batchId") Integer batchId);
+
+	List<SimpleAssessment> findByWeek(@Param("week") Short week);
+
 	List<SimpleAssessment> findByBatchIdAndWeek(@Param("batchId") Integer batchId, @Param("week") Short week);
+
 	List<SimpleAssessment> findByCategoryId(@Param("categoryId") Integer categoryId);
+
+	void deleteByAssessmentId(@Param("assessmentId") Long assessmentId);
+
+	void deleteByBatchId(@Param("batchId") Integer batchId);
 }

@@ -14,6 +14,7 @@ import com.revature.caliber.service.TraineeCompositionService;
 
 @EnableEurekaClient
 @SpringBootApplication
+@EnableEurekaClient 
 public class TraineeRepositoryServiceApplication {
 	@Autowired
 	TraineeCompositionService tcs;

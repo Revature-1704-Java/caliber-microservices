@@ -40,7 +40,7 @@ public class TraineeRepositoryMessagingService {
 
 		return traineeRepositoryRequestDispatcher.processSingleSimpleTraineeRequest(request);
 	}
-	
+
 	/**
 	 * sphuang 02/08/2018 
 	 * Parses message in queue to a string json object.
@@ -48,7 +48,12 @@ public class TraineeRepositoryMessagingService {
 	 * 
 	 * 
 	 * @param String - message
-	 * @return List<SimpleTrainee> - List of simple Trainees
+	 * @return List<SimpleTrainee> - List of simple Trainee
+	 * Parse a String for List of SimpleTrainee
+	 *
+	 * @param Message
+	 *
+	 * @return List of SimpleTrainee
 	 */
 	@RabbitListener(queues = "revature.caliber.repos.trainee.list")
 	public List<SimpleTrainee> receiveListSimpleTraineeRequest(String message) {

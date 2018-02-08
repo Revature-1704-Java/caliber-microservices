@@ -29,7 +29,7 @@ import com.revature.caliber.model.Trainee;
  */
 @RestController
 //@PreAuthorize("isAuthenticated()")
-@CrossOrigin(origins = "http://localhost:8090")
+@CrossOrigin
 public class TraineeController {
 
 	private static final Logger log = Logger.getLogger(TraineeController.class);
@@ -46,7 +46,7 @@ public class TraineeController {
 	 *
 	 *******************************************************
 	 */
-	@RequestMapping(value = "/all/trainee", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/all/trainee", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE) //possibly not used 2/8/18, 10:53am edt
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
 	public ResponseEntity<List<Trainee>> findAllByBatch(@RequestParam(required = true) Integer batch) {

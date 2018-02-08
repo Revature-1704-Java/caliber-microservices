@@ -2,7 +2,7 @@
 *  A filter is too restrictive to do all of the needed authentication, redirect to authentication service
 *  instead
 */
-package com.revature.filters;
+package com.revature.caliber.filters;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;

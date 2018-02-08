@@ -28,7 +28,7 @@ public class RepositoryProducerConfiguration {
 	public PanelCompositionService panelCompositionService() {
 		return new PanelCompositionService();
 	}
-//
+
 //	@Bean
 //	public CommandLineRunner runner() {
 //		return args -> {

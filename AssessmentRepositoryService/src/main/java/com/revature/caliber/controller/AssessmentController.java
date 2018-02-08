@@ -1,6 +1,5 @@
 package com.revature.caliber.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -10,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -126,19 +122,14 @@ public class AssessmentController {
 	 * @return
 	 */
 	@GetMapping(value = "/trainer/assessment/{batchId}/{week}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Assessment>> findAssessmentByWeek(@PathVariable Integer batchId,
+	public ResponseEntity<List<Assessment>> findAssessmentByBatchIdAndWeek(@PathVariable Integer batchId,
 			@PathVariable Short week) {
 		log.debug("Find assessment by week number " + week + " for batch " + batchId + " ");
-		List<Assessment> assessments = assessmentService.findByWeek(batchId, week);
+		List<Assessment> assessments = assessmentService.findByBatchIdAndWeek(batchId, week);
 		if (assessments.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		List<SimpleAssessment> simpleAssessmentList = new ArrayList<SimpleAssessment>();
-		for (Assessment a : assessments) {
-			SimpleAssessment sa = new SimpleAssessment(a);
-			simpleAssessmentList.add(sa);
-		}
-		return new ResponseEntity<>(simpleAssessmentList, HttpStatus.OK);
+		return new ResponseEntity<>(assessments, HttpStatus.OK);
 	}
 
 }

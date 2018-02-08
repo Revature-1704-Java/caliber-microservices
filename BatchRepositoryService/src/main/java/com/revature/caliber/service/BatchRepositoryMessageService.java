@@ -51,7 +51,7 @@ public class BatchRepositoryMessageService {
 	 * @param message
 	 * @return
 	 */
-	@RabbitListener(queues = "revature.caliber.service.batch.list.test")
+	@RabbitListener(queues = "revature.caliber.service.batch.list")
 	public List<Batch> receiveBatchList(String message) {
 		System.out.println("message recieved 3");
 		return bcd.processListBatchRequest(getRequest(message));
@@ -64,7 +64,7 @@ public class BatchRepositoryMessageService {
 	 * @param message
 	 * @return
 	 */
-	@RabbitListener(queues = "revature.caliber.service.batch.test")
+	@RabbitListener(queues = "revature.caliber.service.batch")
 	public Batch receiveBatch(String message) {
 		System.out.println("message recieved 4");
 		return bcd.processBatchRequest(getRequest(message));

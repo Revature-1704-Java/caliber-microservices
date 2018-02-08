@@ -67,7 +67,6 @@ public class TraineeCompositionMessagingService {
 				batchRequest.toString());
 	}
 
-	
 	/**
 	 * sphuang 02/07/2018 
 	 * Sending a message string in json notation to Note's queue containing method name delete and a specific trainee ID.
@@ -88,6 +87,11 @@ public class TraineeCompositionMessagingService {
 	 * GradeRepositoryMessagingService will delete all grades with that trainee ID.
 	 * 
 	 * @param Integer - Trainee's Trainee Id
+	 * Create message for Grade to delete Grades associated with a trainee
+	 *
+	 * @param batchId
+	 *
+	 * @return 
 	 */
 	public void sendSimpleGradeDeleteRequest(Integer traineeId) {
 		JsonObject GradeDeleteRequest = new JsonObject();
@@ -97,12 +101,16 @@ public class TraineeCompositionMessagingService {
 	}
 	
 	/**
-	 * sphuang 02/07/2018 
 	 * Sending a message string in json notation to Panel's queue containing method name delete and a specific trainee ID.
 	 * PanelRepositoryMessagingService will delete all grades with that trainee ID.
 	 * 
 	 * @param Integer - Trainee's Trainee Id
 	 * 
+	 * Create message for Panel to delete Panels associated with a trainee
+	 *
+	 * @param batchId
+	 *
+	 * @return 
 	 */
 	public void sendSimplePanelDeleteRequest(Integer traineeId) {
 		JsonObject PanelDeleteRequest = new JsonObject();
