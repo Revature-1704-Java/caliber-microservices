@@ -110,7 +110,10 @@ public class TraineeCompositionMessagingService {
 	 * 
 	 * @param Integer - Trainee's Trainee Id
 	 * 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 	 * Create message for Grade to delete Grades associated with a trainee
 	 *
 	 * @param batchId
@@ -125,14 +128,21 @@ public class TraineeCompositionMessagingService {
 	}
 	
 	/**
+<<<<<<< HEAD
 
 	 * sphuang 02/07/2018
+=======
+	 * sphuang 02/07/2018 
+>>>>>>> master
 	 * Sending a message string in json notation to Panel's queue containing method name delete and a specific trainee ID.
 	 * PanelRepositoryMessagingService will delete all grades with that trainee ID.
 	 * 
 	 * @param Integer - Trainee's Trainee Id
 	 * 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 	 * Create message for Panel to delete Panels associated with a trainee
 	 *
 	 * @param batchId
