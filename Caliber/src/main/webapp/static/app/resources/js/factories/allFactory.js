@@ -18,7 +18,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.enumAssessmentType = function() {
 		return $http({
-			url : "/types/assessment/all",
+			url : "http://localhost:8081/types/assessment/all",
 			method : "GET"
 		}).then(function(response) {
 			return response.data;
@@ -29,7 +29,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.enumNoteType = function() {
 		return $http({
-			url : "/types/note/all",
+			url : "http://localhost:8081/types/note/all",
 			method : "GET"
 		}).then(function(response) {
 			return response.data;
@@ -40,7 +40,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.enumQCStatus = function() {
 		return $http({
-			url : "/types/qcstatus/all",
+			url : "http://localhost:8081/types/qcstatus/all",
 			method : "GET"
 		}).then(function(response) {
 			return response.data;
@@ -51,7 +51,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.enumSkillType = function() {
 		return $http({
-			url : "/types/skill/all",
+			url : "http://localhost:8081/types/skill/all",
 			method : "GET"
 		}).then(function(response) {
 			return response.data;
@@ -62,7 +62,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.enumTrainingStatus = function() {
 		return $http({
-			url : "/types/trainingstatus/all",
+			url : "http://localhost:8081/types/trainingstatus/all",
 			method : "GET"
 		}).then(function(response) {
 			return response.data;
@@ -73,7 +73,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.enumTrainingType = function() {
 		return $http({
-			url : "/types/training/all",
+			url : "http://localhost:8081/types/training/all",
 			method : "GET"
 		}).then(function(response) {
 			return response.data;
@@ -84,7 +84,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.enumTrainerTier = function() {
 		return $http({
-			url : "/types/trainer/role/all",
+			url : "http://localhost:8081/types/trainer/role/all",
 			method : "GET"
 		}).then(function(response) {
 			return response.data;
@@ -95,7 +95,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	
 	all.enumPanelStatus = function() {
 		return $http({
-			url : "/types/panelstatus/all",
+			url : "http://localhost:8081/types/panelstatus/all",
 			method : "GET"
 		}).then(function(response) {
 			return response.data;
@@ -106,7 +106,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.enumInterviewFormat = function() {
 		return $http({
-			url : "/types/interviewformat/all",
+			url : "http://localhost:8081/types/interviewformat/all",
 			method : "GET"
 		}).then(function(response) {
 			return response.data;
@@ -115,27 +115,27 @@ angular.module("api").factory("allFactory", function($log, $http) {
 		});
 	};
 
-	all.enumPanelStatus = function() {
-		return $http({
-			url : "/types/panelstatus/all",
-			method : "GET"
-		}).then(function(response) {
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
-		});
-	};
-
-	all.enumInterviewFormat = function() {
-		return $http({
-			url : "/types/interviewformat/all",
-			method : "GET"
-		}).then(function(response) {
-			return response.data;
-		}, function(response) {
-			$log.error("There was an error: " + response.status);
-		});
-	};
+//	all.enumPanelStatus = function() {
+//		return $http({
+//			url : "/types/panelstatus/all",
+//			method : "GET"
+//		}).then(function(response) {
+//			return response.data;
+//		}, function(response) {
+//			$log.error("There was an error: " + response.status);
+//		});
+//	};
+//
+//	all.enumInterviewFormat = function() {
+//		return $http({
+//			url : "/types/interviewformat/all",
+//			method : "GET"
+//		}).then(function(response) {
+//			return response.data;
+//		}, function(response) {
+//			$log.error("There was an error: " + response.status);
+//		});
+//	};
 
 	/**
 	 * @param allcategories
