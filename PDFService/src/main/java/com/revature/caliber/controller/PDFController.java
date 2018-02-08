@@ -33,7 +33,6 @@ public class PDFController {
 	public HttpEntity<byte[]> generate(
 			@RequestParam(name = "title", value = "title", defaultValue = "Performance at a Glance") String title,
 			@RequestBody String html) {
-			System.out.println(html);
 		try {
 			byte[] pdf = pdfService.generatePDF(title, html);
 
