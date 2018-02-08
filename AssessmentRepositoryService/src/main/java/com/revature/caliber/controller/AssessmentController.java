@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.caliber.model.Assessment;
-import com.revature.caliber.model.SimpleAssessment;
-import com.revature.caliber.repository.AssessmentDAO;
 import com.revature.caliber.service.AssessmentCompositionService;
 
 /**
@@ -41,9 +39,7 @@ public class AssessmentController {
 	private AssessmentCompositionService assessmentService;
 
 	@Autowired
-	public void setAssessmentService(AssessmentCompositionService assessmentService) {
-		this.assessmentService = assessmentService;
-	}
+	AssessmentCompositionService assessmentService;
 
 	/**
 	 * User gets all assessment objects from table
@@ -52,14 +48,10 @@ public class AssessmentController {
 	 * @return assessmentList
 	 */
 	@GetMapping(value = "/trainer/assessment", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<SimpleAssessment> getAssessments() {
+	public List<Assessment> getAssessments() {
+		log.info("Retrieving all Assessments");
 		List<Assessment> assessmentList = assessmentService.findAll();
-		List<SimpleAssessment> simpleAssessmentList = new ArrayList<SimpleAssessment>();
-		for (Assessment a : assessmentList) {
-			SimpleAssessment sa = new SimpleAssessment(a);
-			simpleAssessmentList.add(sa);
-		}
-		return simpleAssessmentList;
+		return assessmentList;
 	}
 
 	/**
@@ -69,10 +61,10 @@ public class AssessmentController {
 	 * @return assessment object
 	 */
 	@GetMapping(value = "/trainer/assessment/{assessmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public SimpleAssessment getAssessment(@PathVariable Long assessmentId) {
-		Assessment a = assessmentService.findOne(assessmentId);
-		SimpleAssessment sa = new SimpleAssessment(a);
-		return sa;
+	public Assessment getAssessment(@PathVariable Long assessmentId) {
+		log.info("Retrieving Assessment with assessmentId: " + assessmentId);
+		Assessment assessment = assessmentService.findOne(assessmentId);
+		return assessment;
 	}
 
 	/**
@@ -86,7 +78,7 @@ public class AssessmentController {
 	@RequestMapping(value = "/trainer/assessment/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<SimpleAssessment> createAssessment(@Valid @RequestBody SimpleAssessment assessment) {
+	public ResponseEntity<Assessment> createAssessment(@Valid @RequestBody Assessment assessment) {
 		log.info("Creating assessment: " + assessment);
 		assessmentService.save(assessment);
 		return new ResponseEntity<>(assessment, HttpStatus.CREATED);
@@ -118,9 +110,9 @@ public class AssessmentController {
 	@RequestMapping(value = "/trainer/assessment/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE/*, produces = MediaType.APPLICATION_JSON_VALUE*/)
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<SimpleAssessment> updateAssessment(@Valid @RequestBody SimpleAssessment assessment) {
+	public ResponseEntity<Assessment> updateAssessment(@Valid @RequestBody Assessment assessment) {
 		log.info("Updating assessment: " + assessment);
-		assessmentService.update(assessment);
+		assessmentService.save(assessment);
 		return new ResponseEntity<>(assessment, HttpStatus.OK);
 	}
 
@@ -132,7 +124,7 @@ public class AssessmentController {
 	 * @return
 	 */
 	@GetMapping(value = "/trainer/assessment/{batchId}/{week}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<SimpleAssessment>> findAssessmentByWeek(@PathVariable Integer batchId,
+	public ResponseEntity<List<Assessment>> findAssessmentByWeek(@PathVariable Integer batchId,
 			@PathVariable Short week) {
 		log.debug("Find assessment by week number " + week + " for batch " + batchId + " ");
 		List<Assessment> assessments = assessmentService.findByWeek(batchId, week);
