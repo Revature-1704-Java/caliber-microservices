@@ -45,7 +45,7 @@ public class TraineeRepositoryMessagingService {
 
 		return traineeRepositoryRequestDispatcher.processSingleSimpleTraineeRequest(request);
 	}
-	
+
 	/**
 	 * sphuang 02/08/2018 
 	 * Parses message in queue to a string json object.
@@ -55,7 +55,6 @@ public class TraineeRepositoryMessagingService {
 	 * @param String - message
 	 * @return List<SimpleTrainee> - List of simple Trainees
 
-	/**
 	 * Parse a String for List of SimpleTrainee
 	 *
 	 * @param Message
