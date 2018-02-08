@@ -28,13 +28,13 @@ public class AssessmentCompositionMessagingService {
 	 * @return The SimpleBatch returned by the Batch service
 	 */
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
-		JsonObject batchFindRequest = new JsonObject();
+		JsonObject batchRequest = new JsonObject();
 
-		batchFindRequest.addProperty("methodName", "findOne");
-		batchFindRequest.addProperty("batchId", batchId);
+		batchRequest.addProperty("methodName", "findOne");
+		batchRequest.addProperty("batchId", batchId);
 
 		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY,
-				batchFindRequest.toString());
+				batchRequest.toString());
 	}
 
 	/**
@@ -46,13 +46,13 @@ public class AssessmentCompositionMessagingService {
 	 * @return The SimpleCategory returned by the Category service
 	 */
 	public SimpleCategory sendSingleSimpleCategoryRequest(Integer categoryId) {
-		JsonObject categoryFindRequest = new JsonObject();
+		JsonObject categoryRequest = new JsonObject();
 
-		categoryFindRequest.addProperty("methodName", "findOne");
-		categoryFindRequest.addProperty("categoryId", categoryId);
+		categoryRequest.addProperty("methodName", "findOne");
+		categoryRequest.addProperty("categoryId", categoryId);
 
 		return (SimpleCategory) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_CATEGORY_ROUTING_KEY,
-				categoryFindRequest.toString());
+				categoryRequest.toString());
 	}
 
 	/**
@@ -73,12 +73,12 @@ public class AssessmentCompositionMessagingService {
 	}
 
 	/**
-	 * Sends a save request for a SimpleBatch to the Batch service. The SimpleBatch
-	 * is sent as a JsonObject.
+	 * Sends a request for a SimpleBatch to the Batch service identified by
+	 * resourceId
 	 * 
-	 * @param batch
-	 *            The batch to be saved
-	 * @return The SimpleBatch that was saved
+	 * @param resourceId
+	 *            The resourceId that identifies the SimpleBatch
+	 * @return The SimpleBatch returned by the Batch service
 	 */
 	public SimpleBatch sendSingleSimpleBatchRequest(String resourceId) {
 		JsonObject batchRequest = new JsonObject();
@@ -91,12 +91,12 @@ public class AssessmentCompositionMessagingService {
 	}
 
 	/**
-	 * Sends a save request for a SimpleCategory to the Category service. The
-	 * SimpleCategory is sent as a JsonObject.
+	 * Sends a request for a SimpleCategory to the Category service identified by a
+	 * category
 	 * 
 	 * @param category
-	 *            The category to be saved
-	 * @return The SimpleCategory that was saved
+	 *            The category that identifies the SimpleCategory
+	 * @return The SimpleCategory returned by the Category service
 	 */
 	public SimpleCategory sendSingleSimpleCategoryRequest(String category) {
 		JsonObject catRequest = new JsonObject();

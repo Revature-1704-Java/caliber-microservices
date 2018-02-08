@@ -13,9 +13,9 @@ public interface AssessmentRepository extends JpaRepository<SimpleAssessment, Lo
 
 	SimpleAssessment findByAssessmentId(@Param("assessmentId") Long assessmentId);
 
-	List<SimpleAssessment> findByWeek(@Param("week") Short week);
-
 	List<SimpleAssessment> findByBatchId(@Param("batchId") Integer batchId);
+
+	List<SimpleAssessment> findByWeek(@Param("week") Short week);
 
 	List<SimpleAssessment> findByBatchIdAndWeek(@Param("batchId") Integer batchId, @Param("week") Short week);
 

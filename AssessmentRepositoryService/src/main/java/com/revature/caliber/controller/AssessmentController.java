@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,13 +28,16 @@ import com.revature.caliber.service.AssessmentCompositionService;
  */
 @RestController
 // @PreAuthorize("isAuthenticated()")
-@CrossOrigin // (origins = "http://ec2-54-163-132-124.compute-1.amazonaws.com")
+@CrossOrigin(origins = "http://localhost:8090")
 public class AssessmentController {
 
 	private static final Logger log = Logger.getLogger(AssessmentController.class);
+	private AssessmentCompositionService assessmentService;
 
 	@Autowired
-	AssessmentCompositionService assessmentService;
+	public void setAssessmentService(AssessmentCompositionService assessmentService) {
+		this.assessmentService = assessmentService;
+	}
 
 	/**
 	 * User gets all assessment objects from table
@@ -66,15 +66,15 @@ public class AssessmentController {
 	}
 
 	/**
-	 * QC can no longer create assessment, trainer only function Create assessment
-	 * response entity.
+	 * QC can no longer create assessment, trainer only function
+	 * Create assessment response entity.
 	 *
 	 * @param assessment
 	 *            the assessment
 	 * @return the response entity
 	 */
 	@RequestMapping(value = "/trainer/assessment/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
 	public ResponseEntity<Assessment> createAssessment(@Valid @RequestBody Assessment assessment) {
 		log.info("Creating assessment: " + assessment);
@@ -90,13 +90,11 @@ public class AssessmentController {
 	 * @return the response entity
 	 */
 	@RequestMapping(value = "/trainer/assessment/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
 	public ResponseEntity<Void> deleteAssessment(@PathVariable Long id) {
 		log.info("Deleting assessment: " + id);
-		Assessment assessment = new Assessment();
-		assessment.setAssessmentId(id);
-		assessmentService.delete(assessment);
+		assessmentService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
@@ -107,8 +105,8 @@ public class AssessmentController {
 	 *            the assessment
 	 * @return the response entity
 	 */
-	@RequestMapping(value = "/trainer/assessment/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+	@RequestMapping(value = "/trainer/assessment/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE/*, produces = MediaType.APPLICATION_JSON_VALUE*/)
+	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
 	public ResponseEntity<Assessment> updateAssessment(@Valid @RequestBody Assessment assessment) {
 		log.info("Updating assessment: " + assessment);
@@ -124,9 +122,9 @@ public class AssessmentController {
 	 * @return
 	 */
 	@GetMapping(value = "/trainer/assessment/{batchId}/{week}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Assessment>> findAssessmentByWeek(@PathVariable Integer batchId,
+	public ResponseEntity<List<Assessment>> findAssessmentByBatchIdAndWeek(@PathVariable Integer batchId,
 			@PathVariable Short week) {
-		log.info("Find assessment by week number " + week + " for batch " + batchId + " ");
+		log.debug("Find assessment by week number " + week + " for batch " + batchId + " ");
 		List<Assessment> assessments = assessmentService.findByBatchIdAndWeek(batchId, week);
 		if (assessments.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

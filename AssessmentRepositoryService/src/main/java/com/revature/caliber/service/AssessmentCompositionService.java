@@ -22,6 +22,19 @@ public class AssessmentCompositionService {
 	private AssessmentCompositionMessagingService assessmentCompositionMessagingService;
 
 	/**
+	 * SAVE ASSESSMENT
+	 *
+	 * @param assessment
+	 */
+	public void save(SimpleAssessment assessment) {
+		assessmentRepository.save(assessment);
+	}
+
+	public void delete(long id) {
+		assessmentRepository.delete(id);
+	}
+
+	/**
 	 * Saves a Assessment by instantiating a new SimpleAssessment from the
 	 * Assessment and calling the AssessmentRepository save method.
 	 * 

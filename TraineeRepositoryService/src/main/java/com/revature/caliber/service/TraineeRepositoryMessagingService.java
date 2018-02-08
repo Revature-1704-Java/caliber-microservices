@@ -24,7 +24,6 @@ public class TraineeRepositoryMessagingService {
 	private TraineeRepositoryRequestDispatcher traineeRepositoryRequestDispatcher;
 
 	/**
-<<<<<<< HEAD
 	 * sphuang 02/08/2018 
 	 * Parses message in queue to a string json object.
 	 * RequestDispatcher then processes the message and returns a SimpleTrainee.
@@ -32,13 +31,11 @@ public class TraineeRepositoryMessagingService {
 	 * 
 	 * @param String - message
 	 * @return SimpleTrainee 
-=======
 	 * Parse a String for SimpleTrainee
 	 *
 	 * @param Message
 	 *
 	 * @return SimpleTrainee
->>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	@RabbitListener(queues = "revature.caliber.repos.trainee")
 	public SimpleTrainee receiveSingleSimpleTraineeRequest(String message) {
@@ -48,7 +45,6 @@ public class TraineeRepositoryMessagingService {
 
 		return traineeRepositoryRequestDispatcher.processSingleSimpleTraineeRequest(request);
 	}
-<<<<<<< HEAD
 	
 	/**
 	 * sphuang 02/08/2018 
@@ -58,7 +54,6 @@ public class TraineeRepositoryMessagingService {
 	 * 
 	 * @param String - message
 	 * @return List<SimpleTrainee> - List of simple Trainees
-=======
 
 	/**
 	 * Parse a String for List of SimpleTrainee
@@ -66,7 +61,6 @@ public class TraineeRepositoryMessagingService {
 	 * @param Message
 	 *
 	 * @return List of SimpleTrainee
->>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	@RabbitListener(queues = "revature.caliber.repos.trainee.list")
 	public List<SimpleTrainee> receiveListSimpleTraineeRequest(String message) {
@@ -78,7 +72,6 @@ public class TraineeRepositoryMessagingService {
 	}
 	
 	/**
-<<<<<<< HEAD
 	 * sphuang 02/08/2018 
 	 * Parses message in queue to a string json object.
 	 * RequestDispatcher then processes the message and returns a List of ComplexTrainees.
@@ -86,13 +79,11 @@ public class TraineeRepositoryMessagingService {
 	 * 
 	 * @param String - message
 	 * @return List<SimpleTrainee> - List of simple Trainees
-=======
 	 * Parse a String for List of Trainee
 	 *
 	 * @param Message
 	 *
 	 * @return List of Trainee
->>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	@RabbitListener(queues = "revature.caliber.service.trainee.list")
 	public List<Trainee> receiveListTraineeRequest(String message) {

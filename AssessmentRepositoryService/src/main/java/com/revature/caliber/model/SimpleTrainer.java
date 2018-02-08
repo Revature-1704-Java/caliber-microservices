@@ -2,9 +2,16 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * The type Trainer.
  */
+@Entity
+@Table(name = "CALIBER_TRAINER")
+@Cacheable
 public class SimpleTrainer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -109,7 +116,7 @@ public class SimpleTrainer implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Trainer [trainerId=" + trainerId + ", email=" + email + ", name=" + name + ", title=" + title

@@ -126,5 +126,4 @@ public class Trainer implements Serializable {
 		return "Trainer [trainerId=" + trainerId + ", name=" + name + ", title=" + title + ", email=" + email
 				+ ", tier=" + tier + "]";
 	}
-
 }
