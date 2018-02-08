@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
+import com.revature.caliber.model.Assessment;
 import com.revature.caliber.model.SimpleAssessment;
 import com.revature.caliber.repository.AssessmentRepository;
 
@@ -13,6 +14,8 @@ import com.revature.caliber.repository.AssessmentRepository;
 public class AssessmentRepositoryRequestDispatcher {
 	@Autowired
 	private AssessmentRepository assessmentRepository;
+	@Autowired
+	private AssessmentCompositionService assessmentCompositionService;
 	
 	public SimpleAssessment processSingleSimpleAssessmentRequest(JsonObject request) {
 		SimpleAssessment result = null;
@@ -42,6 +45,14 @@ public class AssessmentRepositoryRequestDispatcher {
 			Integer categoryId = request.get("categoryId").getAsInt();
 			result = assessmentRepository.findByCategoryId(categoryId);
 		}
+		
+		return result;
+	}
+	
+	public Assessment processAssessmentDTORequest(JsonObject request) {
+		Assessment result = null;
+		
+		assessmentCompositionService.createAssessmentFromDTO(request.get("category").getAsString(), request.get("batch").getAsString());
 		
 		return result;
 	}

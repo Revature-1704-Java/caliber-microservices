@@ -42,6 +42,8 @@ public class TraineeRepositoryRequestDispatcher {
 		} else if(methodName.equals("save")) {
 			SimpleTrainee trainee = gson.fromJson(request.get("trainee").getAsString(), SimpleTrainee.class);
 			result = traineeRepository.save(trainee);
+		} else if(methodName.equals("findOneByResourceId")) {
+			result = traineeRepository.findOneByResourceId(request.get("resourceId").getAsString());
 		}
 		
 		return result;
