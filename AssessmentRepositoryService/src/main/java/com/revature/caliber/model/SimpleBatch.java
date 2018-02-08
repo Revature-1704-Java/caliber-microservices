@@ -13,7 +13,7 @@ public class SimpleBatch implements Serializable {
 	* 
 	*/
 	private static final long serialVersionUID = 6433997711397981988L;
-	private int batchId;
+	private Integer batchId;
 	private String resourceId;
 	private String trainingName;
 	private Integer trainerId;
@@ -27,14 +27,14 @@ public class SimpleBatch implements Serializable {
 	/**
 	 * Anything above this grade is GREEN
 	 */
-	private short goodGradeThreshold;
+	private Short goodGradeThreshold;
 	/**
 	 * Anything above this grade but below goodGradeThreshold is YELLOW Anything
 	 * below this grade is RED
 	 */
-	private short borderlineGradeThreshold;
-	private int weeks;
-	private int gradedWeeks;
+	private Short borderlineGradeThreshold;
+	private Integer weeks;
+	private Integer gradedWeeks;
 
 	public SimpleBatch() {
 		super();
