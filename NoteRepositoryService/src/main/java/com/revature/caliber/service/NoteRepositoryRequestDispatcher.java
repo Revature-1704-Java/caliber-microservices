@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.Note;
 import com.revature.caliber.model.SimpleNote;
@@ -19,6 +18,11 @@ public class NoteRepositoryRequestDispatcher {
 	@Autowired
 	private NoteCompositionService noteCompositionService;
 	
+	/**
+	 * Handle a messaging request for a simple note.
+	 * @param request The JsonObject that defines the parameters for the simple note to be returned
+	 * @return A simple note according to the parameters in the request
+	 */
 	public SimpleNote processSingleSimpleNoteRequest(JsonObject request) {
 		SimpleNote result = null;
 		String methodName = request.get("methodName").getAsString();
@@ -32,6 +36,11 @@ public class NoteRepositoryRequestDispatcher {
 		return result;
 	}
 	
+	/**
+	 * Handle a messaging request for a list of simple notes.
+	 * @param request The JsonObject that defines the parameters for the list of simple notes to be returned
+	 * @return A list of simple notes according to the parameters in the request
+	 */
 	public List<SimpleNote> processListSimpleNoteRequest(JsonObject request) {
 		List<SimpleNote> result = null;
 		String methodName = request.get("methodName").getAsString();
@@ -47,6 +56,11 @@ public class NoteRepositoryRequestDispatcher {
 		return result;
 	}
 	
+	/**
+	 * Handle a messaging request for a note.
+	 * @param request The JsonObject that defines the parameters for the note to be returned
+	 * @return A note according to the parameters in the request
+	 */
 	public Note processNoteRequest(JsonObject request) {
 		Note result = null;
 		String methodName = request.get("methodName").getAsString();
@@ -57,7 +71,12 @@ public class NoteRepositoryRequestDispatcher {
 		
 		return result;
 	}
-
+	
+	/**
+	 * Handle a messaging request for a list of notes.
+	 * @param request The JsonObject that defines the parameters for the list of notes to be returned
+	 * @return A list of notes according to the parameters in the request
+	 */
 	public List<Note> processListNoteRequest(JsonObject request) {
 		List<Note> result = null;
 		String methodName = request.get("methodName").getAsString();
@@ -65,6 +84,6 @@ public class NoteRepositoryRequestDispatcher {
 		if(methodName.equals("findAllQCTrainerNotes")) {
 			result = noteCompositionService.findAllQCTraineeNotes(request.get("batchId").getAsInt(), request.get("week").getAsShort());
 		}
-		return null;
+		return result;
 	}
 }

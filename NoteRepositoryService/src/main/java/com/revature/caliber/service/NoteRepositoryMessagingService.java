@@ -18,6 +18,12 @@ public class NoteRepositoryMessagingService {
 	@Autowired
 	private NoteRepositoryRequestDispatcher noteRepositoryRequestDispatcher;
 	
+	/**
+	 * Receives a message from the single SimpleNote RabbitMQ queue, parses the message string as a JsonObject,
+	 * and passes it to the request dispatcher.
+	 * @param message The message received from the messaging queue
+	 * @return The simple note returned by the request dispatcher
+	 */
 	@RabbitListener(queues = "revature.caliber.repos.note")
 	public SimpleNote receiveSingleSimpleNoteRequest(String message) {
 		JsonParser parser = new JsonParser();
@@ -27,6 +33,12 @@ public class NoteRepositoryMessagingService {
 		return noteRepositoryRequestDispatcher.processSingleSimpleNoteRequest(request);
 	}
 	
+	/**
+	 * Receives a message from the list SimpleNote RabbitMQ queue, parses the message string as a JsonObject,
+	 * and passes it to the request dispatcher.
+	 * @param message The message received from the messaging queue
+	 * @return The list of simple notes returned by the request dispatcher
+	 */
 	@RabbitListener(queues = "revature.caliber.repos.note.list")
 	public List<SimpleNote> receiveListSimpleNoteRequest(String message) {
 		JsonParser parser = new JsonParser();
@@ -36,6 +48,12 @@ public class NoteRepositoryMessagingService {
 		return noteRepositoryRequestDispatcher.processListSimpleNoteRequest(request);
 	}
 	
+	/**
+	 * Receives a message from the single Note RabbitMQ queue, parses the message string as a JsonObject,
+	 * and passes it to the request dispatcher.
+	 * @param message The message received from the messaging queue
+	 * @return The note returned by the request dispatcher
+	 */
 	@RabbitListener(queues = "revature.caliber.service.note.list")
 	public List<Note> receiveListNoteRequest(String message) {
 		JsonParser parser = new JsonParser();

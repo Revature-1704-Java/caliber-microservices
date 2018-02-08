@@ -49,4 +49,22 @@ public class AssessmentCompositionMessagingService {
 				gradeDeleteRequest.toString());
 	}
 
+	public SimpleBatch sendSingleSimpleBatchRequest(String resourceId) {
+		JsonObject batchRequest = new JsonObject();
+		
+		batchRequest.addProperty("methodName", "findOneByResourceId");
+		batchRequest.addProperty("resourceId", resourceId);
+		
+		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY, batchRequest.toString());
+	}
+
+	public SimpleCategory sendSingleSimpleCategoryRequest(String category) {
+		JsonObject catRequest = new JsonObject();
+		
+		catRequest.addProperty("methodName", "findOneBySkillCategory");
+		catRequest.addProperty("category", category);
+		
+		return (SimpleCategory) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_CATEGORY_ROUTING_KEY, catRequest.toString());
+	}
+
 }

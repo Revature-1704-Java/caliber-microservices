@@ -10,6 +10,8 @@ import com.revature.caliber.model.TrainingStatus;
 
 @Repository
 public interface TraineeRepository extends JpaRepository<SimpleTrainee, Integer> {
+
+	SimpleTrainee findOneByResourceId(String resourceId);
 	
 	/**
 	 * Find a Trainee by traineeId and without this status
@@ -18,6 +20,7 @@ public interface TraineeRepository extends JpaRepository<SimpleTrainee, Integer>
 	 *
 	 * @return SimpleTrainee
 	 */
+  
 	SimpleTrainee findOneByTraineeIdAndTrainingStatusNot(Integer traineeId, TrainingStatus status);
 	
 	/**
