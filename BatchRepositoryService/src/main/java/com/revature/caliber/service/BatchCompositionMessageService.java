@@ -30,6 +30,11 @@ public class BatchCompositionMessageService {
 	private static final String ADDRESS_ROUTING_KEY = "oEKQeav8rcejeYgq";
 	private static final String ADDRESS_LIST_ROUTING_KEY = "Jf2zpP6hPvPHEXsV";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
+	/**
+	 * 
+	 * @param trainerId
+	 * @return
+	 */
 	public SimpleTrainer sendSimpleTrainerRequest(Integer trainerId) {
 		JsonObject SimpleTrainerRequest = new JsonObject();
 		SimpleTrainerRequest.addProperty("methodName", "findOne");
@@ -38,6 +43,11 @@ public class BatchCompositionMessageService {
 				RABBIT_REPO_EXCHANGE, TRAINER_ROUTING_KEY, SimpleTrainerRequest.toString());
 		
 	}
+	/**
+	 * 
+	 * @param addressId
+	 * @return
+	 */
 	public Address sendSimpleAddressRequest(Integer addressId) {
 		JsonObject SimpleAddressRequest = new JsonObject();
 		SimpleAddressRequest.addProperty("methodName", "findOne");
@@ -46,6 +56,10 @@ public class BatchCompositionMessageService {
 				RABBIT_REPO_EXCHANGE, ADDRESS_ROUTING_KEY, SimpleAddressRequest.toString());
 		
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Address> sendSimpleAddressListRequest() {
 		JsonObject SimpleAddressListRequest = new JsonObject();
@@ -53,6 +67,11 @@ public class BatchCompositionMessageService {
 		return (List<Address>) rabbitTemplate.convertSendAndReceive(
 				RABBIT_REPO_EXCHANGE, ADDRESS_LIST_ROUTING_KEY, SimpleAddressListRequest.toString());
 	}
+	/**
+	 * 
+	 * @param batchId
+	 * @return
+	 */
 	public List<SimpleTrainee> sendListSimpleTraineeRequest(Integer batchId){
 		JsonObject SimpleTraineeListRequest = new JsonObject();
 		SimpleTraineeListRequest.addProperty("methodName", "findAllByBatchId");
@@ -61,7 +80,11 @@ public class BatchCompositionMessageService {
 				LIST_TRAINEE_ROUTING_KEY, SimpleTraineeListRequest.toString());
 		return SimpleTraineeList.stream().map(x->(SimpleTrainee)x).collect(Collectors.toList());
 	}
-	
+	/**
+	 * 
+	 * @param batchId
+	 * @return
+	 */
 	public List<SimpleNote> sendListSimpleNoteRequest(Integer batchId){
 		JsonObject SimpleNoteListRequest = new JsonObject();
 		SimpleNoteListRequest.addProperty("methodName", "findAllByBatchId");
@@ -70,7 +93,10 @@ public class BatchCompositionMessageService {
 				LIST_NOTE_ROUTING_KEY, SimpleNoteListRequest.toString());
 		return SimpleNoteList.stream().map(x->(SimpleNote) x).collect(Collectors.toList());
 	}
-	
+	/**
+	 * 
+	 * @param batchId
+	 */
 	public void sendSimpleTraineeDeleteRequest(Integer batchId) {
 		JsonObject TraineeDeleteRequest = new JsonObject();
 		TraineeDeleteRequest.addProperty("methodName", "delete");

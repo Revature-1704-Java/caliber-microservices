@@ -12,6 +12,11 @@ import com.revature.caliber.model.Batch;
 public class BatchCompositionDispatcher {
 	@Autowired
 	private BatchCompositionService bcs;
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public List<Batch> processListBatchRequest(JsonObject request) {
 		System.out.println(request);
 		System.out.println("List");
@@ -36,6 +41,11 @@ public class BatchCompositionDispatcher {
 		}
 		return null;
 	}
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public Batch processBatchRequest(JsonObject request) {
 		String methodName = request.get("methodName").getAsString();
 		System.out.println(request);

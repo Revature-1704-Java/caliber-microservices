@@ -22,6 +22,11 @@ public class PanelFeedbackRepositoryRequestDispatcher {
 	@Autowired
 	private PanelFeedbackRepository panelFeedbackRepository;
 	
+	/**
+	 * Handle a messaging request for a simple panel feedback.
+	 * @param request The JsonObject that defines the parameters for the simple panel feedback to be returned
+	 * @return A simple panel feedback according to the parameters in the request
+	 */
 	public SimplePanelFeedback processSingleSimplePanelFeedbackRequest(JsonObject request) {
 		SimplePanelFeedback result = null;
 		String methodName = request.get("methodName").getAsString();
@@ -38,6 +43,11 @@ public class PanelFeedbackRepositoryRequestDispatcher {
 		return result;
 	}
 	
+	/**
+	 * Handle a messaging request for a list of simple panel feedbacks.
+	 * @param request The JsonObject that defines the parameters for the simple panel feedbacks to be returned
+	 * @return A list of simple panel feedbacks according to the parameters in the request
+	 */
 	public List<SimplePanelFeedback> processListSimplePanelFeedbackRequest(JsonObject request) {
 		List<SimplePanelFeedback> result = null;
 		String methodName = request.get("methodName").getAsString();
