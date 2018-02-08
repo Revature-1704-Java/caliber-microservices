@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Batch implements Serializable {
-	private static final long serialVersionUID = -5755409643112884001L;
+	private static final long serialVersionUID = 5368888406682098953L;
 	
 	private int batchId;
 	private String resourceId;

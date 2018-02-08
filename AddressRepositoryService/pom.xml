@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Edgware.SR1</spring-cloud.version>
+		 <spring-cloud.version>Edgware.SR1</spring-cloud.version>
 	</properties>
 
 	<dependencies>
@@ -101,17 +101,17 @@
         
 	</dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
+        <dependencyManagement>
+          <dependencies>
+              <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+              </dependency>
+          </dependencies>
+        </dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
@@ -120,6 +120,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
