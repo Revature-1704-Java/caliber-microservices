@@ -88,7 +88,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// create assessment
 	trainer.createAssessment = function(assessmentObj) {
 		return $http({
-			url : "/trainer/assessment/create/",
+			url : "http://localhost:8081/assessment/trainer/assessment/create/",
 			method : "POST",
 			data : assessmentObj,
 			headers : {
@@ -107,7 +107,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// get all assessments
 	trainer.getAllAssessmentsForWeek = function(batchId, week) {
 		return $http({
-			url : "/trainer/assessment/" + batchId + "/" + week + "/",
+			url : "http://localhost:8081/assessment/trainer/assessment/" + batchId + "/" + week + "/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Assessments successfully retrieved");
@@ -121,7 +121,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// update assessment
 	trainer.updateAssessment = function(assessmentObj) {
 		return $http({
-			url : "/trainer/assessment/update",
+			url : "http://localhost:8081/assessment/trainer/assessment/update",
 			method : "PUT",
 			data : assessmentObj
 		}).then(function(response) {
@@ -136,7 +136,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// delete assessment
 	trainer.deleteAssessment = function(assessmentId) {
 		return $http({
-			url : "/trainer/assessment/delete/" + assessmentId + "/",
+			url : "http://localhost:8081/assessment/trainer/assessment/delete/" + assessmentId + "/",
 			method : "DELETE"
 		}).then(function(response) {
 			$log.debug("Assessment successfully deleted");
@@ -150,7 +150,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// Call EvaluationController's findTrainerBatchNotes method
 	trainer.getTrainerBatchNote = function(batchId, week) {
 		return $http({
-			url : "/trainer/note/batch/" + batchId + "/" + week + "/",
+			url : "http://localhost:8081/note/trainer/note/batch/" + batchId + "/" + week + "/",
 			method : "GET"
 		}).then(function(response) {
 			$log.log("Trainer Batch Note retrieved successfully");
@@ -162,7 +162,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 
 	trainer.getTraineeBatchNotesForWeek = function(batchId, week) {
 		return $http({
-			url : "/trainer/note/trainee/" + batchId + "/" + week + "/",
+			url : "http://localhost:8081/note/trainer/note/trainee/" + batchId + "/" + week + "/",
 			method : "GET"
 		}).then(function(response) {
 			if (response.data) {
@@ -177,7 +177,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 
 	trainer.getTraineeNote = function(traineeId, week) {
 		return $http({
-			url : "/trainer/note/trainee/" + traineeId + "/for/" + week + "/",
+			url : "http://localhost:8081/note/trainer/note/trainee/" + traineeId + "/for/" + week + "/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Notes successfully fetched");
@@ -194,7 +194,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 
 	trainer.createNote = function(noteObj) {
 		return $http({
-			url : "/note/create/",
+			url : "http://localhost:8081/note/note/create/",
 			method : "POST",
 			data : noteObj
 		}).then(function(response) {
@@ -209,7 +209,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 
 	trainer.updateNote = function(noteObj) {
 		return $http({
-			url : "/note/update/",
+			url : "http://localhost:8081/note/note/update/",
 			method : "POST",
 			data : noteObj
 		}).then(function(response) {
@@ -222,7 +222,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 
 	trainer.saveOrUpdateNote = function(noteObj) {
 		return $http({
-			url : "/note/update/",
+			url : "http://localhost:8081/note/note/update/",
 			method : "POST",
 			data : noteObj
 		}).then(function(response) {

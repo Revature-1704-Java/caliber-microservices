@@ -385,7 +385,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.getAllTraineeNotes = function(traineeId) {
 		return $http({
-			url : "/all/notes/trainee/" + traineeId,
+			url : "http://localhost:8081/note/all/notes/trainee/" + traineeId,
 			method : "GET"
 		}).then(function(response) {
 			return response.data
