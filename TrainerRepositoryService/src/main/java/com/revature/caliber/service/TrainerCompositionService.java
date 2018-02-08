@@ -37,7 +37,8 @@ public class TrainerCompositionService {
 	 */
 	public void save(Trainer trainer) {
 		SimpleTrainer simpleTrainer = new SimpleTrainer(trainer);
-
+		
+		if(trainer.getTrainerId() == 0) simpleTrainer.setTrainerId(null);
 		trainerRepository.save(simpleTrainer);
 	}
 
