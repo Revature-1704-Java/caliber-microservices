@@ -26,7 +26,7 @@ public class ReportingServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ReportingServiceApplication.class, args);
 	}
-	
+	/*
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
@@ -34,7 +34,7 @@ public class ReportingServiceApplication {
 			System.out.println(m.findAllCurrentWithNotesAndTrainees());
 		};
 	}
-	
+	*/
 	@Bean
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  

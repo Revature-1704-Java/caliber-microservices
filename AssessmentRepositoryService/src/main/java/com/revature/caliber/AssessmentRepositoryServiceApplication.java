@@ -32,26 +32,6 @@ public class AssessmentRepositoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AssessmentRepositoryServiceApplication.class, args);
 	}
-
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			List<SimpleAssessment> assessments = dao.findAll();
-			System.out.println(assessments);
-			
-			SimpleAssessment assessment = assessments.get(0);
-			Gson gson = new Gson();
-			String gsonObject = gson.toJson(assessment);
-			System.out.println(gsonObject);
-			
-			JsonParser jp = new JsonParser();
-			JsonElement element = jp.parse(gsonObject);
-			System.out.println(element);
-			
-			JsonObject request = element.getAsJsonObject();
-			System.out.println(request);
-		};
-	}
 	
 	@Bean
     public Docket api() { 
