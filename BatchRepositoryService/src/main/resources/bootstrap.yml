@@ -3,5 +3,8 @@ spring:
     name: batch
   cloud:
     config:
+<<<<<<< HEAD
+      uri: http://localhost:8888
+=======
       url: http://localhost:8888
-      
+>>>>>>> f82692a9c888f18a481a0574a65cce7c698ab665

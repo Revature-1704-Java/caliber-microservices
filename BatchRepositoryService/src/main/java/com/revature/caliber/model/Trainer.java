@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public class Trainer implements Serializable {
 
-	private static final long serialVersionUID = -2546407792912483570L;
+	private static final long serialVersionUID =  -2546407792912483570L;
 	private int trainerId;
 	private String name;
 	private String title;
