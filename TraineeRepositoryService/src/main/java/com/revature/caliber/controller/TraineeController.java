@@ -29,7 +29,7 @@ import com.revature.caliber.model.Trainee;
  */
 @RestController
 //@PreAuthorize("isAuthenticated()")
-@CrossOrigin(origins = "http://localhost:8090")
+@CrossOrigin
 public class TraineeController {
 
 	private static final Logger log = Logger.getLogger(TraineeController.class);

@@ -158,7 +158,7 @@ angular
 					report.getAllBatchesCurrentWeekQCStats = function() {
 						return $http(
 								{
-									url : "/all/reports/batch/week/stacked-bar-current-week",
+									url : "http://localhost:8081/reporting/all/reports/batch/week/stacked-bar-current-week",
 									method : "GET"
 								})
 								.then(
