@@ -29,11 +29,11 @@ public class RepositoryProducerConfiguration {
 		return new PanelCompositionService();
 	}
 
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			Panel panel = panelCompositionService.findOne(1);
-			System.out.println(panel);
-		};
-	}
+//	@Bean
+//	public CommandLineRunner runner() {
+//		return args -> {
+//			Panel panel = panelCompositionService.findOne(1);
+//			System.out.println(panel);
+//		};
+//	}
 }

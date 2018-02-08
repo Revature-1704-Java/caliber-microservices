@@ -8,4 +8,6 @@ import com.revature.caliber.model.Address;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Integer>{
 	
+	Address findByAddressId(Integer addressId);
+	
 }

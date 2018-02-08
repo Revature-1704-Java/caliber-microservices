@@ -182,4 +182,9 @@ public class BatchController {
 	private Trainer getPrincipal(Authentication auth) {
 		return ((SalesforceUser) auth.getPrincipal()).getCaliberUser();
 	}
+	
+//	private Trainer getPrincipal() {
+//		return null;
+//		
+//	}
 }

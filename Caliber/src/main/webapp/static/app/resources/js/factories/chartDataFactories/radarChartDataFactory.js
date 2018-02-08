@@ -14,7 +14,7 @@ angular.module("reportApi").factory(
 			report.getTraineeUpToWeekRadarChart = function(week, traineeId) {
 				return $http(
 						{
-							url : "/all/reports/week/" + week + "/trainee/"
+							url : "https://localhost:8081/reporting/all/reports/week/" + week + "/trainee/"
 									+ traineeId + "/radar-trainee-up-to-week",
 							method : "GET"
 						}).then(function(response) {
@@ -28,7 +28,7 @@ angular.module("reportApi").factory(
 			report.getTraineeOverallRadarChart = function(traineeId) {
 				return $http(
 						{
-							url : "/all/reports/trainee/" + traineeId
+							url : "https://localhost:8081/reporting/all/reports/trainee/" + traineeId
 									+ "/radar-trainee-overall",
 							method : "GET"
 						}).then(function(response) {
@@ -42,7 +42,7 @@ angular.module("reportApi").factory(
 			report.getBatchOverallRadarChart = function(batchId) {
 				return $http(
 						{
-							url : "/all/reports/batch/" + batchId
+							url : "https://localhost:8081/reporting/all/reports/batch/" + batchId
 									+ "/overall/radar-batch-overall",
 							method : "GET"
 						}).then(function(response) {
@@ -94,7 +94,7 @@ angular.module("reportApi").factory(
 			report.getAllTraineesAndBatchRadarChart = function(batchId) {
 				return $http(
 						{
-							url : "/all/reports/batch/" + batchId
+							url : "https://localhost:8081/reporting/all/reports/batch/" + batchId
 									+ "/radar-batch-all-trainees",
 							method : "GET"
 						}).then(function(response) {
