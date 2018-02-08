@@ -11,7 +11,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.Trainee;
-
+/**
+ * Message Listener
+ * The queue in which the message comes in determines the type of composition.
+ *  
+ * @author Samuel Huang
+ */
 @Service
 public class TraineeRepositoryMessagingService {
 
@@ -19,6 +24,13 @@ public class TraineeRepositoryMessagingService {
 	private TraineeRepositoryRequestDispatcher traineeRepositoryRequestDispatcher;
 
 	/**
+	 * sphuang 02/08/2018 
+	 * Parses message in queue to a string json object.
+	 * RequestDispatcher then processes the message and returns a SimpleTrainee.
+	 * 
+	 * 
+	 * @param String - message
+	 * @return SimpleTrainee 
 	 * Parse a String for SimpleTrainee
 	 *
 	 * @param Message
@@ -33,6 +45,15 @@ public class TraineeRepositoryMessagingService {
 
 		return traineeRepositoryRequestDispatcher.processSingleSimpleTraineeRequest(request);
 	}
+	
+	/**
+	 * sphuang 02/08/2018 
+	 * Parses message in queue to a string json object.
+	 * RequestDispatcher then processes the message and returns a List of SimpleTrainee.
+	 * 
+	 * 
+	 * @param String - message
+	 * @return List<SimpleTrainee> - List of simple Trainees
 
 	/**
 	 * Parse a String for List of SimpleTrainee
@@ -51,6 +72,13 @@ public class TraineeRepositoryMessagingService {
 	}
 	
 	/**
+	 * sphuang 02/08/2018 
+	 * Parses message in queue to a string json object.
+	 * RequestDispatcher then processes the message and returns a List of ComplexTrainees.
+	 * 
+	 * 
+	 * @param String - message
+	 * @return List<SimpleTrainee> - List of simple Trainees
 	 * Parse a String for List of Trainee
 	 *
 	 * @param Message

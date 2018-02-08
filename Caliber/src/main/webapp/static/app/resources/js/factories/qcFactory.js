@@ -151,7 +151,7 @@ angular.module("api").factory("qcFactory", function($log, $http) {
 	// get all assessment categories for the week
 	qc.getAllAssessmentCategories = function(batchId, weekId) {
 		return $http({
-			url : "/all/assessments/categories/batch/" + batchId + "/week/" + weekId + "/",
+			url : "https://localhost:8081/reporting/all/assessments/categories/batch/" + batchId + "/week/" + weekId + "/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Assessments categories retrieved successfully");

@@ -14,18 +14,18 @@ import com.revature.caliber.service.BatchCompositionService;
 
 @SpringBootApplication
 public class BatchRepositoryServiceApplication {
-	@Autowired
-	BatchCompositionMessageService bmcs;
+//	@Autowired
+//	BatchCompositionMessageService bcms;
+//	@Autowired
+//	BatchCompositionService bcs;
 	public static void main(String[] args) {
 		SpringApplication.run(BatchRepositoryServiceApplication.class, args);
 	}
 //	@Bean
 //	public CommandLineRunner runner() {
 //		return args -> {
-//			System.out.println("here");
-//			System.out.println(bmcs.sendListSimpleTraineeRequest(2100));
-//			bmcs.sendSimpleTraineeDeleteRequest(2100);
-//			System.out.println(bmcs.sendListSimpleTraineeRequest(2100));
+//			System.out.println(bcs.findAllCurrentWithTrainees());
 //		};
 //	}
 }
+

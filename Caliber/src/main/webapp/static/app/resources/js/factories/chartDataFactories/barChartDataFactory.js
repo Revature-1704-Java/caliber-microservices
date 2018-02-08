@@ -20,7 +20,7 @@ angular
 					report.getBatchWeekAvgBarChart = function(batchId, week) {
 						return $http(
 								{
-									url : "/all/reports/batch/" + batchId
+									url : "https://localhost:8081/reporting/all/reports/batch/" + batchId
 											+ "/week/" + week
 											+ "/bar-batch-week-avg",
 									method : "GET"
@@ -40,7 +40,7 @@ angular
 							weekNum, traineeId) {
 						return $http(
 								{
-									url : "/all/reports/batch/" + batchId
+									url : "https://localhost:8081/reporting/all/reports/batch/" + batchId
 											+ "/week/" + weekNum + "/trainee/"
 											+ traineeId
 											+ "/bar-batch-week-trainee",
@@ -61,7 +61,7 @@ angular
 							traineeId) {
 						return $http(
 								{
-									url : "/all/reports/batch/" + batchId
+									url : "https://localhost:8081/reporting/all/reports/batch/" + batchId
 											+ "/overall/trainee/" + traineeId
 											+ "/bar-batch-overall-trainee",
 									method : "GET"
@@ -99,7 +99,7 @@ angular
 							week) {
 						return $http(
 								{
-									url : "/all/reports/batch/" + batchId
+									url : "https://localhost:8081/reporting/all/reports/batch/" + batchId
 											+ "/week/" + week
 											+ "/bar-batch-weekly-sorted",
 									method : "GET"
@@ -177,7 +177,7 @@ angular
 							startDate) {
 						return $http(
 								{
-									url : "/all/reports/compare/skill/" + skill
+									url : "http://localhost:8081/reporting/all/reports/compare/skill/" + skill
 											+ "/training/" + training
 											+ "/date/" + startDate,
 									method : "GET"
