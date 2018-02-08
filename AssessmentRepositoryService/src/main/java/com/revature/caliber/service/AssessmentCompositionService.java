@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.caliber.model.Assessment;
 import com.revature.caliber.model.Batch;
@@ -13,6 +14,7 @@ import com.revature.caliber.model.SimpleBatch;
 import com.revature.caliber.model.SimpleCategory;
 import com.revature.caliber.repository.AssessmentRepository;
 
+@Service
 public class AssessmentCompositionService {
 	@Autowired
 	private AssessmentRepository assessmentRepository;
@@ -39,7 +41,14 @@ public class AssessmentCompositionService {
 		return assessments;
 	}
 
-	public List<Assessment> findByWeek(Integer batchId, Short week) {
+	public List<Assessment> findByWeek(Short week) {
+		List<SimpleAssessment> basis = assessmentRepository.findByWeek(week);
+		List<Assessment> assessments = composeListOfAssessments(basis);
+
+		return assessments;
+	}
+
+	public List<Assessment> findByBatchIdAndWeek(Integer batchId, Short week) {
 		List<SimpleAssessment> basis = assessmentRepository.findByBatchIdAndWeek(batchId, week);
 		List<Assessment> assessments = composeListOfAssessments(basis);
 
@@ -108,11 +117,11 @@ public class AssessmentCompositionService {
 	public void createAssessmentFromDTO(String category, String batchResourceId) {
 		SimpleBatch simpleBatch = assessmentCompositionMessagingService.sendSingleSimpleBatchRequest(batchResourceId);
 		SimpleCategory simpleCategory = assessmentCompositionMessagingService.sendSingleSimpleCategoryRequest(category);
-		SimpleAssessment sAssessment = new SimpleAssessment();
+		SimpleAssessment simpleAssessment = new SimpleAssessment();
 
-		sAssessment.setBatchId(simpleBatch.getBatchId());
-		sAssessment.setCategoryId(simpleCategory.getCategoryId());
+		simpleAssessment.setBatchId(simpleBatch.getBatchId());
+		simpleAssessment.setCategoryId(simpleCategory.getCategoryId());
 
-		assessmentRepository.save(sAssessment);
+		assessmentRepository.save(simpleAssessment);
 	}
 }
