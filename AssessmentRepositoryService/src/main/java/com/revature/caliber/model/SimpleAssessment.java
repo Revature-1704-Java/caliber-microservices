@@ -67,6 +67,16 @@ public class SimpleAssessment implements Serializable {
 		this.categoryId = categoryId;
 	}
 
+	public SimpleAssessment(Assessment assessment) {
+		this.assessmentId = assessment.getAssessmentId();
+		this.rawScore = assessment.getRawScore();
+		this.title = assessment.getTitle();
+		this.type = assessment.getType();
+		this.week = assessment.getWeek();
+		this.batchId = assessment.getBatch().getBatchId();
+		this.categoryId = assessment.getCategory().getCategoryId();
+	}
+
 	public Long getAssessmentId() {
 		return assessmentId;
 	}

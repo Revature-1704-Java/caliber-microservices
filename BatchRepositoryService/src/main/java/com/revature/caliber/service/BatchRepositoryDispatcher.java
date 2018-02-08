@@ -3,13 +3,14 @@ package com.revature.caliber.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleBatch;
 import com.revature.caliber.repository.BatchRepository;
-
+@Service
 public class BatchRepositoryDispatcher {
 	@Autowired
 	BatchRepository repo;
