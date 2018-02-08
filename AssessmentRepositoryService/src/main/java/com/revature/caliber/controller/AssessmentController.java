@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.caliber.model.SimpleAssessment;
-import com.revature.caliber.repository.AssessmentDAO;
+import com.revature.caliber.model.Assessment;
+import com.revature.caliber.service.AssessmentCompositionService;
 
 /**
  * Used for assessment CRUD operations.
@@ -37,7 +37,7 @@ public class AssessmentController {
 	private static final Logger log = Logger.getLogger(AssessmentController.class);
 
 	@Autowired
-	AssessmentDAO dao;
+	AssessmentCompositionService assessmentService;
 
 	/**
 	 * User gets all assessment objects from table
@@ -46,8 +46,9 @@ public class AssessmentController {
 	 * @return assessmentList
 	 */
 	@GetMapping(value = "/trainer/assessment", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<SimpleAssessment> getAssessments() {
-		List<SimpleAssessment> assessmentList = dao.findAll();
+	public List<Assessment> getAssessments() {
+		log.info("Retrieving all Assessments");
+		List<Assessment> assessmentList = assessmentService.findAll();
 		return assessmentList;
 	}
 
@@ -58,8 +59,9 @@ public class AssessmentController {
 	 * @return assessment object
 	 */
 	@GetMapping(value = "/trainer/assessment/{assessmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public SimpleAssessment getAssessment(@PathVariable Long assessmentId) {
-		SimpleAssessment assessment = dao.findByAssessmentId(assessmentId);
+	public Assessment getAssessment(@PathVariable Long assessmentId) {
+		log.info("Retrieving Assessment with assessmentId: " + assessmentId);
+		Assessment assessment = assessmentService.findOne(assessmentId);
 		return assessment;
 	}
 
@@ -74,9 +76,9 @@ public class AssessmentController {
 	@RequestMapping(value = "/trainer/assessment/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<SimpleAssessment> createAssessment(@Valid @RequestBody SimpleAssessment assessment) {
+	public ResponseEntity<Assessment> createAssessment(@Valid @RequestBody Assessment assessment) {
 		log.info("Creating assessment: " + assessment);
-		dao.save(assessment);
+		assessmentService.save(assessment);
 		return new ResponseEntity<>(assessment, HttpStatus.CREATED);
 	}
 
@@ -92,9 +94,9 @@ public class AssessmentController {
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
 	public ResponseEntity<Void> deleteAssessment(@PathVariable Long id) {
 		log.info("Deleting assessment: " + id);
-		SimpleAssessment assessment = new SimpleAssessment();
+		Assessment assessment = new Assessment();
 		assessment.setAssessmentId(id);
-		dao.delete(assessment);
+		assessmentService.delete(assessment);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
@@ -108,9 +110,9 @@ public class AssessmentController {
 	@RequestMapping(value = "/trainer/assessment/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	// @PreAuthorize("hasAnyRole('VP', 'TRAINER')")
-	public ResponseEntity<SimpleAssessment> updateAssessment(@Valid @RequestBody SimpleAssessment assessment) {
+	public ResponseEntity<Assessment> updateAssessment(@Valid @RequestBody Assessment assessment) {
 		log.info("Updating assessment: " + assessment);
-		dao.save(assessment);
+		assessmentService.save(assessment);
 		return new ResponseEntity<>(assessment, HttpStatus.OK);
 	}
 
@@ -122,10 +124,10 @@ public class AssessmentController {
 	 * @return
 	 */
 	@GetMapping(value = "/trainer/assessment/{batchId}/{week}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<SimpleAssessment>> findAssessmentByWeek(@PathVariable Integer batchId,
+	public ResponseEntity<List<Assessment>> findAssessmentByWeek(@PathVariable Integer batchId,
 			@PathVariable Short week) {
-		log.debug("Find assessment by week number " + week + " for batch " + batchId + " ");
-		List<SimpleAssessment> assessments = dao.findByBatchIdAndWeek(batchId, week);
+		log.info("Find assessment by week number " + week + " for batch " + batchId + " ");
+		List<Assessment> assessments = assessmentService.findByBatchIdAndWeek(batchId, week);
 		if (assessments.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

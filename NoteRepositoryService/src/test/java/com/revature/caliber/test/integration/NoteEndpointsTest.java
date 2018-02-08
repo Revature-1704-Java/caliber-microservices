@@ -1,10 +1,10 @@
 package com.revature.caliber.test.integration;
 
-import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +28,22 @@ public class NoteEndpointsTest {
 	
 	private MockMvc mvc;
 	
+	private Gson gson;
+	
 	@Before
 	public void setUp() {
 		mvc = MockMvcBuilders.webAppContextSetup(context).build();
+		gson = new Gson();
 	}
 	
+	@Ignore
 	@Test
 	public void createNoteTest() throws Exception {
 		Note note = Note.qcBatchNote("Test", 8, new Batch(), QCStatus.Good);
-		Gson gson = new Gson();
-		mvc.perform(post("http://localhost:8908/note/create").contentType(MediaType.APPLICATION_JSON).content(gson.toJson(note, Note.class)));
 		
+		mvc.perform(post("http://localhost:8081/note/note/create")
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.content(gson.toJson(note, Note.class).toString()))
+				.andExpect(status().isCreated());
 	}
 }
