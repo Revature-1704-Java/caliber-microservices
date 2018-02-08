@@ -39,7 +39,9 @@ public class AssessmentController {
 	private AssessmentCompositionService assessmentService;
 
 	@Autowired
-	AssessmentCompositionService assessmentService;
+	public void setAssessmentService(AssessmentCompositionService assessmentService) {
+		this.assessmentService = assessmentService;
+	}
 
 	/**
 	 * User gets all assessment objects from table
