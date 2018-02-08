@@ -13,4 +13,5 @@ import com.revature.caliber.model.SimpleBatch;
 public interface BatchRepository extends JpaRepository<SimpleBatch, Integer>, BatchRepositoryCustom {
 	List <SimpleBatch> findAllByTrainerId(@Param("trainerId") Integer trainerId);
 	List <SimpleBatch> findAllByStartDateAfter(@Param("date") Date date);
+	List <SimpleBatch> findOneByResourceId(@Param("resourceId") String resourceId);
 }

@@ -24,12 +24,13 @@ public class GradeCompositionMessagingService {
 	private static final String SINGLE_TRAINEE_LIST_ROUTING_KEY = "eRQ7GaBRnHgGdV9D";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 	
-	/*
-	 * Dont have the SimpleAssessment so I will skip for now
-	public SimpleAssessment sendSingleGradeRequest() {
-	       return true;
-	}
-	*/
+	/**
+	 * Makes a json request for a simple trainee for the 
+	 * findOne method
+	 * 
+	 * @param traineeId
+	 * @return
+	 */
 	
 	public SimpleTrainee sendSimpleTraineeRequest(Integer traineeId) {
 		JsonObject traineeRequest = new JsonObject();
@@ -40,7 +41,13 @@ public class GradeCompositionMessagingService {
 		return (SimpleTrainee) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_ROUTING_KEY, traineeRequest.toString());
 	}
 	
-	
+	/**
+	 * Makes a json request for a simple assessment for the 
+	 * findOne method
+	 * 
+	 * @param assessmentId
+	 * @return
+	 */
 	public SimpleAssessment sendSimpleAssessmentRequest(Long assessmentId) {
 		JsonObject assessmentRequest = new JsonObject();
 		
@@ -50,6 +57,14 @@ public class GradeCompositionMessagingService {
 		return (SimpleAssessment) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_ASSESSMENT_ROUTING_KEY, assessmentRequest.toString());
 	}
 	
+	
+	/**
+	 * Makes a json request for a list of simple trainee in a batch for the 
+	 * findAllByBatchId method
+	 * 
+	 * @param batchId
+	 * @return
+	 */
 	public List<SimpleTrainee> sendSimpleFindAllByBatchIdRequest(Integer batchId) {
 		JsonObject traineeByBatchRequest = new JsonObject();
 		
@@ -59,6 +74,14 @@ public class GradeCompositionMessagingService {
 		return (List<SimpleTrainee>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_LIST_ROUTING_KEY, traineeByBatchRequest.toString());
 	}
 	
+	
+	/**
+	 * Makes a json request for a list of simple assessments in a category for the 
+	 * findByCategoryId method
+	 * 
+	 * @param traineeId
+	 * @return
+	 */
 	public List<SimpleAssessment> sendListAssessmentRequest(Integer categoryId) {
 		JsonObject assessmentRequest = new JsonObject();
 		
@@ -66,6 +89,16 @@ public class GradeCompositionMessagingService {
 		assessmentRequest.addProperty("categoryId", categoryId);
 		
 		return (List<SimpleAssessment>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_ASSESSMENT_ROUTING_KEY, assessmentRequest.toString());
+	}
+
+
+	public SimpleTrainee sendSimpleTraineeRequest(String traineeResourceId) {
+		JsonObject traineeRequest = new JsonObject();
+		
+		traineeRequest.addProperty("methodName", "findOneByResourceId");
+		traineeRequest.addProperty("resourceId", traineeResourceId);
+		
+		return (SimpleTrainee) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_ROUTING_KEY, traineeRequest.toString());
 	}
 	
 }

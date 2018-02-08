@@ -94,4 +94,15 @@ public class AssessmentCompositionService {
 
 		return assessment;
 	}
+
+	public void createAssessmentFromDTO(String category, String batchResourceId) {
+		SimpleBatch simpleBatch = assessmentCompositionMessagingService.sendSingleSimpleBatchRequest(batchResourceId);
+		SimpleCategory simpleCategory = assessmentCompositionMessagingService.sendSingleSimpleCategoryRequest(category);
+		SimpleAssessment sAssessment = new SimpleAssessment();
+		
+		sAssessment.setBatchId(simpleBatch.getBatchId());
+		sAssessment.setCategoryId(simpleCategory.getCategoryId());
+		
+		assessmentRepository.save(sAssessment);
+	}
 }
