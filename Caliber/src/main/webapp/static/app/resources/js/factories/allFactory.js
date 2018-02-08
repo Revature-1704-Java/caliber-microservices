@@ -372,7 +372,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	};
 	all.getGradesForWeek = function(batchId, weekId) {
 		return $http({
-			url : "/all/grades/batch/" + batchId + "/week/" + weekId,
+			url : "http://localhost:8081/grade/all/grades/batch/" + batchId + "/week/" + weekId,
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Grades for week successfully retrieved.");
