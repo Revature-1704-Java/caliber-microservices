@@ -18,7 +18,12 @@ public class PanelFeedbackCompositionMessagingService {
 	private static final String SINGLE_PANEL_ROUTING_KEY = "B8ptbVDNyVB28mVA";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 	
-	//Category
+	/**
+	 * Sends a request for a SimpleCategory to the Category service identified by
+	 * a categoryId
+	 * @param categoryId The categoryId that identifies the SimpleCategory
+	 * @return The SimpleCategory returned by the Category service
+	 */
 	public SimpleCategory sendSingleSimpleCategoryRequest(Integer categoryId) {
 		JsonObject categoryRequest = new JsonObject();
 		
@@ -28,7 +33,12 @@ public class PanelFeedbackCompositionMessagingService {
 		return (SimpleCategory) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_CATEGORY_ROUTING_KEY, categoryRequest.toString());
 	}
 	
-	//Panel
+	/**
+	 * Sends a request for a SimplePanel to the Panel service identified by
+	 * a panelId
+	 * @param panelId The panelId that identifies the SimplePanel
+	 * @return The SimplePanel returned by the Panel service
+	 */
 	public SimplePanel sendSingleSimplePanelRequest(Integer panelId) {
 		JsonObject panelRequest = new JsonObject();
 		
