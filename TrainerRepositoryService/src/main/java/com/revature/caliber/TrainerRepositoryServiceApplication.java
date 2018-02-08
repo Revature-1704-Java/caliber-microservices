@@ -11,9 +11,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
-@SpringBootApplication
+
+
 @EnableEurekaClient
 @EnableSwagger2
+@SpringBootApplication
 public class TrainerRepositoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TrainerRepositoryServiceApplication.class, args);

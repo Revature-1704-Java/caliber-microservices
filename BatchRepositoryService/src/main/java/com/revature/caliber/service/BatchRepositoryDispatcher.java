@@ -3,16 +3,23 @@ package com.revature.caliber.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleBatch;
 import com.revature.caliber.repository.BatchRepository;
-
+@Service
 public class BatchRepositoryDispatcher {
 	@Autowired
 	BatchRepository repo;
+	/**
+	 * Process incoming request and run actual repository methods base on methodname
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public SimpleBatch processSimpleBatchRequest(JsonObject request) {
 		Gson gson=new GsonBuilder().setDateFormat("mm-dd-yyy").create();
 		String methodName = request.get("methodName").getAsString();
@@ -31,6 +38,13 @@ public class BatchRepositoryDispatcher {
 				return null;
 		}
 	}
+	/**
+	 * 
+	 * Process incoming request and run list repository methods base on method name
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public List<SimpleBatch> processListSimpleBatchRequest(JsonObject request) {
 		String methodName = request.get("methodName").getAsString();
 		if(methodName.contains("Current")){

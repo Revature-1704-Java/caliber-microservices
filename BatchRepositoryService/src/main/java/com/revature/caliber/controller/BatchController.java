@@ -36,7 +36,7 @@ import com.revature.caliber.service.BatchService;
  */
 @RestController
 //@PreAuthorize("isAuthenticated()")
-@CrossOrigin(origins = "http://localhost:8090")
+@CrossOrigin
 public class BatchController {
 
 	private static final Logger log = Logger.getLogger(BatchController.class);
@@ -182,4 +182,9 @@ public class BatchController {
 	private Trainer getPrincipal(Authentication auth) {
 		return ((SalesforceUser) auth.getPrincipal()).getCaliberUser();
 	}
+	
+//	private Trainer getPrincipal() {
+//		return null;
+//		
+//	}
 }

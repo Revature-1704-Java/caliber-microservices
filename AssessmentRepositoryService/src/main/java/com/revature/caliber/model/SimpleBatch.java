@@ -3,16 +3,10 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 import java.util.Date;
 
-//import com.fasterxml.jackson.annotation.JsonIgnore;
-//import com.fasterxml.jackson.annotation.JsonManagedReference;
-//import com.fasterxml.jackson.annotation.JsonProperty;/**
-
-
 public class SimpleBatch implements Serializable {
-	/**
-	* 
-	*/
+
 	private static final long serialVersionUID = 6433997711397981988L;
+
 	private Integer batchId;
 	private String resourceId;
 	private String trainingName;
@@ -24,14 +18,7 @@ public class SimpleBatch implements Serializable {
 	private Date endDate;
 	private String location;
 	private Integer addressId;
-	/**
-	 * Anything above this grade is GREEN
-	 */
 	private Short goodGradeThreshold;
-	/**
-	 * Anything above this grade but below goodGradeThreshold is YELLOW Anything
-	 * below this grade is RED
-	 */
 	private Short borderlineGradeThreshold;
 	private Integer weeks;
 	private Integer gradedWeeks;
@@ -49,7 +36,11 @@ public class SimpleBatch implements Serializable {
 	 * Constructor mostly used for testing. Defaults TrainingType - Revature,
 	 * SkillType - J2EE, Good grade - 80, and Borderline grade - 70
 	 *
-	 * * * * *
+	 * @param trainingName
+	 * @param trainer
+	 * @param startDate
+	 * @param endDate
+	 * @param location
 	 */
 	public SimpleBatch(String trainingName, Integer trainerId, Date startDate, Date endDate, String location) {
 		this();
@@ -278,4 +269,5 @@ public class SimpleBatch implements Serializable {
 				+ ", borderlineGradeThreshold=" + borderlineGradeThreshold + ", weeks=" + weeks + ", gradedWeeks="
 				+ gradedWeeks + "]";
 	}
+
 }

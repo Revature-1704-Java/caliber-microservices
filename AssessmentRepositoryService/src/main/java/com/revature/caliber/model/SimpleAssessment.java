@@ -55,8 +55,8 @@ public class SimpleAssessment implements Serializable {
 		super();
 	}
 
-	public SimpleAssessment(Long assessmentId, Integer rawScore, String title, AssessmentType type, Short week, Integer batchId,
-			Integer categoryId) {
+	public SimpleAssessment(Long assessmentId, Integer rawScore, String title, AssessmentType type, Short week,
+			Integer batchId, Integer categoryId) {
 		super();
 		this.assessmentId = assessmentId;
 		this.rawScore = rawScore;

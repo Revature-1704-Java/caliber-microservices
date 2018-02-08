@@ -3,7 +3,7 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 
 public class Address implements Serializable {
-	private static final long serialVersionUID = -5649489166844504113L;
+	private static final long serialVersionUID = -7886621867644813683L;
 
 	private int addressId;
 	private String street;

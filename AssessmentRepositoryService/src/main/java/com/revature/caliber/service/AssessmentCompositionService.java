@@ -22,6 +22,19 @@ public class AssessmentCompositionService {
 	private AssessmentCompositionMessagingService assessmentCompositionMessagingService;
 
 	/**
+	 * SAVE ASSESSMENT
+	 *
+	 * @param assessment
+	 */
+	public void save(SimpleAssessment assessment) {
+		assessmentRepository.save(assessment);
+	}
+
+	public void delete(long id) {
+		assessmentRepository.delete(id);
+	}
+
+	/**
 	 * Saves a Assessment by instantiating a new SimpleAssessment from the
 	 * Assessment and calling the AssessmentRepository save method.
 	 * 
@@ -155,10 +168,9 @@ public class AssessmentCompositionService {
 		assessmentRepository.deleteByAssessmentId(assessmentId);
 	}
 
-
 	/**
-	 * Deletes all Assessments of the given batchId as well as sends a message
-	 * to the Grade Service to delete all Grades that are tied to the deleted
+	 * Deletes all Assessments of the given batchId as well as sends a message to
+	 * the Grade Service to delete all Grades that are tied to the deleted
 	 * Assessments
 	 * 
 	 * @param batchId

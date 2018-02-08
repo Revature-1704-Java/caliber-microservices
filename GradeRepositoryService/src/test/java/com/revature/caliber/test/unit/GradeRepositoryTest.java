@@ -60,4 +60,28 @@ public class GradeRepositoryTest {
 		SimpleGrade grade = gradeRepository.findOne(2063L);
 		assertEquals(grade.getGradeId().longValue(), 2063L);
 	}
+	
+	
+	@Test
+	public void deleteByAssessmentIdTest() {
+		gradeRepository.deleteByAssessmentId(2053L);
+		List<SimpleGrade> grades = gradeRepository.findByAssessmentId(2053L);
+		
+		
+		assertEquals(grades.size(), 0);//should return an empty list
+		
+	}
+	
+	@Test
+	public void deleteByTraineeIdTest() {
+		gradeRepository.deleteByTraineeId(5354);
+		
+		List<SimpleGrade> grades = gradeRepository.findByTraineeId(5354);
+		
+		assertEquals(grades.size(), 0);	//should return an empty list
+		
+		
+	}
+	
+	
 }

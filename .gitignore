@@ -33,3 +33,6 @@ nbdist/
 
 ## Visual Studio Code
 .vscode/
+
+## Eclipse Servers
+Servers/

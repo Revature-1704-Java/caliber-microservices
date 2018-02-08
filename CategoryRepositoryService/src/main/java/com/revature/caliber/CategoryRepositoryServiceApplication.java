@@ -9,8 +9,10 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
+@EnableEurekaClient
 @EnableSwagger2
 public class CategoryRepositoryServiceApplication {
 

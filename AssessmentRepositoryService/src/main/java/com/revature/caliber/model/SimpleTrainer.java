@@ -2,9 +2,6 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 
-/**
- * The type Trainer.
- */
 public class SimpleTrainer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -109,7 +106,7 @@ public class SimpleTrainer implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Trainer [trainerId=" + trainerId + ", email=" + email + ", name=" + name + ", title=" + title

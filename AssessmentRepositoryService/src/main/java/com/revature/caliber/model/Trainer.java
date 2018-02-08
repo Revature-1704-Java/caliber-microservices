@@ -25,7 +25,6 @@ public class Trainer implements Serializable {
 		this.tier = tier;
 	}
 
-
 	public Trainer(SimpleTrainer src) {
 		this.name = src.getName();
 		this.title = src.getTitle();
@@ -127,5 +126,4 @@ public class Trainer implements Serializable {
 		return "Trainer [trainerId=" + trainerId + ", name=" + name + ", title=" + title + ", email=" + email
 				+ ", tier=" + tier + "]";
 	}
-
 }
