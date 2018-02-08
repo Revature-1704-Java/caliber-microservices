@@ -13,7 +13,7 @@ angular.module("api").factory("qcFactory", function($log, $http) {
 	/** ************************* Batch *********************** */
 	qc.getAllBatches = function() {
 		return $http({
-			url : "/qc/batch/all/",
+			url : "localhost:8081/batch/qc/batch/all/", //added "batch" and localhost in front
 			method : "GET"
 		}).then(function(response) {
 			$log.log("Batches retrieved successfully");

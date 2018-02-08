@@ -16,7 +16,7 @@ angular
 					// Get all batches
 					vp.getAllBatches = function() {
 						return $http({
-							url : "/vp/batch/all/",
+							url : "localhost:8081/batch/vp/batch/all/", //added "batch" and localhost in front
 							method : "GET"
 						})
 								.then(
@@ -34,7 +34,7 @@ angular
 					// Get all current batches
 					vp.getAllCurrentBatches = function() {
 						return $http({
-							url : "/vp/batch/all/current",
+							url : "localhost:8081/batch/vp/batch/all/current", //added "batch" and localhost in front
 							method : "GET"
 						})
 								.then(

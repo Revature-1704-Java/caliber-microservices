@@ -9,7 +9,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 		return $http({
 			url : "/all/locations",
 			method : "GET"
-		}).then(function(response) {
+		}).then(function(response)  {
 			return response.data;
 		}, function(response) {
 			$log.error("There was an error: " + response.status);
@@ -179,7 +179,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	 */
 	all.createBatch = function(batchObj) {
 		return $http({
-			url : "/all/batch/create",
+			url : "http://localhost:8081/batch/all/batch/create", //added "batch" and localhost in front
 			method : "POST",
 			data : batchObj
 		}).then(function(response) {
@@ -199,7 +199,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	 */
 	all.updateBatch = function(batchObj) {
 		return $http({
-			url : "/all/batch/update",
+			url : "http://localhost:8081/batch/all/batch/update", //added "batch" and localhost in front
 			method : "PUT",
 			data : batchObj
 		}).then(function(response) {
@@ -217,7 +217,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	 */
 	all.deleteBatch = function(batchId) {
 		return $http({
-			url : "/all/batch/delete/" + batchId,
+			url : "http://localhost:8081/batch/all/batch/delete/" + batchId, //added "batch" and localhost in front
 			method : "DELETE"
 		}).then(function(response) {
 			$log.debug("Batch successfully deleted");
@@ -408,7 +408,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	/** *********************** Location ********************* */
 	all.getAllLocations = function() {
 		return $http({
-			url : "/all/location/all/",
+			url : "localhost:8081/batch/all/location/all/", //added "batch" and localhost in front
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Locations successfully retrieved");
