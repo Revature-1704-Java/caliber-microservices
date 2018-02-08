@@ -26,63 +26,123 @@ public class BatchCompositionService {
 	private BatchRepository repo;
 	@Autowired
 	private BatchCompositionMessageService BCMS;
-	
+	/**
+	 * 
+	 * @param batch
+	 */
 	public void save(Batch batch) {
 		repo.save(batch.toSimple());
 	}
-	
+	/**
+	 * 
+	 * @param batch
+	 */
 	public void update(Batch batch) {
 		repo.save(batch.toSimple());
 	}
-	
+	/**
+	 * 
+	 * @param batch
+	 */
 	public void delete(Batch batch) {
 		repo.delete(batch.getBatchId());
 		BCMS.sendSimpleTraineeDeleteRequest(batch.getBatchId());
 		
 	}
-	
+	/**
+	 * 
+	 * @param batchId
+	 * @return
+	 */
 	public Batch findOne(Integer batchId) {
 		return composeBatch(repo.findOne(batchId), false);
 		
 	}
+	/**
+	 * 
+	 * @param batchId
+	 * @return
+	 */
 	public Batch findOneWithDroppedTrainees(Integer batchId) {
 		return composeBatch(repo.findOne(batchId), true);
 	}
+	/**
+	 * 
+	 * @param batchId
+	 * @return
+	 */
 	//needs refactoring;
 	public Batch findOneWithTraineesAndGrades(Integer batchId) {
 		return composeBatch(repo.findOne(batchId), false);
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Batch> findAll() {
 		return composeListOfBatch(repo.findAll(), false, false, false);
 	}
+	/**
+	 * 
+	 * @param trainerId
+	 * @return
+	 */
 	public List<Batch> findAllByTrainer(Integer trainerId) {
 		return composeListOfBatch(repo.findAllByTrainerId(trainerId), false, false, false);
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Batch> findAllCurrent() {
 		return composeListOfBatch(repo.findAllCurrent(),false, true ,false);	
 	}
-	
+	/**
+	 * 
+	 * @param trainerId
+	 * @return
+	 */
 	public List<Batch> findAllCurrent(Integer trainerId) {
 		return composeListOfBatch(repo.findAllCurrent(trainerId),false, true ,true);	
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Batch> findAllCurrentWithNotes() {
 		return composeListOfBatch(repo.findAllCurrent(),false, true, true);	
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Batch> findAllCurrentWithTrainees() {
 		return composeListOfBatch(repo.findAllCurrent(),false, true, true);
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Batch> findAllCurrentWithNotesAndTrainees() {
 		return composeListOfBatch(repo.findAllCurrent(),false, true, true);
 	}
-	
+	/**
+	 * 
+	 * @param month
+	 * @param day
+	 * @param year
+	 * @return
+	 */
 	public List<Batch> findAllAfterDate(Integer month, Integer day, Integer year) {
 		Date date=Date.from(LocalDate.of(year, month, day).atStartOfDay(ZoneId.systemDefault()).toInstant());
 		return composeListOfBatch(repo.findAllByStartDateAfter(date), false, true, true);
 	}
-	
+	/**
+	 * 
+	 * @param batchId
+	 * @param includeDropped
+	 * @return
+	 */
 	public Set<Trainee> getBatchTrainees(int batchId, boolean includeDropped){
 		List<SimpleTrainee> simpleTList = BCMS.sendListSimpleTraineeRequest(batchId);
 		return simpleTList.stream()
@@ -90,13 +150,22 @@ public class BatchCompositionService {
 				.map(t->new Trainee(t))
 				.collect(Collectors.toSet());
 	}
-	
+	/**
+	 * 
+	 * @param batchId
+	 * @return
+	 */
 	public Set<Note> getBatchNotes(int batchId){
 		List<SimpleNote> simpleNList = BCMS.sendListSimpleNoteRequest(batchId);
 		return simpleNList.stream()
 				.map(n-> new Note(n))
 				.collect(Collectors.toSet());
 	}
+	/**
+	 * 
+	 * @param src
+	 * @return
+	 */
 	public Batch setAddressAndTrainer(SimpleBatch src){
 		Address a = null;
 		Trainer t = new Trainer(BCMS.sendSimpleTrainerRequest(src.getTrainerId()));
@@ -116,6 +185,14 @@ public class BatchCompositionService {
 		}
 		return b;
 	}
+	/**
+	 * 
+	 * @param src
+	 * @param includeDropped
+	 * @param withTrainees
+	 * @param withNotes
+	 * @return
+	 */
 	private List<Batch> composeListOfBatch(List<SimpleBatch> src, 
 			boolean includeDropped, boolean withTrainees, boolean withNotes){
 		if(withTrainees&&withNotes){
@@ -142,6 +219,12 @@ public class BatchCompositionService {
 			}
 		}
 	}
+	/**
+	 * 
+	 * @param src
+	 * @param includeDropped
+	 * @return
+	 */
 	private Batch composeBatch(SimpleBatch src, boolean includeDropped) {
 		Batch b = setAddressAndTrainer(src);
 		b.setTrainees(getBatchTrainees(src.getBatchId(), includeDropped));

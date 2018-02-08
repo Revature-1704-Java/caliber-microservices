@@ -16,10 +16,4 @@ public class BatchRepositoryServiceConfiguration {
 		rabbitTemplate.setExchange("revature.caliber.repos");
 		return new RabbitTemplate(factory);
 	}
-	@Bean
-	public BatchRepositoryDispatcher brd(){
-		return new BatchRepositoryDispatcher();
-	}
-//	@Bean
-//	public BeanCompositionService 
 }

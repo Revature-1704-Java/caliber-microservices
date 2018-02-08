@@ -13,6 +13,12 @@ import com.revature.caliber.repository.BatchRepository;
 public class BatchRepositoryDispatcher {
 	@Autowired
 	BatchRepository repo;
+	/**
+	 * Process incoming request and run actual repository methods base on methodname
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public SimpleBatch processSimpleBatchRequest(JsonObject request) {
 		Gson gson=new GsonBuilder().setDateFormat("mm-dd-yyy").create();
 		String methodName = request.get("methodName").getAsString();
@@ -31,6 +37,13 @@ public class BatchRepositoryDispatcher {
 				return null;
 		}
 	}
+	/**
+	 * 
+	 * Process incoming request and run list repository methods base on method name
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public List<SimpleBatch> processListSimpleBatchRequest(JsonObject request) {
 		String methodName = request.get("methodName").getAsString();
 		if(methodName.contains("Current")){
