@@ -88,7 +88,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// create assessment
 	trainer.createAssessment = function(assessmentObj) {
 		return $http({
-			url : "/trainer/assessment/create/",
+			url : "http://localhost:8081/trainer/trainer/assessment/create/",
 			method : "POST",
 			data : assessmentObj,
 			headers : {
@@ -107,7 +107,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// get all assessments
 	trainer.getAllAssessmentsForWeek = function(batchId, week) {
 		return $http({
-			url : "/trainer/assessment/" + batchId + "/" + week + "/",
+			url : "http://localhost:8081/trainer/trainer/assessment/" + batchId + "/" + week + "/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Assessments successfully retrieved");
@@ -121,7 +121,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// update assessment
 	trainer.updateAssessment = function(assessmentObj) {
 		return $http({
-			url : "/trainer/assessment/update",
+			url : "http://localhost:8081/trainer/trainer/assessment/update",
 			method : "PUT",
 			data : assessmentObj
 		}).then(function(response) {
@@ -136,7 +136,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// delete assessment
 	trainer.deleteAssessment = function(assessmentId) {
 		return $http({
-			url : "/trainer/assessment/delete/" + assessmentId + "/",
+			url : "http://localhost:8081/trainer/trainer/assessment/delete/" + assessmentId + "/",
 			method : "DELETE"
 		}).then(function(response) {
 			$log.debug("Assessment successfully deleted");
