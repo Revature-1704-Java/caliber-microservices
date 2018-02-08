@@ -19,7 +19,10 @@ public class AssessmentCompositionService {
 	@Autowired
 	private AssessmentCompositionMessagingService assessmentCompositionMessagingService;
 
-	public void save(Assessment assessment) {
+	public SimpleAssessment save(Assessment assessment) {
+		SimpleAssessment simpleAssessment = new SimpleAssessment(assessment);
+
+		return assessmentRepository.save(simpleAssessment);
 	}
 
 	public Assessment findOne(long id) {
@@ -57,14 +60,21 @@ public class AssessmentCompositionService {
 		return assessments;
 	}
 
-	public void update(Assessment assessment) {
+	public SimpleAssessment update(Assessment assessment) {
+		SimpleAssessment simpleAssessment = new SimpleAssessment(assessment);
+
+		return assessmentRepository.save(simpleAssessment);
 	}
 
-	public void deleteByAssessmnetId(Long assessmentId) {
+	public void deleteByAssessmentId(Long assessmentId) {
+		assessmentCompositionMessagingService.sendGradeDeleteRequestForAssessmentId(assessmentId);
 		assessmentRepository.deleteByAssessmentId(assessmentId);
 	}
-	
+
 	public void deleteByBatchId(Integer batchId) {
+		for (SimpleAssessment sa : assessmentRepository.findByBatchId(batchId)) {
+			assessmentCompositionMessagingService.sendGradeDeleteRequestForAssessmentId(sa.getAssessmentId());
+		}
 		assessmentRepository.deleteByBatchId(batchId);
 	}
 
@@ -99,10 +109,10 @@ public class AssessmentCompositionService {
 		SimpleBatch simpleBatch = assessmentCompositionMessagingService.sendSingleSimpleBatchRequest(batchResourceId);
 		SimpleCategory simpleCategory = assessmentCompositionMessagingService.sendSingleSimpleCategoryRequest(category);
 		SimpleAssessment sAssessment = new SimpleAssessment();
-		
+
 		sAssessment.setBatchId(simpleBatch.getBatchId());
 		sAssessment.setCategoryId(simpleCategory.getCategoryId());
-		
+
 		assessmentRepository.save(sAssessment);
 	}
 }

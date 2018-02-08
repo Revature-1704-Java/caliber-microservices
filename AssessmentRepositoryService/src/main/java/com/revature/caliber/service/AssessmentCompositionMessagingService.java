@@ -39,7 +39,7 @@ public class AssessmentCompositionMessagingService {
 				categoryFindRequest.toString());
 	}
 
-	public void sendGradeDeleteRequestForAssessmentId(Integer assessmentId) {
+	public void sendGradeDeleteRequestForAssessmentId(Long assessmentId) {
 		JsonObject gradeDeleteRequest = new JsonObject();
 
 		gradeDeleteRequest.addProperty("methodName", "delete");
@@ -51,20 +51,22 @@ public class AssessmentCompositionMessagingService {
 
 	public SimpleBatch sendSingleSimpleBatchRequest(String resourceId) {
 		JsonObject batchRequest = new JsonObject();
-		
+
 		batchRequest.addProperty("methodName", "findOneByResourceId");
 		batchRequest.addProperty("resourceId", resourceId);
-		
-		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY, batchRequest.toString());
+
+		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY,
+				batchRequest.toString());
 	}
 
 	public SimpleCategory sendSingleSimpleCategoryRequest(String category) {
 		JsonObject catRequest = new JsonObject();
-		
+
 		catRequest.addProperty("methodName", "findOneBySkillCategory");
 		catRequest.addProperty("category", category);
-		
-		return (SimpleCategory) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_CATEGORY_ROUTING_KEY, catRequest.toString());
+
+		return (SimpleCategory) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_CATEGORY_ROUTING_KEY,
+				catRequest.toString());
 	}
 
 }
