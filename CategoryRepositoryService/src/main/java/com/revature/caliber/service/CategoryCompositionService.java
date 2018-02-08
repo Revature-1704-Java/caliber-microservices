@@ -18,7 +18,13 @@ public class CategoryCompositionService {
 	private CategoryCompositionMessagingService categoryCompositionMessagingService;
 	private static final Logger log = Logger.getLogger(CategoryCompositionService.class);
 	
-	//findOne
+	/**. 
+	 * Finds one simplified bean from the service database and
+	 * composes it into a complex bean required by the front end.
+	 *
+	 * @param int the id of a Category 
+	 * @return A Category object
+	 */
 	public Category findOne(int categoryId) {
 		log.info("Finding one simple category");
 		SimpleCategory basis = categoryRepository.findOne(categoryId);
@@ -26,7 +32,12 @@ public class CategoryCompositionService {
 		return result;
 	}
 	
-	//findAll
+	/**. 
+	 * Finds all simplified beans from the service database and
+	 * composes them into complex beans required by the front end.
+	 *
+	 * @return A List of Category objects ordered by skill category Ascending
+	 */
 	public List<Category> findAll() {
 		List<SimpleCategory> basis = categoryRepository.findAllByOrderBySkillCategoryAsc();
 		List<Category> result = composeListOfCategory(basis);
@@ -34,7 +45,12 @@ public class CategoryCompositionService {
 		return result;
 	}
 	
-	//findAllActive
+	/**. 
+	 * Finds all simplified beans from the service database and
+	 * composes them into complex beans required by the front end.
+	 *
+	 * @return A List of Category objects ordered by their id Ascending
+	 */
 	public List<Category> findAllActive() {
 		List<SimpleCategory> basis = categoryRepository.findByActiveOrderByCategoryIdAsc(true);
 		List<Category> result = composeListOfCategory(basis);
@@ -42,19 +58,33 @@ public class CategoryCompositionService {
 		return result;
 	}
 
-	//save
+	/**. 
+	 * Given a Category create a simple version
+	 * and saves it
+	 *
+	 * @param A Category object to save
+	 */
 	public void save(Category category) {
 		SimpleCategory toSave = new SimpleCategory(category);
 		categoryRepository.save(toSave);
 	}
 	
-	//update
+	/**. 
+	 * Given a Category create a simple version
+	 * and use it to update
+	 *
+	 * @param A Category object to update
+	 */
 	public void update(Category category) {
 		SimpleCategory toSave = new SimpleCategory(category);
 		categoryRepository.save(toSave);
 	}
 	
-	//delete
+	/**. 
+	 * Delete a Category
+	 *
+	 * @param int the id of a Category
+	 */
 	public void delete(int categoryId) {
 		categoryRepository.delete(categoryId);
 	}

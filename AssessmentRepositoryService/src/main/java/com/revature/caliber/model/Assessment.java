@@ -20,6 +20,17 @@ public class Assessment implements Serializable {
 		this.grades = new HashSet<Grade>();
 	}
 
+	/**
+	 * Constructor for fully initialized Assessment
+	 * 
+	 * @param title
+	 * @param batch
+	 * @param rawScore
+	 * @param type
+	 * @param week
+	 * @param category
+	 * @param grades
+	 */
 	public Assessment(String title, Batch batch, int rawScore, AssessmentType type, short week, Category category,
 			Set<Grade> grades) {
 		this();
@@ -29,14 +40,21 @@ public class Assessment implements Serializable {
 		this.type = type;
 		this.week = week;
 		this.category = category;
+		this.grades = grades;
 	}
-	
-	public Assessment(SimpleAssessment assessment) {
+
+	/**
+	 * Constructs based off values stored in SimpleAssessment object. 
+	 * Batch & Category values should be set after creation
+	 * 
+	 * @param simpleAssessment
+	 */
+	public Assessment(SimpleAssessment simpleAssessment) {
 		this();
-		this.title = assessment.getTitle();
-		this.rawScore = assessment.getRawScore();
-		this.type = assessment.getType();
-		this.week = assessment.getWeek();
+		this.title = simpleAssessment.getTitle();
+		this.rawScore = simpleAssessment.getRawScore();
+		this.type = simpleAssessment.getType();
+		this.week = simpleAssessment.getWeek();
 	}
 
 	public long getAssessmentId() {

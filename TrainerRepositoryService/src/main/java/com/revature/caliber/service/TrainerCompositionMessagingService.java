@@ -19,6 +19,13 @@ public class TrainerCompositionMessagingService {
 	private static final String LIST_BATCH_ROUTING_KEY = "BSVihZkuxwdg9Dxy";
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 
+	/**
+	 * Send a message to Batch to find all batches associated with a given trainer id
+	 *
+	 * @param trainerId
+	 *
+	 * @return List of SimpleBatch
+	 */
 	public List<SimpleBatch> sendSingleSimpleBatchRequest(Integer trainerId) {
 		JsonObject batchRequest = new JsonObject();
 
