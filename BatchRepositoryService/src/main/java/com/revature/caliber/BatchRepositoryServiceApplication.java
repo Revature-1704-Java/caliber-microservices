@@ -21,11 +21,11 @@ public class BatchRepositoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BatchRepositoryServiceApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			System.out.println(bcs.findAllCurrentWithTrainees());
-		};
-	}
+//	@Bean
+//	public CommandLineRunner runner() {
+//		return args -> {
+//			System.out.println(bcs.findAllCurrentWithTrainees());
+//		};
+//	}
 }
 
