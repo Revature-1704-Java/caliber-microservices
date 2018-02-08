@@ -31,7 +31,13 @@ public class BatchRepositoryTest {
 		entityManager.flush();
 		List<SimpleBatch> test = batchRepo.findAllByTrainerId(1);
 		assertFalse("Test Batch Not Empty", test.size()==0);
+	}
 	
+	@Test
+	public void testFindAll(){
+		List<SimpleBatch> test = batchRepo.findAll();
+		assertEquals(13,test.size());
+		
 	}
 
 }

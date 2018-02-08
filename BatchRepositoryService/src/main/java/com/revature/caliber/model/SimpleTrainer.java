@@ -22,12 +22,38 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * The type Trainer.
  */
+@Entity
+@Table(name = "CALIBER_TRAINER")
+@Cacheable
 public class SimpleTrainer implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private int trainerId;
+
+	@Id
+	@Column(name = "TRAINER_ID", nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRAINER_ID_SEQUENCE")
+	@SequenceGenerator(name = "TRAINER_ID_SEQUENCE", sequenceName = "TRAINER_ID_SEQUENCE")
+	@JsonProperty
+	private Integer trainerId;
+
+	@NotEmpty
+	@Email
+	@Column(name = "EMAIL", nullable = false, unique = true, updatable = true)
+	@JsonProperty
 	private String email;
+
+	@NotEmpty
+	@Column(name = "NAME", nullable = false)
+	@JsonProperty
 	private String name;
+
+	@NotEmpty
+	@Column(name = "TITLE", nullable = false)
+	@JsonProperty
 	private String title;
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name = "TIER")
 	private TrainerRole tier;
 
 	public SimpleTrainer() {
@@ -42,11 +68,20 @@ public class SimpleTrainer implements Serializable {
 		this.tier = tier;
 	}
 
-	public int getTrainerId() {
+	public SimpleTrainer(Trainer trainer) {
+		super();
+		this.trainerId = trainer.getTrainerId();
+		this.email = trainer.getEmail();
+		this.name = trainer.getName();
+		this.title = trainer.getTitle();
+		this.tier = trainer.getTier();
+	}
+
+	public Integer getTrainerId() {
 		return trainerId;
 	}
 
-	public void setTrainerId(int trainerId) {
+	public void setTrainerId(Integer trainerId) {
 		this.trainerId = trainerId;
 	}
 

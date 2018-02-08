@@ -20,7 +20,6 @@ public class BatchRepositoryImpl implements BatchRepositoryCustom {
 	
 	private ZonedDateTime now =ZonedDateTime.now();
 	private ZonedDateTime aMonthAgo= now.minusDays(30);
-	
 	@Override
 	public List<SimpleBatch> findAllCurrent() {
 		CriteriaBuilder cb= entityManager.getCriteriaBuilder();
