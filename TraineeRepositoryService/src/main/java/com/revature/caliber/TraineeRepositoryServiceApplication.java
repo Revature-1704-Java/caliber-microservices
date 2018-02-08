@@ -11,6 +11,8 @@ import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.TraineeRepository;
 import com.revature.caliber.service.TraineeCompositionService;
 
+
+@EnableEurekaClient
 @SpringBootApplication
 @EnableEurekaClient 
 public class TraineeRepositoryServiceApplication {
