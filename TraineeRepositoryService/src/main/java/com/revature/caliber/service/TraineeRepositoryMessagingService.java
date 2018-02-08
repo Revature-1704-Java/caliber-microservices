@@ -18,6 +18,13 @@ public class TraineeRepositoryMessagingService {
 	@Autowired
 	private TraineeRepositoryRequestDispatcher traineeRepositoryRequestDispatcher;
 
+	/**
+	 * Parse a String for SimpleTrainee
+	 *
+	 * @param Message
+	 *
+	 * @return SimpleTrainee
+	 */
 	@RabbitListener(queues = "revature.caliber.repos.trainee")
 	public SimpleTrainee receiveSingleSimpleTraineeRequest(String message) {
 		JsonParser parser = new JsonParser();
@@ -27,6 +34,13 @@ public class TraineeRepositoryMessagingService {
 		return traineeRepositoryRequestDispatcher.processSingleSimpleTraineeRequest(request);
 	}
 
+	/**
+	 * Parse a String for List of SimpleTrainee
+	 *
+	 * @param Message
+	 *
+	 * @return List of SimpleTrainee
+	 */
 	@RabbitListener(queues = "revature.caliber.repos.trainee.list")
 	public List<SimpleTrainee> receiveListSimpleTraineeRequest(String message) {
 		JsonParser parser = new JsonParser();
@@ -36,6 +50,13 @@ public class TraineeRepositoryMessagingService {
 		return traineeRepositoryRequestDispatcher.processListSimpleTraineeRequest(request);
 	}
 	
+	/**
+	 * Parse a String for List of Trainee
+	 *
+	 * @param Message
+	 *
+	 * @return List of Trainee
+	 */
 	@RabbitListener(queues = "revature.caliber.service.trainee.list")
 	public List<Trainee> receiveListTraineeRequest(String message) {
 		JsonParser parser = new JsonParser();

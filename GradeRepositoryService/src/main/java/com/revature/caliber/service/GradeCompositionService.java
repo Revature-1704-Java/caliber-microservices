@@ -24,15 +24,37 @@ public class GradeCompositionService {
 	@Autowired
 	private GradeCompositionMessagingService gradeCompositionMessagingService;
 	
+	
+	/**
+	 * saves the grade in the table
+	 * 
+	 * @param save
+	 * @return
+	 */
 	public void save(Grade grade) {
 		SimpleGrade sGrade = new SimpleGrade(grade);
 		gradeRepository.save(sGrade);
 	}
 	
+	
+	/**
+	 * updates the grade in the table
+	 * 
+	 * @param grade
+	 * @return
+	 */
 	public void update(Grade grade) {
 		save(grade);
 	}
 	
+	
+	/**
+	 * Returns a specific Grade given a grade Id. Not called directy,
+	 * and is mainly used as a helper method.
+	 * 
+	 * @param gradeId
+	 * @return
+	 */
 	public Grade findOne(Long gradeId) {
 		SimpleGrade basis = gradeRepository.findOne(gradeId);
 		Grade result = composeGrade(basis);
@@ -170,6 +192,13 @@ public class GradeCompositionService {
 		return dest;
 	}
 	
+	
+	/**
+	 * Takes in a Simple grade and converts it into a Complex Grade by making requests to Trainee and Assessment.
+	 * 
+	 * @param src
+	 * @return
+	 */
 	private Grade composeGrade(SimpleGrade src) {
 		System.out.println(src);
 		SimpleTrainee simpleTrainee = gradeCompositionMessagingService.sendSimpleTraineeRequest(src.getTraineeId());
@@ -188,6 +217,14 @@ public class GradeCompositionService {
 		
 		return dest;		
 	}
+	
+	
+	/**
+	 * Finds grades in a given week and batch id. 
+	 * 
+	 * @param batchId, week
+	 * @return
+	 */
 
 	public Map<Integer, List<Grade>> findGradesByWeek(Integer batchId, Integer week) {
 		List<Grade> grades = findByWeek(batchId, week);
@@ -205,6 +242,17 @@ public class GradeCompositionService {
 		}
 		
 		return table;
+	}
+
+	public void saveOrUpdateGradeFromDTO(long assessmentId, double score, String traineeResourceId) {
+		SimpleTrainee sTrainee = gradeCompositionMessagingService.sendSimpleTraineeRequest(traineeResourceId);
+		SimpleGrade sGrade = new SimpleGrade();
+		
+		sGrade.setTraineeId(sTrainee.getTraineeId());
+		sGrade.setAssessmentId(assessmentId);
+		sGrade.setScore(score);
+		
+		gradeRepository.save(sGrade);
 	}
 	
 }

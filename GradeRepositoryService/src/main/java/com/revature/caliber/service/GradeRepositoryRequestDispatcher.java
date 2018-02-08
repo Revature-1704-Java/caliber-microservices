@@ -18,6 +18,16 @@ public class GradeRepositoryRequestDispatcher {
 	@Autowired
 	private GradeCompositionService gradeCompositionService;
 	
+	
+	/**
+	 * Takes in a request with methods findOne, delete in json request and 
+	 * will call functions matching the one in the request
+	 * It will return a Simple Grade. 
+	 * 
+	 * @param request
+	 * @return SimpleGrade result
+	 */
+	
 	public SimpleGrade processSingleSimpleGradeRequest(JsonObject request) {
 		SimpleGrade result = null;
 		String methodName = request.get("methodName").getAsString();
@@ -40,6 +50,15 @@ public class GradeRepositoryRequestDispatcher {
 		return result;
 	}
 	
+	
+	/**
+	 * Takes in a request with methods findAllby* in json request
+	 * and will call functions matching the one in the request
+	 * It will return a List of Simple Grades 
+	 * 
+	 * @param request
+	 * @return List<SimpleGrade> result
+	 */
 	public List<SimpleGrade> processListSimpleGradeRequest(JsonObject request){
 		List<SimpleGrade> result = null;
 		String methodName = request.get("methodName").getAsString();
@@ -55,6 +74,15 @@ public class GradeRepositoryRequestDispatcher {
 		return result;
 	}
 	
+	
+	/**
+	 * Takes in a request with methods findByTrainee or findByBatch in json request
+	 * and will call functions matching the one in the request
+	 * It will return a List of Complex Grades 
+	 * 
+	 * @param request
+	 * @return List<SimpleGrade> result
+	 */
 	public List<Grade> processListComplexGradeRequest(JsonObject request){
 		List<Grade> result = null;
 		String methodName = request.get("methodName").getAsString();
@@ -64,6 +92,14 @@ public class GradeRepositoryRequestDispatcher {
 		} else if (methodName.equals("findyByBatch")) {
 			result = gradeCompositionService.findByBatch(request.get("batchId").getAsInt());
 		}
+		return result;
+	}
+
+	public Grade processGradeDTORequest(JsonObject request) {
+		Grade result = null;
+		
+		gradeCompositionService.saveOrUpdateGradeFromDTO(request.get("assessmentId").getAsLong(), request.getAsDouble(), request.get("trainee").getAsString());
+		
 		return result;
 	}
 }
