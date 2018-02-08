@@ -10,8 +10,13 @@ import com.netflix.zuul.context.RequestContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class RedirectToAuthenticationPreFilter extends ZuulFilter {
  
+	@Value("#{systemEnvironment['CALIBER_DEV_MODE']}")
+	private boolean debug;
+
     @Override
     public String filterType() {
         return "pre";
@@ -43,10 +48,13 @@ public class RedirectToAuthenticationPreFilter extends ZuulFilter {
             if(c.getName().equals("role"))
             {
                 hasRole = true;
+                System.out.println("Has role cookie");
             }
         }
         }
         
+        if(debug) {
+          System.out.println("Debug mode");
         if(!hasRole)//if the user has already logged in, they will have a cookie named role
         {
             context.addZuulRequestHeader("preRedirectRequestUri",requestURI );
@@ -56,10 +64,36 @@ public class RedirectToAuthenticationPreFilter extends ZuulFilter {
             {
                 context.put("requestURI", "forward:/security/revoke");
             } 
-            else if(requestURI.contains("/revoke"))
+            else if(requestURI.contains("/authenticated_token"))
+            {
+                context.put("requestURI", "forward:/security/authenticated_token");
+            }
+            else if(requestURI.contains("/authenticated"))
+            {
+                context.put("requestURI", "forward:/security/authenticated");
+            }
+            else if(requestURI.contains("/dto/")) {
+              context.put("requestURI", "forward:/security/authorize");
+            }
+            else
+            {
+                if(requestURI.length() > 7 && requestURI.substring(requestURI.length() - 8).equals("caliber/"))//ends with caliber/
+                context.put("requestURI", "forward:/security/");
+            }
+        }
+        }
+
+        else {
+
+        if(!hasRole)//if the user has already logged in, they will have a cookie named role
+        {
+            context.addZuulRequestHeader("preRedirectRequestUri",requestURI );
+
+            //these endpoints should bypass authentication
+            if(requestURI.contains("/revoke"))
             {
                 context.put("requestURI", "forward:/security/revoke");
-            }
+            } 
             else if(requestURI.contains("/authenticated_token"))
             {
                 context.put("requestURI", "forward:/security/authenticated_token");
@@ -79,6 +113,8 @@ public class RedirectToAuthenticationPreFilter extends ZuulFilter {
         }
         else
           context.put("requestURI", "forward:/security/authorize");//anything that is not one of those endpoints goes here
+        }
+
         return null;
     }
  

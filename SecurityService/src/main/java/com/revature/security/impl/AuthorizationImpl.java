@@ -50,6 +50,7 @@ import com.revature.security.Authorization;
  * Created by louislopez on 1/18/17.
  */
 @Controller
+@CrossOrigin
 public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implements Authorization {
 	@Value("/caliber/")
 	private String forwardUrl;
@@ -65,12 +66,37 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 		super();
 	}
 
+  @RequestMapping("/getRole") 
+  public ModelAndView authorized(HttpServletRequest request, HttpServletResponse response) {
+    Cookie[] cookies = request.getCookies();
+    Cookie cookieToProcess = null;
+    if(cookies != null) { 
+    for(Cookie cookie : cookies) {
+      if("role".equals(cookie.getName())) {
+        cookieToProcess = cookie;
+      }
+    }
+    }
+    if(cookieToProcess == null) {
+      String cookieName = "role";
+      String cookieValue = "ROLE_VP";
+      Cookie newCookie = new Cookie(cookieName, cookieValue);
+      response.addCookie(newCookie);
+    }
+    else {
+      String cookieValue = cookieToProcess.getValue();
+      System.out.println("Had cookie role " + cookieToProcess.getValue());
+    }
+
+    return new ModelAndView("redirect:" +REVATURE);
+  }
 	/**
 	 * Redirects the request to perform authentication.
 	 * 
 	 */
 	@RequestMapping("/")
 	public ModelAndView openAuthURI() {
+    System.out.println("/ reached of security");
 		if (debug) {
 			return new ModelAndView(REDIRECT + redirectUrl);
     }
@@ -158,6 +184,7 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 		// logout and clear Spring Security Context
 		servletRequest.logout();
 		SecurityContextHolder.clearContext();
+    System.out.println("Revoke reached");
 		log.info("User has logged out");
 		return new ModelAndView(REDIRECT + REVATURE);
 	}
