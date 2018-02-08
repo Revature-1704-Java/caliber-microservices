@@ -7,7 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.TrainingStatus;
-
+/**
+ * TraineeRepository
+ * Data Access Object with various methods to search database.
+ * 
+ * @author Samuel Huang
+ */
 @Repository
 public interface TraineeRepository extends JpaRepository<SimpleTrainee, Integer> {
 	SimpleTrainee findOneByTraineeIdAndTrainingStatusNot(Integer traineeId, TrainingStatus status);

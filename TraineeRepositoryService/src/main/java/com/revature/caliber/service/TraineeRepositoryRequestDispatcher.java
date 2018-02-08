@@ -10,7 +10,14 @@ import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.Trainee;
 import com.revature.caliber.repository.TraineeRepository;
-
+/**
+ * TraineeRepositoryRequestDispatcher
+ * Changes JsonObject requests into strings. Depending on the message, different TraineeRepository methods are called to return
+ * back a SimpleTrainee, List of SimpleTrainee, or List of ComplexTrainee.
+ *
+ * 
+ * @author Samuel Huang
+ */
 @Service
 public class TraineeRepositoryRequestDispatcher {
 	@Autowired
@@ -19,6 +26,16 @@ public class TraineeRepositoryRequestDispatcher {
 	@Autowired
 	private TraineeCompositionService traineeCompositionService;
 	
+	/**
+	 * sphuang 02/08/2018 
+	 * Process Single Simple Trainee Request
+	 * Depending on methodName, can return either a trainee that matches a traineeId,
+	 * or delete a trainee, or persists a SimpleTrainee to database.
+	 * 
+	 * 
+	 * @param JsonObject - request
+	 * @return SimpleTrainee
+	 */
 	public SimpleTrainee processSingleSimpleTraineeRequest(JsonObject request) {
 		SimpleTrainee result = null;
 		String methodName = request.get("methodName").getAsString();
@@ -37,6 +54,16 @@ public class TraineeRepositoryRequestDispatcher {
 		return result;
 	}
 	
+	/**
+	 * sphuang 02/08/2018 
+	 * Process List Simple Trainee Request
+	 * Depending on methodName, can return either a list of all trainees, or a list of trainees that all 
+	 * are part of the same batch, or delete all trainees that have the same batchId.
+	 * 
+	 * 
+	 * @param JsonObject - request
+	 * @return List of SimpleTrainee 
+	 */
 	public List<SimpleTrainee> processListSimpleTraineeRequest(JsonObject request) {
 		System.out.println("Hey hello");
 		List<SimpleTrainee> result = null;
@@ -62,7 +89,16 @@ public class TraineeRepositoryRequestDispatcher {
 		
 		return result;
 	}
-
+	
+	/**
+	 * sphuang 02/08/2018 
+	 * Process List Trainee Request
+	 * Returns a List of complex Trainees of the same batch Id.
+	 * 
+	 * 
+	 * @param JsonObject - request
+	 * @return List of Trainees 
+	 */
 	public List<Trainee> processListTraineeRequest(JsonObject request) {
 		List<Trainee> result = null;
 		String methodName = request.get("methodName").getAsString();
