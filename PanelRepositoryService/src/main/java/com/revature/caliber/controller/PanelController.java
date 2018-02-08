@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.caliber.model.Panel;
 import com.revature.caliber.model.PanelFeedback;
 import com.revature.caliber.model.PanelStatus;
+import com.revature.caliber.service.PanelCompositionMessagingService;
 import com.revature.caliber.service.PanelCompositionService;
 import com.revature.caliber.exceptions.MalformedRequestException;
 //import com.revature.security.models.SalesforceUser;
@@ -46,6 +48,8 @@ public class PanelController {
 	//private TrainingService trainingService;
 	@Autowired
 	private PanelCompositionService panelService;
+	@Autowired
+	private PanelCompositionMessagingService trainingService;
 
 	public void setPanelService(PanelCompositionService panelService) {
 		this.panelService = panelService;
@@ -108,7 +112,8 @@ public class PanelController {
 	@RequestMapping(value = "/panel/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@PreAuthorize("hasAnyRole('VP','PANEL')")
-	public ResponseEntity<Panel> savePanel(@Valid @RequestBody Panel panel) throws MalformedRequestException {
+	public ResponseEntity<Panel> savePanel(@Valid @CookieValue("email") String email, @CookieValue("role") String role, @RequestBody Panel panel) throws MalformedRequestException {
+
 		/*
 		SalesforceUser user = (SalesforceUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		log.info(user.getEmail());
@@ -116,6 +121,8 @@ public class PanelController {
 		panelService.createPanel(panel);
 		return new ResponseEntity<>(panel, HttpStatus.CREATED);
 		*/
+        
+        //panel.setPanelist(trainingService.findTrainer(email));
 		return null;
 	}
 	
