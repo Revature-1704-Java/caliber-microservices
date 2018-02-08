@@ -22,7 +22,7 @@ import com.revature.caliber.model.Grade;
 import com.revature.caliber.service.GradeCompositionService;
 
 @RestController
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 @CrossOrigin(origins = "http://ec2-54-163-132-124.compute-1.amazonaws.com")
 public class GradeController {
 	private static final Logger log = Logger.getLogger(GradeController.class);

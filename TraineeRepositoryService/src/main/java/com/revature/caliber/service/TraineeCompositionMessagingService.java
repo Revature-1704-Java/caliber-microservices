@@ -31,6 +31,7 @@ public class TraineeCompositionMessagingService {
 	 * Team Data RABBITMQ Exchange Name
 	 */
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
+<<<<<<< HEAD
 	
 	/**
 	 * sphuang 02/07/2018 
@@ -39,6 +40,15 @@ public class TraineeCompositionMessagingService {
 	 * 
 	 * @param Integer - Trainee's Batch Id
 	 * @return A SimpleBatch object
+=======
+
+	/**
+	 * Create message for Batch to get a single Batch
+	 *
+	 * @param batchId
+	 *
+	 * @return SimpleBatch
+>>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
 		JsonObject batchRequest = new JsonObject();
@@ -49,6 +59,7 @@ public class TraineeCompositionMessagingService {
 		return (SimpleBatch) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_BATCH_ROUTING_KEY,
 				batchRequest.toString());
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * sphuang 02/07/2018 
@@ -57,6 +68,15 @@ public class TraineeCompositionMessagingService {
 	 * 
 	 * @param Integer - Trainee's Trainer Id
 	 * @return A List of SimpleBatch object
+=======
+
+	/**
+	 * Create message for Batch to get a List Batches for a given trainerId
+	 *
+	 * @param traineeId
+	 *
+	 * @return List of SimpleBatch
+>>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	public List<SimpleBatch> sendListSimpleBatchRequest(Integer trainerId) {
 		JsonObject batchRequest = new JsonObject();
@@ -66,6 +86,7 @@ public class TraineeCompositionMessagingService {
 		return (List<SimpleBatch>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, LIST_BATCH_ROUTING_KEY,
 				batchRequest.toString());
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * sphuang 02/07/2018 
@@ -74,6 +95,15 @@ public class TraineeCompositionMessagingService {
 	 * 
 	 * @param Integer - Trainee's Trainee Id
 	 * 
+=======
+
+	/**
+	 * Create message for Note to delete Notes associated with a trainee
+	 *
+	 * @param batchId
+	 *
+	 * @return 
+>>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	public void sendSimpleNoteDeleteRequest(Integer traineeId) {
 		JsonObject NoteDeleteRequest = new JsonObject();
@@ -83,12 +113,20 @@ public class TraineeCompositionMessagingService {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * sphuang 02/07/2018 
 	 * Sending a message string in json notation to Grade's queue containing method name delete and a specific trainee ID.
 	 * GradeRepositoryMessagingService will delete all grades with that trainee ID.
 	 * 
 	 * @param Integer - Trainee's Trainee Id
 	 * 
+=======
+	 * Create message for Grade to delete Grades associated with a trainee
+	 *
+	 * @param batchId
+	 *
+	 * @return 
+>>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	public void sendSimpleGradeDeleteRequest(Integer traineeId) {
 		JsonObject GradeDeleteRequest = new JsonObject();
@@ -98,12 +136,20 @@ public class TraineeCompositionMessagingService {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * sphuang 02/07/2018 
 	 * Sending a message string in json notation to Panel's queue containing method name delete and a specific trainee ID.
 	 * PanelRepositoryMessagingService will delete all grades with that trainee ID.
 	 * 
 	 * @param Integer - Trainee's Trainee Id
 	 * 
+=======
+	 * Create message for Panel to delete Panels associated with a trainee
+	 *
+	 * @param batchId
+	 *
+	 * @return 
+>>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	public void sendSimplePanelDeleteRequest(Integer traineeId) {
 		JsonObject PanelDeleteRequest = new JsonObject();

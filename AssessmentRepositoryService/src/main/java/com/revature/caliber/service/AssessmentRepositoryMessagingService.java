@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.revature.caliber.model.Assessment;
 import com.revature.caliber.model.SimpleAssessment;
 
 @Service
@@ -17,6 +18,12 @@ public class AssessmentRepositoryMessagingService {
 	@Autowired
 	private AssessmentRepositoryRequestDispatcher assessmentRepositoryRequestDispatcher;
 
+	/**
+	 * Receives a message from the single SimpleAssessment RabbitMQ queue, parses the message string as a JsonObject,
+	 * and passes it to the request dispatcher.
+	 * @param message The message received from the messaging queue
+	 * @return The SimpleAssessment returned by the request dispatcher
+	 */
 	@RabbitListener(queues = "revature.caliber.repos.assessment")
 	public SimpleAssessment receiveSingleSimpleAssessmentRequest(String message) {
 		System.out.println(message);
@@ -27,6 +34,12 @@ public class AssessmentRepositoryMessagingService {
 		return assessmentRepositoryRequestDispatcher.processSingleSimpleAssessmentRequest(request);
 	}
 
+	/**
+	 * Receives a message from the list SimpleAssessment RabbitMQ queue, parses the message string as a JsonObject,
+	 * and passes it to the request dispatcher.
+	 * @param message The message received from the messaging queue
+	 * @return The list of SimpleAssessments returned by the request dispatcher
+	 */
 	@RabbitListener(queues = "revature.caliber.repos.assessment.list")
 	public List<SimpleAssessment> receiveListSimpleAssessmentRequest(String message) {
 		System.out.println(message);
@@ -36,5 +49,20 @@ public class AssessmentRepositoryMessagingService {
 		System.out.println(request);
 
 		return assessmentRepositoryRequestDispatcher.processListSimpleAssessmentRequest(request);
+	}
+
+	/**
+	 * Receives a message from the single Assessment RabbitMQ queue, parses the message string as a JsonObject,
+	 * and passes it to the request dispatcher.
+	 * @param message The message received from the messaging queue
+	 * @return The Assessment returned by the request dispatcher
+	 */
+	@RabbitListener(queues = "revature.caliber.dto.assessment")
+	public Assessment receiveAssessmentDTORequest(String message) {
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(message);
+		JsonObject request = element.getAsJsonObject();
+		
+		return assessmentRepositoryRequestDispatcher.processAssessmentDTORequest(request);
 	}
 }

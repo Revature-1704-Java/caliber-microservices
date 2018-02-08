@@ -154,7 +154,7 @@ public class TraineeCompositionService {
 	 * Obtain a SimpleTrainee from traineeRepository that have it's training status not dropped and matches the traineeId.
 	 * Then obtain a Complex Trainee from composition.
 	 * 
-	 * @param Integer - trainerId
+	 * @param Integer - traineeId
 	 * @return List<Trainee> - List of complex Trainees
 	 */
 	public Trainee findOne(Integer traineeId) {
