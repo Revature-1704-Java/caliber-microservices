@@ -252,7 +252,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	 */
 	all.getDroppedTrainees = function(batchId) {
 		return $http({
-			url : "/all/trainee/dropped?batch=" + batchId,
+			url : "http://localhost:8081/trainee/all/trainee/dropped?batch=" + batchId, //added "trainee" and localhost in front
 			method : "GET",
 		}).then(function(response) {
 			$log.debug("Dropped trainees successfully fetched.");
@@ -272,7 +272,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	 */
 	all.createTrainee = function(traineeObj) {
 		return $http({
-			url : "/all/trainee/create",
+			url : "http://localhost:8081/trainee/all/trainee/create", //added "trainee" and localhost in front
 			method : "POST",
 			data : traineeObj
 		}).then(function(response) {
@@ -293,7 +293,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	 */
 	all.updateTrainee = function(traineeObj) {
 		return $http({
-			url : "/all/trainee/update",
+			url : "http://localhost:8081/trainee/all/trainee/update", //added "trainee" and localhost in front
 			method : "PUT",
 			data : traineeObj
 		}).then(function(response) {
@@ -307,7 +307,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.getTraineeEmail = function(traineeEmail) {
 		return $http({
-			url : "/all/trainee/getByEmail/" + traineeEmail + "/",
+			url : "http://localhost:8081/trainee/all/trainee/getByEmail/" + traineeEmail + "/", //added "trainee" and localhost in front
 			method : "GET",
 		}).then(function(response) {
 			$log.log(traineeEmail);
@@ -326,7 +326,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	 */
 	all.deleteTrainee = function(traineeId) {
 		$http({
-			url : "/all/trainee/delete/" + traineeId,
+			url : "http://localhost:8081/trainee/all/trainee/delete/" + traineeId, //added "trainee" and localhost in front
 			method : "DELETE"
 		}).then(function(response) {
 			$log.debug("Trainee successfully deleted.");
@@ -339,7 +339,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	
 	all.searchTrainee = function (searchTerm) {
 		$http({
-			url: '/all/trainee/search/' + searchTerm,
+			url: 'http://localhost:8081/trainee/all/trainee/search/' + searchTerm, //added "trainee" and localhost in front
 			method: 'GET'
 		}).then(function (response) {
 			$log.debug("Searched list of trainees");
