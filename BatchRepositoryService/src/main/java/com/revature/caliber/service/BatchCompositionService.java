@@ -193,7 +193,7 @@ public class BatchCompositionService {
 	 * @param withNotes
 	 * @return
 	 */
-	private List<Batch> composeListOfBatch(List<SimpleBatch> src, 
+	public List<Batch> composeListOfBatch(List<SimpleBatch> src, 
 			boolean includeDropped, boolean withTrainees, boolean withNotes){
 		if(withTrainees&&withNotes){
 			return src.stream()

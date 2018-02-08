@@ -28,7 +28,7 @@ public class BatchRepositoryMessageService {
 	 */
 	@RabbitListener(queues = "revature.caliber.repos.batch")
 	public SimpleBatch receive(String message) {
-		//System.out.println("message recieved 1");
+		System.out.println("message recieved 1");
 		return brd.processSimpleBatchRequest(getRequest(message));
 	}
 	/**
@@ -40,7 +40,7 @@ public class BatchRepositoryMessageService {
 	 */
 	@RabbitListener(queues = "revature.caliber.repos.batch.list")
 	public List<SimpleBatch> receiveList(String message) {
-		//System.out.println("message recieved");
+		System.out.println("message recieved");
 		return brd.processListSimpleBatchRequest(getRequest(message));
 	}
 	/**
@@ -51,8 +51,9 @@ public class BatchRepositoryMessageService {
 	 * @param message
 	 * @return
 	 */
-	@RabbitListener(queues = "revature.caliber.service.batch.list")
+	@RabbitListener(queues = "revature.caliber.service.batch.list.test")
 	public List<Batch> receiveBatchList(String message) {
+		System.out.println("message recieved 3");
 		return bcd.processListBatchRequest(getRequest(message));
 	}
 	/**
@@ -63,8 +64,9 @@ public class BatchRepositoryMessageService {
 	 * @param message
 	 * @return
 	 */
-	@RabbitListener(queues = "revature.caliber.service.batch")
+	@RabbitListener(queues = "revature.caliber.service.batch.test")
 	public Batch receiveBatch(String message) {
+		System.out.println("message recieved 4");
 		return bcd.processBatchRequest(getRequest(message));
 	}
 	/**

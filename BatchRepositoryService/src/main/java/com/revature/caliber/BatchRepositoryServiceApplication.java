@@ -14,7 +14,18 @@ import com.revature.caliber.service.BatchCompositionService;
 
 @SpringBootApplication
 public class BatchRepositoryServiceApplication {
+//	@Autowired
+//	BatchCompositionMessageService bcms;
+	@Autowired
+	BatchCompositionService bcs;
 	public static void main(String[] args) {
 		SpringApplication.run(BatchRepositoryServiceApplication.class, args);
 	}
+	@Bean
+	public CommandLineRunner runner() {
+		return args -> {
+			System.out.println(bcs.findAllCurrentWithTrainees());
+		};
+	}
 }
+
