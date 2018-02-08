@@ -1,6 +1,7 @@
 spring:
   application:
-    name: batch
+    name: trainee
   cloud:
     config:
       url: http://localhost:8888
+      
