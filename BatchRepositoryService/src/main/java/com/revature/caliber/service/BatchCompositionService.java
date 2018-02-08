@@ -172,7 +172,6 @@ public class BatchCompositionService {
 		Trainer c = null;
 		if(src.getAddressId()!=null){
 			a = BCMS.sendSimpleAddressRequest(src.getAddressId());
-			System.out.println(a);
 		}
 		if(src.getCoTrainerId()!=null){
 			c = new Trainer(BCMS.sendSimpleTrainerRequest(src.getCoTrainerId()));

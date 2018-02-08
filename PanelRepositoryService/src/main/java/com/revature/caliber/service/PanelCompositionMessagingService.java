@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.SimpleTrainer;
+import com.revature.caliber.model.Trainer;
 
 @Service
 public class PanelCompositionMessagingService {
@@ -46,6 +47,12 @@ public class PanelCompositionMessagingService {
 		panelFeedbackRequest.addProperty("panelId", panelId);
 		
 		rabbitTemplate.convertAndSend(RABBIT_REPO_EXCHANGE, SINGLE_PANEL_FEEDBACK_ROUTING_KEY, panelFeedbackRequest.toString());
+	}
+	public Trainer findTrainer(String email) {
+		JsonObject trainerRequest = new JsonObject();
+		trainerRequest.addProperty("methodName", "findByEmail");
+		trainerRequest.addProperty("trainerEmail", email);
+		return (Trainer) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINER_ROUTING_KEY, trainerRequest.toString());
 	}
 	
 }
