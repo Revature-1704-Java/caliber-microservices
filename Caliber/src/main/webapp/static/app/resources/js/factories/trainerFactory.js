@@ -150,7 +150,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// Call EvaluationController's findTrainerBatchNotes method
 	trainer.getTrainerBatchNote = function(batchId, week) {
 		return $http({
-			url : "/trainer/note/batch/" + batchId + "/" + week + "/",
+			url : "http://localhost:8081/note/trainer/note/batch/" + batchId + "/" + week + "/",
 			method : "GET"
 		}).then(function(response) {
 			$log.log("Trainer Batch Note retrieved successfully");
@@ -162,7 +162,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 
 	trainer.getTraineeBatchNotesForWeek = function(batchId, week) {
 		return $http({
-			url : "/trainer/note/trainee/" + batchId + "/" + week + "/",
+			url : "http://localhost:8081/note/trainer/note/trainee/" + batchId + "/" + week + "/",
 			method : "GET"
 		}).then(function(response) {
 			if (response.data) {
@@ -177,7 +177,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 
 	trainer.getTraineeNote = function(traineeId, week) {
 		return $http({
-			url : "/trainer/note/trainee/" + traineeId + "/for/" + week + "/",
+			url : "http://localhost:8081/note/trainer/note/trainee/" + traineeId + "/for/" + week + "/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Notes successfully fetched");
@@ -194,7 +194,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 
 	trainer.createNote = function(noteObj) {
 		return $http({
-			url : "/note/create/",
+			url : "http://localhost:8081/note/note/create/",
 			method : "POST",
 			data : noteObj
 		}).then(function(response) {
@@ -209,7 +209,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 
 	trainer.updateNote = function(noteObj) {
 		return $http({
-			url : "/note/update/",
+			url : "http://localhost:8081/note/note/update/",
 			method : "POST",
 			data : noteObj
 		}).then(function(response) {
@@ -222,7 +222,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 
 	trainer.saveOrUpdateNote = function(noteObj) {
 		return $http({
-			url : "/note/update/",
+			url : "http://localhost:8081/note/note/update/",
 			method : "POST",
 			data : noteObj
 		}).then(function(response) {
