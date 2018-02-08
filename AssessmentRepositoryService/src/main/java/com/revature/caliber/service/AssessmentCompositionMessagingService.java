@@ -19,6 +19,14 @@ public class AssessmentCompositionMessagingService {
 	private static final String SINGLE_CATEGORY_ROUTING_KEY = "utMPxDus2M9qy9Bh";
 	private static final String SINGLE_GRADE_ROUTING_KEY = "aYF4wPtsGMjq72Lu";
 
+	/**
+	 * Sends a request for a SimpleBatch to the Batch service identified by a
+	 * batchId
+	 * 
+	 * @param batchId
+	 *            The batchId that identifies the SimpleBatch
+	 * @return The SimpleBatch returned by the Batch service
+	 */
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
 		JsonObject batchFindRequest = new JsonObject();
 
@@ -29,6 +37,14 @@ public class AssessmentCompositionMessagingService {
 				batchFindRequest.toString());
 	}
 
+	/**
+	 * Sends a request for a SimpleCategory to the Category service identified by a
+	 * categoryId
+	 * 
+	 * @param categoryId
+	 *            The categoryId that identifies the SimpleCategory
+	 * @return The SimpleCategory returned by the Category service
+	 */
 	public SimpleCategory sendSingleSimpleCategoryRequest(Integer categoryId) {
 		JsonObject categoryFindRequest = new JsonObject();
 
@@ -39,6 +55,13 @@ public class AssessmentCompositionMessagingService {
 				categoryFindRequest.toString());
 	}
 
+	/**
+	 * Sends a request to delete a set of Grades based of their parent Assessment
+	 * Parent Assessment found using assessmentId
+	 * 
+	 * @param assessmentId
+	 *            The assessmentId that identifies the Assessment
+	 */
 	public void sendGradeDeleteRequestForAssessmentId(Long assessmentId) {
 		JsonObject gradeDeleteRequest = new JsonObject();
 
@@ -49,6 +72,14 @@ public class AssessmentCompositionMessagingService {
 				gradeDeleteRequest.toString());
 	}
 
+	/**
+	 * Sends a save request for a SimpleBatch to the Batch service. The SimpleBatch
+	 * is sent as a JsonObject.
+	 * 
+	 * @param batch
+	 *            The batch to be saved
+	 * @return The SimpleBatch that was saved
+	 */
 	public SimpleBatch sendSingleSimpleBatchRequest(String resourceId) {
 		JsonObject batchRequest = new JsonObject();
 
@@ -59,6 +90,14 @@ public class AssessmentCompositionMessagingService {
 				batchRequest.toString());
 	}
 
+	/**
+	 * Sends a save request for a SimpleCategory to the Category service. The
+	 * SimpleCategory is sent as a JsonObject.
+	 * 
+	 * @param category
+	 *            The category to be saved
+	 * @return The SimpleCategory that was saved
+	 */
 	public SimpleCategory sendSingleSimpleCategoryRequest(String category) {
 		JsonObject catRequest = new JsonObject();
 

@@ -23,11 +23,6 @@ public class AssessmentCompositionServiceConfiguration {
 		return new RabbitTemplate(factory);
 	}
 
-	@Bean
-	public AssessmentCompositionService assessmentCompositionService() {
-		return new AssessmentCompositionService();
-	}
-
 //	@Bean
 //	public CommandLineRunner runner() {
 //		return args -> {

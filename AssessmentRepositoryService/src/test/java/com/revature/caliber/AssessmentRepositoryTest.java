@@ -40,42 +40,42 @@ public class AssessmentRepositoryTest {
 	}
 	
 	@Test
-	public void testFindOne() {
+	public void testMethodFindOne() {
 		Long addedAssessmentId = this.entityManager.merge(testAssessment).getAssessmentId();
 		SimpleAssessment assessment = this.assessmentRepository.findOne(addedAssessmentId);
 		assertThat(assessment).isEqualTo(testAssessment);
 	}
 	
 	@Test
-	public void testFindAllTest() {
+	public void testMethodFindAllTest() {
 		this.entityManager.merge(testAssessment).getAssessmentId();
 		List<SimpleAssessment> assessments = assessmentRepository.findAll();
 		assertThat(assessments).isNotEmpty();
 	}
 
 	@Test
-	public void testFindByAssessmentId() {
+	public void testMethodFindByAssessmentId() {
 		Long addedAssessmentId = this.entityManager.merge(testAssessment).getAssessmentId();
 		SimpleAssessment assessment = this.assessmentRepository.findByAssessmentId(addedAssessmentId);
 		assertThat(assessment).isEqualTo(testAssessment);
 	}
 
 	@Test
-	public void testFindDistinctByBatchId() {
+	public void testMethodFindDistinctByBatchId() {
 		this.entityManager.merge(testAssessment);
 		List<SimpleAssessment> assessments = this.assessmentRepository.findByBatchId(testAssessment.getBatchId());
 		assertThat(assessments).contains(testAssessment);
 	}
 
 	@Test
-	public void testFindDistinctByWeek() {
+	public void testMethodFindDistinctByWeek() {
 		this.entityManager.merge(testAssessment);
 		List<SimpleAssessment> assessments = this.assessmentRepository.findByWeek(testAssessment.getWeek());
 		assertThat(assessments).contains(testAssessment);
 	}
 
 	@Test
-	public void testFindByBatchIdAndWeek() {
+	public void testMethodFindByBatchIdAndWeek() {
 		this.entityManager.merge(testAssessment);
 		List<SimpleAssessment> assessments = this.assessmentRepository.findByBatchIdAndWeek(testAssessment.getBatchId(),
 				testAssessment.getWeek());
@@ -83,7 +83,7 @@ public class AssessmentRepositoryTest {
 	}
 
 	@Test
-	public void testFindByCategoryId() {
+	public void testMethodFindByCategoryId() {
 		this.entityManager.merge(testAssessment);
 		List<SimpleAssessment> assessments = this.assessmentRepository.findByCategoryId(testAssessment.getCategoryId());
 		System.out.println("\n\n\n" + assessments + "\n\n\n");
@@ -91,7 +91,7 @@ public class AssessmentRepositoryTest {
 	}
 
 	@Test
-	public void testDeleteByAssessmentId() {
+	public void testMethodDeleteByAssessmentId() {
 		Long addedAssessmentId = this.entityManager.merge(testAssessment).getAssessmentId();
 		SimpleAssessment assessment = this.assessmentRepository.findByAssessmentId(addedAssessmentId);
 		assertThat(assessment).isNotNull();
@@ -101,7 +101,7 @@ public class AssessmentRepositoryTest {
 	}
 
 	@Test
-	public void testDeleteByBatchId() {
+	public void testMethodDeleteByBatchId() {
 		this.entityManager.merge(testAssessment).getAssessmentId();
 		List<SimpleAssessment> assessments = this.assessmentRepository.findByBatchId(testAssessment.getBatchId());
 		assertThat(assessments).isNotEmpty();
