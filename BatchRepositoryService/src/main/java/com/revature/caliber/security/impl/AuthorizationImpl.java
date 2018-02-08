@@ -242,7 +242,12 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 		// Http request to the training module to get the caliber user
 		String jsonString = getCaliberTrainer(servletRequest, email);
 		// authorize user
-		authorize(jsonString, salesforceUser, servletResponse);
+		try {
+			authorize(jsonString, salesforceUser, servletResponse);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -257,7 +262,7 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 	 * @throws JSONException // error for not doing so when migrating this code over to MSA
 	 */
 	private void authorize(String jsonString, SalesforceUser salesforceUser, HttpServletResponse servletResponse)
-			throws IOException {
+			throws IOException, JSONException {
 		JSONObject jsonObject = new JSONObject(jsonString);
 		if (jsonObject.getString("email").equals(salesforceUser.getEmail())) {
 			log.info("Logged in user " + jsonObject.getString("email") + " now hasRole: "

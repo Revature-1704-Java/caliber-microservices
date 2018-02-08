@@ -33,8 +33,8 @@ import com.revature.caliber.model.TrainingType;
  */
 @RestController
 //@PreAuthorize("isAuthenticated()")
-@RequestMapping(value = "types", produces = MediaType.APPLICATION_JSON_VALUE)
-@CrossOrigin(origins = "http://ec2-54-163-132-124.compute-1.amazonaws.com")
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+@CrossOrigin(origins = "http://localhost:8090")
 public class TypeController {
 
 	private static final Logger log = Logger.getLogger(TypeController.class);
