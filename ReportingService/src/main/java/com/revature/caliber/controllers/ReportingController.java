@@ -37,7 +37,7 @@ import com.revature.caliber.services.ReportingService;
  *
  */
 @RestController
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 //@CrossOrigin(origins = "http://ec2-54-163-132-124.compute-1.amazonaws.com")
 @CrossOrigin("http://localhost:8081")
 public class ReportingController {

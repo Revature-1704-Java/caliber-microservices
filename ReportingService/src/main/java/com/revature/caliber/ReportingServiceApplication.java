@@ -19,12 +19,12 @@ public class ReportingServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ReportingServiceApplication.class, args);
 	}
-	
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			System.out.println("Test");
-			System.out.println(m.findAllCurrentWithNotesAndTrainees());
-		};
-	}
+//	
+//	@Bean
+//	public CommandLineRunner runner() {
+//		return args -> {
+//			System.out.println("Test");
+//			System.out.println(m.findAllQCTraineeNotes(2201, 5));
+//		};
+//	}
 }
