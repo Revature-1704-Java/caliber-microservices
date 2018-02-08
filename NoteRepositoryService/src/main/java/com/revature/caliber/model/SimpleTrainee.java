@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class SimpleTrainee implements Serializable {
 	private static final long serialVersionUID = 7741153496228057046L;
 
-	private int traineeId;
+	private Integer traineeId;
 	private String resourceId;
 	private String name;
 	private String email;
 	private TrainingStatus trainingStatus;
-	private int batchId;
+	private Integer batchId;
 	private String phoneNumber;
 	private String skypeId;
 	private String profileUrl;
@@ -25,8 +25,8 @@ public class SimpleTrainee implements Serializable {
 		super();
 	}
 
-	public SimpleTrainee(int traineeId, String resourceId, String name, String email, TrainingStatus trainingStatus,
-			int batchId, String phoneNumber, String skypeId, String profileUrl, String recruiterName, String college,
+	public SimpleTrainee(Integer traineeId, String resourceId, String name, String email, TrainingStatus trainingStatus,
+			Integer batchId, String phoneNumber, String skypeId, String profileUrl, String recruiterName, String college,
 			String degree, String major, String techScreenerName, String projectCompletion) {
 		super();
 		this.traineeId = traineeId;
@@ -63,11 +63,11 @@ public class SimpleTrainee implements Serializable {
 		this.projectCompletion = trainee.getProjectCompletion();
 	}
 
-	public int getTraineeId() {
+	public Integer getTraineeId() {
 		return traineeId;
 	}
 
-	public void setTraineeId(int traineeId) {
+	public void setTraineeId(Integer traineeId) {
 		this.traineeId = traineeId;
 	}
 
@@ -103,11 +103,11 @@ public class SimpleTrainee implements Serializable {
 		this.trainingStatus = trainingStatus;
 	}
 
-	public int getBatchId() {
+	public Integer getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(Integer batchId) {
 		this.batchId = batchId;
 	}
 
