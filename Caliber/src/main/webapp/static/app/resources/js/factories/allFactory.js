@@ -144,7 +144,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.getAllCategories = function() {
 		return $http({
-			url : "/category/all/",
+			url : "http://localhost:8081/category/all/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Categories successfully retrieved.");
