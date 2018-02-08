@@ -155,10 +155,9 @@ public class AssessmentCompositionService {
 		assessmentRepository.deleteByAssessmentId(assessmentId);
 	}
 
-
 	/**
-	 * Deletes all Assessments of the given batchId as well as sends a message
-	 * to the Grade Service to delete all Grades that are tied to the deleted
+	 * Deletes all Assessments of the given batchId as well as sends a message to
+	 * the Grade Service to delete all Grades that are tied to the deleted
 	 * Assessments
 	 * 
 	 * @param batchId

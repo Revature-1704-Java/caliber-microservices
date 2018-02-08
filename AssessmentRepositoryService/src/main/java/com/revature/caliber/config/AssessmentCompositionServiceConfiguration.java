@@ -14,7 +14,7 @@ import com.revature.caliber.service.AssessmentCompositionService;
 public class AssessmentCompositionServiceConfiguration {
 	@Autowired
 	AssessmentCompositionService assessmentCompositionService;
-	
+
 	@Autowired
 	AssessmentRepository assessmentRepository;
 
@@ -23,12 +23,12 @@ public class AssessmentCompositionServiceConfiguration {
 		return new RabbitTemplate(factory);
 	}
 
-//	@Bean
-//	public CommandLineRunner runner() {
-//		return args -> {
-//			Assessment assessment = assessmentCompositionService.findOne((long) 5175);
-//
-//			System.out.println(assessment);
-//		};
-//	}
+	// @Bean
+	// public CommandLineRunner runner() {
+	// return args -> {
+	// Assessment assessment = assessmentCompositionService.findOne((long) 5175);
+	//
+	// System.out.println(assessment);
+	// };
+	// }
 }
