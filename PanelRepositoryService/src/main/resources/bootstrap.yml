@@ -1,6 +1,6 @@
 spring:
   application:
-    name: trainer
+    name: panel
   cloud:
     config:
       uri: http://localhost:8888
