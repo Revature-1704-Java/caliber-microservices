@@ -52,7 +52,7 @@ angular
 					// Get all Categories
 					vp.getAllCategories = function() {
 						return $http({
-							url : "/vp/category",
+							url : "http://localhost:8081/category/vp/category",
 							method : "GET"
 						})
 								.then(
@@ -71,7 +71,7 @@ angular
 					// Update a category
 					vp.updateCategory = function(category) {
 						return $http({
-							url : "/vp/category/update",
+							url : "http://localhost:8081/category/vp/category/update",
 							method : "PUT",
 							data : category
 						}).then(
@@ -88,7 +88,7 @@ angular
 					// Save new category
 					vp.saveCategory = function(category) {
 						return $http({
-							url : "/vp/category",
+							url : "http://localhost:8081/category/vp/category",
 							method : "POST",
 							data : category
 						}).then(

@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name = "CALIBER_ADDRESS")
 public class Address implements Serializable {
-	private static final long serialVersionUID = -5649489166844504113L;
+	private static final long serialVersionUID = -7886621867644813683L;
 	
 	@Id
 	@Column(name = "ADDRESS_ID")

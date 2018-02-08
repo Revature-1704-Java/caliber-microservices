@@ -11,7 +11,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.Trainee;
-
+/**
+ * Message Listener
+ * The queue in which the message comes in determines the type of composition.
+ *  
+ * @author Samuel Huang
+ */
 @Service
 public class TraineeRepositoryMessagingService {
 
@@ -19,11 +24,21 @@ public class TraineeRepositoryMessagingService {
 	private TraineeRepositoryRequestDispatcher traineeRepositoryRequestDispatcher;
 
 	/**
+<<<<<<< HEAD
+	 * sphuang 02/08/2018 
+	 * Parses message in queue to a string json object.
+	 * RequestDispatcher then processes the message and returns a SimpleTrainee.
+	 * 
+	 * 
+	 * @param String - message
+	 * @return SimpleTrainee 
+=======
 	 * Parse a String for SimpleTrainee
 	 *
 	 * @param Message
 	 *
 	 * @return SimpleTrainee
+>>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	@RabbitListener(queues = "revature.caliber.repos.trainee")
 	public SimpleTrainee receiveSingleSimpleTraineeRequest(String message) {
@@ -33,6 +48,17 @@ public class TraineeRepositoryMessagingService {
 
 		return traineeRepositoryRequestDispatcher.processSingleSimpleTraineeRequest(request);
 	}
+<<<<<<< HEAD
+	
+	/**
+	 * sphuang 02/08/2018 
+	 * Parses message in queue to a string json object.
+	 * RequestDispatcher then processes the message and returns a List of SimpleTrainee.
+	 * 
+	 * 
+	 * @param String - message
+	 * @return List<SimpleTrainee> - List of simple Trainees
+=======
 
 	/**
 	 * Parse a String for List of SimpleTrainee
@@ -40,6 +66,7 @@ public class TraineeRepositoryMessagingService {
 	 * @param Message
 	 *
 	 * @return List of SimpleTrainee
+>>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	@RabbitListener(queues = "revature.caliber.repos.trainee.list")
 	public List<SimpleTrainee> receiveListSimpleTraineeRequest(String message) {
@@ -51,11 +78,21 @@ public class TraineeRepositoryMessagingService {
 	}
 	
 	/**
+<<<<<<< HEAD
+	 * sphuang 02/08/2018 
+	 * Parses message in queue to a string json object.
+	 * RequestDispatcher then processes the message and returns a List of ComplexTrainees.
+	 * 
+	 * 
+	 * @param String - message
+	 * @return List<SimpleTrainee> - List of simple Trainees
+=======
 	 * Parse a String for List of Trainee
 	 *
 	 * @param Message
 	 *
 	 * @return List of Trainee
+>>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	@RabbitListener(queues = "revature.caliber.service.trainee.list")
 	public List<Trainee> receiveListTraineeRequest(String message) {
