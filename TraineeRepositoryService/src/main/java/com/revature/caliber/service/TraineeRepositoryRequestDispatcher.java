@@ -27,7 +27,6 @@ public class TraineeRepositoryRequestDispatcher {
 	private TraineeCompositionService traineeCompositionService;
 	
 	/**
-<<<<<<< HEAD
 	 * sphuang 02/08/2018 
 	 * Process Single Simple Trainee Request
 	 * Depending on methodName, can return either a trainee that matches a traineeId,
@@ -36,7 +35,6 @@ public class TraineeRepositoryRequestDispatcher {
 	 * 
 	 * @param JsonObject - request
 	 * @return SimpleTrainee
-=======
 	 * Parse JsonObject for method to execute
 	 * Executable methods: 
 	 * 		findOne - find a SimpleTrainer by traineeId
@@ -45,7 +43,6 @@ public class TraineeRepositoryRequestDispatcher {
 	 * @param request
 	 *
 	 * @return result
->>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	public SimpleTrainee processSingleSimpleTraineeRequest(JsonObject request) {
 		SimpleTrainee result = null;
@@ -68,7 +65,6 @@ public class TraineeRepositoryRequestDispatcher {
 	}
 	
 	/**
-<<<<<<< HEAD
 	 * sphuang 02/08/2018 
 	 * Process List Simple Trainee Request
 	 * Depending on methodName, can return either a list of all trainees, or a list of trainees that all 
@@ -77,7 +73,6 @@ public class TraineeRepositoryRequestDispatcher {
 	 * 
 	 * @param JsonObject - request
 	 * @return List of SimpleTrainee 
-=======
 	 * Parse JsonObject for method to execute
 	 * Executable methods: 
 	 * 		findAll - find all SimpleTrainee
@@ -87,7 +82,6 @@ public class TraineeRepositoryRequestDispatcher {
 	 * @param request
 	 *
 	 * @return result
->>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	public List<SimpleTrainee> processListSimpleTraineeRequest(JsonObject request) {
 		System.out.println("Hey hello");
@@ -114,7 +108,6 @@ public class TraineeRepositoryRequestDispatcher {
 		
 		return result;
 	}
-<<<<<<< HEAD
 	
 	/**
 	 * sphuang 02/08/2018 
@@ -124,7 +117,6 @@ public class TraineeRepositoryRequestDispatcher {
 	 * 
 	 * @param JsonObject - request
 	 * @return List of Trainees 
-=======
 
 	/**
 	 * Parse JsonObject for method to execute
@@ -133,7 +125,6 @@ public class TraineeRepositoryRequestDispatcher {
 	 * @param request
 	 *
 	 * @return result
->>>>>>> 0714f00f9be024164980a506d117d1f1dbbbef09
 	 */
 	public List<Trainee> processListTraineeRequest(JsonObject request) {
 		List<Trainee> result = null;
