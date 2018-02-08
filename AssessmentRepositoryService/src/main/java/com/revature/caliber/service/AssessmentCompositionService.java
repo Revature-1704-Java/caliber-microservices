@@ -49,6 +49,11 @@ public class AssessmentCompositionService {
 		return result;
 	}
 
+	/**
+	 * Returns List of all Assessments
+	 * 
+	 * @return List of Assessments
+	 */
 	public List<Assessment> findAll() {
 		List<SimpleAssessment> basis = assessmentRepository.findAll();
 		List<Assessment> assessments = composeListOfAssessments(basis);
@@ -56,20 +61,13 @@ public class AssessmentCompositionService {
 		return assessments;
 	}
 
-	public List<Assessment> findByWeek(Short week) {
-		List<SimpleAssessment> basis = assessmentRepository.findByWeek(week);
-		List<Assessment> assessments = composeListOfAssessments(basis);
-
-		return assessments;
-	}
-
-	public List<Assessment> findByBatchIdAndWeek(Integer batchId, Short week) {
-		List<SimpleAssessment> basis = assessmentRepository.findByBatchIdAndWeek(batchId, week);
-		List<Assessment> assessments = composeListOfAssessments(basis);
-
-		return assessments;
-	}
-
+	/**
+	 * Returns List of all Assessments of the given batchId
+	 * 
+	 * @param batchId
+	 *            The batchId to search for Assessments with
+	 * @return List of Assessments with the batchId
+	 */
 	public List<Assessment> findByBatchId(Integer batchId) {
 		List<SimpleAssessment> basis = assessmentRepository.findByBatchId(batchId);
 		List<Assessment> assessments = composeListOfAssessments(basis);
@@ -77,6 +75,43 @@ public class AssessmentCompositionService {
 		return assessments;
 	}
 
+	/**
+	 * Returns List of all Assessments of the given week
+	 * 
+	 * @param week
+	 *            The week to search for Assessments with
+	 * @return List of Assessments with the week
+	 */
+	public List<Assessment> findByWeek(Short week) {
+		List<SimpleAssessment> basis = assessmentRepository.findByWeek(week);
+		List<Assessment> assessments = composeListOfAssessments(basis);
+
+		return assessments;
+	}
+
+	/**
+	 * Returns List of all Assessments of a given batchId and week
+	 * 
+	 * @param batchId
+	 *            The batchId to search for Assessments with
+	 * @param week
+	 *            The week to search for Assessments with
+	 * @return List of Assessments with the batchId and week
+	 */
+	public List<Assessment> findByBatchIdAndWeek(Integer batchId, Short week) {
+		List<SimpleAssessment> basis = assessmentRepository.findByBatchIdAndWeek(batchId, week);
+		List<Assessment> assessments = composeListOfAssessments(basis);
+
+		return assessments;
+	}
+
+	/**
+	 * Returns List of all Assessments of the given categoryId
+	 * 
+	 * @param categoryId
+	 *            The categoryId to search for Assessments with
+	 * @return List of Assessments with the categoryId
+	 */
 	public List<Assessment> findByCategoryId(Integer categoryId) {
 		List<SimpleAssessment> basis = assessmentRepository.findByCategoryId(categoryId);
 		List<Assessment> assessments = composeListOfAssessments(basis);
@@ -107,11 +142,28 @@ public class AssessmentCompositionService {
 		assessmentRepository.delete(assessment.getAssessmentId());
 	}
 
+	/**
+	 * Deletes the Assessment with the given assessmentId as well as sends a message
+	 * to the Grade Service to delete any Grades that are tied to the deleted
+	 * Assessment
+	 * 
+	 * @param assessmentId
+	 *            The assessmentId of the requested to delete Assessment
+	 */
 	public void deleteByAssessmentId(Long assessmentId) {
 		assessmentCompositionMessagingService.sendGradeDeleteRequestForAssessmentId(assessmentId);
 		assessmentRepository.deleteByAssessmentId(assessmentId);
 	}
 
+
+	/**
+	 * Deletes all Assessments of the given batchId as well as sends a message
+	 * to the Grade Service to delete all Grades that are tied to the deleted
+	 * Assessments
+	 * 
+	 * @param batchId
+	 *            The batchId of the requested to delete Assessments
+	 */
 	public void deleteByBatchId(Integer batchId) {
 		for (SimpleAssessment sa : assessmentRepository.findByBatchId(batchId)) {
 			assessmentCompositionMessagingService.sendGradeDeleteRequestForAssessmentId(sa.getAssessmentId());
