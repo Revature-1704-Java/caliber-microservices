@@ -396,7 +396,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.getAssessmentsAverageForWeek = function(batchId, weekId) {
 		return $http({
-			url : "/all/assessments/average/" + batchId + "/" + weekId,
+			url : "https://localhost:8081/reporting/all/assessments/average/" + batchId + "/" + weekId,
 			method : "GET"
 		}).then(function(response) {
 			return response.data;
