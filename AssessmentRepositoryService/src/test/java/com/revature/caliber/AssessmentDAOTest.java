@@ -26,10 +26,6 @@ public class AssessmentDAOTest {
 
 	private static final Logger log = Logger.getLogger(AssessmentDAOTest.class);
 
-	private long assessmentId = 2077;
-	private short week = 5;
-	private short batchId = 2150;
-
 	@Autowired
 	AssessmentDAO dao;
 
@@ -43,13 +39,14 @@ public class AssessmentDAOTest {
 		test.setBatchId(77);
 		test.setRawScore(77);
 		test.setType(AssessmentType.Other);
-		test.setWeek(week);
+		test.setWeek((short) 5);
 		test.setCategoryId(77);
 	}
 
 	@Test
 	public void testFindAll() {
 		log.info("Getting All Assessments");
+		dao.save(test);
 		List<SimpleAssessment> test = dao.findAll();
 		assertFalse(test.isEmpty());
 	}
@@ -57,7 +54,8 @@ public class AssessmentDAOTest {
 	@Test
 	public void testFindByAssessmentId() {
 		log.info("Getting Assessment by assessmentId");
-		SimpleAssessment test = dao.findByAssessmentId(assessmentId);
+		SimpleAssessment savedAssessment = dao.save(test);
+		SimpleAssessment test = dao.findByAssessmentId(savedAssessment.getAssessmentId());
 		assertFalse(test == null);
 	}
 
@@ -78,19 +76,12 @@ public class AssessmentDAOTest {
 	}
 
 	@Test
-	public void testDeleteAssessment() {
-		log.info("Deleting Assessment");
-		SimpleAssessment savedTest = dao.save(test);
-		dao.delete(savedTest);
-		assertNull(dao.findByAssessmentId(savedTest.getAssessmentId()));
-	}
-
-	@Test
 	public void findByWeekNumber() {
 		log.info("Getting Assessment by Week Number");
-		List<SimpleAssessment> assessments = dao.findDistinctByWeek(week);
+		dao.save(test);
+		List<SimpleAssessment> assessments = dao.findDistinctByWeek(test.getWeek());
 		for (SimpleAssessment a : assessments) {
-			if (a.getWeek() != week)
+			if (a.getWeek() != test.getWeek())
 				Assert.fail("week Number does not match: " + a.toString());
 		}
 		assertFalse(assessments.isEmpty());
@@ -99,14 +90,24 @@ public class AssessmentDAOTest {
 	@Test
 	public void findByBatchId() {
 		log.info("Getting Assessment by batchId");
-		List<SimpleAssessment> assessments = dao.findDistinctByBatchId(batchId);
+		dao.save(test);
+		List<SimpleAssessment> assessments = dao.findDistinctByBatchId(test.getBatchId());
 		assertFalse(assessments.isEmpty());
 	}
 
 	@Test
 	public void findByBatchIdAndWeek() {
 		log.info("Getting Assessment by batchId and Week");
-		List<SimpleAssessment> assessments = dao.findByBatchIdAndWeek(batchId, week);
+		dao.save(test);
+		List<SimpleAssessment> assessments = dao.findByBatchIdAndWeek(test.getBatchId(), test.getWeek());
 		assertFalse(assessments.isEmpty());
+	}
+
+	@Test
+	public void testDeleteAssessment() {
+		log.info("Deleting Assessment");
+		SimpleAssessment savedTest = dao.save(test);
+		dao.delete(savedTest);
+		assertNull(dao.findByAssessmentId(savedTest.getAssessmentId()));
 	}
 }

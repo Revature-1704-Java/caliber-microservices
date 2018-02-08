@@ -2,8 +2,12 @@ version: "3"
 services:
   eurekaservice:
     build: ./EurekaService
+    ports:
+        - "8761:8761"
   zuulservice:
     build: ./ZuulService
+    ports:
+        - "8081:8081"
   addressrepositoryservice:
     build: ./AddressRepositoryService
   assessmentrepositoryservice:

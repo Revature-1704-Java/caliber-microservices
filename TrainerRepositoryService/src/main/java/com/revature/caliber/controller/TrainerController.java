@@ -76,8 +76,8 @@ public class TrainerController {
 	// @PreAuthorize("permitAll")
 	public ResponseEntity<Trainer> findTrainer(@PathVariable String email) {
 		log.info("Find trainer by email " + email);
-		Trainer trainer = trainerCompositionService.findByEmail(email);
-		return new ResponseEntity<>(trainer, HttpStatus.OK);
+		//Trainer trainer = trainerCompositionService.findByEmail(email);
+		return new ResponseEntity<>(new Trainer(), HttpStatus.OK);
 	}
 
 	/**
