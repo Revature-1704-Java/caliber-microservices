@@ -92,7 +92,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 			$log.error("There was an error: " + response.status);
 		});
 	};
-	
+
 	all.enumPanelStatus = function() {
 		return $http({
 			url : "http://localhost:8081/types/panelstatus/all",
@@ -144,7 +144,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.getAllCategories = function() {
 		return $http({
-			url : "/category/all/",
+			url : "http://localhost:8081/category/category/all/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Categories successfully retrieved.");
@@ -154,16 +154,16 @@ angular.module("api").factory("allFactory", function($log, $http) {
 			$log.error("There was an error: " + response.status);
 		});
 	};
-	
+
 	/** ************************* Batch *********************** */
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	all.importAvailableBatches = function() {
 		return $http({
-			url : "/all/batch/import",
+			url : "http://localhost:8081/salesforce/all/batch/import",
 			method : "GET",
 		}).then(function(response) {
 			$log.debug("Object successfully imported");
@@ -174,7 +174,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	};
 
 	/**
-	 * 
+	 *
 	 * @param batchObj
 	 */
 	all.createBatch = function(batchObj) {
@@ -193,7 +193,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	};
 
 	/**
-	 * 
+	 *
 	 * @param batchObj
 	 * @returns {*}
 	 */
@@ -211,7 +211,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	};
 
 	/**
-	 * 
+	 *
 	 * @param batchId
 	 * @returns {*}
 	 */
@@ -233,7 +233,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	all.getAllTraineesFromBatch = function(resourceId) {
 		return $http({
-			url : "http://localhost:8081/trainee/all/trainee/import?resourceId=" + resourceId,
+			url : "http://localhost:8081/salesforce/all/trainee/import?resourceId=" + resourceId,
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Trainees successfully imported");
@@ -246,7 +246,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	};
 
 	/**
-	 * 
+	 *
 	 * @param batchId
 	 * @returns {*}
 	 */
@@ -266,7 +266,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	};
 
 	/**
-	 * 
+	 *
 	 * @param traineeObj
 	 * @returns {*}
 	 */
@@ -287,7 +287,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	};
 
 	/**
-	 * 
+	 *
 	 * @param traineeObj
 	 * @returns {*}
 	 */
@@ -321,7 +321,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	};
 
 	/**
-	 * 
+	 *
 	 * @param traineeId
 	 */
 	all.deleteTrainee = function(traineeId) {
@@ -336,7 +336,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 			$log.error("There was an error: " + response.status);
 		});
 	};
-	
+
 	all.searchTrainee = function (searchTerm) {
 		$http({
 			url: 'http://localhost:8081/trainee/all/trainee/search/' + searchTerm,
@@ -354,7 +354,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	/**
 	 * Gets all grades for a given Assessment
-	 * 
+	 *
 	 * @param assessmentId
 	 * @returns {*}
 	 */
@@ -408,7 +408,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	/** *********************** Location ********************* */
 	all.getAllLocations = function() {
 		return $http({
-			url : "/all/location/all/",
+			url : "http://localhost:8081/address/all/location/all/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Locations successfully retrieved");
@@ -438,7 +438,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	/** *********************** Location ********************* */
 	all.getAllLocations = function() {
 		return $http({
-			url : "/all/location/all/",
+			url : "http://localhost:8081/address/all/location/all/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Locations successfully retrieved");
@@ -468,7 +468,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	/** *********************** Trainer ********************* */
 
 	/**
-	 * 
+	 *
 	 * @returns {*}
 	 */
 	all.getAllTrainers = function() {
@@ -485,12 +485,12 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	};
 
 	/**
-	 * 
+	 *
 	 * @returns {*}
 	 */
 	all.importAvailableBatches = function() {
 		return $http({
-			url : "/all/batch/import/",
+			url : "http://localhost:8081/salesforce/all/batch/import/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Object successfully imported");
@@ -502,7 +502,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	};
 
 	/**
-	 * 
+	 *
 	 * @param trainerObj
 	 * @returns {*}
 	 */
@@ -524,7 +524,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 
 	/***************************************************************************
 	 * Server generates PDF from HTML Download via response data
-	 * 
+	 *
 	 **************************************************************************/
 	all.generatePDF = function(title, html) {
 		return $http({
