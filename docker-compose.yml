@@ -2,6 +2,8 @@ version: "3"
 services:
   eurekaservice:
     build: ./EurekaService
+    ports:
+        - "8181:8761"
   zuulservice:
     build: ./ZuulService
   addressrepositoryservice:
