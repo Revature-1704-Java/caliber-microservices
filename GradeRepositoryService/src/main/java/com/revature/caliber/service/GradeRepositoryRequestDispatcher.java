@@ -94,4 +94,12 @@ public class GradeRepositoryRequestDispatcher {
 		}
 		return result;
 	}
+
+	public Grade processGradeDTORequest(JsonObject request) {
+		Grade result = null;
+		
+		gradeCompositionService.saveOrUpdateGradeFromDTO(request.get("assessmentId").getAsLong(), request.getAsDouble(), request.get("trainee").getAsString());
+		
+		return result;
+	}
 }
