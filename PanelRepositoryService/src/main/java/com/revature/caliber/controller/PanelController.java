@@ -121,9 +121,11 @@ public class PanelController {
 		panelService.createPanel(panel);
 		return new ResponseEntity<>(panel, HttpStatus.CREATED);
 		*/
-        
-        //panel.setPanelist(trainingService.findTrainer(email));
-		return null;
+		
+		panel.setPanelist(trainingService.findTrainer(email));
+        log.info(email);
+        panelService.save(panel);
+        return new ResponseEntity<>(panel, HttpStatus.OK);
 	}
 	
 	
@@ -161,11 +163,11 @@ public class PanelController {
 	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
 	public ResponseEntity<List<Map<String, String>>> getBatchAllTraineesPanelTable(
 			@PathVariable Integer batchId) {
-			return null;
-		//log.info("getBatchOverallPanelTable   ===>   /all/reports/batch/{batchId}/overall/panel-batch-overall");
+		log.info("getBatchOverallPanelTable   ===>   /all/reports/batch/{batchId}/overall/panel-batch-overall");
 		//if (panelService.getBatchPanels(batchId).isEmpty()) {
 			//return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		//}
 		//return new ResponseEntity<>(panelService.getBatchPanels(batchId), HttpStatus.OK);
+		return null;
 	}
 }
