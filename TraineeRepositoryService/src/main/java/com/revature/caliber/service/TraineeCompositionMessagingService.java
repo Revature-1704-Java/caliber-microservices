@@ -8,7 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
 import com.revature.caliber.model.SimpleBatch;
-
+/**
+ * TraineeCompositionMessagingService
+ * Sends messages to Batch's queue to obtain a Batch or list of Batches to build the complex TraineeBean and list of Trainee respectively.
+ * Message can be a delete request.
+ * 
+ * @author Samuel Huang
+ */
 @Service
 public class TraineeCompositionMessagingService {
 
@@ -20,7 +26,19 @@ public class TraineeCompositionMessagingService {
 	private static final String LIST_BATCH_ROUTING_KEY = "BSVihZkuxwdg9Dxy";
 	private static final String LIST_GRADE_ROUTING_KEY = "V6hbpnyZRH8ZQQ9e";
 	private static final String LIST_PANEL_ROUTING_KEY = "8AzDbkAUCZn9Z2T3";
+	
+	/**
+	 * Team Data RABBITMQ Exchange Name
+	 */
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
+	
+	/**
+	 * sphuang 02/07/2018 
+	 * Sending a message string in json notation to Batch's queue containing method name findOne and a specific batch ID.
+	 * In return, BatchRepositoryMessagingService will return back a SimpleBatch object that is in that particular batch.
+	 * 
+	 * @param Integer - Trainee's Batch Id
+	 * @return A SimpleBatch object
 
 	/**
 	 * Create message for Batch to get a single Batch
@@ -40,6 +58,14 @@ public class TraineeCompositionMessagingService {
 	}
 
 	/**
+	 * sphuang 02/07/2018 
+	 * Sending a message string in json notation to Batch's queue containing method name findAllByTrainerId and a specific trainer ID.
+	 * In return, BatchRepositoryMessagingService will return back a list of SimpleBatch objects that have the same Trainer ID.
+	 * 
+	 * @param Integer - Trainee's Trainer Id
+	 * @return A List of SimpleBatch object
+
+	/**
 	 * Create message for Batch to get a List Batches for a given trainerId
 	 *
 	 * @param traineeId
@@ -56,6 +82,14 @@ public class TraineeCompositionMessagingService {
 	}
 
 	/**
+	 * sphuang 02/07/2018 
+	 * Sending a message string in json notation to Note's queue containing method name delete and a specific trainee ID.
+	 * NoteRepositoryMessagingService will delete all notes with that trainee ID.
+	 * 
+	 * @param Integer - Trainee's Trainee Id
+	 * 
+
+	/**
 	 * Create message for Note to delete Notes associated with a trainee
 	 *
 	 * @param batchId
@@ -70,6 +104,16 @@ public class TraineeCompositionMessagingService {
 	}
 	
 	/**
+	 * sphuang 02/07/2018 
+	 * Sending a message string in json notation to Grade's queue containing method name delete and a specific trainee ID.
+	 * GradeRepositoryMessagingService will delete all grades with that trainee ID.
+	 * 
+	 * @param Integer - Trainee's Trainee Id
+	 * 
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 	 * Create message for Grade to delete Grades associated with a trainee
 	 *
 	 * @param batchId
@@ -84,6 +128,21 @@ public class TraineeCompositionMessagingService {
 	}
 	
 	/**
+<<<<<<< HEAD
+
+	 * sphuang 02/07/2018
+=======
+	 * sphuang 02/07/2018 
+>>>>>>> master
+	 * Sending a message string in json notation to Panel's queue containing method name delete and a specific trainee ID.
+	 * PanelRepositoryMessagingService will delete all grades with that trainee ID.
+	 * 
+	 * @param Integer - Trainee's Trainee Id
+	 * 
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 	 * Create message for Panel to delete Panels associated with a trainee
 	 *
 	 * @param batchId

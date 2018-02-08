@@ -23,6 +23,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<spring-cloud.version>Edgware.SR1</spring-cloud.version>
 	</properties>
 
 	<dependencies>
@@ -62,6 +63,14 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 		</dependency>
+		<dependency>
+    		<groupId>org.springframework.cloud</groupId>
+    		<artifactId>spring-cloud-starter-config</artifactId>
+ 		</dependency>
+  		<dependency>
+    		<groupId>org.springframework.cloud</groupId>
+    		<artifactId>spring-cloud-starter-eureka</artifactId>
+  		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -106,6 +115,7 @@
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
 	</dependencies>
+<<<<<<< HEAD
 		<dependencyManagement>
         <dependencies>
             <dependency>
@@ -117,6 +127,20 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+=======
+	
+	<dependencyManagement>
+  		<dependencies>
+    		<dependency>
+      			<groupId>org.springframework.cloud</groupId>
+      			<artifactId>spring-cloud-dependencies</artifactId>
+      			<version>${spring-cloud.version}</version>
+      			<type>pom</type>
+      			<scope>import</scope>
+    		</dependency>
+  		</dependencies>
+	</dependencyManagement>
+>>>>>>> 418dc636890fadeccaffa00907b48fa33ec55880
 
 	<build>
 		<plugins>

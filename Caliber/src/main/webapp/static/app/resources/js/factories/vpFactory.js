@@ -1,6 +1,6 @@
 /**
  * API for making vp related AJAX calls to the backend
- * 
+ *
  * @param $log
  * @param $http
  * @returns {{}}
@@ -16,7 +16,7 @@ angular
 					// Get all batches
 					vp.getAllBatches = function() {
 						return $http({
-							url : "/vp/batch/all/",
+							url : "localhost:8081/batch/vp/batch/all/", //added "batch" and localhost in front
 							method : "GET"
 						})
 								.then(
@@ -34,7 +34,7 @@ angular
 					// Get all current batches
 					vp.getAllCurrentBatches = function() {
 						return $http({
-							url : "/vp/batch/all/current",
+							url : "localhost:8081/batch/vp/batch/all/current", //added "batch" and localhost in front
 							method : "GET"
 						})
 								.then(
@@ -48,7 +48,7 @@ angular
 													+ response.status);
 										});
 					};
-				
+
 					// Get all Categories
 					vp.getAllCategories = function() {
 						return $http({
@@ -107,7 +107,7 @@ angular
 					// Save new location
 					vp.saveLocation = function(location) {
 						return $http({
-							url : "/vp/location/create",
+							url : "http://localhost:8081/address/vp/location/create",
 							method : "POST",
 							data : location
 						}).then(
@@ -151,7 +151,7 @@ angular
 					// Deactivate location
 					vp.deactivateLocation = function(locationObj) {
 						return $http({
-							url : "/vp/location/delete",
+							url : "http://localhost:8081/address/vp/location/delete",
 							method : "DELETE",
 							data : locationObj,
 							headers : {
@@ -171,7 +171,7 @@ angular
 					// Update selected location
 					vp.updateLocation = function(locationObj) {
 						return $http({
-							url : "/vp/location/update",
+							url : "http://localhost:8081/address/vp/location/update",
 							method : "PUT",
 							data : locationObj,
 							headers : {
@@ -190,11 +190,11 @@ angular
 											return false;
 										});
 					};
-					
+
 					// Update selected location active status
 					vp.reactivateLocation = function(locationObj) {
 						return $http({
-							url : "/vp/location/reactivate",
+							url : "http://localhost:8081/address/vp/location/reactivate",
 							method : "PUT",
 							data : locationObj,
 							headers : {
@@ -218,7 +218,7 @@ angular
 					vp.createLocation = function(locationObj) {
 						$log.debug(locationObj);
 						return $http({
-							url : "/vp/location/create",
+							url : "http://localhost:8081/address/vp/location/create",
 							method : "POST",
 							data : locationObj
 						})
@@ -241,7 +241,7 @@ angular
 					// Get all locations
 					vp.getAllLocations = function() {
 						return $http({
-							url : "/all/location/all/",
+							url : "http://localhost:8081/address/all/location/all/",
 							method : "GET"
 						})
 								.then(
@@ -256,7 +256,7 @@ angular
 													+ response.status);
 										});
 					};
-					
+
 					/*******TRAINERS************/
 
 					// Update selected trainer
@@ -281,7 +281,7 @@ angular
 
 					/**
 					 * returns all titles
-					 * 
+					 *
 					 * @returns {*}
 					 */
 					vp.getAllTrainersTitle = function() {
@@ -303,7 +303,7 @@ angular
 					};
 
 					/**
-					 * 
+					 *
 					 * @param trainerObj
 					 * @returns {*}
 					 */
@@ -345,6 +345,6 @@ angular
 									return response;
 								});
 					};
-					
+
 					return vp;
 				});

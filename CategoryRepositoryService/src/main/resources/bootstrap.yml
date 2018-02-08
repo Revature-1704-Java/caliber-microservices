@@ -3,4 +3,8 @@ spring:
     name: category
   cloud:
     config:
+<<<<<<< HEAD
       uri: http://localhost:8888
+=======
+    uri: http://localhost:8888
+>>>>>>> 418dc636890fadeccaffa00907b48fa33ec55880

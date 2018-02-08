@@ -22,6 +22,12 @@ public class CategoryRepositoryMessagingService {
 	@Autowired
 	private CategoryRepositoryRequestDispatcher categoryRepositoryRequestDispatcher;
 	
+	/**
+	 * Receives a message from the single SimpleCategory RabbitMQ queue, parses the message string as a JsonObject,
+	 * and passes it to the request dispatcher.
+	 * @param message The message received from the messaging queue
+	 * @return The simple category returned by the request dispatcher
+	 */
 	@RabbitListener(queues = "revature.caliber.repos.category")
 	public SimpleCategory receiveSingleSimpleCategoryRequest(String message) {
 		JsonParser parser = new JsonParser();
@@ -31,6 +37,12 @@ public class CategoryRepositoryMessagingService {
 		return categoryRepositoryRequestDispatcher.processSingleSimpleCategoryRequest(request);
 	}
 
+	/**
+	 * Receives a message from the list SimpleCategories RabbitMQ queue, parses the message string as a JsonObject,
+	 * and passes it to the request dispatcher.
+	 * @param message The message received from the messaging queue
+	 * @return The list of simple categories returned by the request dispatcher
+	 */
 	@RabbitListener(queues = "revature.caliber.repos.category.list")
 	public List<SimpleCategory> receiveListSimpleCategoryRequest(String message) {
 		JsonParser parser = new JsonParser();

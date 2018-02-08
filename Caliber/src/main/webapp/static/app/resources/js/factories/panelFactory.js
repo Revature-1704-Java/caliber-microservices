@@ -1,15 +1,15 @@
 /**
  * API that makes panel related AJAX calls to the back-end
- * 
+ *
  * @author Nathan Koszuta
  * @author Daniel Fairbanks
  * @author Emma Bownes
  * @author Matt 'Spring Data' Prass
  * @author Lauren Wallace
- * 
+ *
  * @param $log
  * @param $http
- * 
+ *
  * @returns {{}}
  */
 
@@ -27,7 +27,7 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 		}).then(function (response) {
 			$log.debug('Panel - AllPanels -- success');
 			$log.debug(response);
-			return response.data;	
+			return response.data;
 		}, function (error) {
 			$log.error('There was an error: ' + error.status);
 		});
@@ -92,7 +92,7 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 	// Update a panel
 	panel.updatePanel = function (panelObj) {
 		return $http({
-			url : 'http://localhost:8081/panel/update',
+			url : 'http://localhost:8081/panel/panel/update',
 			method : 'PUT',
 			data : panelObj
 		}).then(function (response) {
@@ -146,6 +146,6 @@ angular.module('api').factory('panelFactory', function($log, $http) {
 		});
 	};
 
-	
+
 	return panel;
 });
