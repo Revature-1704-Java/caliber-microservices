@@ -14,9 +14,10 @@ public class AssessmentCompositionMessagingService {
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 
+	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 	private static final String SINGLE_BATCH_ROUTING_KEY = "XLNbCWqQzFHr9JfZ";
 	private static final String SINGLE_CATEGORY_ROUTING_KEY = "utMPxDus2M9qy9Bh";
-	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
+	private static final String SINGLE_GRADE_ROUTING_KEY = "aYF4wPtsGMjq72Lu";
 
 	/**
 	 * Sends a request for a SimpleBatch to the Batch service identified by a
@@ -72,12 +73,12 @@ public class AssessmentCompositionMessagingService {
 	}
 
 	/**
-	 * Sends a save request for a SimpleBatch to the Batch service. The SimpleBatch
-	 * is sent as a JsonObject.
+	 * Sends a request for a SimpleBatch to the Batch service identified by
+	 * resourceId
 	 * 
-	 * @param batch
-	 *            The batch to be saved
-	 * @return The SimpleBatch that was saved
+	 * @param resourceId
+	 *            The resourceId that identifies the SimpleBatch
+	 * @return The SimpleBatch returned by the Batch service
 	 */
 	public SimpleBatch sendSingleSimpleBatchRequest(String resourceId) {
 		JsonObject batchRequest = new JsonObject();
@@ -90,12 +91,12 @@ public class AssessmentCompositionMessagingService {
 	}
 
 	/**
-	 * Sends a save request for a SimpleCategory to the Category service. The
-	 * SimpleCategory is sent as a JsonObject.
+	 * Sends a request for a SimpleCategory to the Category service identified by a
+	 * category
 	 * 
 	 * @param category
-	 *            The category to be saved
-	 * @return The SimpleCategory that was saved
+	 *            The category that identifies the SimpleCategory
+	 * @return The SimpleCategory returned by the Category service
 	 */
 	public SimpleCategory sendSingleSimpleCategoryRequest(String category) {
 		JsonObject catRequest = new JsonObject();

@@ -33,5 +33,6 @@ nbdist/
 
 ## Visual Studio Code
 .vscode/
-AssessmentRepositoryService/src/main/java/com/revature/caliber/AssessmentRepositoryServiceApplication.java
-AssessmentRepositoryService/src/main/java/com/revature/caliber/service/AssessmentCompositionMessagingService.java
+
+## Eclipse Servers
+Servers/
