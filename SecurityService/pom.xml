@@ -58,6 +58,12 @@
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-eureka</artifactId>
     </dependency>
+    
+    <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        
 		<dependency>
     		<groupId>org.mock-server</groupId>
     		<artifactId>mockserver-netty</artifactId>
@@ -68,6 +74,8 @@
 		    <artifactId>mockserver-client-java</artifactId>
 		    <version>3.10.8</version>
 		</dependency>
+		
+		
 	</dependencies>
 
 	<dependencyManagement>

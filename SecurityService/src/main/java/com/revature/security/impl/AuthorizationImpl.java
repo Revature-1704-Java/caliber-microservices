@@ -23,6 +23,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
@@ -39,6 +41,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import com.revature.security.beans.Trainer;
 import com.revature.security.beans.TrainerRole;
 import com.revature.security.exceptions.NotAuthorizedException;
@@ -61,6 +64,9 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 	private static final String DEBUG_USER_LOGIN = "patrick.walsh@revature.com";
 	private static final String REDIRECT = "redirect:";
 	private static final String REVATURE = "http://www.revature.com/";
+	
+	@Autowired
+	private AmqpTemplate msgq;
 
 	public AuthorizationImpl() {
 		super();
@@ -234,23 +240,30 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 	 * @throws URISyntaxException
 	 * @throws IOException
 	 */
-	private String getCaliberTrainer(HttpServletRequest servletRequest, String email)
+	private Trainer getCaliberTrainer(HttpServletRequest servletRequest, String email)
 			throws URISyntaxException, IOException {
-		HttpClient httpClient = HttpClientBuilder.create().build();
+		
+		
+		/*HttpClient httpClient = HttpClientBuilder.create().build();
 		URIBuilder uriBuilder = new URIBuilder();
 		uriBuilder.setScheme(servletRequest.getScheme()).setHost(servletRequest.getServerName())
 				.setPort(servletRequest.getServerPort()).setPath("/training/trainer/byemail/" + email + "/");
 		URI uri = uriBuilder.build();
 		HttpGet httpGet = new HttpGet(uri);
 		HttpResponse response = httpClient.execute(httpGet);
-		String jsonString = toJsonString(response.getEntity().getContent());
+		String jsonString = toJsonString(response.getEntity().getContent());*/
 		// check if we actually got back JSON object from the Salesforce
-		if (!jsonString.contains(email)) {
-			log.fatal("Training API returned: " + jsonString);
+		JsonObject jObj = new JsonObject();
+		jObj.addProperty("methodName", "findByEmail");
+		jObj.addProperty("email", email);
+		Trainer trainer = (Trainer)msgq.convertSendAndReceive("revature.caliber.service","trainer", jObj.toString());
+		
+		if (trainer == null) {
+			log.fatal("Training API returned: " + trainer.toString());
 			throw new NotAuthorizedException();
 		}
-		log.info(jsonString);
-		return jsonString;
+		
+		return trainer;
 	}
 	
 	private void tryAuthorize(HttpServletRequest servletRequest, HttpServletResponse servletResponse, String salesTokenString) throws URISyntaxException, IOException {
@@ -270,9 +283,9 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 		
 		String email = salesforceUser.getEmail();
 		// Http request to the training module to get the caliber user
-		String jsonString = getCaliberTrainer(servletRequest, email);
+		Trainer trainer = getCaliberTrainer(servletRequest, email);
 		// authorize user
-		authorize(jsonString, salesforceUser, servletResponse);
+		authorize(trainer, salesforceUser, servletResponse);
 	}
 
 	/**
@@ -285,15 +298,14 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 	 * @param servletResponse
 	 * @throws IOException
 	 */
-	private void authorize(String jsonString, SalesforceUser salesforceUser, HttpServletResponse servletResponse)
+	private void authorize(Trainer trainer, SalesforceUser salesforceUser, HttpServletResponse servletResponse)
 			throws IOException {
 		try {
-		JSONObject jsonObject = new JSONObject(jsonString);
-		if (jsonObject.getString("email").equals(salesforceUser.getEmail())) {
-			log.info("Logged in user " + jsonObject.getString("email") + " now hasRole: "
-					+ jsonObject.getString("tier"));
-			salesforceUser.setRole(jsonObject.getString("tier"));
-			salesforceUser.setCaliberUser(new ObjectMapper().readValue(jsonString, Trainer.class));
+		if (trainer.getEmail().equals(salesforceUser.getEmail())) {
+			log.info("Logged in user " + trainer.getEmail() + " now hasRole: "
+					+ trainer.getTier());
+			salesforceUser.setRole(trainer.getTier().toString());
+			salesforceUser.setCaliberUser(trainer);
 			// check if user is active
 			if (salesforceUser.getCaliberUser().getTier().equals(TrainerRole.ROLE_INACTIVE))
 				throw new NotAuthorizedException();
@@ -304,7 +316,8 @@ public class AuthorizationImpl extends AbstractSalesforceSecurityHelper implemen
 		Authentication auth = new PreAuthenticatedAuthenticationToken(salesforceUser, salesforceUser.getUserId(),
 				salesforceUser.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(auth);
-		servletResponse.addCookie(new Cookie("role", jsonObject.getString("tier")));
+		servletResponse.addCookie(new Cookie("role", trainer.getTier().toString()));
+		servletResponse.addCookie(new Cookie("caliber_email", trainer.getEmail()));
 		}catch(Exception e) { e.getMessage();}
 		
 	}
