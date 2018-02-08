@@ -33,7 +33,7 @@ public class SimpleTrainer implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRAINER_ID_SEQUENCE")
 	@SequenceGenerator(name = "TRAINER_ID_SEQUENCE", sequenceName = "TRAINER_ID_SEQUENCE")
 	@JsonProperty
-	private int trainerId;
+	private Integer trainerId;
 
 	@NotEmpty
 	@Email
@@ -70,17 +70,18 @@ public class SimpleTrainer implements Serializable {
 
 	public SimpleTrainer(Trainer trainer) {
 		super();
+		this.trainerId = trainer.getTrainerId();
 		this.email = trainer.getEmail();
 		this.name = trainer.getName();
 		this.title = trainer.getTitle();
 		this.tier = trainer.getTier();
 	}
 
-	public int getTrainerId() {
+	public Integer getTrainerId() {
 		return trainerId;
 	}
 
-	public void setTrainerId(int trainerId) {
+	public void setTrainerId(Integer trainerId) {
 		this.trainerId = trainerId;
 	}
 
