@@ -14,7 +14,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 
 
-@EnableEurekaClient
 @EnableSwagger2
 @SpringBootApplication
 @EnableEurekaClient
