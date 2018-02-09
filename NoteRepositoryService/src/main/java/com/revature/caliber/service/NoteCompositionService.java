@@ -3,6 +3,7 @@ package com.revature.caliber.service;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.bouncycastle.jcajce.provider.asymmetric.dsa.DSASigner.detDSA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -247,11 +248,15 @@ public class NoteCompositionService {
 		System.out.println(dest);
 		for(SimpleNote curr : src) {
 			Note note = composeNote(curr);
-			System.out.println(note);
-			if(!includeDropped && note.getTrainee().getTrainingStatus() != TrainingStatus.Dropped)
+			
+			if(note.getTrainee() == null || (note.getType().equals(NoteType.BATCH) || note.getType().equals(NoteType.QC_BATCH)))
 				dest.add(note);
-			else if(includeDropped)
-				dest.add(note);
+			else {
+				if(!includeDropped && note.getTrainee().getTrainingStatus() != TrainingStatus.Dropped)
+					dest.add(note);
+				else if(includeDropped)
+					dest.add(note);
+			}
 		}
 		
 		return dest;
@@ -270,6 +275,9 @@ public class NoteCompositionService {
 		Batch batch = null;
 		Trainee trainee = null;
 		Note dest = new Note(src);
+		
+		System.out.println("SimpleNote: " + src);
+		System.out.println("Note: " + dest);
 		
 		if(src.getBatchId() != null) {
 			simpleBatch =  noteCompositionMessagingService.sendSingleSimpleBatchRequest(src.getBatchId());
