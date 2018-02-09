@@ -3,63 +3,72 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 
 import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+/**
+ * The type Simple PanelFeedback.
+ */
 @Entity
 @Table(name = "CALIBER_PANEL_FEEDBACK")
 @Cacheable
 public class SimplePanelFeedback implements Serializable {
-
-	private static final long serialVersionUID = 8110514896738077383L;
+	private static final long serialVersionUID = -7841752990652676610L;
 
 	@Id
 	@Column(name = "PANEL_FEEDBACK_ID")
 	@SequenceGenerator(name = "PANEL_FEEDBACK_ID_SEQUENCE", sequenceName = "PANEL_FEEDBACK_ID_SEQUENCE", initialValue = 1, allocationSize = 600)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PANEL_FEEDBACK_ID_SEQUENCE")
-	private long id;
-	
-	@JoinColumn(name="CATEGORY_ID", nullable=false)
-	private int categoryId;
-	
+	private Long id;
+
+	@JoinColumn(name = "CATEGORY_ID", nullable = false)
+	private Integer categoryId;
+
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "PANEL_STATUS", nullable = false)
 	private PanelStatus status;
-	
+
 	@Min(0)
 	@Max(10)
 	@NotNull
 	@Column(name = "PANEL_RESULT")
-	private int result;
-	
+	private Integer result;
+
 	@Column(name = "PANELIST_COMMENTS")
 	private String comment;
-	
-	@JoinColumn(name="PANEL_ID", nullable=false)
-	private int panelId;
+
+	@JoinColumn(name = "PANEL_ID", nullable = false)
+	private Integer panelId;
 
 	public SimplePanelFeedback() {
 		super();
 	}
-	
+
+	public SimplePanelFeedback(Long id, Integer categoryId, PanelStatus status, Integer result, String comment,
+			Integer panelId) {
+		super();
+		this.id = id;
+		this.categoryId = categoryId;
+		this.status = status;
+		this.result = result;
+		this.comment = comment;
+		this.panelId = panelId;
+	}
+
 	public SimplePanelFeedback(PanelFeedback pf) {
+		super();
 		this.id = pf.getId();
 		this.categoryId = pf.getTechnology().getCategoryId();
 		this.status = pf.getStatus();
@@ -68,19 +77,19 @@ public class SimplePanelFeedback implements Serializable {
 		this.panelId = pf.getPanel().getId();
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public int getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setTechnology(int categoryId) {
+	public void setTechnology(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -92,11 +101,11 @@ public class SimplePanelFeedback implements Serializable {
 		this.status = status;
 	}
 
-	public int getResult() {
+	public Integer getResult() {
 		return result;
 	}
 
-	public void setResult(int result) {
+	public void setResult(Integer result) {
 		this.result = result;
 	}
 
@@ -108,11 +117,11 @@ public class SimplePanelFeedback implements Serializable {
 		this.comment = comment;
 	}
 
-	public int getPanelId() {
+	public Integer getPanelId() {
 		return panelId;
 	}
 
-	public void setPanelId(int panelId) {
+	public void setPanelId(Integer panelId) {
 		this.panelId = panelId;
 	}
 
@@ -145,7 +154,7 @@ public class SimplePanelFeedback implements Serializable {
 		if (panelId == 0) {
 			if (other.panelId != 0)
 				return false;
-		} 
+		}
 		if (result != other.result)
 			return false;
 		if (status != other.status)
@@ -163,5 +172,5 @@ public class SimplePanelFeedback implements Serializable {
 		return "PanelFeedback [id=" + id + ", categoryId=" + categoryId + ", status=" + status + ", result=" + result
 				+ ", comment=" + comment + "]";
 	}
-	
+
 }

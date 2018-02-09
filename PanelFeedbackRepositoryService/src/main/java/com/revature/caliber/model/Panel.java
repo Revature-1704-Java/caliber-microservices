@@ -6,16 +6,16 @@ import java.util.Set;
 
 public class Panel implements Serializable {
 	private static final long serialVersionUID = -3904962254572382770L;
-	
-	private int id;
+
+	private Integer panelId;
 	private Trainee trainee;
 	private Trainer panelist;
 	private Date interviewDate;
-	private String duration;
+	private String duration; // 1hr 30 minutes
 	private InterviewFormat format;
-	private String internet;
-	private int panelRound;
-	private boolean recordingConsent;
+	private String internet; // stable/unstable
+	private Integer panelRound;
+	private Boolean recordingConsent;
 	private String recordingLink;
 	private PanelStatus status;
 	private Set<PanelFeedback> feedback;
@@ -25,39 +25,34 @@ public class Panel implements Serializable {
 	private String projectThreeDescription;
 	private String communicationSkills;
 	private String overall;
-	
+
 	public Panel() {
 		super();
 		this.interviewDate = new Date();
 	}
 	
-	public Panel(SimplePanel simplePanel) {
-		this.id = simplePanel.getPanelId();
-		this.trainee = null;
-		this.panelist = null;
+	public Panel(SimplePanel simplePanel){
+		this();
+		this.panelId = simplePanel.getPanelId();
 		this.interviewDate = simplePanel.getInterviewDate();
 		this.duration = simplePanel.getDuration();
-		this.format = simplePanel.getFormatId();
 		this.internet = simplePanel.getInternet();
 		this.panelRound = simplePanel.getPanelRound();
 		this.recordingConsent = simplePanel.isRecordingConsent();
 		this.recordingLink = simplePanel.getRecordingLink();
-		this.status = simplePanel.getStatusId();
-		this.feedback = null;
-		this.associateIntro = simplePanel.getAssociateIntro();
 		this.projectOneDescription = simplePanel.getProjectOneDescription();
 		this.projectTwoDescription = simplePanel.getProjectTwoDescription();
 		this.projectThreeDescription = simplePanel.getProjectThreeDescription();
 		this.communicationSkills = simplePanel.getCommunicationSkills();
-		this.overall = simplePanel.getCommunicationSkills();
+		this.overall = simplePanel.getOverall();
 	}
 
-	public int getId() {
-		return id;
+	public Integer getId() {
+		return panelId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(Integer id) {
+		this.panelId = id;
 	}
 
 	public Trainee getTrainee() {
@@ -108,19 +103,19 @@ public class Panel implements Serializable {
 		this.internet = internet;
 	}
 
-	public int getPanelRound() {
+	public Integer getPanelRound() {
 		return panelRound;
 	}
 
-	public void setPanelRound(int panelRound) {
+	public void setPanelRound(Integer panelRound) {
 		this.panelRound = panelRound;
 	}
 
-	public boolean isRecordingConsent() {
+	public Boolean isRecordingConsent() {
 		return recordingConsent;
 	}
 
-	public void setRecordingConsent(boolean recordingConsent) {
+	public void setRecordingConsent(Boolean recordingConsent) {
 		this.recordingConsent = recordingConsent;
 	}
 
@@ -198,8 +193,8 @@ public class Panel implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((associateIntro == null) ? 0 : associateIntro.hashCode());
 		result = prime * result + ((communicationSkills == null) ? 0 : communicationSkills.hashCode());
 		result = prime * result + ((duration == null) ? 0 : duration.hashCode());
@@ -301,7 +296,7 @@ public class Panel implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Panel [id=" + id + ", trainee=" + trainee + ", panelist=" + panelist + ", interviewDate="
+		return "Panel [id=" + panelId + ", trainee=" + trainee + ", panelist=" + panelist + ", interviewDate="
 				+ interviewDate + ", duration=" + duration + ", format=" + format + ", internet=" + internet
 				+ ", panelRound=" + panelRound + ", recordingConsent=" + recordingConsent + ", recordingLink="
 				+ recordingLink + ", status=" + status + ", feedback=" + feedback + ", associateIntro=" + associateIntro
@@ -309,4 +304,5 @@ public class Panel implements Serializable {
 				+ projectTwoDescription + ", projectThreeDescription=" + projectThreeDescription
 				+ ", communicationSkills=" + communicationSkills + ", overall=" + overall + "]";
 	}
+
 }

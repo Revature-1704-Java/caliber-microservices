@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * The type SimpleBatch.
+ * The type Simple Batch.
  */
-
 public class SimpleBatch implements Serializable {
-	private static final long serialVersionUID = 6433997711397981988L;
+	private static final long serialVersionUID = -7000300062384597615L;
 
 	private Integer batchId;
 	private String resourceId;
@@ -25,7 +24,7 @@ public class SimpleBatch implements Serializable {
 	private Short borderlineGradeThreshold;
 	private Integer weeks;
 	private Integer gradedWeeks;
-	
+
 	public SimpleBatch() {
 		super();
 		this.weeks = 1;
@@ -34,7 +33,27 @@ public class SimpleBatch implements Serializable {
 		this.borderlineGradeThreshold = 70;
 		this.trainingType = TrainingType.Revature;
 	}
-	
+
+	/**
+	 * Constructor mostly used for testing. Defaults TrainingType - Revature,
+	 * SkillType - J2EE, Good grade - 80, and Borderline grade - 70
+	 *
+	 * @param trainingName
+	 * @param trainer
+	 * @param startDate
+	 * @param endDate
+	 * @param location
+	 */
+	public SimpleBatch(String trainingName, Integer trainerId, Date startDate, Date endDate, String location) {
+		super();
+		this.trainingName = trainingName;
+		this.trainerId = trainerId;
+		this.skillType = SkillType.J2EE;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.location = location;
+	}
+
 	public SimpleBatch(Batch batch) {
 		super();
 		this.batchId = batch.getBatchId();
@@ -51,26 +70,6 @@ public class SimpleBatch implements Serializable {
 		this.goodGradeThreshold = batch.getGoodGradeThreshold();
 		this.borderlineGradeThreshold = batch.getBorderlineGradeThreshold();
 		this.trainingType = batch.getTrainingType();
-	}
-
-	/**
-	 * Constructor mostly used for testing. Defaults TrainingType - Revature,
-	 * SkillType - J2EE, Good grade - 80, and Borderline grade - 70
-	 *
-	 * @param trainingName
-	 * @param trainer
-	 * @param startDate
-	 * @param endDate
-	 * @param location
-	 */
-	public SimpleBatch(String trainingName, Integer trainerId, Date startDate, Date endDate, String location) {
-		this();
-		this.trainingName = trainingName;
-		this.trainerId = trainerId;
-		this.skillType = SkillType.J2EE;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.location = location;
 	}
 
 	public Integer getBatchId() {
@@ -290,5 +289,4 @@ public class SimpleBatch implements Serializable {
 				+ ", borderlineGradeThreshold=" + borderlineGradeThreshold + ", weeks=" + weeks + ", gradedWeeks="
 				+ gradedWeeks + "]";
 	}
-	
 }

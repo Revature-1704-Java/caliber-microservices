@@ -2,26 +2,34 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 
-public class PanelFeedback implements Serializable {
+public class PanelFeedback  implements Serializable {
 	private static final long serialVersionUID = -7997716749941674836L;
 	
-	private long id;
+	private Long panelFeedbackId;
 	private Category technology;
 	private PanelStatus status;
-	private int result;
+	private Integer result;
 	private String comment;
 	private Panel panel;
-	
+
 	public PanelFeedback() {
 		super();
 	}
-
-	public long getId() {
-		return id;
+	
+	public PanelFeedback(SimplePanelFeedback simplePanelFeedback){
+		this();
+		this.panelFeedbackId = simplePanelFeedback.getId();
+		this.status = simplePanelFeedback.getStatus();
+		this.result = simplePanelFeedback.getResult();
+		this.comment = simplePanelFeedback.getComment();
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public Long getId() {
+		return panelFeedbackId;
+	}
+
+	public void setId(Long id) {
+		this.panelFeedbackId = id;
 	}
 
 	public Category getTechnology() {
@@ -40,11 +48,11 @@ public class PanelFeedback implements Serializable {
 		this.status = status;
 	}
 
-	public int getResult() {
+	public Integer getResult() {
 		return result;
 	}
 
-	public void setResult(int result) {
+	public void setResult(Integer result) {
 		this.result = result;
 	}
 
@@ -66,8 +74,8 @@ public class PanelFeedback implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int hashCodeResult = 1;
+		final Integer prime = 31;
+		Integer hashCodeResult = 1;
 		hashCodeResult = prime * hashCodeResult + ((comment == null) ? 0 : comment.hashCode());
 		hashCodeResult = prime * hashCodeResult + ((panel == null) ? 0 : panel.hashCode());
 		hashCodeResult = prime * hashCodeResult + this.result;
@@ -93,7 +101,7 @@ public class PanelFeedback implements Serializable {
 		if (panel == null) {
 			if (other.panel != null)
 				return false;
-		} 
+		}
 		if (result != other.result)
 			return false;
 		if (status != other.status)
@@ -108,8 +116,8 @@ public class PanelFeedback implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PanelFeedback [id=" + id + ", technology=" + technology + ", status=" + status + ", result=" + result
+		return "PanelFeedback [id=" + panelFeedbackId + ", technology=" + technology + ", status=" + status + ", result=" + result
 				+ ", comment=" + comment + "]";
 	}
-	
+
 }

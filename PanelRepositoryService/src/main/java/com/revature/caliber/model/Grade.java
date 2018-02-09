@@ -4,24 +4,31 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Grade implements Serializable {
-	private static final long serialVersionUID = -2020456497011531928L;
+	private static final long serialVersionUID = -2031135710502844800L;
 
-	private long gradeId;
+	private Long gradeId;
 	private Assessment assessment;
 	private Trainee trainee;
 	private Date dateReceived;
-	private double score;
+	private Double score;
 
 	public Grade() {
 		super();
 	}
 
-	public Grade(Assessment assessment, Trainee trainee, Date dateReceived, double score) {
-		super();
+	public Grade(Assessment assessment, Trainee trainee, Date dateReceived, Double score) {
+		this();
 		this.assessment = assessment;
 		this.trainee = trainee;
 		this.dateReceived = dateReceived;
 		this.score = score;
+	}
+	
+	public Grade(SimpleGrade simpleGrade){
+		this();
+		this.dateReceived = simpleGrade.getDateReceived();
+		this.score = simpleGrade.getScore();
+		
 	}
 
 	public long getGradeId() {
@@ -56,18 +63,18 @@ public class Grade implements Serializable {
 		this.dateReceived = dateReceived;
 	}
 
-	public double getScore() {
+	public Double getScore() {
 		return score;
 	}
 
-	public void setScore(double score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((assessment == null) ? 0 : assessment.hashCode());
 		result = prime * result + ((dateReceived == null) ? 0 : dateReceived.hashCode());
 		long temp;
@@ -111,5 +118,4 @@ public class Grade implements Serializable {
 		return "Grade [gradeId=" + gradeId + ", assessment=" + assessment + ", trainee=" + trainee + ", dateReceived="
 				+ dateReceived + ", score=" + score + "]";
 	}
-	
 }
