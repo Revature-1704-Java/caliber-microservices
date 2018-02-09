@@ -1,12 +1,23 @@
 package com.revature.caliber.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
+import com.revature.caliber.model.Panel;
+import com.revature.caliber.model.PanelFeedback;
 import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.SimpleTrainer;
+import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.Trainer;
 
 @Service
@@ -29,6 +40,13 @@ public class PanelCompositionMessagingService {
 		return (SimpleTrainee) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_ROUTING_KEY,
 				traineeRequest.toString());
 	}
+	public List<SimpleTrainee> findTraineebyPanel(Integer batchid){
+		JsonObject traineeRequest = new JsonObject();
+		traineeRequest.addProperty("methodName", "findAllByBatch");
+		traineeRequest.addProperty("batchId", batchid);
+		return (List<SimpleTrainee>) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINEE_ROUTING_KEY,
+				traineeRequest.toString());
+	}
 
 	public SimpleTrainer sendSingleSimpleTrainerRequest(Integer trainerId) {
 		JsonObject trainerRequest = new JsonObject();
@@ -48,11 +66,11 @@ public class PanelCompositionMessagingService {
 		
 		rabbitTemplate.convertAndSend(RABBIT_REPO_EXCHANGE, SINGLE_PANEL_FEEDBACK_ROUTING_KEY, panelFeedbackRequest.toString());
 	}
-	public Trainer findTrainer(String email) {
+	public SimpleTrainer findTrainer(String email) {
 		JsonObject trainerRequest = new JsonObject();
 		trainerRequest.addProperty("methodName", "findByEmail");
 		trainerRequest.addProperty("trainerEmail", email);
-		return (Trainer) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINER_ROUTING_KEY, trainerRequest.toString());
+		return (SimpleTrainer) rabbitTemplate.convertSendAndReceive(RABBIT_REPO_EXCHANGE, SINGLE_TRAINER_ROUTING_KEY, trainerRequest.toString());
 	}
 	
 }

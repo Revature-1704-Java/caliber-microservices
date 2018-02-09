@@ -1,6 +1,7 @@
 package com.revature.caliber.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.caliber.model.Panel;
 import com.revature.caliber.model.PanelFeedback;
 import com.revature.caliber.model.PanelStatus;
+import com.revature.caliber.model.SimplePanel;
+import com.revature.caliber.model.SimpleTrainee;
+import com.revature.caliber.model.Trainee;
+import com.revature.caliber.model.Trainer;
 import com.revature.caliber.service.PanelCompositionMessagingService;
 import com.revature.caliber.service.PanelCompositionService;
 import com.revature.caliber.exceptions.MalformedRequestException;
@@ -121,8 +126,8 @@ public class PanelController {
 		panelService.createPanel(panel);
 		return new ResponseEntity<>(panel, HttpStatus.CREATED);
 		*/
-		
-		panel.setPanelist(trainingService.findTrainer(email));
+		Trainer trainer = new Trainer(trainingService.findTrainer(email));
+		panel.setPanelist(trainer);
         log.info(email);
         panelService.save(panel);
         return new ResponseEntity<>(panel, HttpStatus.OK);
@@ -164,10 +169,16 @@ public class PanelController {
 	public ResponseEntity<List<Map<String, String>>> getBatchAllTraineesPanelTable(
 			@PathVariable Integer batchId) {
 		log.info("getBatchOverallPanelTable   ===>   /all/reports/batch/{batchId}/overall/panel-batch-overall");
-		//if (panelService.getBatchPanels(batchId).isEmpty()) {
-			//return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		//}
-		//return new ResponseEntity<>(panelService.getBatchPanels(batchId), HttpStatus.OK);
-		return null;
+		List<SimpleTrainee> trainee = trainingService.findTraineebyPanel(batchId);
+		if (trainee.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		List<Trainee> trainees = new ArrayList<Trainee>();
+		for (SimpleTrainee curr : trainee) {
+			Trainee train = new Trainee(curr);
+			trainees.add(train);
+		}
+		
+		return new ResponseEntity<>(panelService.getBatchPanels(trainees), HttpStatus.OK);
 	}
 }

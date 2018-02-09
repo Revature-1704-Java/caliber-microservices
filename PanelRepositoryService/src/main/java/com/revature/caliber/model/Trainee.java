@@ -1,7 +1,7 @@
 package com.revature.caliber.model;
 
-import java.awt.Panel;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 public class Trainee implements Serializable {
