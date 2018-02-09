@@ -58,12 +58,18 @@ public class Batch implements Serializable {
 	}
 
 	public Batch(SimpleBatch simpleBatch) {
-		this();
+		super();
+		this.batchId = simpleBatch.getBatchId();
+		this.resourceId = simpleBatch.getResourceId();
 		this.trainingName = simpleBatch.getTrainingName();
 		this.skillType = simpleBatch.getSkillType();
 		this.startDate = simpleBatch.getStartDate();
 		this.endDate = simpleBatch.getEndDate();
 		this.location = simpleBatch.getLocation();
+		this.goodGradeThreshold = simpleBatch.getGoodGradeThreshold();
+		this.borderlineGradeThreshold = simpleBatch.getBorderlineGradeThreshold();
+		this.weeks = simpleBatch.getWeeks();
+		this.gradedWeeks = simpleBatch.getGradedWeeks();
 	}
 
 	public Integer getBatchId() {
@@ -280,8 +286,12 @@ public class Batch implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Batch [batchId=" + batchId + ", trainingName=" + trainingName + ", skillType=" + skillType
-				+ ", trainingType=" + trainingType + ", location==" + location + "]";
+		return "Batch [batchId=" + batchId + ", resourceId=" + resourceId + ", trainingName=" + trainingName
+				+ ", trainer=" + trainer + ", coTrainer=" + coTrainer + ", skillType=" + skillType + ", trainingType="
+				+ trainingType + ", startDate=" + startDate + ", endDate=" + endDate + ", location=" + location
+				+ ", address=" + address + ", goodGradeThreshold=" + goodGradeThreshold + ", borderlineGradeThreshold="
+				+ borderlineGradeThreshold + ", trainees=" + trainees + ", weeks=" + weeks + ", gradedWeeks="
+				+ gradedWeeks + ", notes=" + notes + "]";
 	}
 
 }

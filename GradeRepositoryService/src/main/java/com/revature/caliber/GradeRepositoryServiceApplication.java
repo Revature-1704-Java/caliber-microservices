@@ -25,12 +25,7 @@ public class GradeRepositoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GradeRepositoryServiceApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			System.out.println(gcs.findByTrainee(5350));
-		};
-	}
+	
 	@Bean
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
