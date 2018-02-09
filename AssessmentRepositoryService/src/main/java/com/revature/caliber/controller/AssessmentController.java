@@ -129,16 +129,11 @@ public class AssessmentController {
 	public ResponseEntity<List<Assessment>> findAssessmentByWeek(@PathVariable Integer batchId,
 			@PathVariable Short week) {
 		log.debug("Find assessment by week number " + week + " for batch " + batchId + " ");
-		List<Assessment> assessments = assessmentService.findByWeek(batchId, week);
+		List<Assessment> assessments = assessmentService.findByBatchIdAndWeek(batchId, week);
 		if (assessments.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		List<SimpleAssessment> simpleAssessmentList = new ArrayList<SimpleAssessment>();
-		for (Assessment a : assessments) {
-			SimpleAssessment sa = new SimpleAssessment(a);
-			simpleAssessmentList.add(sa);
-		}
-		return new ResponseEntity<>(simpleAssessmentList, HttpStatus.OK);
+		return new ResponseEntity<>(assessments, HttpStatus.OK);
 	}
 
 }
