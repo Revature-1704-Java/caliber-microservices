@@ -3,22 +3,22 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 
 public class Address implements Serializable {
-	private static final long serialVersionUID = -5649489166844504113L;
+	private static final long serialVersionUID = -7886621867644813683L;
 
-	private int addressId;
+	private Integer addressId;
 	private String street;
 	private String city;
 	private String state;
 	private String zipcode;
 	private String company;
-	private boolean active;
+	private Boolean active;
 
 	public Address() {
 		super();
 	}
 
-	public Address(int addressId, String street, String city, String state, String zipcode, String company,
-			boolean active) {
+	public Address(Integer addressId, String street, String city, String state, String zipcode, String company,
+			Boolean active) {
 		super();
 		this.addressId = addressId;
 		this.street = street;
@@ -29,11 +29,11 @@ public class Address implements Serializable {
 		this.active = active;
 	}
 
-	public int getAddressId() {
+	public Integer getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(int addressId) {
+	public void setAddressId(Integer addressId) {
 		this.addressId = addressId;
 	}
 
@@ -77,18 +77,18 @@ public class Address implements Serializable {
 		this.company = company;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + (active ? 1231 : 1237);
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
@@ -141,5 +141,4 @@ public class Address implements Serializable {
 	public String toString() {
 		return company + ", " + street + " " + city + " " + state + " " + zipcode;
 	}
-
 }

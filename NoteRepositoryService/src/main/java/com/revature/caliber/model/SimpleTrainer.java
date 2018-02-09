@@ -2,58 +2,16 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
- * The type Trainer.
+ * The type Simple Trainer.
  */
-@Entity
-@Table(name = "CALIBER_TRAINER")
-@Cacheable
 public class SimpleTrainer implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4555033024866490022L;
 
-	@Id
-	@Column(name = "TRAINER_ID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRAINER_ID_SEQUENCE")
-	@SequenceGenerator(name = "TRAINER_ID_SEQUENCE", sequenceName = "TRAINER_ID_SEQUENCE")
-	@JsonProperty
-	private int trainerId;
-
-	@NotEmpty
-	@Email
-	@Column(name = "EMAIL", nullable = false, unique = true, updatable = true)
-	@JsonProperty
+	private Integer trainerId;
 	private String email;
-
-	@NotEmpty
-	@Column(name = "NAME", nullable = false)
-	@JsonProperty
 	private String name;
-
-	@NotEmpty
-	@Column(name = "TITLE", nullable = false)
-	@JsonProperty
 	private String title;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "TIER")
 	private TrainerRole tier;
 
 	public SimpleTrainer() {
@@ -68,11 +26,20 @@ public class SimpleTrainer implements Serializable {
 		this.tier = tier;
 	}
 
-	public int getTrainerId() {
+	public SimpleTrainer(Trainer trainer) {
+		super();
+		this.trainerId = trainer.getTrainerId();
+		this.email = trainer.getEmail();
+		this.name = trainer.getName();
+		this.title = trainer.getTitle();
+		this.tier = trainer.getTier();
+	}
+
+	public Integer getTrainerId() {
 		return trainerId;
 	}
 
-	public void setTrainerId(int trainerId) {
+	public void setTrainerId(Integer trainerId) {
 		this.trainerId = trainerId;
 	}
 

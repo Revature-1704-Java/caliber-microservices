@@ -1,30 +1,16 @@
 package com.revature.caliber.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+/**
+ * The type Simple Category.
+ */
 public class SimpleCategory implements Serializable {
+	private static final long serialVersionUID = -9222096298296205812L;
 
-	private static final long serialVersionUID = 3363756954535297728L;
-
-	private int categoryId;
-
+	private Integer categoryId;
 	private String skillCategory;
-	
-	private boolean active;
+	private Boolean active;
 
 	/**
 	 * Instantiates a new Category.
@@ -35,13 +21,21 @@ public class SimpleCategory implements Serializable {
 
 	/**
 	 * Create new category
+	 * 
 	 * @param skillCategory
 	 * @param active
 	 */
-	public SimpleCategory(String skillCategory, boolean active) {
+	public SimpleCategory(String skillCategory, Boolean active) {
 		super();
 		this.skillCategory = skillCategory;
 		this.active = active;
+	}
+
+	public SimpleCategory(Category category) {
+		super();
+		this.categoryId = category.getCategoryId();
+		this.skillCategory = category.getSkillCategory();
+		this.active = category.isActive();
 	}
 
 	/**
@@ -49,7 +43,7 @@ public class SimpleCategory implements Serializable {
 	 *
 	 * @return the category id
 	 */
-	public int getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
@@ -59,7 +53,7 @@ public class SimpleCategory implements Serializable {
 	 * @param categoryId
 	 *            the category id
 	 */
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -82,11 +76,11 @@ public class SimpleCategory implements Serializable {
 		this.skillCategory = skillCategory;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
