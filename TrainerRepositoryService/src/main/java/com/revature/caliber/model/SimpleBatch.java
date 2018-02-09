@@ -3,109 +3,28 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
-//import com.fasterxml.jackson.annotation.JsonIgnore;
-//import com.fasterxml.jackson.annotation.JsonManagedReference;
-//import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
- * The type Batch.
+ * The type Simple Batch.
  */
-@Entity
-@Table(name = "CALIBER_BATCH")
-@Cacheable
-public class SimpleBatch implements Serializable {	
+public class SimpleBatch implements Serializable {
+	private static final long serialVersionUID = -7000300062384597615L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6433997711397981988L;
-
-	@Id
-	@Column(name = "BATCH_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BATCH_ID_SEQUENCE")
-	@SequenceGenerator(name = "BATCH_ID_SEQUENCE", sequenceName = "BATCH_ID_SEQUENCE")
-	private int batchId;
-
-	@Column(name = "RESOURCE_ID")
+	private Integer batchId;
 	private String resourceId;
-
-	@NotNull
-	@Column(name = "TRAINING_NAME")
 	private String trainingName;
-
-	@NotNull
-//	@JsonProperty
-	@Column(name = "TRAINER_ID", nullable = false)
 	private Integer trainerId;
-
-	@Column(name = "CO_TRAINER_ID")
 	private Integer coTrainerId;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "SKILL_TYPE")
 	private SkillType skillType;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "TRAINING_TYPE")
 	private TrainingType trainingType;
-
-	@NotNull
-	@Temporal(TemporalType.DATE)
-	@Column(name = "START_DATE", nullable = false)
 	private Date startDate;
-
-	@NotNull
-	@Temporal(TemporalType.DATE)
-	@Column(name = "END_DATE", nullable = false)
 	private Date endDate;
-
-	@NotEmpty
-	@Column(name = "LOCATION", nullable = false)
 	private String location;
-
-	@Column(name = "ADDRESS_ID")
 	private Integer addressId;
+	private Short goodGradeThreshold;
+	private Short borderlineGradeThreshold;
+	private Integer weeks;
+	private Integer gradedWeeks;
 
-	/**
-	 * Anything above this grade is GREEN
-	 */
-	@Min(value = 1)
-	@Column(name = "GOOD_GRADE_THRESHOLD")
-	private short goodGradeThreshold;
-
-	/**
-	 * Anything above this grade but below goodGradeThreshold is YELLOW Anything
-	 * below this grade is RED
-	 */
-	@Min(value = 1)
-	@Column(name = "BORDERLINE_GRADE_THRESHOLD")
-	private short borderlineGradeThreshold;
-
-	@Column(name = "NUMBER_OF_WEEKS", nullable = false)
-	private int weeks;
-	
-	@Column(name = "GRADED_WEEKS")
-	private int gradedWeeks;
-	
 	public SimpleBatch() {
 		super();
 		this.weeks = 1;
@@ -126,7 +45,7 @@ public class SimpleBatch implements Serializable {
 	 * @param location
 	 */
 	public SimpleBatch(String trainingName, Integer trainerId, Date startDate, Date endDate, String location) {
-		this();
+		super();
 		this.trainingName = trainingName;
 		this.trainerId = trainerId;
 		this.skillType = SkillType.J2EE;
@@ -135,11 +54,29 @@ public class SimpleBatch implements Serializable {
 		this.location = location;
 	}
 
-	public int getBatchId() {
+	public SimpleBatch(Batch batch) {
+		super();
+		this.batchId = batch.getBatchId();
+		this.resourceId = batch.getResourceId();
+		this.trainingName = batch.getTrainingName();
+		this.trainerId = batch.getTrainer() != null ? batch.getTrainer().getTrainerId() : null;
+		this.coTrainerId = batch.getCoTrainer() != null ? batch.getCoTrainer().getTrainerId() : null;
+		this.skillType = batch.getSkillType();
+		this.trainingType = batch.getTrainingType();
+		this.startDate = batch.getStartDate();
+		this.endDate = batch.getEndDate();
+		this.location = batch.getLocation();
+		this.addressId = batch.getAddress() != null ? batch.getAddress().getAddressId() : null;
+		this.goodGradeThreshold = batch.getGoodGradeThreshold();
+		this.borderlineGradeThreshold = batch.getBorderlineGradeThreshold();
+		this.trainingType = batch.getTrainingType();
+	}
+
+	public Integer getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(Integer batchId) {
 		this.batchId = batchId;
 	}
 
@@ -223,35 +160,35 @@ public class SimpleBatch implements Serializable {
 		this.addressId = addressId;
 	}
 
-	public short getGoodGradeThreshold() {
+	public Short getGoodGradeThreshold() {
 		return goodGradeThreshold;
 	}
 
-	public void setGoodGradeThreshold(short goodGradeThreshold) {
+	public void setGoodGradeThreshold(Short goodGradeThreshold) {
 		this.goodGradeThreshold = goodGradeThreshold;
 	}
 
-	public short getBorderlineGradeThreshold() {
+	public Short getBorderlineGradeThreshold() {
 		return borderlineGradeThreshold;
 	}
 
-	public void setBorderlineGradeThreshold(short borderlineGradeThreshold) {
+	public void setBorderlineGradeThreshold(Short borderlineGradeThreshold) {
 		this.borderlineGradeThreshold = borderlineGradeThreshold;
 	}
 
-	public int getWeeks() {
+	public Integer getWeeks() {
 		return weeks;
 	}
 
-	public void setWeeks(int weeks) {
+	public void setWeeks(Integer weeks) {
 		this.weeks = weeks;
 	}
 
-	public int getGradedWeeks() {
+	public Integer getGradedWeeks() {
 		return gradedWeeks;
 	}
 
-	public void setGradedWeeks(int gradedWeeks) {
+	public void setGradedWeeks(Integer gradedWeeks) {
 		this.gradedWeeks = gradedWeeks;
 	}
 
@@ -352,5 +289,4 @@ public class SimpleBatch implements Serializable {
 				+ ", borderlineGradeThreshold=" + borderlineGradeThreshold + ", weeks=" + weeks + ", gradedWeeks="
 				+ gradedWeeks + "]";
 	}
-	
 }
