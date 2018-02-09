@@ -2,17 +2,16 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 
+/**
+ * The type Simple Trainer.
+ */
 public class SimpleTrainer implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4555033024866490022L;
 
-	private int trainerId;
-
+	private Integer trainerId;
 	private String email;
-
 	private String name;
-
 	private String title;
-
 	private TrainerRole tier;
 
 	public SimpleTrainer() {
@@ -27,11 +26,20 @@ public class SimpleTrainer implements Serializable {
 		this.tier = tier;
 	}
 
-	public int getTrainerId() {
+	public SimpleTrainer(Trainer trainer) {
+		super();
+		this.trainerId = trainer.getTrainerId();
+		this.email = trainer.getEmail();
+		this.name = trainer.getName();
+		this.title = trainer.getTitle();
+		this.tier = trainer.getTier();
+	}
+
+	public Integer getTrainerId() {
 		return trainerId;
 	}
 
-	public void setTrainerId(int trainerId) {
+	public void setTrainerId(Integer trainerId) {
 		this.trainerId = trainerId;
 	}
 

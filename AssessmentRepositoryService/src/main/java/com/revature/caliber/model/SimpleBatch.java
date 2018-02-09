@@ -3,9 +3,11 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * The type Simple Batch.
+ */
 public class SimpleBatch implements Serializable {
-
-	private static final long serialVersionUID = 6433997711397981988L;
+	private static final long serialVersionUID = -7000300062384597615L;
 
 	private Integer batchId;
 	private String resourceId;
@@ -43,7 +45,7 @@ public class SimpleBatch implements Serializable {
 	 * @param location
 	 */
 	public SimpleBatch(String trainingName, Integer trainerId, Date startDate, Date endDate, String location) {
-		this();
+		super();
 		this.trainingName = trainingName;
 		this.trainerId = trainerId;
 		this.skillType = SkillType.J2EE;
@@ -52,11 +54,29 @@ public class SimpleBatch implements Serializable {
 		this.location = location;
 	}
 
-	public int getBatchId() {
+	public SimpleBatch(Batch batch) {
+		super();
+		this.batchId = batch.getBatchId();
+		this.resourceId = batch.getResourceId();
+		this.trainingName = batch.getTrainingName();
+		this.trainerId = batch.getTrainer() != null ? batch.getTrainer().getTrainerId() : null;
+		this.coTrainerId = batch.getCoTrainer() != null ? batch.getCoTrainer().getTrainerId() : null;
+		this.skillType = batch.getSkillType();
+		this.trainingType = batch.getTrainingType();
+		this.startDate = batch.getStartDate();
+		this.endDate = batch.getEndDate();
+		this.location = batch.getLocation();
+		this.addressId = batch.getAddress() != null ? batch.getAddress().getAddressId() : null;
+		this.goodGradeThreshold = batch.getGoodGradeThreshold();
+		this.borderlineGradeThreshold = batch.getBorderlineGradeThreshold();
+		this.trainingType = batch.getTrainingType();
+	}
+
+	public Integer getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(Integer batchId) {
 		this.batchId = batchId;
 	}
 
@@ -140,35 +160,35 @@ public class SimpleBatch implements Serializable {
 		this.addressId = addressId;
 	}
 
-	public short getGoodGradeThreshold() {
+	public Short getGoodGradeThreshold() {
 		return goodGradeThreshold;
 	}
 
-	public void setGoodGradeThreshold(short goodGradeThreshold) {
+	public void setGoodGradeThreshold(Short goodGradeThreshold) {
 		this.goodGradeThreshold = goodGradeThreshold;
 	}
 
-	public short getBorderlineGradeThreshold() {
+	public Short getBorderlineGradeThreshold() {
 		return borderlineGradeThreshold;
 	}
 
-	public void setBorderlineGradeThreshold(short borderlineGradeThreshold) {
+	public void setBorderlineGradeThreshold(Short borderlineGradeThreshold) {
 		this.borderlineGradeThreshold = borderlineGradeThreshold;
 	}
 
-	public int getWeeks() {
+	public Integer getWeeks() {
 		return weeks;
 	}
 
-	public void setWeeks(int weeks) {
+	public void setWeeks(Integer weeks) {
 		this.weeks = weeks;
 	}
 
-	public int getGradedWeeks() {
+	public Integer getGradedWeeks() {
 		return gradedWeeks;
 	}
 
-	public void setGradedWeeks(int gradedWeeks) {
+	public void setGradedWeeks(Integer gradedWeeks) {
 		this.gradedWeeks = gradedWeeks;
 	}
 
@@ -269,5 +289,4 @@ public class SimpleBatch implements Serializable {
 				+ ", borderlineGradeThreshold=" + borderlineGradeThreshold + ", weeks=" + weeks + ", gradedWeeks="
 				+ gradedWeeks + "]";
 	}
-
 }

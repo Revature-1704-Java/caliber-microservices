@@ -15,11 +15,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+/**
+ * The type Simple Assessment.
+ */
 @Entity
 @Table(name = "CALIBER_ASSESSMENT")
 @Cacheable
 public class SimpleAssessment implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3715103315340780554L;
 
 	@Id
 	@Column(name = "ASSESSMENT_ID")
@@ -68,6 +71,7 @@ public class SimpleAssessment implements Serializable {
 	}
 
 	public SimpleAssessment(Assessment assessment) {
+		super();
 		this.assessmentId = assessment.getAssessmentId();
 		this.rawScore = assessment.getRawScore();
 		this.title = assessment.getTitle();

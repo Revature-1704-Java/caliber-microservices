@@ -6,9 +6,9 @@ import java.util.Set;
 public class Category implements Serializable {
 	private static final long serialVersionUID = 3363756954535297728L;
 
-	private int categoryId;
+	private Integer categoryId;
 	private String skillCategory;
-	private boolean active;
+	private Boolean active;
 	private Set<Assessment> assessments;
 
 	/**
@@ -24,16 +24,16 @@ public class Category implements Serializable {
 	 * @param skillCategory
 	 * @param active
 	 */
-	public Category(String skillCategory, boolean active) {
-		super();
+	public Category(String skillCategory, Boolean active) {
+		this();
 		this.skillCategory = skillCategory;
 		this.active = active;
 	}
 	
-	public Category(SimpleCategory category) {
+	public Category(SimpleCategory simpleCategory){
 		this();
-		this.skillCategory = category.getSkillCategory();
-		this.active = category.isActive();
+		this.skillCategory = simpleCategory.getSkillCategory();
+		this.active = simpleCategory.isActive();
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class Category implements Serializable {
 	 *
 	 * @return the category id
 	 */
-	public int getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
@@ -51,7 +51,7 @@ public class Category implements Serializable {
 	 * @param categoryId
 	 *            the category id
 	 */
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -74,11 +74,11 @@ public class Category implements Serializable {
 		this.skillCategory = skillCategory;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
@@ -103,8 +103,8 @@ public class Category implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + (active ? 1231 : 1237);
 		result = prime * result + ((skillCategory == null) ? 0 : skillCategory.hashCode());
 		return result;
@@ -133,5 +133,5 @@ public class Category implements Serializable {
 	public String toString() {
 		return skillCategory;
 	}
-	
+
 }
