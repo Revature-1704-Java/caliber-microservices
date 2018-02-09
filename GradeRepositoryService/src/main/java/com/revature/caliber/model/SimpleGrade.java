@@ -1,6 +1,5 @@
 package com.revature.caliber.model;
 
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,14 +15,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * The type Grade.
+ * The type Simple Grade.
  */
 @Entity
 @Table(name = "CALIBER_GRADE")
 @Cacheable
 public class SimpleGrade implements Serializable {
-
-	private static final long serialVersionUID = -2031135710502844800L;
+	private static final long serialVersionUID = -1052997429979145920L;
 
 	@Id
 	@Column(name = "GRADE_ID")
@@ -36,8 +34,6 @@ public class SimpleGrade implements Serializable {
 	 */
 	@Column(name = "ASSESSMENT_ID")
 	private Long assessmentId;
-
-	
 
 	/**
 	 * Trainee- the trainee that receives this Grade
@@ -53,11 +49,10 @@ public class SimpleGrade implements Serializable {
 	private Date dateReceived;
 
 	/**
-	 * score - points earned. should be based on raw score of Assessment.
-	 * Example: Assessment is worth 200 points, and Trainee made a 75% thus
-	 * score is 150
+	 * score - points earned. should be based on raw score of Assessment. Example:
+	 * Assessment is worth 200 points, and Trainee made a 75% thus score is 150
 	 */
-	@Min(value=0)
+	@Min(value = 0)
 	@Column(name = "SCORE")
 	private Double score;
 
@@ -65,26 +60,22 @@ public class SimpleGrade implements Serializable {
 		super();
 	}
 
-
-	public SimpleGrade(Long assessmentId, Integer traineeId, Date dateReceived, double score) {
+	public SimpleGrade(Long assessmentId, Integer traineeId, Date dateReceived, Double score) {
 		super();
 		this.assessmentId = assessmentId;
 		this.traineeId = traineeId;
 		this.dateReceived = dateReceived;
 		this.score = score;
 	}
-	
-	
-	
 
 	public SimpleGrade(Grade grade) {
+		super();
 		this.gradeId = grade.getGradeId();
 		this.assessmentId = grade.getAssessment() != null ? grade.getAssessment().getAssessmentId() : null;
 		this.traineeId = grade.getTrainee() != null ? grade.getTrainee().getTraineeId() : null;
 		this.dateReceived = grade.getDateReceived();
 		this.score = grade.getScore();
 	}
-
 
 	public Long getGradeId() {
 		return gradeId;
@@ -125,7 +116,7 @@ public class SimpleGrade implements Serializable {
 	public void setScore(Double score) {
 		this.score = score;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -139,7 +130,6 @@ public class SimpleGrade implements Serializable {
 		result = prime * result + ((traineeId == null) ? 0 : traineeId.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -171,7 +161,6 @@ public class SimpleGrade implements Serializable {
 			return false;
 		return true;
 	}
-
 
 	@Override
 	public String toString() {

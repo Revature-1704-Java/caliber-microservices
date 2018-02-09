@@ -3,27 +3,27 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 
 public class Note implements Serializable {
-	private static final long serialVersionUID = 1203665277195505838L;
-	
-	private int noteId;
+	private static final long serialVersionUID = -4960654794116385953L;
+
+	private Integer noteId;
 	private String content;
-	private short week;
+	private Short week;
 	private Batch batch;
 	private Trainee trainee;
 	private TrainerRole maxVisibility;
 	private NoteType type;
-	private boolean qcFeedback;
+	private Boolean qcFeedback;
 	private QCStatus qcStatus;
-	
+
 	public Note() {
 		super();
 		this.maxVisibility = TrainerRole.ROLE_TRAINER;
 	}
-	
+
 	/**
 	 * QC Status for the batch. Constructs the note and it's visibility If the
-	 * feedback is public, anyone can view. If not, the feedback can only be
-	 * viewed by QC and the VP.
+	 * feedback is public, anyone can view. If not, the feedback can only be viewed
+	 * by QC and the VP.
 	 * 
 	 * @param content
 	 * @param week
@@ -33,7 +33,7 @@ public class Note implements Serializable {
 	 * @param qcFeedback
 	 * @param qcStatus
 	 */
-	private Note(String content, short week, Batch batch, NoteType type, QCStatus qcStatus) {
+	private Note(String content, Short week, Batch batch, NoteType type, QCStatus qcStatus) {
 		this();
 		this.content = content;
 		this.week = week;
@@ -46,11 +46,20 @@ public class Note implements Serializable {
 		this.qcFeedback = true;
 		this.qcStatus = qcStatus;
 	}
+	
+	public Note(SimpleNote simpleNote){
+		this();
+		this.content = simpleNote.getContent();
+		this.week = simpleNote.getWeek();
+		this.maxVisibility = simpleNote.getMaxVisibility();
+		this.type = simpleNote.getType();
+		this.qcStatus = simpleNote.getQcStatus();		
+	}
 
 	/**
-	 * QC Status for each trainee. Constructs the note and it's visibility If
-	 * the feedback is public, anyone can view. If not, the feedback can only be
-	 * viewed by QC and the VP.
+	 * QC Status for each trainee. Constructs the note and it's visibility If the
+	 * feedback is public, anyone can view. If not, the feedback can only be viewed
+	 * by QC and the VP.
 	 * 
 	 * @param content
 	 * @param week
@@ -60,7 +69,7 @@ public class Note implements Serializable {
 	 * @param qcFeedback
 	 * @param qcStatus
 	 */
-	private Note(String content, short week, Trainee trainee, NoteType type, QCStatus qcStatus) {
+	private Note(String content, Short week, Trainee trainee, NoteType type, QCStatus qcStatus) {
 		this();
 		this.content = content;
 		this.week = week;
@@ -83,7 +92,7 @@ public class Note implements Serializable {
 	 * @param maxVisibility
 	 * @param type
 	 */
-	private Note(String content, short week, Trainee trainee) {
+	private Note(String content, Short week, Trainee trainee) {
 		this();
 		this.content = content;
 		this.week = week;
@@ -102,7 +111,7 @@ public class Note implements Serializable {
 	 * @param maxVisibility
 	 * @param type
 	 */
-	private Note(String content, short week, Batch batch) {
+	private Note(String content, Short week, Batch batch) {
 		this();
 		this.content = content;
 		this.week = week;
@@ -111,7 +120,7 @@ public class Note implements Serializable {
 		this.type = NoteType.BATCH;
 		this.qcFeedback = false;
 	}
-	
+
 	/**
 	 * Factory method to construct new QC weekly batch note
 	 * 
@@ -164,11 +173,11 @@ public class Note implements Serializable {
 		return new Note(content, week.shortValue(), trainee);
 	}
 
-	public int getNoteId() {
+	public Integer getNoteId() {
 		return noteId;
 	}
 
-	public void setNoteId(int noteId) {
+	public void setNoteId(Integer noteId) {
 		this.noteId = noteId;
 	}
 
@@ -180,11 +189,11 @@ public class Note implements Serializable {
 		this.content = content;
 	}
 
-	public short getWeek() {
+	public Short getWeek() {
 		return week;
 	}
 
-	public void setWeek(short week) {
+	public void setWeek(Short week) {
 		this.week = week;
 	}
 
@@ -220,11 +229,11 @@ public class Note implements Serializable {
 		this.type = type;
 	}
 
-	public boolean isQcFeedback() {
+	public Boolean isQcFeedback() {
 		return qcFeedback;
 	}
 
-	public void setQcFeedback(boolean qcFeedback) {
+	public void setQcFeedback(Boolean qcFeedback) {
 		this.qcFeedback = qcFeedback;
 	}
 
@@ -235,11 +244,11 @@ public class Note implements Serializable {
 	public void setQcStatus(QCStatus qcStatus) {
 		this.qcStatus = qcStatus;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((batch == null) ? 0 : batch.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((maxVisibility == null) ? 0 : maxVisibility.hashCode());
@@ -290,9 +299,9 @@ public class Note implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Note [noteId=" + noteId + ", content=" + content + ", week=" + week
-				+ ", trainee=" + trainee + ", maxVisibility=" + maxVisibility + ", type=" + type
-				+ ", qcFeedback=" + qcFeedback + ", qcStatus=" + qcStatus + "]";
+		return "Note [noteId=" + noteId + ", content=" + content + ", week=" + week + ", trainee=" + trainee
+				+ ", maxVisibility=" + maxVisibility + ", type=" + type + ", qcFeedback=" + qcFeedback + ", qcStatus="
+				+ qcStatus + "]";
 	}
-	
+
 }

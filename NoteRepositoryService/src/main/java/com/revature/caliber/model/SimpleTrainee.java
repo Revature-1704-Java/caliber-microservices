@@ -2,8 +2,11 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 
+/**
+ * The type Simple Trainee.
+ */
 public class SimpleTrainee implements Serializable {
-	private static final long serialVersionUID = 7741153496228057046L;
+	private static final long serialVersionUID = -5478972218765858144L;
 
 	private Integer traineeId;
 	private String resourceId;
@@ -26,8 +29,8 @@ public class SimpleTrainee implements Serializable {
 	}
 
 	public SimpleTrainee(Integer traineeId, String resourceId, String name, String email, TrainingStatus trainingStatus,
-			Integer batchId, String phoneNumber, String skypeId, String profileUrl, String recruiterName, String college,
-			String degree, String major, String techScreenerName, String projectCompletion) {
+			Integer batchId, String phoneNumber, String skypeId, String profileUrl, String recruiterName,
+			String college, String degree, String major, String techScreenerName, String projectCompletion) {
 		super();
 		this.traineeId = traineeId;
 		this.resourceId = resourceId;
@@ -47,6 +50,7 @@ public class SimpleTrainee implements Serializable {
 	}
 
 	public SimpleTrainee(Trainee trainee) {
+		super();
 		this.traineeId = trainee.getTraineeId();
 		this.resourceId = trainee.getResourceId();
 		this.name = trainee.getName();

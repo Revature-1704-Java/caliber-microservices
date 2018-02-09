@@ -15,15 +15,15 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
 /**
- * The type Panel.
+ * The type Simple Panel.
  */
 @Entity
 @Table(name = "CALIBER_PANEL")
 @Cacheable
 public class SimplePanel implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7473663118455489828L;
 
 	@Id
 	@Column(name = "PANEL_ID", nullable = false)
@@ -56,7 +56,7 @@ public class SimplePanel implements Serializable {
 	private Integer panelRound;
 
 	@Column(name = "RECORDING_CONSENT")
-	private boolean recordingConsent;
+	private Boolean recordingConsent;
 
 	@Column(name = "RECORDING_LINK")
 	private String recordingLink;
@@ -91,9 +91,9 @@ public class SimplePanel implements Serializable {
 	}
 
 	public SimplePanel(Integer panelId, Integer traineeId, Integer panelist, Date interviewDate, String duration,
-			InterviewFormat formatId, String internet, Integer panelRound, boolean recordingConsent, String recordingLink,
-			PanelStatus statusId, String associateIntro, String projectOneDescription, String projectTwoDescription,
-			String projectThreeDescription, String communicationSkills, String overall) {
+			InterviewFormat formatId, String internet, Integer panelRound, Boolean recordingConsent,
+			String recordingLink, PanelStatus statusId, String associateIntro, String projectOneDescription,
+			String projectTwoDescription, String projectThreeDescription, String communicationSkills, String overall) {
 		super();
 		this.panelId = panelId;
 		this.traineeId = traineeId;
@@ -115,6 +115,7 @@ public class SimplePanel implements Serializable {
 	}
 
 	public SimplePanel(Panel panel) {
+		super();
 		this.panelId = panel.getId();
 		this.traineeId = panel.getTrainee() != null ? panel.getTrainee().getTraineeId() : null;
 		this.panelist = panel.getPanelist() != null ? panel.getPanelist().getTrainerId() : null;
@@ -146,7 +147,7 @@ public class SimplePanel implements Serializable {
 	public Integer getTraineeId() {
 		return traineeId;
 	}
-	
+
 	public void setTraineeId(Integer traineeId) {
 		this.traineeId = traineeId;
 	}
@@ -199,11 +200,11 @@ public class SimplePanel implements Serializable {
 		this.panelRound = panelRound;
 	}
 
-	public boolean isRecordingConsent() {
+	public Boolean isRecordingConsent() {
 		return recordingConsent;
 	}
 
-	public void setRecordingConsent(boolean recordingConsent) {
+	public void setRecordingConsent(Boolean recordingConsent) {
 		this.recordingConsent = recordingConsent;
 	}
 
@@ -269,10 +270,6 @@ public class SimplePanel implements Serializable {
 
 	public void setOverall(String overall) {
 		this.overall = overall;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	/** hashcode */
@@ -394,6 +391,5 @@ public class SimplePanel implements Serializable {
 			return false;
 		return true;
 	}
-
 
 }

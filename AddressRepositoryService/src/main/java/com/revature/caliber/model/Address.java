@@ -16,7 +16,7 @@ public class Address implements Serializable {
 	
 	@Id
 	@Column(name = "ADDRESS_ID")
-	private int addressId;
+	private Integer addressId;
 	
 	@Column(name = "ADDRESS_STREET")
 	@NotEmpty
@@ -44,7 +44,7 @@ public class Address implements Serializable {
 		super();
 	}
 
-	public Address(int addressId, String street, String city, String state, String zipcode, String company,
+	public Address(Integer addressId, String street, String city, String state, String zipcode, String company,
 			boolean active) {
 		super();
 		this.addressId = addressId;
@@ -56,11 +56,11 @@ public class Address implements Serializable {
 		this.active = active;
 	}
 
-	public int getAddressId() {
+	public Integer getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(int addressId) {
+	public void setAddressId(Integer addressId) {
 		this.addressId = addressId;
 	}
 
