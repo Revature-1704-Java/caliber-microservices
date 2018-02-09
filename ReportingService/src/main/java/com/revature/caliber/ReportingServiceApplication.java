@@ -19,14 +19,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableEurekaClient
 @EnableSwagger2
 public class ReportingServiceApplication {
-	
-	@Autowired
-	private Messenger m;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReportingServiceApplication.class, args);
 	}
-	
+
 	@Bean
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  

@@ -135,8 +135,7 @@ public class Messenger {
 		JsonObject msg = new JsonObject();
 		msg.addProperty("methodName", "findByBatch");
 		msg.addProperty("batchId", batchId);
-//		List<Grade> reply = (List<Grade>) amqpTemplate.convertSendAndReceive(serviceExchange, gradeList, msg.toString());
-		List<Grade> reply = (List<Grade>) amqpTemplate.convertSendAndReceive(serviceExchange, "testList", msg.toString());
+		List<Grade> reply = (List<Grade>) amqpTemplate.convertSendAndReceive(serviceExchange, gradeList, msg.toString());
 		return reply;
 	}
 
