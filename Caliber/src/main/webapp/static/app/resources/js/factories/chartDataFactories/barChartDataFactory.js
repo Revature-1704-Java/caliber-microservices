@@ -119,7 +119,7 @@ angular
 					report.getBatchOverallBarChart = function(batchId) {
 						return $http(
 								{
-									url : "/all/reports/batch/" + batchId
+									url : "http://localhost:8081/reporting/all/reports/batch/" + batchId
 											+ "/overall/bar-batch-overall",
 									method : "GET"
 								})

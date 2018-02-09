@@ -31,11 +31,6 @@ public class TraineeRepositoryMessagingService {
 	 * 
 	 * @param String - message
 	 * @return SimpleTrainee 
-	 * Parse a String for SimpleTrainee
-	 *
-	 * @param Message
-	 *
-	 * @return SimpleTrainee
 	 */
 	@RabbitListener(queues = "revature.caliber.repos.trainee")
 	public SimpleTrainee receiveSingleSimpleTraineeRequest(String message) {
@@ -53,8 +48,7 @@ public class TraineeRepositoryMessagingService {
 	 * 
 	 * 
 	 * @param String - message
-	 * @return List<SimpleTrainee> - List of simple Trainees
-
+	 * @return List<SimpleTrainee> - List of simple Trainee
 	 * Parse a String for List of SimpleTrainee
 	 *
 	 * @param Message
@@ -77,12 +71,7 @@ public class TraineeRepositoryMessagingService {
 	 * 
 	 * 
 	 * @param String - message
-	 * @return List<SimpleTrainee> - List of simple Trainees
-	 * Parse a String for List of Trainee
-	 *
-	 * @param Message
-	 *
-	 * @return List of Trainee
+	 * @return List<Trainee> - List of Complex Trainees
 	 */
 	@RabbitListener(queues = "revature.caliber.service.trainee.list")
 	public List<Trainee> receiveListTraineeRequest(String message) {

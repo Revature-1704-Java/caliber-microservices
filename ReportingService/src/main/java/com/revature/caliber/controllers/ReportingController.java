@@ -37,7 +37,7 @@ import com.revature.caliber.services.ReportingService;
  *
  */
 @RestController
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 //@CrossOrigin(origins = "http://ec2-54-163-132-124.compute-1.amazonaws.com")
 @CrossOrigin
 public class ReportingController {
@@ -145,7 +145,7 @@ public class ReportingController {
 			return new ResponseEntity<>(result, HttpStatus.OK);
 		}
 	}
-// (below) possibly not used
+
 	@RequestMapping(value = "/all/reports/batch/{batchId}/overall/bar-batch-overall", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
 	public ResponseEntity<Map<String, Double>> getBatchOverallBarChart(@PathVariable Integer batchId) {

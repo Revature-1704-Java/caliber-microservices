@@ -39,14 +39,7 @@ public class TraineeCompositionMessagingService {
 	 * 
 	 * @param Integer - Trainee's Batch Id
 	 * @return A SimpleBatch object
-
-	/**
-	 * Create message for Batch to get a single Batch
-	 *
-	 * @param batchId
-	 *
-	 * @return SimpleBatch
-	 */
+	*/
 	public SimpleBatch sendSingleSimpleBatchRequest(Integer batchId) {
 		JsonObject batchRequest = new JsonObject();
 
@@ -64,14 +57,7 @@ public class TraineeCompositionMessagingService {
 	 * 
 	 * @param Integer - Trainee's Trainer Id
 	 * @return A List of SimpleBatch object
-
-	/**
-	 * Create message for Batch to get a List Batches for a given trainerId
-	 *
-	 * @param traineeId
-	 *
-	 * @return List of SimpleBatch
-	 */
+	*/
 	public List<SimpleBatch> sendListSimpleBatchRequest(Integer trainerId) {
 		JsonObject batchRequest = new JsonObject();
 		batchRequest.addProperty("methodName", "findAllByTrainerId");
@@ -87,14 +73,6 @@ public class TraineeCompositionMessagingService {
 	 * NoteRepositoryMessagingService will delete all notes with that trainee ID.
 	 * 
 	 * @param Integer - Trainee's Trainee Id
-	 * 
-
-	/**
-	 * Create message for Note to delete Notes associated with a trainee
-	 *
-	 * @param batchId
-	 *
-	 * @return 
 	 */
 	public void sendSimpleNoteDeleteRequest(Integer traineeId) {
 		JsonObject NoteDeleteRequest = new JsonObject();
@@ -109,11 +87,6 @@ public class TraineeCompositionMessagingService {
 	 * GradeRepositoryMessagingService will delete all grades with that trainee ID.
 	 * 
 	 * @param Integer - Trainee's Trainee Id
-	 * 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 	 * Create message for Grade to delete Grades associated with a trainee
 	 *
 	 * @param batchId
@@ -128,21 +101,11 @@ public class TraineeCompositionMessagingService {
 	}
 	
 	/**
-<<<<<<< HEAD
-
-	 * sphuang 02/07/2018
-=======
-	 * sphuang 02/07/2018 
->>>>>>> master
 	 * Sending a message string in json notation to Panel's queue containing method name delete and a specific trainee ID.
 	 * PanelRepositoryMessagingService will delete all grades with that trainee ID.
 	 * 
 	 * @param Integer - Trainee's Trainee Id
 	 * 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 	 * Create message for Panel to delete Panels associated with a trainee
 	 *
 	 * @param batchId
