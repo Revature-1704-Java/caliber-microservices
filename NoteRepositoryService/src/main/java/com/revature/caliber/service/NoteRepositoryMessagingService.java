@@ -62,4 +62,18 @@ public class NoteRepositoryMessagingService {
 		
 		return noteRepositoryRequestDispatcher.processListNoteRequest(request);
 	}
+	/**
+	 * Receives a message from the single Note RabbitMQ queue, parses the message string as a JsonObject,
+	 * and passes it to the request dispatcher.
+	 * @param message The message received from the messaging queue
+	 * @return The note returned by the request dispatcher
+	 */
+	@RabbitListener(queues = "revature.caliber.service.note")
+	public Note receiveNoteRequest(String message) {
+		JsonParser parser = new JsonParser();
+		JsonElement element = parser.parse(message);
+		JsonObject request = element.getAsJsonObject();
+		
+		return noteRepositoryRequestDispatcher.processNoteRequest(request);
+	}
 }

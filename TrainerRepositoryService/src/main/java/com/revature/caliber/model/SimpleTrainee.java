@@ -2,15 +2,18 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 
+/**
+ * The type Simple Trainee.
+ */
 public class SimpleTrainee implements Serializable {
-	private static final long serialVersionUID = 7741153496228057046L;
+	private static final long serialVersionUID = -5478972218765858144L;
 
-	private int traineeId;
+	private Integer traineeId;
 	private String resourceId;
 	private String name;
 	private String email;
 	private TrainingStatus trainingStatus;
-	private int batchId;
+	private Integer batchId;
 	private String phoneNumber;
 	private String skypeId;
 	private String profileUrl;
@@ -25,9 +28,9 @@ public class SimpleTrainee implements Serializable {
 		super();
 	}
 
-	public SimpleTrainee(int traineeId, String resourceId, String name, String email, TrainingStatus trainingStatus,
-			int batchId, String phoneNumber, String skypeId, String profileUrl, String recruiterName, String college,
-			String degree, String major, String techScreenerName, String projectCompletion) {
+	public SimpleTrainee(Integer traineeId, String resourceId, String name, String email, TrainingStatus trainingStatus,
+			Integer batchId, String phoneNumber, String skypeId, String profileUrl, String recruiterName,
+			String college, String degree, String major, String techScreenerName, String projectCompletion) {
 		super();
 		this.traineeId = traineeId;
 		this.resourceId = resourceId;
@@ -46,11 +49,29 @@ public class SimpleTrainee implements Serializable {
 		this.projectCompletion = projectCompletion;
 	}
 
-	public int getTraineeId() {
+	public SimpleTrainee(Trainee trainee) {
+		super();
+		this.traineeId = trainee.getTraineeId();
+		this.resourceId = trainee.getResourceId();
+		this.name = trainee.getName();
+		this.email = trainee.getEmail();
+		this.trainingStatus = trainee.getTrainingStatus();
+		this.batchId = trainee.getBatch() != null ? trainee.getBatch().getBatchId() : null;
+		this.phoneNumber = trainee.getPhoneNumber();
+		this.skypeId = trainee.getSkypeId();
+		this.profileUrl = trainee.getProfileUrl();
+		this.college = trainee.getCollege();
+		this.degree = trainee.getDegree();
+		this.major = trainee.getMajor();
+		this.techScreenerName = trainee.getTechScreenerName();
+		this.projectCompletion = trainee.getProjectCompletion();
+	}
+
+	public Integer getTraineeId() {
 		return traineeId;
 	}
 
-	public void setTraineeId(int traineeId) {
+	public void setTraineeId(Integer traineeId) {
 		this.traineeId = traineeId;
 	}
 
@@ -86,11 +107,11 @@ public class SimpleTrainee implements Serializable {
 		this.trainingStatus = trainingStatus;
 	}
 
-	public int getBatchId() {
+	public Integer getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(Integer batchId) {
 		this.batchId = batchId;
 	}
 

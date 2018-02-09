@@ -1,13 +1,13 @@
 package com.revature.caliber.model;
 
-import java.awt.Panel;
 import java.io.Serializable;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Trainee implements Serializable {
 	private static final long serialVersionUID = -9090223980655307018L;
-	
-	private int traineeId;
+
+	private Integer traineeId;
 	private String resourceId;
 	private String name;
 	private String email;
@@ -24,21 +24,22 @@ public class Trainee implements Serializable {
 	private String projectCompletion;
 	private Set<Grade> grades;
 	private Set<Note> notes;
-	private Set<Panel> panelInterviews;
-	
+	private Set<Panel> panelInterviews = new TreeSet<>();
+
 	public Trainee() {
 		super();
 	}
 
 	/**
 	 * Constructor used mostly for testing. Default TrainingStatus as Training
+	 * 
 	 * @param name
 	 * @param resourceId
 	 * @param email
 	 * @param batch
 	 */
 	public Trainee(String name, String resourceId, String email, Batch batch) {
-		super();
+		this();
 		this.name = name;
 		this.resourceId = resourceId;
 		this.email = email;
@@ -46,29 +47,20 @@ public class Trainee implements Serializable {
 		this.batch = batch;
 	}
 	
-	public Trainee(SimpleTrainee trainee) {
+	public Trainee(SimpleTrainee simpleTrainee){
 		this();
-		this.traineeId = trainee.getTraineeId();
-		this.resourceId = trainee.getResourceId();
-		this.name = trainee.getName();
-		this.email = trainee.getEmail();
-		this.trainingStatus = trainee.getTrainingStatus();
-		this.phoneNumber = trainee.getPhoneNumber();
-		this.skypeId = trainee.getSkypeId();
-		this.profileUrl = trainee.getProfileUrl();
-		this.recruiterName = trainee.getRecruiterName();
-		this.college = trainee.getCollege();
-		this.degree = trainee.getDegree();
-		this.major = trainee.getMajor();
-		this.techScreenerName = trainee.getTechScreenerName();
-		this.projectCompletion = trainee.getProjectCompletion();
+		this.name = simpleTrainee.getName();
+		this.resourceId = simpleTrainee.getResourceId();
+		this.email = simpleTrainee.getEmail();
+		this.trainingStatus = simpleTrainee.getTrainingStatus();
+		
 	}
 
-	public int getTraineeId() {
+	public Integer getTraineeId() {
 		return traineeId;
 	}
 
-	public void setTraineeId(int traineeId) {
+	public void setTraineeId(Integer traineeId) {
 		this.traineeId = traineeId;
 	}
 
@@ -162,8 +154,8 @@ public class Trainee implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
@@ -220,8 +212,8 @@ public class Trainee implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Trainee [traineeId=" + traineeId +", name=" + name + ", email=" + email + ", trainingStatus="
-				+ trainingStatus + ", major=" + major +  "]";
+		return "Trainee [traineeId=" + traineeId + ", name=" + name + ", email=" + email + ", trainingStatus="
+				+ trainingStatus + ", major=" + major + "]";
 	}
 
 	public String getRecruiterName() {
