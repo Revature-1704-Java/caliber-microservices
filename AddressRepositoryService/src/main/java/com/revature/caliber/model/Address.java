@@ -38,14 +38,14 @@ public class Address implements Serializable {
 	private String company;
 	
 	@Column(name = "ACTIVE")
-	private boolean active;
+	private Boolean active;
 
 	public Address() {
 		super();
 	}
 
 	public Address(Integer addressId, String street, String city, String state, String zipcode, String company,
-			boolean active) {
+			Boolean active) {
 		super();
 		this.addressId = addressId;
 		this.street = street;
@@ -104,11 +104,11 @@ public class Address implements Serializable {
 		this.company = company;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
