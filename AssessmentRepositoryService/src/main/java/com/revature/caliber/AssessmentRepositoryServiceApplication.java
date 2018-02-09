@@ -14,6 +14,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.revature.caliber.model.SimpleAssessment;
 import com.revature.caliber.repository.AssessmentDAO;
+import com.revature.caliber.service.AssessmentCompositionService;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -26,10 +28,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @SpringBootApplication
 public class AssessmentRepositoryServiceApplication {
-
+//	@Autowired
+//	AssessmentCompositionService acs;
 	public static void main(String[] args) {
 		SpringApplication.run(AssessmentRepositoryServiceApplication.class, args);
 	}
+	
+//	@Bean
+//	public CommandLineRunner runner() {
+//		return args -> {
+//			System.out.println(acs.findByBatchIdAndWeek(2050, (short) 7));
+//		};
+//	}
 	
 	@Bean
     public Docket api() { 

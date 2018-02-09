@@ -113,6 +113,7 @@ public class AssessmentCompositionService {
 	 */
 	public List<Assessment> findByBatchIdAndWeek(Integer batchId, Short week) {
 		List<SimpleAssessment> basis = assessmentRepository.findByBatchIdAndWeek(batchId, week);
+		System.out.println(basis);
 		List<Assessment> assessments = composeListOfAssessments(basis);
 
 		return assessments;
