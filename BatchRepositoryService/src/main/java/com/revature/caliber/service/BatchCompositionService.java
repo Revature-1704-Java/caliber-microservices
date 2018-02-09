@@ -3,6 +3,7 @@ package com.revature.caliber.service;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -80,7 +81,7 @@ public class BatchCompositionService {
 	 * @return
 	 */
 	public List<Batch> findAll() {
-		return composeListOfBatch(repo.findAll(), false, false, false);
+		return composeListOfBatch(repo.findAll(), false, true, true);
 	}
 	/**
 	 * 
@@ -95,7 +96,7 @@ public class BatchCompositionService {
 	 * @return
 	 */
 	public List<Batch> findAllCurrent() {
-		return composeListOfBatch(repo.findAllCurrent(),false, true ,false);	
+		return composeListOfBatch(repo.findAllCurrent(),false, true ,true);	
 	}
 	/**
 	 * 
@@ -227,7 +228,9 @@ public class BatchCompositionService {
 	private Batch composeBatch(SimpleBatch src, boolean includeDropped) {
 		Batch b = setAddressAndTrainer(src);
 		b.setTrainees(getBatchTrainees(src.getBatchId(), includeDropped));
+		if(b.getTrainees() == null) b.setTrainees(new HashSet<>());
 		b.setNotes(getBatchNotes(src.getBatchId()));
+		if(b.getNotes() == null) b.setNotes(new HashSet<>());
 		return b;	
 	}
 //	/**

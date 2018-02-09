@@ -25,17 +25,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class BatchRepositoryServiceApplication {
 //	@Autowired
 //	BatchCompositionMessageService bcms;
-//	@Autowired
-//	BatchCompositionService bcs;
+	@Autowired
+	BatchCompositionService bcs;
 	public static void main(String[] args) {
 		SpringApplication.run(BatchRepositoryServiceApplication.class, args);
 	}
-//	@Bean
-//	public CommandLineRunner runner() {
-//		return args -> {
-//			System.out.println(bcs.findAllCurrentWithTrainees());
-//		};
-//	}
+	@Bean
+	public CommandLineRunner runner() {
+		return args -> {
+			System.out.println(bcs.findAllCurrent());
+		};
+	}
 	@Bean
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  

@@ -145,6 +145,7 @@ public class BatchController {
 	public ResponseEntity<List<Batch>> getAllBatches() {
 		log.info("Fetching all batches");
 		List<Batch> batches = batchService.findAllBatches();
+		System.out.println(batches);
 		return new ResponseEntity<>(batches, HttpStatus.OK);
 
 	}

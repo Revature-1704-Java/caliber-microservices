@@ -274,8 +274,11 @@ public class NoteCompositionService {
 		SimpleTrainee simpleTrainee = null;
 		Batch batch = null;
 		Trainee trainee = null;
-		Note dest = new Note(src);
+		Note dest = null;
 		
+		if(src == null) return null;
+		dest = new Note(src);
+
 		System.out.println("SimpleNote: " + src);
 		System.out.println("Note: " + dest);
 		

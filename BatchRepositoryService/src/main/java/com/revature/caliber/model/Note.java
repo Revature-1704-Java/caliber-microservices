@@ -247,18 +247,72 @@ public class Note implements Serializable {
 		this.qcStatus = qcStatus;
 	}
 
+	
+//	@Override
+//	public int hashCode() {
+//		final Integer prime = 31;
+//		Integer result = 1;
+//		result = prime * result + ((batch == null) ? 0 : batch.hashCode());
+//		result = prime * result + ((content == null) ? 0 : content.hashCode());
+//		result = prime * result + ((maxVisibility == null) ? 0 : maxVisibility.hashCode());
+//		result = prime * result + (qcFeedback ? 1231 : 1237);
+//		result = prime * result + ((qcStatus == null) ? 0 : qcStatus.hashCode());
+//		result = prime * result + ((trainee == null) ? 0 : trainee.hashCode());
+//		result = prime * result + ((type == null) ? 0 : type.hashCode());
+//		result = prime * result + week;
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Note other = (Note) obj;
+//		if (batch == null) {
+//			if (other.batch != null)
+//				return false;
+//		} else if (!batch.equals(other.batch))
+//			return false;
+//		if (content == null) {
+//			if (other.content != null)
+//				return false;
+//		} else if (!content.equals(other.content))
+//			return false;
+//		if (maxVisibility != other.maxVisibility)
+//			return false;
+//		if (qcFeedback != other.qcFeedback)
+//			return false;
+//		if (qcStatus != other.qcStatus)
+//			return false;
+//		if (trainee == null) {
+//			if (other.trainee != null)
+//				return false;
+//		} else if (!trainee.equals(other.trainee))
+//			return false;
+//		if (type != other.type)
+//			return false;
+//		if (week != other.week)
+//			return false;
+//		return true;
+//	}
+
 	@Override
 	public int hashCode() {
-		final Integer prime = 31;
-		Integer result = 1;
+		final int prime = 31;
+		int result = 1;
 		result = prime * result + ((batch == null) ? 0 : batch.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((maxVisibility == null) ? 0 : maxVisibility.hashCode());
-		result = prime * result + (qcFeedback ? 1231 : 1237);
+		result = prime * result + ((noteId == null) ? 0 : noteId.hashCode());
+		result = prime * result + ((qcFeedback == null) ? 0 : qcFeedback.hashCode());
 		result = prime * result + ((qcStatus == null) ? 0 : qcStatus.hashCode());
 		result = prime * result + ((trainee == null) ? 0 : trainee.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + week;
+		result = prime * result + ((week == null) ? 0 : week.hashCode());
 		return result;
 	}
 
@@ -283,7 +337,15 @@ public class Note implements Serializable {
 			return false;
 		if (maxVisibility != other.maxVisibility)
 			return false;
-		if (qcFeedback != other.qcFeedback)
+		if (noteId == null) {
+			if (other.noteId != null)
+				return false;
+		} else if (!noteId.equals(other.noteId))
+			return false;
+		if (qcFeedback == null) {
+			if (other.qcFeedback != null)
+				return false;
+		} else if (!qcFeedback.equals(other.qcFeedback))
 			return false;
 		if (qcStatus != other.qcStatus)
 			return false;
@@ -294,7 +356,10 @@ public class Note implements Serializable {
 			return false;
 		if (type != other.type)
 			return false;
-		if (week != other.week)
+		if (week == null) {
+			if (other.week != null)
+				return false;
+		} else if (!week.equals(other.week))
 			return false;
 		return true;
 	}

@@ -26,8 +26,8 @@ import com.revature.caliber.model.SimpleCategory;
 import com.revature.caliber.repository.CategoryRepository;
 
 @RestController
-@PreAuthorize("isAuthenticated()")
-@CrossOrigin(origins = "http://ec2-54-163-132-124.compute-1.amazonaws.com")
+//@PreAuthorize("isAuthenticated()")
+@CrossOrigin
 public class CategoryController {
 	private static final Logger log = Logger.getLogger(CategoryController.class);
 	private CategoryCompositionService categoryService;
@@ -38,7 +38,7 @@ public class CategoryController {
 	}
 	//Calls a method that will return all ACTIVE Categories. This will NOT return INACTIVE Categories. 
 	@RequestMapping(value = "/category/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
+//	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	public ResponseEntity<List<Category>> findAllActive() {
 		log.debug("Getting categories");
@@ -48,7 +48,7 @@ public class CategoryController {
 	//Calls a method that will return all Categories both ACTIVE and INACTIVE. Intended to be used by VP only.
 	@RequestMapping(value = "/vp/category", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
+//	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
 	public ResponseEntity<List<Category>> findAll() {
 		log.debug("Getting categories");
 		List<Category> categories = categoryService.findAll();
@@ -57,7 +57,7 @@ public class CategoryController {
 	//Calls a method that will find a category based on id. 
 	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
+//	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING','PANEL')")
 	public ResponseEntity<Category> findCategoryById(@PathVariable int id) {
 		log.debug("Getting category: " + id);
 		Category category = categoryService.findOne(id);
@@ -67,7 +67,7 @@ public class CategoryController {
 	//Calls a method that will update a categories name or activity
 	@RequestMapping(value = "/vp/category/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	@PreAuthorize("hasAnyRole('VP')")
+//	@PreAuthorize("hasAnyRole('VP')")
 	public ResponseEntity<Category> updateCategory(@Valid @RequestBody Category category) {
 		categoryService.update(category);
 		return new ResponseEntity<>(category, HttpStatus.OK);
@@ -75,7 +75,7 @@ public class CategoryController {
 	//Calls a method that creates a new Category
 	@RequestMapping(value = "/vp/category", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	@PreAuthorize("hasAnyRole('VP')")
+//	@PreAuthorize("hasAnyRole('VP')")
 	public ResponseEntity<Category> saveCategory(@Valid @RequestBody Category category) {
 		categoryService.save(category);
 		return new ResponseEntity<>(category, HttpStatus.CREATED);

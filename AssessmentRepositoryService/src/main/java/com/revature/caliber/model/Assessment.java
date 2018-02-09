@@ -35,6 +35,7 @@ public class Assessment implements Serializable {
 		this();
 		this.assessmentId = simpleAssessment.getAssessmentId();
 		this.title = simpleAssessment.getTitle();
+		if(this.title == null) this.title = "";
 		this.rawScore = simpleAssessment.getRawScore();
 		this.type = simpleAssessment.getType();
 		this.week = simpleAssessment.getWeek();
