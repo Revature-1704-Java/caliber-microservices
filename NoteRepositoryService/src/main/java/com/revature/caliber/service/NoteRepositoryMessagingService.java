@@ -55,11 +55,12 @@ public class NoteRepositoryMessagingService {
 	 * @return The note returned by the request dispatcher
 	 */
 	@RabbitListener(queues = "revature.caliber.service.note.list")
+//	@RabbitListener(queues = "revature.caliber.service.test.list")
 	public List<Note> receiveListNoteRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		
+		System.out.println(message);
 		return noteRepositoryRequestDispatcher.processListNoteRequest(request);
 	}
 	/**
@@ -69,11 +70,12 @@ public class NoteRepositoryMessagingService {
 	 * @return The note returned by the request dispatcher
 	 */
 	@RabbitListener(queues = "revature.caliber.service.note")
+//	@RabbitListener(queues = "revature.caliber.service.test.list")
 	public Note receiveNoteRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		
+		System.out.println(message);
 		return noteRepositoryRequestDispatcher.processNoteRequest(request);
 	}
 }

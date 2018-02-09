@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.caliber.model.Assessment;
 import com.revature.caliber.model.Grade;
@@ -16,7 +17,7 @@ import com.revature.caliber.model.SimpleTrainee;
 import com.revature.caliber.model.Trainee;
 import com.revature.caliber.model.TrainingStatus;
 import com.revature.caliber.repository.GradeRepository;
-
+@Service
 public class GradeCompositionService {
 
     @Autowired
@@ -107,14 +108,8 @@ public class GradeCompositionService {
      * @return
      */
     public List<Grade> findByBatch(Integer batchId) {
-        List<SimpleTrainee> trainees = gradeCompositionMessagingService.sendSimpleFindAllByBatchIdRequest(batchId); // get
-                                                                                                                    // list
-                                                                                                                    // of
-                                                                                                                    // trainees
-                                                                                                                    // belonging
-                                                                                                                    // to
-                                                                                                                    // the
-                                                                                                                    // batch
+        List<SimpleTrainee> trainees = gradeCompositionMessagingService.sendSimpleFindAllByBatchIdRequest(batchId);                                                                                                     
+        System.out.println(trainees);  
         List<Grade> part = null;
         List<Grade> result = new ArrayList<Grade>();
         for (int i = 0; i < trainees.size(); i++) {
@@ -194,7 +189,7 @@ public class GradeCompositionService {
         List<Grade> dest = new LinkedList<Grade>();
 
         for (SimpleGrade curr : src) {
-            Grade grade = new Grade(curr);
+            Grade grade = composeGrade(curr);
             dest.add(grade);
         }
 

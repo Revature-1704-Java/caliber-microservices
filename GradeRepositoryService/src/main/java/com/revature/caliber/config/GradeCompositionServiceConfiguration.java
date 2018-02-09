@@ -16,10 +16,6 @@ public class GradeCompositionServiceConfiguration {
 	
 		@Autowired
 		private GradeCompositionMessagingService mms;
-		
-		@Autowired
-		private GradeCompositionService gcs;
-	   
 	   @Bean
 	   public AmqpTemplate rabbitTemplate(ConnectionFactory factory) {
 	       RabbitTemplate rabbitTemplate = new RabbitTemplate(factory);

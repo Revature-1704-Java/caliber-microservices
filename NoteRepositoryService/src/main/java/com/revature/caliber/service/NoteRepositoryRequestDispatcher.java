@@ -81,7 +81,7 @@ public class NoteRepositoryRequestDispatcher {
 		List<Note> result = null;
 		String methodName = request.get("methodName").getAsString();
 		
-		if(methodName.equals("findAllQCTrainerNotes")) {
+		if(methodName.equals("findAllQCTraineeNotes")) {
 			result = noteCompositionService.findAllQCTraineeNotes(request.get("batchId").getAsInt(), request.get("week").getAsShort());
 		}
 		return result;
