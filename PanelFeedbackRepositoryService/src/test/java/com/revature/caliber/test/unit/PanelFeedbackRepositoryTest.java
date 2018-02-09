@@ -66,7 +66,7 @@ public class PanelFeedbackRepositoryTest {
 		log.info("Finding feedback by panel id");
 		long panelFId = 140;
 		int expected = 70;
-		assertEquals(panelFeedBackRepository.findOne(panelFId).getPanelId(), expected);
+		assertEquals(panelFeedBackRepository.findOne(panelFId).getPanelId().intValue(), expected);
 	}
 	
 	

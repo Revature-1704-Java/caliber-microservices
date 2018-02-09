@@ -7,8 +7,8 @@ import java.util.Set;
 
 public class Batch implements Serializable {
 	private static final long serialVersionUID = -5755409643112884001L;
-	
-	private int batchId;
+
+	private Integer batchId;
 	private String resourceId;
 	private String trainingName;
 	private Trainer trainer;
@@ -19,13 +19,13 @@ public class Batch implements Serializable {
 	private Date endDate;
 	private String location;
 	private Address address;
-	private short goodGradeThreshold;
-	private short borderlineGradeThreshold;
+	private Short goodGradeThreshold;
+	private Short borderlineGradeThreshold;
 	private Set<Trainee> trainees;
-	private int weeks;
-	private int gradedWeeks;
+	private Integer weeks;
+	private Integer gradedWeeks;
 	private Set<Note> notes;
-	
+
 	public Batch() {
 		super();
 		this.weeks = 1;
@@ -56,30 +56,21 @@ public class Batch implements Serializable {
 		this.endDate = endDate;
 		this.location = location;
 	}
-	
-	public Batch(SimpleBatch batch) {
-		this.batchId = batch.getBatchId();
-		this.trainingName = batch.getTrainingName();
-		this.trainer = null;
-		this.coTrainer = null;
-		this.skillType = batch.getSkillType();
-		this.trainingType = batch.getTrainingType();
-		this.startDate = batch.getStartDate();
-		this.endDate = batch.getEndDate();
-		this.location = batch.getLocation();
-		this.address = null;
-		this.goodGradeThreshold = batch.getGoodGradeThreshold();
-		this.trainees = null;
-		this.weeks = batch.getWeeks();
-		this.gradedWeeks = batch.getGradedWeeks();
-		this.notes = null;
+
+	public Batch(SimpleBatch simpleBatch) {
+		this();
+		this.trainingName = simpleBatch.getTrainingName();
+		this.skillType = simpleBatch.getSkillType();
+		this.startDate = simpleBatch.getStartDate();
+		this.endDate = simpleBatch.getEndDate();
+		this.location = simpleBatch.getLocation();
 	}
 
-	public int getBatchId() {
+	public Integer getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(Integer batchId) {
 		this.batchId = batchId;
 	}
 
@@ -155,19 +146,19 @@ public class Batch implements Serializable {
 		this.location = location;
 	}
 
-	public short getGoodGradeThreshold() {
+	public Short getGoodGradeThreshold() {
 		return goodGradeThreshold;
 	}
 
-	public void setGoodGradeThreshold(short goodGradeThreshold) {
+	public void setGoodGradeThreshold(Short goodGradeThreshold) {
 		this.goodGradeThreshold = goodGradeThreshold;
 	}
 
-	public short getBorderlineGradeThreshold() {
+	public Short getBorderlineGradeThreshold() {
 		return borderlineGradeThreshold;
 	}
 
-	public void setBorderlineGradeThreshold(short borderlineGradeThreshold) {
+	public void setBorderlineGradeThreshold(Short borderlineGradeThreshold) {
 		this.borderlineGradeThreshold = borderlineGradeThreshold;
 	}
 
@@ -179,11 +170,11 @@ public class Batch implements Serializable {
 		this.trainees = trainees;
 	}
 
-	public int getWeeks() {
+	public Integer getWeeks() {
 		return weeks;
 	}
 
-	public void setWeeks(int weeks) {
+	public void setWeeks(Integer weeks) {
 		this.weeks = weeks;
 	}
 
@@ -203,18 +194,18 @@ public class Batch implements Serializable {
 		this.address = address;
 	}
 
-	public int getGradedWeeks() {
+	public Integer getGradedWeeks() {
 		return gradedWeeks;
 	}
 
-	public void setGradedWeeks(int gradedWeeks) {
+	public void setGradedWeeks(Integer gradedWeeks) {
 		this.gradedWeeks = gradedWeeks;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + borderlineGradeThreshold;
 		result = prime * result + ((coTrainer == null) ? 0 : coTrainer.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
@@ -290,7 +281,7 @@ public class Batch implements Serializable {
 	@Override
 	public String toString() {
 		return "Batch [batchId=" + batchId + ", trainingName=" + trainingName + ", skillType=" + skillType
-				+ ", trainingType=" + trainingType +", location=" + location + "]";
+				+ ", trainingType=" + trainingType + ", location==" + location + "]";
 	}
-	
+
 }
