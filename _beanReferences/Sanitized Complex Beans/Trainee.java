@@ -49,6 +49,7 @@ public class Trainee implements Serializable {
 	
 	public Trainee(SimpleTrainee simpleTrainee){
 		this();
+		this.traineeId = simpleTrainee.getTraineeId();
 		this.name = simpleTrainee.getName();
 		this.resourceId = simpleTrainee.getResourceId();
 		this.email = simpleTrainee.getEmail();

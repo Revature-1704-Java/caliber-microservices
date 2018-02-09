@@ -33,6 +33,7 @@ public class Assessment implements Serializable {
 	
 	public Assessment(SimpleAssessment simpleAssessment){
 		this();
+		this.assessmentId = simpleAssessment.getAssessmentId();
 		this.title = simpleAssessment.getTitle();
 		this.rawScore = simpleAssessment.getRawScore();
 		this.type = simpleAssessment.getType();

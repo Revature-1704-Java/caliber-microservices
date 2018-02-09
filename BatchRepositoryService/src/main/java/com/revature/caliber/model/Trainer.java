@@ -27,6 +27,7 @@ public class Trainer implements Serializable {
 	
 	public Trainer(SimpleTrainer simpleTrainer){
 		this();
+		this.trainerId = simpleTrainer.getTrainerId();
 		this.name = simpleTrainer.getName();
 		this.title = simpleTrainer.getTitle();
 		this.email = simpleTrainer.getEmail();

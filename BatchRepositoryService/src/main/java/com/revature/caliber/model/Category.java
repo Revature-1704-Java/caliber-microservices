@@ -32,6 +32,7 @@ public class Category implements Serializable {
 	
 	public Category(SimpleCategory simpleCategory){
 		this();
+		this.categoryId = simpleCategory.getCategoryId();
 		this.skillCategory = simpleCategory.getSkillCategory();
 		this.active = simpleCategory.isActive();
 	}

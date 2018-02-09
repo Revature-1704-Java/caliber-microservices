@@ -201,6 +201,7 @@ public class BatchCompositionService {
 		}else{
 			List<Batch> batches = src.stream()
 					.map(b-> setAddressAndTrainer(b)).collect(Collectors.toList());
+			System.out.println(batches);
 			if(withTrainees){
 				return batches.stream()
 						.map(b-> {
