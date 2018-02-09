@@ -7,7 +7,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	/** ************************* Enum constants *********************** */
 	all.enumCommonLocations = function() {
 		return $http({
-			url : "/all/locations",
+			url : "http://localhost:8081/batch/all/locations",
 			method : "GET"
 		}).then(function(response)  {
 			return response.data;
@@ -473,7 +473,7 @@ angular.module("api").factory("allFactory", function($log, $http) {
 	 */
 	all.getAllTrainers = function() {
 		return $http({
-			url : "/all/trainer/all/",
+			url : "http://localhost:8081/trainer/all/trainer/all/",
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Trainers successfully retrieved");
