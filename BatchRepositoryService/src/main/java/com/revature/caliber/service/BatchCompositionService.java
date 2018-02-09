@@ -31,14 +31,14 @@ public class BatchCompositionService {
 	 * @param batch
 	 */
 	public void save(Batch batch) {
-		repo.save(batch.toSimple());
+		repo.save(new SimpleBatch(batch));
 	}
 	/**
 	 * 
 	 * @param batch
 	 */
 	public void update(Batch batch) {
-		repo.save(batch.toSimple());
+		repo.save(new SimpleBatch(batch));
 	}
 	/**
 	 * 

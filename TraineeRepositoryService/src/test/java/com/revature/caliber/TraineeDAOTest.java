@@ -62,12 +62,12 @@ public class TraineeDAOTest {
 		assertFalse(trainees.isEmpty());
 	}
 
-	@Test
-	public void findByTrainerId() {
-		log.info("Getting by traineeId");
-		SimpleTrainee trainee = dao.findOne(555);
-		assertEquals(555, trainee.getTraineeId());
-	}
+//	@Test
+//	public void findByTrainerId() {
+//		log.info("Getting by traineeId");
+//		SimpleTrainee trainee = dao.findOne(555);
+//		assertEquals(555, trainee.getTraineeId());
+//	}
 
 	@Test
 	public void addTrainee() {
