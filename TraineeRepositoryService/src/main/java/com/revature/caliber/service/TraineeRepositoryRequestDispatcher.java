@@ -35,14 +35,6 @@ public class TraineeRepositoryRequestDispatcher {
 	 * 
 	 * @param JsonObject - request
 	 * @return SimpleTrainee
-	 * Parse JsonObject for method to execute
-	 * Executable methods: 
-	 * 		findOne - find a SimpleTrainer by traineeId
-	 * 		delete - delete a Trainee by traineeId
-	 *
-	 * @param request
-	 *
-	 * @return result
 	 */
 	public SimpleTrainee processSingleSimpleTraineeRequest(JsonObject request) {
 		SimpleTrainee result = null;
@@ -73,15 +65,6 @@ public class TraineeRepositoryRequestDispatcher {
 	 * 
 	 * @param JsonObject - request
 	 * @return List of SimpleTrainee 
-	 * Parse JsonObject for method to execute
-	 * Executable methods: 
-	 * 		findAll - find all SimpleTrainee
-	 * 		findAllByBatchId - find all trainees with a batchId
-	 * 		delete - delete all trainees with a batchId
-	 *
-	 * @param request
-	 *
-	 * @return result
 	 */
 	public List<SimpleTrainee> processListSimpleTraineeRequest(JsonObject request) {
 		System.out.println("Hey hello");
@@ -117,14 +100,6 @@ public class TraineeRepositoryRequestDispatcher {
 	 * 
 	 * @param JsonObject - request
 	 * @return List of Trainees 
-
-	/**
-	 * Parse JsonObject for method to execute
-	 * 		findAllByBatch - find all trainee by a given batchId
-	 *
-	 * @param request
-	 *
-	 * @return result
 	 */
 	public List<Trainee> processListTraineeRequest(JsonObject request) {
 		List<Trainee> result = null;

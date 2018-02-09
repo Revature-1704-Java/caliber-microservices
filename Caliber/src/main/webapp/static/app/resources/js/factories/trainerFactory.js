@@ -1,6 +1,6 @@
 /**
  * API for making trainer related AJAX calls caliber endpoints
- * 
+ *
  * @param $log
  * @param $http
  * @returns {{}}
@@ -13,7 +13,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// grab all batches
 	trainer.getAllBatches = function() {
 		return $http({
-			url : "/trainer/batch/all/",
+			url : "http://localhost:8081/batch/trainer/batch/all/", //added "batch" and localhost in front
 			method : "GET"
 		}).then(function(response) {
 			$log.debug("Batches successfully retrieved");
@@ -42,7 +42,7 @@ angular.module("api").factory("trainerFactory", function($log, $http) {
 	// create a new week
 	trainer.createWeek = function(batchId) {
 		return $http({
-			url : "/trainer/week/new/" + batchId + "/",
+			url : "http://localhost:8081/batch/trainer/week/new/" + batchId + "/", //added "batch" and localhost in front
 			method : "POST",
 		}).then(function(response) {
 			$log.debug("Week successfully created.");

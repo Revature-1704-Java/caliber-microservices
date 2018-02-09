@@ -16,7 +16,7 @@ angular
 					// Get all batches
 					vp.getAllBatches = function() {
 						return $http({
-							url : "/vp/batch/all/",
+							url : "http://localhost:8081/batch/vp/batch/all/", //added "batch" and localhost in front
 							method : "GET"
 						})
 								.then(
@@ -34,7 +34,7 @@ angular
 					// Get all current batches
 					vp.getAllCurrentBatches = function() {
 						return $http({
-							url : "/vp/batch/all/current",
+							url : "http://localhost:8081/batch/vp/batch/all/current", //added "batch" and localhost in front
 							method : "GET"
 						})
 								.then(
@@ -129,7 +129,7 @@ angular
 					// JSON else 415
 					vp.deactivateTrainer = function(trainerObj) {
 						return $http({
-							url : "/vp/trainer/delete",
+							url : "http://localhost:8081/trainer/vp/trainer/delete",
 							method : "DELETE",
 							data : trainerObj,
 							headers : {
@@ -262,7 +262,7 @@ angular
 					// Update selected trainer
 					vp.updateTrainer = function(trainerObj) {
 						return $http({
-							url : "/vp/trainer/update",
+							url : "http://localhost:8081/trainer/vp/trainer/update",
 							method : "PUT",
 							data : trainerObj
 						})
@@ -286,7 +286,7 @@ angular
 					 */
 					vp.getAllTrainersTitle = function() {
 						return $http({
-							url : "/vp/trainer/titles/",
+							url : "http://localhost:8081/trainer/vp/trainer/titles/",
 							method : "GET"
 						})
 								.then(
@@ -310,7 +310,7 @@ angular
 					vp.createTrainer = function(trainerObj) {
 						$log.debug(trainerObj);
 						return $http({
-							url : "/vp/trainer/create",
+							url : "http://localhost:8081/trainer/vp/trainer/create",
 							method : "POST",
 							data : trainerObj
 						}).then(
@@ -329,7 +329,7 @@ angular
 					vp.getTrainerEmail = function(trainerEmail) {
 						return $http(
 								{
-									url : "/training/trainer/byemail/"
+									url : "http://localhost:8081/trainer/training/trainer/byemail/"
 											+ trainerEmail + "/",
 									method : "GET",
 								}).then(

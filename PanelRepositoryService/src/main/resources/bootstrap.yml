@@ -3,4 +3,8 @@ spring:
     name: panel
   cloud:
     config:
+<<<<<<< HEAD
       uri: http://localhost:8888
+=======
+      url: http://localhost:8888
+>>>>>>> 418dc636890fadeccaffa00907b48fa33ec55880

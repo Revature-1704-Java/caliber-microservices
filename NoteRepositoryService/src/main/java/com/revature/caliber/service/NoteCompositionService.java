@@ -263,15 +263,31 @@ public class NoteCompositionService {
 	 * @return The Note composed from information in the SimpleNote
 	 */
 	private Note composeNote(SimpleNote src) {
-		SimpleBatch simpleBatch = noteCompositionMessagingService.sendSingleSimpleBatchRequest(src.getBatchId());
-		SimpleTrainee simpleTrainee = noteCompositionMessagingService.sendSingleSimpleTraineeRequest(src.getTraineeId());
-		Batch batch = new Batch(simpleBatch);
-		Trainee trainee = new Trainee(simpleTrainee);
+		SimpleBatch simpleBatch = null;
+		SimpleTrainee simpleTrainee = null;
+		Batch batch = null;
+		Trainee trainee = null;
 		Note dest = new Note(src);
 		
-		trainee.setBatch(batch);
-		dest.setBatch(batch);
-		dest.setTrainee(trainee);
+		if(src.getBatchId() != null) {
+			simpleBatch =  noteCompositionMessagingService.sendSingleSimpleBatchRequest(src.getBatchId());
+			batch = new Batch(simpleBatch);
+			dest.setBatch(batch);
+		}
+			
+		if(src.getTraineeId() != null) {
+			simpleTrainee = noteCompositionMessagingService.sendSingleSimpleTraineeRequest(src.getTraineeId());
+			trainee = new Trainee(simpleTrainee);
+			
+			if(simpleBatch == null && simpleTrainee.getBatchId() != null) {
+				simpleBatch = noteCompositionMessagingService.sendSingleSimpleBatchRequest(simpleTrainee.getBatchId());
+				if(simpleBatch != null) batch = new Batch(simpleBatch);
+			}
+			
+			dest.setTrainee(trainee);
+		}
+		
+		if(trainee != null && batch != null) trainee.setBatch(batch);
 		
 		return dest;
 	}

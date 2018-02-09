@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.caliber.model.Panel;
 import com.revature.caliber.model.PanelFeedback;
 import com.revature.caliber.model.PanelStatus;
+import com.revature.caliber.service.PanelCompositionMessagingService;
 import com.revature.caliber.service.PanelCompositionService;
 import com.revature.caliber.exceptions.MalformedRequestException;
 //import com.revature.security.models.SalesforceUser;
@@ -37,7 +39,7 @@ import com.revature.caliber.exceptions.MalformedRequestException;
  */
 @RestController
 @PreAuthorize("isAuthenticated()")
-@CrossOrigin(origins = "http://ec2-54-163-132-124.compute-1.amazonaws.com")
+@CrossOrigin
 public class PanelController {
 
 	private static final Logger log = Logger.getLogger(PanelController.class);
@@ -46,6 +48,8 @@ public class PanelController {
 	//private TrainingService trainingService;
 	@Autowired
 	private PanelCompositionService panelService;
+	@Autowired
+	private PanelCompositionMessagingService trainingService;
 
 	public void setPanelService(PanelCompositionService panelService) {
 		this.panelService = panelService;
@@ -108,7 +112,8 @@ public class PanelController {
 	@RequestMapping(value = "/panel/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	@PreAuthorize("hasAnyRole('VP','PANEL')")
-	public ResponseEntity<Panel> savePanel(@Valid @RequestBody Panel panel) throws MalformedRequestException {
+	public ResponseEntity<Panel> savePanel(@CookieValue("email") String email, @CookieValue("role") String role, @Valid @RequestBody Panel panel) throws MalformedRequestException {
+
 		/*
 		SalesforceUser user = (SalesforceUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		log.info(user.getEmail());
@@ -116,7 +121,11 @@ public class PanelController {
 		panelService.createPanel(panel);
 		return new ResponseEntity<>(panel, HttpStatus.CREATED);
 		*/
-		return null;
+		
+		panel.setPanelist(trainingService.findTrainer(email));
+        log.info(email);
+        panelService.save(panel);
+        return new ResponseEntity<>(panel, HttpStatus.OK);
 	}
 	
 	
@@ -154,11 +163,11 @@ public class PanelController {
 	@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
 	public ResponseEntity<List<Map<String, String>>> getBatchAllTraineesPanelTable(
 			@PathVariable Integer batchId) {
-			return null;
-		//log.info("getBatchOverallPanelTable   ===>   /all/reports/batch/{batchId}/overall/panel-batch-overall");
+		log.info("getBatchOverallPanelTable   ===>   /all/reports/batch/{batchId}/overall/panel-batch-overall");
 		//if (panelService.getBatchPanels(batchId).isEmpty()) {
 			//return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		//}
 		//return new ResponseEntity<>(panelService.getBatchPanels(batchId), HttpStatus.OK);
+		return null;
 	}
 }
