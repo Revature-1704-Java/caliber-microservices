@@ -28,13 +28,6 @@ public class ReportingServiceApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			System.out.println("Test");
-			System.out.println(m.findByBatch(2050));
-		};
-	}
-	@Bean
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
           .select()                                  
