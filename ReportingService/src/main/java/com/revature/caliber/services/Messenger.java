@@ -63,9 +63,9 @@ public class Messenger {
 	
 	public List<Note> findAllQCTraineeNotes(int batchId, int weekNumber) {
 		JsonObject msg = new JsonObject();
-		msg.addProperty("methodName", "findAllQCTrainerNotes");
+		msg.addProperty("methodName", "findAllQCTraineeNotes");
 		msg.addProperty("batchId", batchId);
-		msg.addProperty("weekNumber", weekNumber);
+		msg.addProperty("week", weekNumber);
 		List<Note> reply = (List<Note>) amqpTemplate.convertSendAndReceive(serviceExchange, noteList, msg.toString());
 		return reply;
 	}
@@ -106,6 +106,7 @@ public class Messenger {
 		msg.addProperty("methodName", "findOneWithTraineesAndGrades");
 		msg.addProperty("batchId", batchId);
 		Batch reply = (Batch) amqpTemplate.convertSendAndReceive(serviceExchange, batch, msg.toString());
+		
 		return reply;
 	}
 
