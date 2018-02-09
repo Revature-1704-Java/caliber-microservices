@@ -23,7 +23,7 @@ public class Grade implements Serializable {
 		this.dateReceived = dateReceived;
 		this.score = score;
 	}
-	
+	//fix this 
 	public Grade(SimpleGrade simpleGrade){
 		this();
 		this.dateReceived = simpleGrade.getDateReceived();

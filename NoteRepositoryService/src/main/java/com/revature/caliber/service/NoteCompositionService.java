@@ -215,9 +215,11 @@ public class NoteCompositionService {
 	 * @return The List of all QC Notes for all Trainees in the Batch for the given week 
 	 */
 	public List<Note> findAllQCTraineeNotes(Integer batchId, Short week) {
-		List<SimpleNote> basis = noteRepository.findAllByBatchIdAndWeekAndQcFeedbackAndTypeOrderByWeekAsc(batchId, week, true, NoteType.QC_TRAINEE);
-		List<Note> result = composeListOfNotes(basis, false);
 		
+		List<SimpleNote> basis = noteRepository.findAllByBatchIdAndWeekAndQcFeedbackAndTypeOrderByWeekAsc(batchId, week, true, NoteType.QC_TRAINEE);
+		System.out.println(basis);
+		List<Note> result = composeListOfNotes(basis, false);
+		System.out.println(result);
 		return result;
 	}
 	
@@ -242,10 +244,10 @@ public class NoteCompositionService {
 	 */
 	private List<Note> composeListOfNotes(List<SimpleNote> src, boolean includeDropped) {
 		List<Note> dest = new LinkedList<Note>();
-		
+		System.out.println(dest);
 		for(SimpleNote curr : src) {
 			Note note = composeNote(curr);
-			
+			System.out.println(note);
 			if(!includeDropped && note.getTrainee().getTrainingStatus() != TrainingStatus.Dropped)
 				dest.add(note);
 			else if(includeDropped)

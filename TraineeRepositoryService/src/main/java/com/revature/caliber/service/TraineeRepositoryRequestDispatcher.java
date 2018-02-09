@@ -16,7 +16,7 @@ import com.revature.caliber.repository.TraineeRepository;
  * back a SimpleTrainee, List of SimpleTrainee, or List of ComplexTrainee.
  *
  * 
- * @author Samuel Huang
+ * 
  */
 @Service
 public class TraineeRepositoryRequestDispatcher {
@@ -27,7 +27,7 @@ public class TraineeRepositoryRequestDispatcher {
 	private TraineeCompositionService traineeCompositionService;
 	
 	/**
-	 * sphuang 02/08/2018 
+	 * 
 	 * Process Single Simple Trainee Request
 	 * Depending on methodName, can return either a trainee that matches a traineeId,
 	 * or delete a trainee, or persists a SimpleTrainee to database.

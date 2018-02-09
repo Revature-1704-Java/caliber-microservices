@@ -17,6 +17,9 @@ public class AssessmentRepositoryMessagingService {
 
 	@Autowired
 	private AssessmentRepositoryRequestDispatcher assessmentRepositoryRequestDispatcher;
+	
+	@Autowired
+	private AssessmentCompositionService acs;
 
 	/**
 	 * Receives a message from the single SimpleAssessment RabbitMQ queue, parses
@@ -46,7 +49,6 @@ public class AssessmentRepositoryMessagingService {
 	 */
 	@RabbitListener(queues = "revature.caliber.repos.assessment.list")
 	public List<SimpleAssessment> receiveListSimpleAssessmentRequest(String message) {
-		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
@@ -54,7 +56,22 @@ public class AssessmentRepositoryMessagingService {
 
 		return assessmentRepositoryRequestDispatcher.processListSimpleAssessmentRequest(request);
 	}
-
+//	@RabbitListener(queues = "revature.caliber.service.test.list")
+//	public List<Assessment> receiveListAssessmentRequest(String message) {
+//		JsonParser parser = new JsonParser();
+//		JsonElement element = parser.parse(message);
+//		JsonObject request = element.getAsJsonObject();
+//		System.out.println(message);
+//		
+//		String methodName = request.get("methodName").getAsString();
+//		System.out.println(methodName);
+//		if(methodName.equals("findByBatchIdAndWeek")) {
+//			System.out.println(request.get("week").getAsShort());
+//			System.out.println(request.get("batchId").getAsInt());
+//			return acs.findByBatchIdAndWeek(request.get("batchId").getAsInt(), request.get("week").getAsShort());
+//		}
+//		return null;
+//	}
 	/**
 	 * Receives a message from the single Assessment RabbitMQ queue, parses the
 	 * message string as a JsonObject, and passes it to the request dispatcher.

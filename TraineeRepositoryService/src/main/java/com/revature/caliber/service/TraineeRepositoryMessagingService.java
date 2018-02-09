@@ -15,7 +15,6 @@ import com.revature.caliber.model.Trainee;
  * Message Listener
  * The queue in which the message comes in determines the type of composition.
  *  
- * @author Samuel Huang
  */
 @Service
 public class TraineeRepositoryMessagingService {
@@ -24,7 +23,7 @@ public class TraineeRepositoryMessagingService {
 	private TraineeRepositoryRequestDispatcher traineeRepositoryRequestDispatcher;
 
 	/**
-	 * sphuang 02/08/2018 
+	 * 
 	 * Parses message in queue to a string json object.
 	 * RequestDispatcher then processes the message and returns a SimpleTrainee.
 	 * 
@@ -42,7 +41,6 @@ public class TraineeRepositoryMessagingService {
 	}
 
 	/**
-	 * sphuang 02/08/2018 
 	 * Parses message in queue to a string json object.
 	 * RequestDispatcher then processes the message and returns a List of SimpleTrainee.
 	 * 
@@ -65,7 +63,6 @@ public class TraineeRepositoryMessagingService {
 	}
 	
 	/**
-	 * sphuang 02/08/2018 
 	 * Parses message in queue to a string json object.
 	 * RequestDispatcher then processes the message and returns a List of ComplexTrainees.
 	 * 
@@ -74,11 +71,11 @@ public class TraineeRepositoryMessagingService {
 	 * @return List<Trainee> - List of Complex Trainees
 	 */
 	@RabbitListener(queues = "revature.caliber.service.trainee.list")
+//	@RabbitListener(queues = "revature.caliber.service.test.list")
 	public List<Trainee> receiveListTraineeRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-
 		return traineeRepositoryRequestDispatcher.processListTraineeRequest(request);
 	}
 }

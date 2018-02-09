@@ -29,11 +29,12 @@ public class PanelRepositoryMessagingService {
 	}
 	
 	@RabbitListener(queues = "revature.caliber.service.panel.list")
+//	@RabbitListener(queues = "revature.caliber.service.test.list")
 	public List<Panel> receiveListPanelRequest(String message) {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		
+		System.out.println(message);
 		return panelRepositoryRequestDispatcer.processSinglePanelRequest(request);
 	}
 }

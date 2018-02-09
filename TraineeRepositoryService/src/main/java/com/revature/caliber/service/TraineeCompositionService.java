@@ -16,7 +16,7 @@ import com.revature.caliber.repository.TraineeRepository;
  * TraineeCompositionService
  * Implemented all the methods to achieve composition of complex Trainee.
  *  
- * @author Samuel Huang
+ * 
  */
 @Service
 public class TraineeCompositionService {
@@ -26,7 +26,7 @@ public class TraineeCompositionService {
 	private TraineeCompositionMessagingService traineeCompositionMessagingService;
 	
 	/**
-	 * sphuang 02/07/2018 
+	 * 
 	 * Saving a simple Trainee bean.
 	 * 
 	 * @param Trainee - Trainee to save
@@ -38,7 +38,7 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/07/2018 
+	 * 
 	 * Updating a simple Trainee bean to become a complex Trainee bean?.
 	 * 
 	 * @param Trainee - Trainee to update
@@ -49,7 +49,7 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/07/2018 
+	 * 
 	 * Deleting a Trainee bean.
 	 * 
 	 * @param Trainee - Trainee to delete
@@ -64,7 +64,7 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/07/2018 
+	 * 
 	 * Obtain list of SimpleTrainees from traineeRepository.
 	 * Then obtain a list of Complex Trainee beans from composition.
 	 * 
@@ -79,7 +79,6 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/07/2018 
 	 * Obtain list of SimpleTrainees from traineeRepository that have training status not dropped.
 	 * Then obtain a list of Complex Trainee beans from composition.
 	 * 
@@ -94,7 +93,6 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/07/2018 
 	 * Obtain list of SimpleTrainees from traineeRepository that have training status not dropped and part of a particular batch.
 	 * Then obtain a list of Complex Trainee beans from composition.
 	 * 
@@ -110,7 +108,6 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/07/2018 
 	 * Obtain list of SimpleTrainees from traineeRepository that have training status dropped and part of a particular batch.
 	 * Then obtain a list of Complex Trainee beans from composition.
 	 * 
@@ -126,7 +123,6 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/07/2018 
 	 * Obtain list of SimpleTrainees from traineeRepository that have training status not dropped and part of a particular batch.
 	 * Then obtain a list of Complex Trainee beans from composition.
 	 * 
@@ -136,7 +132,8 @@ public class TraineeCompositionService {
 	public List<Trainee> findAllByTrainer(Integer trainerId) {
 		List<SimpleBatch> trainerBatches = traineeCompositionMessagingService.sendListSimpleBatchRequest(trainerId);
 		List<SimpleTrainee> basis = new LinkedList<SimpleTrainee>();// traineeRepository.findAllByBatchIdAndTrainingStatusNot(trainerId,
-																	// TrainingStatus.Dropped);
+														// TrainingStatus.Dropped);
+		System.out.println(basis);
 		List<Trainee> trainees = null;
 
 		for (SimpleBatch b : trainerBatches) {
@@ -166,7 +163,6 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/08/2018 
 	 * Obtain a List of SimpleTrainees from traineeRepository that have it's training status not dropped and matches the email.
 	 * Then obtain a List of Complex Trainee from composition.
 	 * 
@@ -181,7 +177,6 @@ public class TraineeCompositionService {
 		return trainees;
 	}
 	/**
-	 * sphuang 02/08/2018 
 	 * Obtain a List of SimpleTrainees from traineeRepository that have it's training status not dropped and matches the name.
 	 * Then obtain a List of Complex Trainees from composition.
 	 * 
@@ -197,7 +192,6 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/08/2018 
 	 * Obtain a List of SimpleTrainees from traineeRepository that have it's training status not dropped and matches the skypeId.
 	 * Then obtain a List of Complex Trainees from composition.
 	 * 
@@ -213,7 +207,6 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/08/2018 
 	 * Composing a list of Complex Trainees.
 	 * 
 	 * 
@@ -232,7 +225,6 @@ public class TraineeCompositionService {
 	}
 	
 	/**
-	 * sphuang 02/08/2018 
 	 * Composing a complex Trainee from a simpleTrainee. Obtains a batch to build the complex Trainee.
 	 * 
 	 * 

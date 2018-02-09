@@ -38,7 +38,7 @@ public class Address implements Serializable {
 	private String company;
 	
 	@Column(name = "ACTIVE")
-	private boolean active;
+	private Boolean active;
 
 	public Address() {
 		super();

@@ -67,13 +67,14 @@ public class GradeRepositoryMessagingService {
 	 * @param message
 	 * @return 
 	 */
-	@RabbitListener(queues = "revature.caliber.service.grade.list")
+//	@RabbitListener(queues = "revature.caliber.service.grade.list")
+	@RabbitListener(queues = "revature.caliber.service.test.list")
 	public List<Grade> recieveBatchId(String message) {
 		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		
+		System.out.println(message);
 		return gradeRepositoryRequestDispatcher.processListComplexGradeRequest(request);
 	}
 	

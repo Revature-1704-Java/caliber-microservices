@@ -86,10 +86,10 @@ public class GradeRepositoryRequestDispatcher {
 	public List<Grade> processListComplexGradeRequest(JsonObject request){
 		List<Grade> result = null;
 		String methodName = request.get("methodName").getAsString();
-		
+		System.out.println(request);
 		if(methodName.equals("findByTrainee")) {
 			result = gradeCompositionService.findByTrainee(request.get("traineeId").getAsInt());
-		} else if (methodName.equals("findyByBatch")) {
+		} else if (methodName.equals("findByBatch")) {
 			result = gradeCompositionService.findByBatch(request.get("batchId").getAsInt());
 		}
 		return result;

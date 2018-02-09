@@ -114,7 +114,7 @@ public class GradeCompositionService {
                                                                                                                     // belonging
                                                                                                                     // to
                                                                                                                     // the
-                                                                                                                    // batch
+        System.out.println(trainees);                                                                                                    // batch
         List<Grade> part = null;
         List<Grade> result = new ArrayList<Grade>();
         for (int i = 0; i < trainees.size(); i++) {
