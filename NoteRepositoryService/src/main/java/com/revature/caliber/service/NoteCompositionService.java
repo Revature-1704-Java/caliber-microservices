@@ -244,12 +244,12 @@ public class NoteCompositionService {
 		List<Note> dest = new LinkedList<Note>();
 		
 		for(SimpleNote curr : src) {
-			Note note = new Note(curr);
+			Note note = composeNote(curr);
 			
 			if(!includeDropped && note.getTrainee().getTrainingStatus() != TrainingStatus.Dropped)
-				dest.add(new Note(curr));
+				dest.add(note);
 			else if(includeDropped)
-				dest.add(new Note(curr));
+				dest.add(note);
 		}
 		
 		return dest;
