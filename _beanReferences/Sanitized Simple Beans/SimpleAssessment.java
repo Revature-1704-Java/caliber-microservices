@@ -2,56 +2,18 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
 /**
  * The type Simple Assessment.
  */
-@Entity
-@Table(name = "CALIBER_ASSESSMENT")
-@Cacheable
 public class SimpleAssessment implements Serializable {
 	private static final long serialVersionUID = -3715103315340780554L;
 
-	@Id
-	@Column(name = "ASSESSMENT_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ASSESSMENT_ID_SEQUENCE")
-	@SequenceGenerator(name = "ASSESSMENT_ID_SEQUENCE", sequenceName = "ASSESSMENT_ID_SEQUENCE")
 	private Long assessmentId;
-
-	@Min(value = 1)
-	@Column(name = "RAW_SCORE", nullable = false)
 	private Integer rawScore;
-
-	@Column(name = "ASSESSMENT_TITLE")
 	private String title;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "ASSESSMENT_TYPE", nullable = false)
 	private AssessmentType type;
-
-	@Min(value = 1)
-	@Column(name = "WEEK_NUMBER", nullable = false)
 	private Short week;
-
-	@NotNull
-	@Column(name = "BATCH_ID")
 	private Integer batchId;
-
-	@NotNull
-	@Column(name = "ASSESSMENT_CATEGORY", nullable = false)
 	private Integer categoryId;
 
 	public SimpleAssessment() {
