@@ -3,47 +3,32 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * The type Grade.
- */
 public class Grade implements Serializable {
-
 	private static final long serialVersionUID = -2031135710502844800L;
 
-	private long gradeId;
-
-	/**
-	 * Assessment - The specified assessment taken by the Trainee
-	 */
+	private Long gradeId;
 	private Assessment assessment;
-
-	/**
-	 * Trainee- the trainee that receives this Grade
-	 */
 	private Trainee trainee;
-
-	/**
-	 * dateReceived- date this Grade was earned
-	 */
 	private Date dateReceived;
-
-	/**
-	 * score - points earned. should be based on raw score of Assessment.
-	 * Example: Assessment is worth 200 points, and Trainee made a 75% thus
-	 * score is 150
-	 */
-	private double score;
+	private Double score;
 
 	public Grade() {
 		super();
 	}
 
-	public Grade(Assessment assessment, Trainee trainee, Date dateReceived, double score) {
-		super();
+	public Grade(Assessment assessment, Trainee trainee, Date dateReceived, Double score) {
+		this();
 		this.assessment = assessment;
 		this.trainee = trainee;
 		this.dateReceived = dateReceived;
 		this.score = score;
+	}
+	
+	public Grade(SimpleGrade simpleGrade){
+		this();
+		this.dateReceived = simpleGrade.getDateReceived();
+		this.score = simpleGrade.getScore();
+		
 	}
 
 	public long getGradeId() {
@@ -78,18 +63,18 @@ public class Grade implements Serializable {
 		this.dateReceived = dateReceived;
 	}
 
-	public double getScore() {
+	public Double getScore() {
 		return score;
 	}
 
-	public void setScore(double score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((assessment == null) ? 0 : assessment.hashCode());
 		result = prime * result + ((dateReceived == null) ? 0 : dateReceived.hashCode());
 		long temp;

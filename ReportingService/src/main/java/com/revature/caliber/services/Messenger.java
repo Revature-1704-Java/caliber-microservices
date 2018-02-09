@@ -1,7 +1,6 @@
 package com.revature.caliber.services;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,7 +141,7 @@ public class Messenger {
 
 	public List<Assessment> findByWeek(Integer batchId, Integer week) {
 		JsonObject msg = new JsonObject();
-		msg.addProperty("methodName", "findByWeek");
+		msg.addProperty("methodName", "findByBatchIdAndWeek");
 		msg.addProperty("batchId", batchId);
 		msg.addProperty("week", week);
 		List<Assessment> reply = (List<Assessment>) amqpTemplate.convertSendAndReceive(serviceExchange, assessmentList, msg.toString());

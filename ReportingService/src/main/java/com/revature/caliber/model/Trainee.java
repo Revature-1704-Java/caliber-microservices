@@ -1,66 +1,29 @@
- package com.revature.caliber.model;
+package com.revature.caliber.model;
 
 import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-/**
- * The type Trainee.
- * 
- * (NOTE) Further iterations should include the following from the Salesforce:
- * recruiter_name, account_name, project_completion This way we can analyze
- * performance based on where they went to college, who recruited them, and if
- * they finished RevaturePro.
- */
-
 public class Trainee implements Serializable {
-
 	private static final long serialVersionUID = -9090223980655307018L;
 
-	private int traineeId;
-
+	private Integer traineeId;
 	private String resourceId;
-
 	private String name;
-
 	private String email;
-
 	private TrainingStatus trainingStatus;
-
-	@JsonBackReference(value = "traineeAndBatch")
 	private Batch batch;
-
 	private String phoneNumber;
-
 	private String skypeId;
-
 	private String profileUrl;
-	
-	// new columns
 	private String recruiterName;
-	
 	private String college;
-	
 	private String degree;
-	
 	private String major;
-	
 	private String techScreenerName;
-	
 	private String projectCompletion;
-	// end of new columns
-	
-
-	@JsonIgnore
 	private Set<Grade> grades;
-
-	@JsonIgnore
 	private Set<Note> notes;
-	
-	@JsonIgnore
 	private Set<Panel> panelInterviews = new TreeSet<>();
 
 	public Trainee() {
@@ -69,25 +32,35 @@ public class Trainee implements Serializable {
 
 	/**
 	 * Constructor used mostly for testing. Default TrainingStatus as Training
+	 * 
 	 * @param name
 	 * @param resourceId
 	 * @param email
 	 * @param batch
 	 */
 	public Trainee(String name, String resourceId, String email, Batch batch) {
-		super();
+		this();
 		this.name = name;
 		this.resourceId = resourceId;
 		this.email = email;
 		this.trainingStatus = TrainingStatus.Training;
 		this.batch = batch;
 	}
+	
+	public Trainee(SimpleTrainee simpleTrainee){
+		this();
+		this.name = simpleTrainee.getName();
+		this.resourceId = simpleTrainee.getResourceId();
+		this.email = simpleTrainee.getEmail();
+		this.trainingStatus = simpleTrainee.getTrainingStatus();
+		
+	}
 
-	public int getTraineeId() {
+	public Integer getTraineeId() {
 		return traineeId;
 	}
 
-	public void setTraineeId(int traineeId) {
+	public void setTraineeId(Integer traineeId) {
 		this.traineeId = traineeId;
 	}
 
@@ -181,8 +154,8 @@ public class Trainee implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
@@ -239,8 +212,8 @@ public class Trainee implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Trainee [traineeId=" + traineeId +", name=" + name + ", email=" + email + ", trainingStatus="
-				+ trainingStatus + ", major=" + major +  "]";
+		return "Trainee [traineeId=" + traineeId + ", name=" + name + ", email=" + email + ", trainingStatus="
+				+ trainingStatus + ", major=" + major + "]";
 	}
 
 	public String getRecruiterName() {
