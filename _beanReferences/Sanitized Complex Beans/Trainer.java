@@ -27,11 +27,11 @@ public class Trainer implements Serializable {
 
 	public Trainer(SimpleTrainer simpleTrainer){
 		this();
-		this.traineeId = simpleTrainer.getTrainerId();
+		this.trainerId = simpleTrainer.getTrainerId();
 		this.name = simpleTrainer.getName();
 		this.title = simpleTrainer.getTitle();
 		this.email = simpleTrainer.getEmail();
-		this.tier = simpleTrainer.getTier();		
+		this.tier = simpleTrainer.getTier();
 	}
 
 	public Integer getTrainerId() {

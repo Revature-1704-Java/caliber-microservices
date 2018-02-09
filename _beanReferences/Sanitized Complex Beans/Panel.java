@@ -36,12 +36,12 @@ public class Panel implements Serializable {
 		this.panelId = simplePanel.getPanelId();
 		this.interviewDate = simplePanel.getInterviewDate();
 		this.duration = simplePanel.getDuration();
-		this.format = simplePanel.getFormat();
+		this.format = simplePanel.getFormatId();
 		this.internet = simplePanel.getInternet();
 		this.panelRound = simplePanel.getPanelRound();
 		this.recordingConsent = simplePanel.isRecordingConsent();
 		this.recordingLink = simplePanel.getRecordingLink();
-		this.status = simplePanel.getStatus();
+		this.status = simplePanel.getStatusId();
 		this.associateIntro = simplePanel.getAssociateIntro();
 		this.projectOneDescription = simplePanel.getProjectOneDescription();
 		this.projectTwoDescription = simplePanel.getProjectTwoDescription();
