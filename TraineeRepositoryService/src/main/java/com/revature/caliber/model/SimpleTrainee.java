@@ -17,17 +17,20 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * The type Simple Trainee.
+ */
 @Entity
 @Table(name = "CALIBER_TRAINEE")
-@Cacheable	
+@Cacheable
 public class SimpleTrainee implements Serializable {
-	private static final long serialVersionUID = 7741153496228057046L;
+	private static final long serialVersionUID = -5478972218765858144L;
 
 	@Id
 	@Column(name = "TRAINEE_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TRAINEE_ID_SEQUENCE")
 	@SequenceGenerator(name = "TRAINEE_ID_SEQUENCE", sequenceName = "TRAINEE_ID_SEQUENCE")
-	private int traineeId;
+	private Integer traineeId;
 
 	@Column(name = "RESOURCE_ID")
 	private String resourceId;
@@ -48,7 +51,7 @@ public class SimpleTrainee implements Serializable {
 
 	@NotNull
 	@Column(name = "BATCH_ID")
-	private int batchId;
+	private Integer batchId;
 
 	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
@@ -81,28 +84,10 @@ public class SimpleTrainee implements Serializable {
 	public SimpleTrainee() {
 		super();
 	}
-	
-	public SimpleTrainee(Trainee src) {
-		this.traineeId = src.getTraineeId();
-		this.resourceId = src.getResourceId();
-		this.name = src.getName();
-		this.email = src.getEmail();
-		this.trainingStatus = src.getTrainingStatus();
-		this.batchId = src.getBatch().getBatchId();
-		this.phoneNumber = src.getPhoneNumber();
-		this.skypeId = src.getSkypeId();
-		this.profileUrl = src.getProfileUrl();
-		this.recruiterName = src.getRecruiterName();
-		this.college = src.getCollege();
-		this.degree = src.getDegree();
-		this.major = src.getMajor();
-		this.techScreenerName = src.getTechScreenerName();
-		this.projectCompletion = src.getProjectCompletion();
-	}
 
-	public SimpleTrainee(int traineeId, String resourceId, String name, String email, TrainingStatus trainingStatus,
-			int batchId, String phoneNumber, String skypeId, String profileUrl, String recruiterName, String college,
-			String degree, String major, String techScreenerName, String projectCompletion) {
+	public SimpleTrainee(Integer traineeId, String resourceId, String name, String email, TrainingStatus trainingStatus,
+			Integer batchId, String phoneNumber, String skypeId, String profileUrl, String recruiterName,
+			String college, String degree, String major, String techScreenerName, String projectCompletion) {
 		super();
 		this.traineeId = traineeId;
 		this.resourceId = resourceId;
@@ -121,11 +106,29 @@ public class SimpleTrainee implements Serializable {
 		this.projectCompletion = projectCompletion;
 	}
 
-	public int getTraineeId() {
+	public SimpleTrainee(Trainee trainee) {
+		super();
+		this.traineeId = trainee.getTraineeId();
+		this.resourceId = trainee.getResourceId();
+		this.name = trainee.getName();
+		this.email = trainee.getEmail();
+		this.trainingStatus = trainee.getTrainingStatus();
+		this.batchId = trainee.getBatch() != null ? trainee.getBatch().getBatchId() : null;
+		this.phoneNumber = trainee.getPhoneNumber();
+		this.skypeId = trainee.getSkypeId();
+		this.profileUrl = trainee.getProfileUrl();
+		this.college = trainee.getCollege();
+		this.degree = trainee.getDegree();
+		this.major = trainee.getMajor();
+		this.techScreenerName = trainee.getTechScreenerName();
+		this.projectCompletion = trainee.getProjectCompletion();
+	}
+
+	public Integer getTraineeId() {
 		return traineeId;
 	}
 
-	public void setTraineeId(int traineeId) {
+	public void setTraineeId(Integer traineeId) {
 		this.traineeId = traineeId;
 	}
 
@@ -161,11 +164,11 @@ public class SimpleTrainee implements Serializable {
 		this.trainingStatus = trainingStatus;
 	}
 
-	public int getBatchId() {
+	public Integer getBatchId() {
 		return batchId;
 	}
 
-	public void setBatchId(int batchId) {
+	public void setBatchId(Integer batchId) {
 		this.batchId = batchId;
 	}
 

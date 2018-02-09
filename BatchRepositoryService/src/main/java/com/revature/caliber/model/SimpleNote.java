@@ -2,8 +2,12 @@ package com.revature.caliber.model;
 
 import java.io.Serializable;
 
+/**
+ * The type Simple Note.
+ */
 public class SimpleNote implements Serializable {
-	private static final long serialVersionUID = 7785756076682011103L;
+	private static final long serialVersionUID = 2951603247957437593L;
+
 	private Integer noteId;
 	private String content;
 	private Short week;
@@ -11,14 +15,41 @@ public class SimpleNote implements Serializable {
 	private Integer traineeId;
 	private TrainerRole maxVisibility;
 	private NoteType type;
-	private boolean qcFeedback;
+	private Boolean qcFeedback;
 	private QCStatus qcStatus;
 
 	public SimpleNote() {
 		super();
 		this.maxVisibility = TrainerRole.ROLE_TRAINER;
 	}
-	
+
+	public SimpleNote(Integer noteId, String content, Short week, Integer batchId, Integer traineeId,
+			TrainerRole maxVisibility, NoteType type, Boolean qcFeedback, QCStatus qcStatus) {
+		super();
+		this.noteId = noteId;
+		this.content = content;
+		this.week = week;
+		this.batchId = batchId;
+		this.traineeId = traineeId;
+		this.maxVisibility = maxVisibility;
+		this.type = type;
+		this.qcFeedback = qcFeedback;
+		this.qcStatus = qcStatus;
+	}
+
+	public SimpleNote(Note src) {
+		super();
+		this.noteId = src.getNoteId();
+		this.content = src.getContent();
+		this.week = src.getWeek();
+		this.batchId = src.getBatch() != null ? src.getBatch().getBatchId() : null;
+		this.traineeId = src.getTrainee() != null ? src.getTrainee().getTraineeId() : null;
+		this.maxVisibility = src.getMaxVisibility();
+		this.type = src.getType();
+		this.qcFeedback = src.isQcFeedback();
+		this.qcStatus = src.getQcStatus();
+	}
+
 	/**
 	 * Factory method to construct new QC weekly batch note
 	 * 
@@ -30,7 +61,7 @@ public class SimpleNote implements Serializable {
 	 */
 	public static SimpleNote qcBatchNote(String content, Short week, Integer batchId, QCStatus qcStatus) {
 		SimpleNote note = new SimpleNote();
-		
+
 		note.setContent(content);
 		note.setWeek(week);
 		note.setBatchId(batchId);
@@ -38,10 +69,10 @@ public class SimpleNote implements Serializable {
 		note.setType(NoteType.QC_BATCH);
 		note.setQcFeedback(true);
 		note.setQcStatus(qcStatus);
-		
+
 		return note;
 	}
-	
+
 	/**
 	 * Factory method for creating new QC weekly individual trainee note
 	 * 
@@ -53,18 +84,19 @@ public class SimpleNote implements Serializable {
 	 */
 	public static SimpleNote qcIndividualNote(String content, Short week, Integer traineeId, QCStatus qcStatus) {
 		SimpleNote note = new SimpleNote();
-		
+
 		note.setContent(content);
 		note.setWeek(week);
 		note.setTraineeId(traineeId);
 		note.setMaxVisibility(TrainerRole.ROLE_QC);
 		note.setType(NoteType.QC_TRAINEE);
 		note.setQcFeedback(true);
-		note.setQcStatus(qcStatus);;
-		
+		note.setQcStatus(qcStatus);
+		;
+
 		return note;
 	}
-	
+
 	/**
 	 * Factory method for creating a new Trainer weekly batch note
 	 * 
@@ -75,17 +107,17 @@ public class SimpleNote implements Serializable {
 	 */
 	public static SimpleNote trainerBatchNote(String content, Short week, Integer batchId) {
 		SimpleNote note = new SimpleNote();
-		
+
 		note.setContent(content);
 		note.setWeek(week);
 		note.setBatchId(batchId);
 		note.setMaxVisibility(TrainerRole.ROLE_TRAINER);
 		note.setType(NoteType.BATCH);
 		note.setQcFeedback(false);
-		
+
 		return note;
 	}
-	
+
 	/**
 	 * Factory method for creating a new Trainer weekly individual trainee note
 	 * 
@@ -96,14 +128,14 @@ public class SimpleNote implements Serializable {
 	 */
 	public static SimpleNote trainerIndividualNote(String content, Short week, Integer traineeId) {
 		SimpleNote note = new SimpleNote();
-		
+
 		note.setContent(content);
 		note.setWeek(week);
 		note.setTraineeId(traineeId);
 		note.setMaxVisibility(TrainerRole.ROLE_TRAINER);
 		note.setType(NoteType.TRAINEE);
 		note.setQcFeedback(false);
-		
+
 		return note;
 	}
 
@@ -163,11 +195,11 @@ public class SimpleNote implements Serializable {
 		this.type = type;
 	}
 
-	public boolean isQcFeedback() {
+	public Boolean isQcFeedback() {
 		return qcFeedback;
 	}
 
-	public void setQcFeedback(boolean qcFeedback) {
+	public void setQcFeedback(Boolean qcFeedback) {
 		this.qcFeedback = qcFeedback;
 	}
 
@@ -246,5 +278,5 @@ public class SimpleNote implements Serializable {
 				+ ", traineeId=" + traineeId + ", maxVisibility=" + maxVisibility + ", type=" + type + ", qcFeedback="
 				+ qcFeedback + ", qcStatus=" + qcStatus + "]";
 	}
-	
+
 }

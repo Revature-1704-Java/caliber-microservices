@@ -20,13 +20,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The type Trainer.
+ * The type Simple Trainer.
  */
 @Entity
 @Table(name = "CALIBER_TRAINER")
 @Cacheable
 public class SimpleTrainer implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4555033024866490022L;
 
 	@Id
 	@Column(name = "TRAINER_ID", nullable = false)

@@ -3,13 +3,10 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 import java.util.Set;
 
-/**
- * The type Trainer.
- */
 public class Trainer implements Serializable {
-
 	private static final long serialVersionUID = -2546407792912483570L;
-	private int trainerId;
+
+	private Integer trainerId;
 	private String name;
 	private String title;
 	private String email;
@@ -21,27 +18,26 @@ public class Trainer implements Serializable {
 	}
 
 	public Trainer(String name, String title, String email, TrainerRole tier) {
-		super();
+		this();
 		this.name = name;
 		this.title = title;
 		this.email = email;
 		this.tier = tier;
 	}
-
-
-	public Trainer(SimpleTrainer src) {
-		this.name = src.getName();
-		this.title = src.getTitle();
-		this.email = src.getEmail();
-		this.tier = src.getTier();
-		this.batches = null;
+	
+	public Trainer(SimpleTrainer simpleTrainer){
+		this();
+		this.name = simpleTrainer.getName();
+		this.title = simpleTrainer.getTitle();
+		this.email = simpleTrainer.getEmail();
+		this.tier = simpleTrainer.getTier();		
 	}
 
-	public int getTrainerId() {
+	public Integer getTrainerId() {
 		return trainerId;
 	}
 
-	public void setTrainerId(int trainerId) {
+	public void setTrainerId(Integer trainerId) {
 		this.trainerId = trainerId;
 	}
 
@@ -87,8 +83,8 @@ public class Trainer implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((tier == null) ? 0 : tier.hashCode());

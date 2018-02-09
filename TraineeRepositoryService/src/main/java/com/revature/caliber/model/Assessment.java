@@ -6,44 +6,44 @@ import java.util.Set;
 
 public class Assessment implements Serializable {
 	private static final long serialVersionUID = 5030264218154828822L;
-	private long assessmentId;
+
+	private Long assessmentId;
 	private String title;
 	private Batch batch;
-	private int rawScore;
+	private Integer rawScore;
 	private AssessmentType type;
-	private short week;
+	private Short week;
 	private Category category;
-	private Set<Grade> grades;
+	private Set<Grade> grades = new HashSet<>();
 
 	public Assessment() {
 		super();
-		this.grades = new HashSet<Grade>();
 	}
 
-	public Assessment(String title, Batch batch, int rawScore, AssessmentType type, short week, Category category,
-			Set<Grade> grades) {
+	public Assessment(String title, Batch batch, Integer rawScore, AssessmentType type, Integer week,
+			Category category) {
 		this();
 		this.title = title;
 		this.batch = batch;
 		this.rawScore = rawScore;
 		this.type = type;
-		this.week = week;
+		this.week = week.shortValue();
 		this.category = category;
 	}
 	
-	public Assessment(SimpleAssessment assessment) {
+	public Assessment(SimpleAssessment simpleAssessment){
 		this();
-		this.title = assessment.getTitle();
-		this.rawScore = assessment.getRawScore();
-		this.type = assessment.getType();
-		this.week = assessment.getWeek();
+		this.title = simpleAssessment.getTitle();
+		this.rawScore = simpleAssessment.getRawScore();
+		this.type = simpleAssessment.getType();
+		this.week = simpleAssessment.getWeek();
 	}
 
-	public long getAssessmentId() {
+	public Long getAssessmentId() {
 		return assessmentId;
 	}
 
-	public void setAssessmentId(long assessmentId) {
+	public void setAssessmentId(Long assessmentId) {
 		this.assessmentId = assessmentId;
 	}
 
@@ -63,11 +63,11 @@ public class Assessment implements Serializable {
 		this.batch = batch;
 	}
 
-	public int getRawScore() {
+	public Integer getRawScore() {
 		return rawScore;
 	}
 
-	public void setRawScore(int rawScore) {
+	public void setRawScore(Integer rawScore) {
 		this.rawScore = rawScore;
 	}
 
@@ -79,11 +79,11 @@ public class Assessment implements Serializable {
 		this.type = type;
 	}
 
-	public short getWeek() {
+	public Short getWeek() {
 		return week;
 	}
 
-	public void setWeek(short week) {
+	public void setWeek(Short week) {
 		this.week = week;
 	}
 
@@ -105,8 +105,8 @@ public class Assessment implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final Integer prime = 31;
+		Integer result = 1;
 		result = prime * result + ((batch == null) ? 0 : batch.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + rawScore;
@@ -151,7 +151,7 @@ public class Assessment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Assessment [assessmentId=" + assessmentId + ", title=" + title + ", batch=" + batch + ", rawScore="
+		return "Assessment [assessmentId= " + assessmentId + " title=" + title + ", batch=" + batch + ", rawScore="
 				+ rawScore + ", type=" + type + ", week=" + week + ", category=" + category + "]";
 	}
 }
