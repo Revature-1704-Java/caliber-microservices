@@ -21,7 +21,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableEurekaClient 
-@EnableSwagger2
 public class TraineeRepositoryServiceApplication {
 	@Autowired
 	TraineeCompositionService tcs;
@@ -33,12 +32,4 @@ public class TraineeRepositoryServiceApplication {
 		SpringApplication.run(TraineeRepositoryServiceApplication.class, args);
 	}
 	
-	@Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)  
-          .select()                                  
-          .apis(RequestHandlerSelectors.basePackage("com.revature.caliber.controller"))              
-          .paths(PathSelectors.any())                          
-          .build();
-    }
 }
