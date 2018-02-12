@@ -13,18 +13,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 @EnableEurekaClient
-@EnableSwagger2
 public class CategoryRepositoryServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CategoryRepositoryServiceApplication.class, args);
 	}
-	@Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)  
-          .select()                                  
-          .apis(RequestHandlerSelectors.basePackage("com.revature.caliber.controller"))              
-          .paths(PathSelectors.any())                          
-          .build();
-    }
+
 }

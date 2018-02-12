@@ -16,7 +16,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableSwagger2
+
 @SpringBootApplication
 @EnableEurekaClient
 public class GradeRepositoryServiceApplication {
@@ -26,12 +26,4 @@ public class GradeRepositoryServiceApplication {
 		SpringApplication.run(GradeRepositoryServiceApplication.class, args);
 	}
 	
-	@Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)  
-          .select()                                  
-          .apis(RequestHandlerSelectors.basePackage("com.revature.caliber.controller"))              
-          .paths(PathSelectors.any())                          
-          .build();
-    }
 }

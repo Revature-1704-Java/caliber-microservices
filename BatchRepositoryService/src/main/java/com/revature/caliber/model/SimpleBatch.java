@@ -270,12 +270,12 @@ public class SimpleBatch implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
-		result = prime * result + batchId;
-		result = prime * result + borderlineGradeThreshold;
+		result = prime * result + ((batchId == null) ? 0 : batchId.hashCode());
+		result = prime * result + ((borderlineGradeThreshold == null) ? 0 : borderlineGradeThreshold.hashCode());
 		result = prime * result + ((coTrainerId == null) ? 0 : coTrainerId.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result + goodGradeThreshold;
-		result = prime * result + gradedWeeks;
+		result = prime * result + ((goodGradeThreshold == null) ? 0 : goodGradeThreshold.hashCode());
+		result = prime * result + ((gradedWeeks == null) ? 0 : gradedWeeks.hashCode());
 		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		result = prime * result + ((resourceId == null) ? 0 : resourceId.hashCode());
 		result = prime * result + ((skillType == null) ? 0 : skillType.hashCode());
@@ -283,7 +283,7 @@ public class SimpleBatch implements Serializable {
 		result = prime * result + ((trainerId == null) ? 0 : trainerId.hashCode());
 		result = prime * result + ((trainingName == null) ? 0 : trainingName.hashCode());
 		result = prime * result + ((trainingType == null) ? 0 : trainingType.hashCode());
-		result = prime * result + weeks;
+		result = prime * result + ((weeks == null) ? 0 : weeks.hashCode());
 		return result;
 	}
 
@@ -301,9 +301,15 @@ public class SimpleBatch implements Serializable {
 				return false;
 		} else if (!addressId.equals(other.addressId))
 			return false;
-		if (batchId != other.batchId)
+		if (batchId == null) {
+			if (other.batchId != null)
+				return false;
+		} else if (!batchId.equals(other.batchId))
 			return false;
-		if (borderlineGradeThreshold != other.borderlineGradeThreshold)
+		if (borderlineGradeThreshold == null) {
+			if (other.borderlineGradeThreshold != null)
+				return false;
+		} else if (!borderlineGradeThreshold.equals(other.borderlineGradeThreshold))
 			return false;
 		if (coTrainerId == null) {
 			if (other.coTrainerId != null)
@@ -315,9 +321,15 @@ public class SimpleBatch implements Serializable {
 				return false;
 		} else if (!endDate.equals(other.endDate))
 			return false;
-		if (goodGradeThreshold != other.goodGradeThreshold)
+		if (goodGradeThreshold == null) {
+			if (other.goodGradeThreshold != null)
+				return false;
+		} else if (!goodGradeThreshold.equals(other.goodGradeThreshold))
 			return false;
-		if (gradedWeeks != other.gradedWeeks)
+		if (gradedWeeks == null) {
+			if (other.gradedWeeks != null)
+				return false;
+		} else if (!gradedWeeks.equals(other.gradedWeeks))
 			return false;
 		if (location == null) {
 			if (other.location != null)
@@ -348,7 +360,10 @@ public class SimpleBatch implements Serializable {
 			return false;
 		if (trainingType != other.trainingType)
 			return false;
-		if (weeks != other.weeks)
+		if (weeks == null) {
+			if (other.weeks != null)
+				return false;
+		} else if (!weeks.equals(other.weeks))
 			return false;
 		return true;
 	}

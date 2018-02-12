@@ -301,6 +301,13 @@ public class Note implements Serializable {
 //	}
 
 	@Override
+	public String toString() {
+		return "Note [noteId=" + noteId + ", content=" + content + ", week=" + week + ", trainee=" + trainee
+				+ ", maxVisibility=" + maxVisibility + ", type=" + type + ", qcFeedback=" + qcFeedback + ", qcStatus="
+				+ qcStatus + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -362,13 +369,6 @@ public class Note implements Serializable {
 		} else if (!week.equals(other.week))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Note [noteId=" + noteId + ", content=" + content + ", week=" + week + ", trainee=" + trainee
-				+ ", maxVisibility=" + maxVisibility + ", type=" + type + ", qcFeedback=" + qcFeedback + ", qcStatus="
-				+ qcStatus + "]";
 	}
 
 }

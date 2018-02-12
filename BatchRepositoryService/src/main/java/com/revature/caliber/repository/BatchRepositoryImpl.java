@@ -13,6 +13,16 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import com.revature.caliber.model.SimpleBatch;
+/**
+ * 
+ * This is a custom implementation for repository methods
+ * 
+ * For Spring JPA 1.x you need to name it **RepositoryImpl
+ * For Spring JPA 2.x you need to name it after your custom interface with Impl suffix
+ * 
+ * @author Tzu
+ *
+ */
 @Repository
 public class BatchRepositoryImpl implements BatchRepositoryCustom {
 	@PersistenceContext

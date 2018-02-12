@@ -32,6 +32,9 @@ public class BatchCompositionMessageService {
 	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
 	/**
 	 * 
+	 * send synchronous request to SimpleTrainer Queue to execute
+	 * findOne from Trainer repo and receive a SimpleTrainer
+	 * 
 	 * @param trainerId
 	 * @return
 	 */
@@ -44,6 +47,9 @@ public class BatchCompositionMessageService {
 		
 	}
 	/**
+	 * 
+	 * send synchronous request to Address Queue to execute findOne from
+	 * Address repo and receive an Address
 	 * 
 	 * @param addressId
 	 * @return
@@ -58,6 +64,9 @@ public class BatchCompositionMessageService {
 	}
 	/**
 	 * 
+	 *  send synchronous request to Address.list Queue to execute findAll from 
+	 *  Address repo and receive a list of Address
+	 * 
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -68,6 +77,9 @@ public class BatchCompositionMessageService {
 				RABBIT_REPO_EXCHANGE, ADDRESS_LIST_ROUTING_KEY, SimpleAddressListRequest.toString());
 	}
 	/**
+	 * 
+	 * send synchronous request to Trainee.list Queue to execute findAllByBatchId 
+	 * from Trainee repo and receive a list of SimpleTrainee
 	 * 
 	 * @param batchId
 	 * @return
@@ -81,6 +93,9 @@ public class BatchCompositionMessageService {
 		return SimpleTraineeList.stream().map(x->(SimpleTrainee)x).collect(Collectors.toList());
 	}
 	/**
+	 * 
+	 * send synchronous request to Note.list Queue to execute findAllByBatchId 
+	 * from Note repo and receive a list of SimpleNote
 	 * 
 	 * @param batchId
 	 * @return

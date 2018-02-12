@@ -12,21 +12,22 @@ import com.revature.caliber.model.SimpleBatch;
 @RepositoryRestResource(collectionResourceRel = "batch", path = "batch")
 public interface BatchRepository extends JpaRepository<SimpleBatch, Integer>, BatchRepositoryCustom {
 	/**
+	 * Find all batches by TrainerId
 	 * 
 	 * @param trainerId
 	 * @return
 	 */
 	List <SimpleBatch> findAllByTrainerId(@Param("trainerId") Integer trainerId);
 	/**
-	 * 
+	 * Find all batches start after certain date
 	 * @param date
 	 * @return
 	 */
 	List <SimpleBatch> findAllByStartDateAfter(@Param("date") Date date);
 	/**
-	 * 
+	 *  Find a batch by ResourceId
 	 * @param resourceId
 	 * @return
 	 */
-	List <SimpleBatch> findOneByResourceId(@Param("resourceId") String resourceId);
+	SimpleBatch findOneByResourceId(@Param("resourceId") String resourceId);
 }
