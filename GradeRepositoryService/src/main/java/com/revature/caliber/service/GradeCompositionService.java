@@ -204,7 +204,6 @@ public class GradeCompositionService {
      * @return
      */
     private Grade composeGrade(SimpleGrade src) {
-        System.out.println(src);
         SimpleTrainee simpleTrainee = gradeCompositionMessagingService.sendSimpleTraineeRequest(src.getTraineeId());
         if (simpleTrainee == null) {
             System.out.println("simpletrainee is null");
@@ -233,9 +232,10 @@ public class GradeCompositionService {
     public Map<Integer, List<Grade>> findGradesByWeek(Integer batchId, Integer week) {
         List<Grade> grades = findByWeek(batchId, week);
         Map<Integer, List<Grade>> table = new HashMap<>();
-
+        
         for (Grade grade : grades) {
             Integer key = grade.getTrainee().getTraineeId();
+            
             if (table.containsKey(key)) {
                 table.get(key).add(grade);
             } else {

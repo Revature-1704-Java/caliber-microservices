@@ -3,6 +3,8 @@ package com.revature.caliber.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Grade implements Serializable {
 	private static final long serialVersionUID = -2031135710502844800L;
 
@@ -23,13 +25,12 @@ public class Grade implements Serializable {
 		this.dateReceived = dateReceived;
 		this.score = score;
 	}
-	
+
 	public Grade(SimpleGrade simpleGrade){
 		this();
-		this.gradeId=simpleGrade.getGradeId();
+		this.gradeId = simpleGrade.getGradeId();
 		this.dateReceived = simpleGrade.getDateReceived();
 		this.score = simpleGrade.getScore();
-		
 	}
 
 	public long getGradeId() {

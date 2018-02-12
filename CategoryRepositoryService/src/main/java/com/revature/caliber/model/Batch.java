@@ -58,12 +58,18 @@ public class Batch implements Serializable {
 	}
 
 	public Batch(SimpleBatch simpleBatch) {
-		this();
+		super();
+		this.batchId = simpleBatch.getBatchId();
+		this.resourceId = simpleBatch.getResourceId();
 		this.trainingName = simpleBatch.getTrainingName();
 		this.skillType = simpleBatch.getSkillType();
 		this.startDate = simpleBatch.getStartDate();
 		this.endDate = simpleBatch.getEndDate();
 		this.location = simpleBatch.getLocation();
+		this.goodGradeThreshold = simpleBatch.getGoodGradeThreshold();
+		this.borderlineGradeThreshold = simpleBatch.getBorderlineGradeThreshold();
+		this.weeks = simpleBatch.getWeeks();
+		this.gradedWeeks = simpleBatch.getGradedWeeks();
 	}
 
 	public Integer getBatchId() {

@@ -20,7 +20,7 @@ public class Category implements Serializable {
 
 	/**
 	 * Create new category
-	 * 
+	 *
 	 * @param skillCategory
 	 * @param active
 	 */
@@ -29,7 +29,7 @@ public class Category implements Serializable {
 		this.skillCategory = skillCategory;
 		this.active = active;
 	}
-	
+
 	public Category(SimpleCategory simpleCategory){
 		this();
 		this.categoryId = simpleCategory.getCategoryId();

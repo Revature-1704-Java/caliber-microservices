@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.revature.caliber.model.SimpleBatch;
 
@@ -26,9 +27,6 @@ public class BatchRepositoryTest {
 
 	@Test
 	public void testFindAllByTrainerId() {
-		SimpleBatch b=new SimpleBatch("trainingName", 1, Date.from(Instant.now()), Date.from(Instant.now()), "location");
-		int id = (int) entityManager.persistAndGetId(b);
-		entityManager.flush();
 		List<SimpleBatch> test = batchRepo.findAllByTrainerId(1);
 		assertFalse("Test Batch Not Empty", test.size()==0);
 	}
@@ -39,5 +37,10 @@ public class BatchRepositoryTest {
 		assertEquals(13,test.size());
 		
 	}
-
+	
+	@Test
+	public void testFindOne() {
+		SimpleBatch test = batchRepo.findOne(2100);
+		assertEquals(test.getBatchId(), (Integer) 2100);
+	}
 }

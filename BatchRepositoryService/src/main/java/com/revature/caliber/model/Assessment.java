@@ -30,7 +30,7 @@ public class Assessment implements Serializable {
 		this.week = week.shortValue();
 		this.category = category;
 	}
-	
+
 	public Assessment(SimpleAssessment simpleAssessment){
 		this();
 		this.assessmentId = simpleAssessment.getAssessmentId();

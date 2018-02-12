@@ -32,7 +32,7 @@ public class Trainee implements Serializable {
 
 	/**
 	 * Constructor used mostly for testing. Default TrainingStatus as Training
-	 * 
+	 *
 	 * @param name
 	 * @param resourceId
 	 * @param email
@@ -46,12 +46,12 @@ public class Trainee implements Serializable {
 		this.trainingStatus = TrainingStatus.Training;
 		this.batch = batch;
 	}
-	
+
 	public Trainee(SimpleTrainee simpleTrainee){
 		this();
 		this.traineeId = simpleTrainee.getTraineeId();
-		this.name = simpleTrainee.getName();
 		this.resourceId = simpleTrainee.getResourceId();
+		this.name = simpleTrainee.getName();
 		this.email = simpleTrainee.getEmail();
 		this.trainingStatus = simpleTrainee.getTrainingStatus();
 		this.phoneNumber = simpleTrainee.getPhoneNumber();
@@ -63,7 +63,6 @@ public class Trainee implements Serializable {
 		this.major = simpleTrainee.getMajor();
 		this.techScreenerName = simpleTrainee.getTechScreenerName();
 		this.projectCompletion = simpleTrainee.getProjectCompletion();
-		
 	}
 
 	public Integer getTraineeId() {

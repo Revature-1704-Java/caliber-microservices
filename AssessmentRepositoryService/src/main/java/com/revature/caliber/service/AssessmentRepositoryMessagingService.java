@@ -32,7 +32,6 @@ public class AssessmentRepositoryMessagingService {
 	 */
 	@RabbitListener(queues = "revature.caliber.repos.assessment")
 	public SimpleAssessment receiveSingleSimpleAssessmentRequest(String message) {
-		System.out.println(message);
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
@@ -53,7 +52,6 @@ public class AssessmentRepositoryMessagingService {
 		JsonParser parser = new JsonParser();
 		JsonElement element = parser.parse(message);
 		JsonObject request = element.getAsJsonObject();
-		System.out.println(request);
 
 		return assessmentRepositoryRequestDispatcher.processListSimpleAssessmentRequest(request);
 	}

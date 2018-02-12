@@ -24,7 +24,7 @@ public class Note implements Serializable {
 	 * QC Status for the batch. Constructs the note and it's visibility If the
 	 * feedback is public, anyone can view. If not, the feedback can only be viewed
 	 * by QC and the VP.
-	 * 
+	 *
 	 * @param content
 	 * @param week
 	 * @param batch
@@ -46,21 +46,23 @@ public class Note implements Serializable {
 		this.qcFeedback = true;
 		this.qcStatus = qcStatus;
 	}
-	
+
 	public Note(SimpleNote simpleNote){
 		this();
+		this.noteId = simpleNote.getNoteId();
 		this.content = simpleNote.getContent();
 		this.week = simpleNote.getWeek();
 		this.maxVisibility = simpleNote.getMaxVisibility();
 		this.type = simpleNote.getType();
-		this.qcStatus = simpleNote.getQcStatus();		
+		this.qcFeedback = simpleNote.isQcFeedback();
+		this.qcStatus = simpleNote.getQcStatus();
 	}
 
 	/**
 	 * QC Status for each trainee. Constructs the note and it's visibility If the
 	 * feedback is public, anyone can view. If not, the feedback can only be viewed
 	 * by QC and the VP.
-	 * 
+	 *
 	 * @param content
 	 * @param week
 	 * @param batch
@@ -85,7 +87,7 @@ public class Note implements Serializable {
 
 	/**
 	 * Trainer feedback for a trainee
-	 * 
+	 *
 	 * @param content
 	 * @param week
 	 * @param trainee
@@ -104,7 +106,7 @@ public class Note implements Serializable {
 
 	/**
 	 * Trainer feedback for a batch
-	 * 
+	 *
 	 * @param content
 	 * @param week
 	 * @param trainee
@@ -123,7 +125,7 @@ public class Note implements Serializable {
 
 	/**
 	 * Factory method to construct new QC weekly batch note
-	 * 
+	 *
 	 * @param content
 	 * @param week
 	 * @param batch
@@ -137,7 +139,7 @@ public class Note implements Serializable {
 
 	/**
 	 * Factory method for creating new QC weekly individual trainee note
-	 * 
+	 *
 	 * @param content
 	 * @param week
 	 * @param trainee
@@ -151,7 +153,7 @@ public class Note implements Serializable {
 
 	/**
 	 * Factory method for creating a new Trainer weekly batch note
-	 * 
+	 *
 	 * @param content
 	 * @param week
 	 * @param batch
@@ -163,7 +165,7 @@ public class Note implements Serializable {
 
 	/**
 	 * Factory method for creating a new Trainer weekly individual trainee note
-	 * 
+	 *
 	 * @param content
 	 * @param week
 	 * @param trainee
