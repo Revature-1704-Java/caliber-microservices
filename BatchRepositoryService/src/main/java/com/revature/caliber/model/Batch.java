@@ -210,25 +210,20 @@ public class Batch implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((batchId == null) ? 0 : batchId.hashCode());
-		result = prime * result + ((borderlineGradeThreshold == null) ? 0 : borderlineGradeThreshold.hashCode());
+		final Integer prime = 31;
+		Integer result = 1;
+		result = prime * result + borderlineGradeThreshold;
 		result = prime * result + ((coTrainer == null) ? 0 : coTrainer.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result + ((goodGradeThreshold == null) ? 0 : goodGradeThreshold.hashCode());
-		result = prime * result + ((gradedWeeks == null) ? 0 : gradedWeeks.hashCode());
+		result = prime * result + goodGradeThreshold;
 		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
-		result = prime * result + ((resourceId == null) ? 0 : resourceId.hashCode());
 		result = prime * result + ((skillType == null) ? 0 : skillType.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result + ((trainees == null) ? 0 : trainees.hashCode());
 		result = prime * result + ((trainer == null) ? 0 : trainer.hashCode());
 		result = prime * result + ((trainingName == null) ? 0 : trainingName.hashCode());
 		result = prime * result + ((trainingType == null) ? 0 : trainingType.hashCode());
-		result = prime * result + ((weeks == null) ? 0 : weeks.hashCode());
+		result = prime * result + ((resourceId == null) ? 0 : resourceId.hashCode());
+		result = prime * result + weeks;
 		return result;
 	}
 
@@ -241,20 +236,7 @@ public class Batch implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Batch other = (Batch) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (batchId == null) {
-			if (other.batchId != null)
-				return false;
-		} else if (!batchId.equals(other.batchId))
-			return false;
-		if (borderlineGradeThreshold == null) {
-			if (other.borderlineGradeThreshold != null)
-				return false;
-		} else if (!borderlineGradeThreshold.equals(other.borderlineGradeThreshold))
+		if (borderlineGradeThreshold != other.borderlineGradeThreshold)
 			return false;
 		if (coTrainer == null) {
 			if (other.coTrainer != null)
@@ -266,30 +248,12 @@ public class Batch implements Serializable {
 				return false;
 		} else if (!endDate.equals(other.endDate))
 			return false;
-		if (goodGradeThreshold == null) {
-			if (other.goodGradeThreshold != null)
-				return false;
-		} else if (!goodGradeThreshold.equals(other.goodGradeThreshold))
-			return false;
-		if (gradedWeeks == null) {
-			if (other.gradedWeeks != null)
-				return false;
-		} else if (!gradedWeeks.equals(other.gradedWeeks))
+		if (goodGradeThreshold != other.goodGradeThreshold)
 			return false;
 		if (location == null) {
 			if (other.location != null)
 				return false;
 		} else if (!location.equals(other.location))
-			return false;
-		if (notes == null) {
-			if (other.notes != null)
-				return false;
-		} else if (!notes.equals(other.notes))
-			return false;
-		if (resourceId == null) {
-			if (other.resourceId != null)
-				return false;
-		} else if (!resourceId.equals(other.resourceId))
 			return false;
 		if (skillType != other.skillType)
 			return false;
@@ -297,11 +261,6 @@ public class Batch implements Serializable {
 			if (other.startDate != null)
 				return false;
 		} else if (!startDate.equals(other.startDate))
-			return false;
-		if (trainees == null) {
-			if (other.trainees != null)
-				return false;
-		} else if (!trainees.equals(other.trainees))
 			return false;
 		if (trainer == null) {
 			if (other.trainer != null)
@@ -313,12 +272,14 @@ public class Batch implements Serializable {
 				return false;
 		} else if (!trainingName.equals(other.trainingName))
 			return false;
+		if (resourceId == null) {
+			if (other.resourceId != null)
+				return false;
+		} else if (!resourceId.equals(other.resourceId))
+			return false;
 		if (trainingType != other.trainingType)
 			return false;
-		if (weeks == null) {
-			if (other.weeks != null)
-				return false;
-		} else if (!weeks.equals(other.weeks))
+		if (weeks != other.weeks)
 			return false;
 		return true;
 	}

@@ -13,7 +13,9 @@ public class BatchCompositionDispatcher {
 	@Autowired
 	private BatchCompositionService bcs;
 	/**
+	 * process json request and execute method from CompositionService
 	 * 
+	 * return a list of compose batch.
 	 * @param request
 	 * @return
 	 */
@@ -42,6 +44,10 @@ public class BatchCompositionDispatcher {
 		return null;
 	}
 	/**
+	 * 
+	 * process json request and execute method from CompositionService
+	 * 
+	 * return a compose batch.
 	 * 
 	 * @param request
 	 * @return

@@ -28,7 +28,7 @@ public class BatchCompositionService {
 	@Autowired
 	private BatchCompositionMessageService BCMS;
 	/**
-	 * 
+	 * Save a Batch
 	 * @param batch
 	 */
 	public void save(Batch batch) {
@@ -36,12 +36,16 @@ public class BatchCompositionService {
 	}
 	/**
 	 * 
+	 * Update a Batch
+	 * 
 	 * @param batch
 	 */
 	public void update(Batch batch) {
 		repo.save(new SimpleBatch(batch));
 	}
 	/**
+	 * 
+	 * Delete a Batch
 	 * 
 	 * @param batch
 	 */
@@ -61,6 +65,8 @@ public class BatchCompositionService {
 	}
 	/**
 	 * 
+	 * Trainee with dropped status are included
+	 * 
 	 * @param batchId
 	 * @return
 	 */
@@ -68,15 +74,18 @@ public class BatchCompositionService {
 		return composeBatch(repo.findOne(batchId), true);
 	}
 	/**
+	 * Grades are no longer fetched in this method, only Trainee and Notes are fetched
+	 * 
+	 * the method name is retained purely to accommodate middle-tier request
 	 * 
 	 * @param batchId
 	 * @return
 	 */
-	//needs refactoring;
 	public Batch findOneWithTraineesAndGrades(Integer batchId) {
 		return composeBatch(repo.findOne(batchId), false);
 	}
 	/**
+	 * get all Batches
 	 * 
 	 * @return
 	 */
@@ -84,6 +93,8 @@ public class BatchCompositionService {
 		return composeListOfBatch(repo.findAll(), false, true, true);
 	}
 	/**
+	 * 
+	 * get all Batches head by one Trainer
 	 * 
 	 * @param trainerId
 	 * @return
@@ -93,12 +104,19 @@ public class BatchCompositionService {
 	}
 	/**
 	 * 
+	 * Current defined by started in the last 30 days and not yet ended
+	 * 
+	 * get all Current batches with Notes and Trainee
+	 * 
 	 * @return
 	 */
 	public List<Batch> findAllCurrent() {
 		return composeListOfBatch(repo.findAllCurrent(),false, true ,true);	
 	}
 	/**
+	 * Current defined by started in the last 30 days and not yet ended
+	 * 
+	 * get all Current batches with Notes and Trainee under a trainer
 	 * 
 	 * @param trainerId
 	 * @return
@@ -107,27 +125,36 @@ public class BatchCompositionService {
 		return composeListOfBatch(repo.findAllCurrent(trainerId),false, true ,true);	
 	}
 	/**
+	 * Current defined by started in the last 30 days and not yet ended
 	 * 
+	 * get all Current batches with Notes
 	 * @return
 	 */
 	public List<Batch> findAllCurrentWithNotes() {
 		return composeListOfBatch(repo.findAllCurrent(),false, true, true);	
 	}
 	/**
+	 * Current defined by started in the last 30 days and not yet ended
 	 * 
+	 * get all Current batches with Trainee
 	 * @return
 	 */
 	public List<Batch> findAllCurrentWithTrainees() {
 		return composeListOfBatch(repo.findAllCurrent(),false, true, true);
 	}
 	/**
+	 * This Method is redundant and poorly named, original method fetches Grades for each Trainee, 
+	 * but is no long accommodated in this version.
 	 * 
+	 * method maintain to facilitate middle-tier request only. Actually grade fetch is now done in the middle tier
 	 * @return
 	 */
 	public List<Batch> findAllCurrentWithNotesAndTrainees() {
 		return composeListOfBatch(repo.findAllCurrent(),false, true, true);
 	}
 	/**
+	 * 
+	 * find all after certain date
 	 * 
 	 * @param month
 	 * @param day
@@ -139,6 +166,8 @@ public class BatchCompositionService {
 		return composeListOfBatch(repo.findAllByStartDateAfter(date), false, true, true);
 	}
 	/**
+	 * 
+	 * request Trainees using composition message service
 	 * 
 	 * @param batchId
 	 * @param includeDropped
@@ -153,6 +182,8 @@ public class BatchCompositionService {
 	}
 	/**
 	 * 
+	 * request Notes using composition message service
+	 * 
 	 * @param batchId
 	 * @return
 	 */
@@ -163,6 +194,8 @@ public class BatchCompositionService {
 				.collect(Collectors.toSet());
 	}
 	/**
+	 * 
+	 * request Address and Trainer using composition message service
 	 * 
 	 * @param src
 	 * @return
@@ -186,6 +219,8 @@ public class BatchCompositionService {
 		return b;
 	}
 	/**
+	 * 
+	 * composer list of Batches with necessary fields from other repos
 	 * 
 	 * @param src
 	 * @param includeDropped
@@ -221,6 +256,8 @@ public class BatchCompositionService {
 		}
 	}
 	/**
+	 * 
+	 * compose Batches with necessary fields from other repos
 	 * 
 	 * @param src
 	 * @param includeDropped
